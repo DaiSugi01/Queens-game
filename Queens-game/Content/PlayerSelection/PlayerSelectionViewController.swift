@@ -8,7 +8,7 @@
 import UIKit
 
 class PlayerSelectionViewController: UIViewController {
-    
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
