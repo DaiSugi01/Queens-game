@@ -12,6 +12,7 @@ class TopViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
+    setUpDemoButton() // debug button
   }
   
   let screenName: UILabel = {
@@ -85,4 +86,24 @@ class TopViewController: UIViewController {
     menuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     menuButton.topAnchor.constraint(equalTo: editCommandButton.bottomAnchor, constant: 10).isActive = true
   }
+
+}
+
+
+// MARK: - Debug button
+
+extension TopViewController {
+    
+  private func setUpDemoButton() {
+    let demoButton = UIBarButtonItem(systemItem: .organize)
+    demoButton.action = #selector(demoButtonTapped(_:))
+    demoButton.target = self
+    demoButton.tintColor = .black
+    navigationItem.leftBarButtonItems = [demoButton]
+  }
+  
+  @objc func demoButtonTapped(_ sender: UIButton) {
+    navigationController?.pushViewController(DemoViewController(), animated: true)
+  }
+
 }
