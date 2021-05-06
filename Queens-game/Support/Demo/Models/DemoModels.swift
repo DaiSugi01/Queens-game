@@ -16,7 +16,7 @@ enum DemoCommandType {
   case cToQ
 }
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
-enum DemoLevel {
+enum DemoDifficulty {
   case easy
   case normal
   case hard
@@ -30,7 +30,7 @@ struct DemoUser: Hashable {
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
 struct DemoCommand:Hashable {
   var detail: String
-  var level: DemoLevel
+  var level: DemoDifficulty
   var commandType: DemoCommandType
 }
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.

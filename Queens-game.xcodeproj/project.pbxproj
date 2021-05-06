@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,6 @@
 		0A306FD625F7078C0059CDEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A306FD525F7078C0059CDEE /* Assets.xcassets */; };
 		0A306FD925F7078C0059CDEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A306FD725F7078C0059CDEE /* LaunchScreen.storyboard */; };
 		0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62832637A70C0082ACAE /* tempExtension.swift */; };
-		0A3A62872637A7140082ACAE /* tempModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62862637A7140082ACAE /* tempModel.swift */; };
 		0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62942638B1830082ACAE /* TopViewController.swift */; };
 		0A3A62982638B3780082ACAE /* PlayerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62972638B3780082ACAE /* PlayerSelectionViewController.swift */; };
 		0A3A62AA2638BBF20082ACAE /* QueenSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62A92638BBF20082ACAE /* QueenSelectingViewController.swift */; };
@@ -33,6 +32,15 @@
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
+		485635E2264369370043AF21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635E1264369370043AF21 /* User.swift */; };
+		485635E426436A420043AF21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635E326436A420043AF21 /* Settings.swift */; };
+		485635E626436FA40043AF21 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635E526436FA40043AF21 /* GameManager.swift */; };
+		485635E826437C3F0043AF21 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635E726437C3F0043AF21 /* Difficulty.swift */; };
+		485635EA26437C7A0043AF21 /* CommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635E926437C7A0043AF21 /* CommandType.swift */; };
+		485635EC26437CED0043AF21 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EB26437CED0043AF21 /* Command.swift */; };
+		485635EE26438A140043AF21 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635ED26438A140043AF21 /* Section.swift */; };
+		485635F026438AB80043AF21 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EF26438AB80043AF21 /* Selection.swift */; };
+		485635F226438F4F0043AF21 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635F126438F4F0043AF21 /* Item.swift */; };
 		48AE80082640B1EA00CBDB5E /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE7FE32640B1EA00CBDB5E /* UISearchBar+configLayout.swift */; };
 		48AE80092640B1EA00CBDB5E /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE7FE42640B1EA00CBDB5E /* CustomSearchBar.swift */; };
 		48AE800A2640B1EA00CBDB5E /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE7FE62640B1EA00CBDB5E /* CustomColor.swift */; };
@@ -86,7 +94,6 @@
 		0A306FD825F7078C0059CDEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A306FDA25F7078C0059CDEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A3A62832637A70C0082ACAE /* tempExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempExtension.swift; sourceTree = "<group>"; };
-		0A3A62862637A7140082ACAE /* tempModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempModel.swift; sourceTree = "<group>"; };
 		0A3A62942638B1830082ACAE /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		0A3A62972638B3780082ACAE /* PlayerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewController.swift; sourceTree = "<group>"; };
 		0A3A62A92638BBF20082ACAE /* QueenSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectingViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +113,15 @@
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
 		33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
+		485635E1264369370043AF21 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		485635E326436A420043AF21 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		485635E526436FA40043AF21 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		485635E726437C3F0043AF21 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		485635E926437C7A0043AF21 /* CommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandType.swift; sourceTree = "<group>"; };
+		485635EB26437CED0043AF21 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		485635ED26438A140043AF21 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		485635EF26438AB80043AF21 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		485635F126438F4F0043AF21 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		48AE7FE32640B1EA00CBDB5E /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		48AE7FE42640B1EA00CBDB5E /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		48AE7FE62640B1EA00CBDB5E /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -195,7 +211,15 @@
 		0A3A627426379D2B0082ACAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A62862637A7140082ACAE /* tempModel.swift */,
+				485635E1264369370043AF21 /* User.swift */,
+				485635E326436A420043AF21 /* Settings.swift */,
+				485635E526436FA40043AF21 /* GameManager.swift */,
+				485635E726437C3F0043AF21 /* Difficulty.swift */,
+				485635E926437C7A0043AF21 /* CommandType.swift */,
+				485635EB26437CED0043AF21 /* Command.swift */,
+				485635EF26438AB80043AF21 /* Selection.swift */,
+				485635ED26438A140043AF21 /* Section.swift */,
+				485635F126438F4F0043AF21 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -610,7 +634,6 @@
 				33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */,
 				080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -739,9 +762,9 @@
 				0A3A62B42638BE9C0082ACAE /* QueenSelectionViewController.swift in Sources */,
 				0A306FCE25F7078B0059CDEE /* ViewController.swift in Sources */,
 				0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */,
+				485635E2264369370043AF21 /* User.swift in Sources */,
 				48AE80452640B26F00CBDB5E /* DemoIconViewController.swift in Sources */,
 				0A3A62C52638C1AB0082ACAE /* CommandConfirmationViewController.swift in Sources */,
-				0A3A62872637A7140082ACAE /* tempModel.swift in Sources */,
 				0A306FCA25F7078B0059CDEE /* AppDelegate.swift in Sources */,
 				48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */,
 				48AE80102640B1EA00CBDB5E /* H4Label.swift in Sources */,
@@ -757,8 +780,10 @@
 				48AE80082640B1EA00CBDB5E /* UISearchBar+configLayout.swift in Sources */,
 				48AE800E2640B1EA00CBDB5E /* H3Label.swift in Sources */,
 				0A306FD425F7078B0059CDEE /* Queens_game.xcdatamodeld in Sources */,
+				485635E826437C3F0043AF21 /* Difficulty.swift in Sources */,
 				48AE80432640B26F00CBDB5E /* DemoButtonViewController.swift in Sources */,
 				0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */,
+				485635E626436FA40043AF21 /* GameManager.swift in Sources */,
 				48AE80212640B1EA00CBDB5E /* IconFactory.swift in Sources */,
 				0A3A62AA2638BBF20082ACAE /* QueenSelectingViewController.swift in Sources */,
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
@@ -772,6 +797,7 @@
 				48AE80192640B1EA00CBDB5E /* NextAndBackButtons.swift in Sources */,
 				0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */,
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,
+				485635EE26438A140043AF21 /* Section.swift in Sources */,
 				0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */,
 				0A3A62982638B3780082ACAE /* PlayerSelectionViewController.swift in Sources */,
 				48AE80132640B1EA00CBDB5E /* SelectionCollectionViewCell.swift in Sources */,
@@ -783,11 +809,15 @@
 				48AE801C2640B1EA00CBDB5E /* CustomFont.swift in Sources */,
 				48AE80152640B1EA00CBDB5E /* VerticalStackView.swift in Sources */,
 				48AE80402640B26F00CBDB5E /* DemoCellCVC+DataSource.swift in Sources */,
+				485635F226438F4F0043AF21 /* Item.swift in Sources */,
 				48AE800A2640B1EA00CBDB5E /* CustomColor.swift in Sources */,
 				48AE80122640B1EA00CBDB5E /* UsernameInputCollectionViewCell.swift in Sources */,
+				485635EA26437C7A0043AF21 /* CommandType.swift in Sources */,
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
 				48AE80202640B1EA00CBDB5E /* IconSource.swift in Sources */,
+				485635F026438AB80043AF21 /* Selection.swift in Sources */,
 				48AE800C2640B1EA00CBDB5E /* H2Label.swift in Sources */,
+				485635E426436A420043AF21 /* Settings.swift in Sources */,
 				0A3A62BC2638C0580082ACAE /* CommandSelectionViewController.swift in Sources */,
 				0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */,
 				48AE80182640B1EA00CBDB5E /* SubButton.swift in Sources */,
@@ -795,6 +825,7 @@
 				48AE801B2640B1EA00CBDB5E /* GeneticLabelCollectionReusableView.swift in Sources */,
 				48AE80142640B1EA00CBDB5E /* HorizontalStackView.swift in Sources */,
 				48AE801F2640B1EA00CBDB5E /* UserIdIconView.swift in Sources */,
+				485635EC26437CED0043AF21 /* Command.swift in Sources */,
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
 				48AE800F2640B1EA00CBDB5E /* H1Label.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
