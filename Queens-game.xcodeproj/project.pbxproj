@@ -560,6 +560,8 @@
 				48AE80372640B26F00CBDB5E /* Icon */,
 				48AE802D2640B26F00CBDB5E /* Search */,
 				48AE802B2640B26F00CBDB5E /* Top */,
+				48AE80372640B26F00CBDB5E /* Icons */,
+				48AE80392640B26F00CBDB5E /* Color+UIView */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
@@ -606,12 +608,12 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		48AE80372640B26F00CBDB5E /* Icon */ = {
+		48AE80372640B26F00CBDB5E /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				48AE80382640B26F00CBDB5E /* DemoIconViewController.swift */,
 			);
-			path = Icon;
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		48AE80392640B26F00CBDB5E /* Color+UIView */ = {
