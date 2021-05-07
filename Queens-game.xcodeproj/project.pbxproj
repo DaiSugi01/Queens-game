@@ -419,7 +419,7 @@
 				482681712645EBA70010543A /* Button */,
 				482681752645EBA70010543A /* SupplementaryView */,
 				482681772645EBA80010543A /* Font */,
-				482681792645EBA80010543A /* Icon */,
+				482681792645EBA80010543A /* Icons */,
 				482681802645EBA80010543A /* SegmentControl */,
 			);
 			path = UIComponents;
@@ -503,15 +503,7 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		482681792645EBA80010543A /* Icon */ = {
-			isa = PBXGroup;
-			children = (
-				4826817A2645EBA80010543A /* Factory */,
-			);
-			path = Icon;
-			sourceTree = "<group>";
-		};
-		4826817A2645EBA80010543A /* Factory */ = {
+		482681792645EBA80010543A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				4826817B2645EBA80010543A /* UIImage+append.swift */,
@@ -520,7 +512,7 @@
 				4826817E2645EBA80010543A /* IconSource.swift */,
 				4826817F2645EBA80010543A /* IconFactory.swift */,
 			);
-			path = Factory;
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		482681802645EBA80010543A /* SegmentControl */ = {
