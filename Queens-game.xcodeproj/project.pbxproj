@@ -540,7 +540,7 @@
 				48AE802F2640B26F00CBDB5E /* Cell */,
 				48AE80332640B26F00CBDB5E /* Button */,
 				48AE80352640B26F00CBDB5E /* Font */,
-				48AE80372640B26F00CBDB5E /* Icon */,
+				48AE80372640B26F00CBDB5E /* Icons */,
 				48AE80392640B26F00CBDB5E /* Color+UIView */,
 			);
 			path = Contents;
@@ -588,12 +588,12 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		48AE80372640B26F00CBDB5E /* Icon */ = {
+		48AE80372640B26F00CBDB5E /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				48AE80382640B26F00CBDB5E /* DemoIconViewController.swift */,
 			);
-			path = Icon;
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		48AE80392640B26F00CBDB5E /* Color+UIView */ = {
