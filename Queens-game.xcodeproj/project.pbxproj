@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -163,10 +163,10 @@
 		0A306FBD25F7078B0059CDEE = {
 			isa = PBXGroup;
 			children = (
-				0A306FC825F7078B0059CDEE /* Queens-game */,
-				0A306FC725F7078B0059CDEE /* Products */,
-				947E72FD06C84FBAA1E7B9CC /* Pods */,
 				DF27715BED272FE4B7134D97 /* Frameworks */,
+				947E72FD06C84FBAA1E7B9CC /* Pods */,
+				0A306FC725F7078B0059CDEE /* Products */,
+				0A306FC825F7078B0059CDEE /* Queens-game */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,13 +181,13 @@
 		0A306FC825F7078B0059CDEE /* Queens-game */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A627C2637A5450082ACAE /* Support */,
-				48AE7FE12640B1EA00CBDB5E /* UIComponents */,
 				0A3A627A2637A2F30082ACAE /* Content */,
 				0A3A62792637A2C50082ACAE /* Extention */,
-				0A3A627426379D2B0082ACAE /* Model */,
-				0A306FCD25F7078B0059CDEE /* ViewController.swift */,
 				0A306FDA25F7078C0059CDEE /* Info.plist */,
+				0A3A627426379D2B0082ACAE /* Model */,
+				0A3A627C2637A5450082ACAE /* Support */,
+				48AE7FE12640B1EA00CBDB5E /* UIComponents */,
+				0A306FCD25F7078B0059CDEE /* ViewController.swift */,
 			);
 			path = "Queens-game";
 			sourceTree = "<group>";
@@ -211,24 +211,24 @@
 		0A3A627A2637A2F30082ACAE /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A62932638B1610082ACAE /* Top */,
-				0A3A629A2638B3880082ACAE /* PlayerSelection */,
-				0A3A629D2638B8A50082ACAE /* EntryName */,
-				0A3A62A32638BB8A0082ACAE /* QueenSelection */,
-				0A3A62A82638BBE60082ACAE /* QueenSelecting */,
-				0A3A62AD2638BC2B0082ACAE /* QueenSelected */,
-				0A3A62BA2638C01A0082ACAE /* CommandSelection */,
-				0A3A62BF2638C10F0082ACAE /* CommandManualSelecting */,
-				0A3A62C32638C1850082ACAE /* CommandConfirmation */,
-				0A3A62C72638C2AE0082ACAE /* CitizenSelecting */,
 				0A3A62CC2638C3270082ACAE /* CitizenSelected */,
-				0A3A62D22638C3950082ACAE /* Result */,
-				0A3A62D72638CF6B0082ACAE /* CommandSetting */,
+				0A3A62C72638C2AE0082ACAE /* CitizenSelecting */,
+				0A3A62C32638C1850082ACAE /* CommandConfirmation */,
 				0A3A62DF2638D1A20082ACAE /* CommandEdit */,
-				0A3A62E12638D3110082ACAE /* Menu */,
-				0A3A62E62638D3800082ACAE /* HowToPlay */,
-				0A3A62EB2638D4650082ACAE /* Settings */,
+				0A3A62BF2638C10F0082ACAE /* CommandManualSelecting */,
+				0A3A62BA2638C01A0082ACAE /* CommandSelection */,
+				0A3A62D72638CF6B0082ACAE /* CommandSetting */,
+				0A3A629D2638B8A50082ACAE /* EntryName */,
 				0A3A62EF2638D7980082ACAE /* ExitAlert */,
+				0A3A62E62638D3800082ACAE /* HowToPlay */,
+				0A3A62E12638D3110082ACAE /* Menu */,
+				0A3A629A2638B3880082ACAE /* PlayerSelection */,
+				0A3A62AD2638BC2B0082ACAE /* QueenSelected */,
+				0A3A62A82638BBE60082ACAE /* QueenSelecting */,
+				0A3A62A32638BB8A0082ACAE /* QueenSelection */,
+				0A3A62D22638C3950082ACAE /* Result */,
+				0A3A62EB2638D4650082ACAE /* Settings */,
+				0A3A62932638B1610082ACAE /* Top */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -236,12 +236,12 @@
 		0A3A627C2637A5450082ACAE /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				48AE80292640B26F00CBDB5E /* Demo */,
 				0A306FC925F7078B0059CDEE /* AppDelegate.swift */,
-				0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */,
 				0A306FD525F7078C0059CDEE /* Assets.xcassets */,
+				48AE80292640B26F00CBDB5E /* Demo */,
 				0A306FD725F7078C0059CDEE /* LaunchScreen.storyboard */,
 				0A306FD225F7078B0059CDEE /* Queens_game.xcdatamodeld */,
+				0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -393,16 +393,16 @@
 		48AE7FE12640B1EA00CBDB5E /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				48AE7FE22640B1EA00CBDB5E /* SearchBar */,
-				48AE7FE52640B1EA00CBDB5E /* Color */,
-				48AE7FE82640B1EA00CBDB5E /* Label */,
-				48AE7FEE2640B1EA00CBDB5E /* Cell */,
-				48AE7FF22640B1EA00CBDB5E /* Common */,
 				48AE7FF72640B1EA00CBDB5E /* Button */,
-				48AE7FFB2640B1EA00CBDB5E /* SupplementaryView */,
+				48AE7FEE2640B1EA00CBDB5E /* Cell */,
+				48AE7FE52640B1EA00CBDB5E /* Color */,
+				48AE7FF22640B1EA00CBDB5E /* Common */,
 				48AE7FFD2640B1EA00CBDB5E /* Font */,
 				48AE7FFF2640B1EA00CBDB5E /* Icon */,
+				48AE7FE82640B1EA00CBDB5E /* Label */,
+				48AE7FE22640B1EA00CBDB5E /* SearchBar */,
 				48AE80062640B1EA00CBDB5E /* SegmentControl */,
+				48AE7FFB2640B1EA00CBDB5E /* SupplementaryView */,
 			);
 			name = UIComponents;
 			path = ../../UISample/UISample/UIComponents;
@@ -526,13 +526,13 @@
 		48AE802A2640B26F00CBDB5E /* Contents */ = {
 			isa = PBXGroup;
 			children = (
-				48AE802B2640B26F00CBDB5E /* Top */,
-				48AE802D2640B26F00CBDB5E /* Search */,
-				48AE802F2640B26F00CBDB5E /* Cell */,
 				48AE80332640B26F00CBDB5E /* Button */,
+				48AE802F2640B26F00CBDB5E /* Cell */,
+				48AE80392640B26F00CBDB5E /* Color+UIView */,
 				48AE80352640B26F00CBDB5E /* Font */,
 				48AE80372640B26F00CBDB5E /* Icon */,
-				48AE80392640B26F00CBDB5E /* Color+UIView */,
+				48AE802D2640B26F00CBDB5E /* Search */,
+				48AE802B2640B26F00CBDB5E /* Top */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
@@ -598,8 +598,8 @@
 		48AE803B2640B26F00CBDB5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */,
 				48AE803D2640B26F00CBDB5E /* DemoModels.swift */,
+				48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -610,7 +610,6 @@
 				33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */,
 				080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -940,6 +939,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Queens-game/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -947,7 +947,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -960,6 +960,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Queens-game/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -967,7 +968,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
