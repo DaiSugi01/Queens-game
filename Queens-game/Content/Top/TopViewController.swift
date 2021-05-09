@@ -9,84 +9,66 @@ import UIKit
 
 class TopViewController: UIViewController {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupLayout()
-    setUpDemoButton() // debug button
-  }
-  
-  let screenName: UILabel = {
-    let lb = UILabel()
+  let gameTitle: H1Label = {
+    let lb = H1Label()
+    let title = NSMutableAttributedString(string: "Queen's Game")
+    title.addAttribute(.foregroundColor, value: CustomColor.accent, range: NSMakeRange(0, 1))
+    lb.attributedText = title
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 2
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Top"
-    
     return lb
   }()
   
-  let startGameButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Start game", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(startGame(_:)), for: .touchUpInside)
-    return bt
+  lazy var buttonWrapper: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [startButton, editCommandButton, menuButton])
+    sv.spacing = 24
+    sv.alignment = .leading
+    return sv
   }()
-
-  @objc func startGame(_ sender: UIButton) {
+  
+  let startButton = MainButton(superView: nil, title: "Start game")
+  @objc func startTapped(_ sender: UIButton) {
     let nx = PlayerSelectionViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
-  
-  let editCommandButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Edit commands", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(editCommand(_:)), for: .touchUpInside)
-    return bt
-  }()
 
-  @objc func editCommand(_ sender: UIButton) {
+  let editCommandButton  = SubButton(superView: nil, title: "Edit commands")
+  @objc func editCommandTapped(_ sender: UIButton) {
     let nx = CommandSettingViewController(collectionViewLayout: UICollectionViewFlowLayout())
     navigationController?.pushViewController(nx, animated: true)
   }
   
-  let menuButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Menu", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
-    return bt
-  }()
-
+  let menuButton  = SubButton(superView: nil, title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
     navigationController?.present(nx, animated: true, completion: nil)
   }
-
-  private func setupLayout() {
-    view.backgroundColor = .white
-
-    view.addSubview(screenName)
-    view.addSubview(startGameButton)
-    view.addSubview(editCommandButton)
-    view.addSubview(menuButton)
-
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-
-    startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    startGameButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    editCommandButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    editCommandButton.topAnchor.constraint(equalTo: startGameButton.bottomAnchor, constant: 10).isActive = true
-
-    menuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    menuButton.topAnchor.constraint(equalTo: editCommandButton.bottomAnchor, constant: 10).isActive = true
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setUpDemoButton() // debug button
+    setupLayout()
+    setActions()
   }
 
+  private func setupLayout() {
+    view.backgroundColor = CustomColor.background
+    view.addSubview(gameTitle)
+    view.addSubview(buttonWrapper)
+    
+    gameTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 128).isActive = true
+    gameTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+    gameTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+    buttonWrapper.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
+    buttonWrapper.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
+  }
+  
+  private func setActions() {
+    startButton.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
+    editCommandButton.addTarget(self, action: #selector(editCommandTapped(_:)), for: .touchUpInside)
+    menuButton.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
+  }
 }
 
 
