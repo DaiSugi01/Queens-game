@@ -9,6 +9,8 @@ import UIKit
 
 class TopViewController: UIViewController {
   
+  let vm = TopViewModel()
+  
   let gameTitle: H1Label = {
     let lb = H1Label()
     let title = NSMutableAttributedString(string: "Queen's Game")
@@ -47,11 +49,12 @@ class TopViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setUpDemoButton() // debug button
+    vm.resetGameManeger()
     setupLayout()
     setActions()
+    setUpDemoButton() // debug button
   }
-
+  
   private func setupLayout() {
     view.backgroundColor = CustomColor.background
     view.addSubview(gameTitle)
