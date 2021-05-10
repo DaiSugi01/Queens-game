@@ -1,5 +1,5 @@
 //
-//  EntryNameCollectionViewController.swift
+//  QueenSelectionViewController.swift
 //  Queens-game
 //
 //  Created by 杉原大貴 on 2021/04/27.
@@ -9,8 +9,8 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class EntryNameViewController: UICollectionViewController {
-  
+class QueenSelectionCollectoinViewController: UICollectionViewController {
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -39,7 +39,7 @@ class EntryNameViewController: UICollectionViewController {
   let screenName: UILabel = {
     let lb = UILabel()
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Entry Name"
+    lb.text = "Queen Selection"
     
     return lb
   }()
@@ -66,7 +66,7 @@ class EntryNameViewController: UICollectionViewController {
   }()
   
   @objc func goToNext(_ sender: UIButton) {
-    let nx = QueenSelectionViewController()
+    let nx = QueenSelectedViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   
@@ -90,5 +90,4 @@ class EntryNameViewController: UICollectionViewController {
     
     backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
     backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  }
-}
+  }}
