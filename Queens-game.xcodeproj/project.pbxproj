@@ -68,6 +68,7 @@
 		485635EE26438A140043AF21 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635ED26438A140043AF21 /* Section.swift */; };
 		485635F026438AB80043AF21 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EF26438AB80043AF21 /* Selection.swift */; };
 		485635F226438F4F0043AF21 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635F126438F4F0043AF21 /* Item.swift */; };
+		4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */; };
 		48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802C2640B26F00CBDB5E /* DemoViewController.swift */; };
 		48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */; };
 		48AE80402640B26F00CBDB5E /* DemoCellCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */; };
@@ -148,6 +149,7 @@
 		485635ED26438A140043AF21 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		485635EF26438AB80043AF21 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		485635F126438F4F0043AF21 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+DataSource.swift"; sourceTree = "<group>"; };
 		48AE802C2640B26F00CBDB5E /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSearchViewController.swift; sourceTree = "<group>"; };
 		48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DemoCellCVC+DataSource.swift"; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */,
+				4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */,
 			);
 			path = CommandSetting;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				482681882645EBA80010543A /* H3Label.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
+				4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,
 				4826819A2645EBA80010543A /* UserIdIconView.swift in Sources */,
 				0A3A62BC2638C0580082ACAE /* CommandSelectionViewController.swift in Sources */,
