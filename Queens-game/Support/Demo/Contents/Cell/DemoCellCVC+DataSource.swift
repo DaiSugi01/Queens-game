@@ -42,20 +42,31 @@ extension DemoCellCollectionViewController {
             return cell
           }
           
-          if let command = item.command {
+          if let demoCommand = item.command {
             let cell = collectionView.dequeueReusableCell(
               withReuseIdentifier: CommandCollectionViewCell.identifier,
               for: indexPath
             ) as! CommandCollectionViewCell
+            let command = Command(
+              detail: demoCommand.detail,
+              difficulty: Difficulty.init(rawValue: demoCommand.difficulty.rawValue)!,
+              commandType: CommandType.init(rawValue: demoCommand.commandType.rawValue)!
+            )
             cell.configContent(by: command)
+            
             return cell
           }
           
-          if let selection = item.selection {
+          if let demoSelection = item.selection {
             let cell = collectionView.dequeueReusableCell(
               withReuseIdentifier: SelectionCollectionViewCell.identifier,
               for: indexPath
             ) as! SelectionCollectionViewCell
+            let selection = Selection(
+              title: demoSelection.title,
+              detail: demoSelection.detail,
+              isSelected: demoSelection.isSelected
+            )
             cell.configContent(by: selection)
             return cell
           }
