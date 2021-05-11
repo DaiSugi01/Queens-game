@@ -37,7 +37,7 @@ extension CommonSelectionViewController {
               for: indexPath
             ) as! SelectionCollectionViewCell
             cell.configContent(by: selection)
-            print(cell)
+
             return cell
           }
           

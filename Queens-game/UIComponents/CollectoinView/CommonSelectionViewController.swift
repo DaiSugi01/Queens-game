@@ -20,6 +20,7 @@ class CommonSelectionViewController: UIViewController {
     let collectionView = UICollectionView(
       frame: .zero,collectionViewLayout: layout
     )
+    collectionView.constraintHeight(equalToConstant: 360)
     return collectionView
   }()
   

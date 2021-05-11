@@ -9,7 +9,7 @@ import UIKit
 
 class QueenSelectionViewController: CommonSelectionViewController {
   
-  // TODO: Delete users later
+  //TODO: Delete users later
   let users: [User] = [
     User(id: UUID(), playerId: 0, name: "Player1"),
     User(id: UUID(), playerId: 1, name: "Player2"),
@@ -30,17 +30,17 @@ class QueenSelectionViewController: CommonSelectionViewController {
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 2
     lb.textAlignment = .left
+    lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
   
   let navButtons = NextAndBackButtons()
   
   lazy var verticalSV: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView, navButtons] ,spacing: 40)
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
     sv.alignment = .fill
-    sv.distribution = .fill
+    sv.distribution = .equalSpacing
     sv.translatesAutoresizingMaskIntoConstraints = false
-    sv.setCustomSpacing(Constant.QueenSelection.cardBottomSpacing, after: collectionView)
     return sv
   }()
   
@@ -50,6 +50,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     setupLayout()
     setButtonActions()
     GameManager.shared.users = users
+    print(Constant.Common.topSpacing)
   }
   
   /// Setup collection view layout and datasource
@@ -60,10 +61,21 @@ class QueenSelectionViewController: CommonSelectionViewController {
   
   /// Setup whole layout
   private func setupLayout() {
+    // config navigation
     navigationItem.hidesBackButton = true
+    
+    // add components to super view
     view.backgroundColor = CustomColor.background
     view.addSubview(verticalSV)
-    verticalSV.matchParent(padding: .init(top: 128, left: 32, bottom: 96, right: 32))
+    view.addSubview(navButtons)
+
+    // set constraints
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  Constant.Common.trailingSpacing).isActive = true
+    
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.centerXin(view)
   }
   
   /// Set Button Actions
@@ -72,6 +84,8 @@ class QueenSelectionViewController: CommonSelectionViewController {
     navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
   }
   
+  //TODO: Implements card selection later
+
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
