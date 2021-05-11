@@ -1,13 +1,13 @@
 //
-//  QueenSelectionViewController+Layout.swift
+//  CommonSelectionViewController+Layout.swift
 //  Queens-game
 //
-//  Created by 杉原大貴 on 2021/05/10.
+//  Created by 杉原大貴 on 2021/05/11.
 //
 
 import UIKit
 
-extension QueenSelectionViewController {
+extension CommonSelectionViewController {
   
   /// Config layout of CollectionViewController
   /// Internally, it executes
@@ -19,22 +19,25 @@ extension QueenSelectionViewController {
   ///     - with section header
   func createCollectionViewLayout() {
     view.backgroundColor = CustomColor.background
-    multipleSelectionCV.backgroundColor = CustomColor.background
+    collectionView.backgroundColor = CustomColor.background
     // Config compositionalLayout
-    multipleSelectionCV.setCollectionViewLayout(createCompositionalLayout(), animated: false)
+    collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }
   
   
   /// Create CompositionalLayout. It is assigning CollectionLayoutSection to each section
   /// - Returns: CompositionalLayout
-  private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-    return UICollectionViewCompositionalLayout
-    { [unowned self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-      
-      return createSection()
-    }
-  }
+  //  private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+  //    return UICollectionViewCompositionalLayout
+  //    { [unowned self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+  //
+  //      return createSection()
+  //    }
+  //  }
   
+  private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+    return UICollectionViewCompositionalLayout(section: createSection())
+  }
   
   /// Create layout of section. You can create different layout of section by modifying or duplicating this function.
   /// - Returns: NSCollectionLayoutSection
@@ -61,8 +64,7 @@ extension QueenSelectionViewController {
     // Section
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 16
-    section.contentInsets = .init(top: 16, leading: 32, bottom: 64, trailing: 32)
-    
+    section.contentInsets = .init(top: 16, leading: 0, bottom: 64, trailing: 0)
     return section
   }
   
