@@ -11,7 +11,7 @@ import RealmSwift
 /// Command object capable in realm
 class Command: Object {
   
-  @objc dynamic let id: UUID = UUID()
+  @objc dynamic var id: String = UUID().uuidString
   @objc dynamic var detail: String = ""
   // Don't allow access by int
   @objc private dynamic var intDifficulty: Int = 0
@@ -24,12 +24,12 @@ class Command: Object {
     return "id"
   }
   
-  internal init(
+  convenience init(
     detail: String = "",
     difficulty: Difficulty = .easy,
     commandType: CommandType = .cToC
   ) {
-    super.init()
+    self.init()
     self.detail = detail
     self.difficulty = difficulty
     self.commandType = commandType
