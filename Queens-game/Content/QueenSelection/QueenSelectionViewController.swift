@@ -29,7 +29,6 @@ class QueenSelectionViewController: CommonSelectionViewController {
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 2
-    lb.textAlignment = .left
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
