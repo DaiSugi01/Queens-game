@@ -11,10 +11,5 @@ import Foundation
 struct Selection: Hashable {
   var title: String
   var detail: String
-  var isSelected: Bool
-  
-  static let options = [
-    Selection(title: "Quick select", detail: "The queen is selected as you as you tap next", isSelected: true),
-    Selection(title: "Card select", detail: "Those who select Queen will be the Queen!", isSelected: false)
-  ]
+  var isSelected: Bool  
 }

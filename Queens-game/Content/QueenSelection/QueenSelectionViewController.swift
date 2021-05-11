@@ -9,18 +9,10 @@ import UIKit
 
 class QueenSelectionViewController: UIViewController, UICollectionViewDelegate {
 
-    
-  var sections: [DemoSection] = [.selection]
-  
+  let sections: [Section] = [.selection]
+
+  var snapshot: NSDiffableDataSourceSnapshot<DemoSection, DemoItem>!
   var dataSource: UICollectionViewDiffableDataSource<DemoSection, DemoItem>!
-  var snapshot: NSDiffableDataSourceSnapshot<DemoSection, DemoItem> {
-    var ss = NSDiffableDataSourceSnapshot<DemoSection, DemoItem>()
-    ss.appendSections([.selection])
-//    ss.appendItems(DemoItem.wrap(items: DemoSampleData.options))
-    ss.appendItems(DemoItem.wrapSelection(items: DemoSampleData.options), toSection: .selection)
-    sections = ss.sectionIdentifiers
-    return ss
-  }
   
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Let's decide the Queen")
@@ -37,10 +29,6 @@ class QueenSelectionViewController: UIViewController, UICollectionViewDelegate {
     let collectionView = UICollectionView(
       frame: .zero,collectionViewLayout: layout
     )
-    collectionView.backgroundColor = CustomColor.background
-    collectionView.register(
-      SelectionCollectionViewCell.self,
-      forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier)
     return collectionView
   }()
   
@@ -48,40 +36,28 @@ class QueenSelectionViewController: UIViewController, UICollectionViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    multipleSelectionCV.delegate = self
-    multipleSelectionCV.setCollectionViewLayout(generateLayout(), animated: true)
-    createDataSource()
+    setupCollectionView()
     setupLayout()
     setButtonActions()
+  }
+  
+  private func setupCollectionView() {
+    createCollectionViewLayout()
+    createDiffableDataSource()
   }
   
   private func setupLayout() {
     navigationItem.hidesBackButton = true
     view.backgroundColor = CustomColor.background
     
-//    let verticalSV = VerticalStackView(arrangedSubviews: [screenTitle, multipleSelectionCV, navButtons])
-//    verticalSV.alignment = .center
-//    verticalSV.spacing = 40
-//    verticalSV.translatesAutoresizingMaskIntoConstraints = false
-//    verticalSV.distribution = .equalSpacing
-//    view.addSubview(verticalSV)
-//    verticalSV.matchParent(padding: .init(top: 64, left: 32, bottom: 64, right: 32))
-    view.addSubview(screenTitle)
-    view.addSubview(navButtons)
-    view.addSubview(multipleSelectionCV)
-    screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64).isActive = true
-    screenTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-    screenTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-
-    navButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
-    navButtons.centerXin(view)
-//
-//    multipleSelectionCV.topAnchor.constraint(equalTo: screenTitle.bottomAnchor, constant: 40).isActive = true
-    multipleSelectionCV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-    multipleSelectionCV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-    multipleSelectionCV.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-//
-
+    let verticalSV = VerticalStackView(arrangedSubviews: [screenTitle, multipleSelectionCV, navButtons])
+    verticalSV.alignment = .fill
+    verticalSV.distribution = .fill
+    verticalSV.spacing = 40
+    verticalSV.translatesAutoresizingMaskIntoConstraints = false
+    verticalSV.distribution = .equalSpacing
+    view.addSubview(verticalSV)
+    verticalSV.matchParent(padding: .init(top: 64, left: 32, bottom: 64, right: 32))
   }
   
   private func setButtonActions() {
