@@ -10,6 +10,7 @@ import RealmSwift
 
 /// Command object capable in realm
 class Command: Object {
+  
   @objc dynamic let id: UUID = UUID()
   @objc dynamic var detail: String = ""
   // Don't allow access by int
@@ -17,9 +18,21 @@ class Command: Object {
   // Don't allow access by int
   @objc private dynamic var intType: Int = 0
   
+  
   // What do you want to use as primaryKey?
   override class func primaryKey() -> String? {
     return "id"
+  }
+  
+  internal init(
+    detail: String = "",
+    difficulty: Difficulty = .easy,
+    commandType: CommandType = .cToC
+  ) {
+    super.init()
+    self.detail = detail
+    self.difficulty = difficulty
+    self.commandType = commandType
   }
 }
 
@@ -41,7 +54,7 @@ extension Command {
   }
   
   /// Get and Set `CommandType` by enum type
-  var type: CommandType {
+  var commandType: CommandType {
     get {
       return CommandType(rawValue: intType) ?? .cToC
     }
