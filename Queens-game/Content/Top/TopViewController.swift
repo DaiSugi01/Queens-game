@@ -48,7 +48,7 @@ class TopViewController: UIViewController {
   }()
 
   @objc func editCommand(_ sender: UIButton) {
-    let nx = CommandSelectionViewController()
+    let nx = CommandSettingViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   

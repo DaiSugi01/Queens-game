@@ -7,6 +7,33 @@
 
 import UIKit
 
+
+extension CommandSettingViewController {
+  func configSearchBar() {
+    searchBar.delegate = self
+    searchBar.configSuperView(under: view)
+    searchBar.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor:  nil,
+      padding: .init(top: Constant.Common.topSpacing*0.64 - 24, left: 32-8, bottom: 0, right: 32-8)
+    )
+    searchBar.isHidden = true
+  }
+  
+  func configBottomNavigationBar() {
+    bottomNavigationBar.configSuperView(under: view)
+    bottomNavigationBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    bottomNavigationBar.centerXin(view)
+  }
+  
+  func disableDefaultNavigation() {
+    navigationItem.hidesBackButton = true
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+}
+
 extension CommandSettingViewController {
   /// Config layout of CollectionViewController
   /// Internally, it executes
@@ -17,6 +44,15 @@ extension CommandSettingViewController {
   ///    - section
   ///     - with section header
   func createCollectionViewLayout() {
+    collectionView.configSuperView(under: view)
+    collectionView.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: view.bottomAnchor,
+      padding: .init(top: 0, left: 0, bottom: 0, right: 0)
+    )
+    
     collectionView.backgroundColor = CustomColor.background
     // Config compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
@@ -70,7 +106,7 @@ extension CommandSettingViewController {
     
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(1)
+      heightDimension: .estimated(40)
     )
     let header = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize,

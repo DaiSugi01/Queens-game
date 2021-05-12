@@ -18,7 +18,7 @@ class CommandHeaderCollectionReusableView: UICollectionReusableView {
     let sv = VerticalStackView(
       arrangedSubviews: [uv, title, subTitle]
     )
-    sv.setCustomSpacing(64, after: uv)
+    sv.setCustomSpacing(76, after: uv)
     sv.setCustomSpacing(24, after: title)
     return sv
   } ()

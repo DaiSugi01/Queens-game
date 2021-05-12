@@ -63,7 +63,6 @@ class CommandCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // FIXME: - DemoSelection -> Command
   /// Update command text, level, type based on source
   /// - Parameter command: Command source
   func configContent(by command: Command) {

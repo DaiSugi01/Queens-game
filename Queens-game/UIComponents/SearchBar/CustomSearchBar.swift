@@ -28,8 +28,8 @@ class CustomSearchBar: UISearchBar {
     fatalError("init(coder:) has not been implemented")
   }
   
+  /// Change color of cancel button
   private func configCancelButton() {
-    // Change color of cancel button
     let attributes:[NSAttributedString.Key: Any] = [
       .foregroundColor: CustomColor.accent,
       .font: CustomFont.p,

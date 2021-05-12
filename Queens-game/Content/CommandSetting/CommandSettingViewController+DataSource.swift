@@ -81,6 +81,7 @@ extension CommandSettingViewController {
   /// 3. Define cells (and headers) with data source.
   /// 4. Apply snapshot to data source.
   func createDiffableDataSource(){
+    collectionView.delegate = self
     registerCells()
     
     // Reset snapshot

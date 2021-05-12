@@ -68,6 +68,9 @@
 		485635EE26438A140043AF21 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635ED26438A140043AF21 /* Section.swift */; };
 		485635F026438AB80043AF21 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EF26438AB80043AF21 /* Selection.swift */; };
 		485635F226438F4F0043AF21 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635F126438F4F0043AF21 /* Item.swift */; };
+		487AF1E5264B977100663047 /* CommandSettingViewController+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E4264B977100663047 /* CommandSettingViewController+ScrollView.swift */; };
+		487AF1E7264B9A2900663047 /* CommandSettingViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E6264B9A2900663047 /* CommandSettingViewController+SearchBar.swift */; };
+		487AF1E9264B9AA300663047 /* CommandSettingViewController+AddEditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E8264B9AA300663047 /* CommandSettingViewController+AddEditItem.swift */; };
 		4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */; };
 		4892E022264A170300C3EFB4 /* CommandSettingViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */; };
 		48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802C2640B26F00CBDB5E /* DemoViewController.swift */; };
@@ -151,6 +154,9 @@
 		485635ED26438A140043AF21 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		485635EF26438AB80043AF21 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		485635F126438F4F0043AF21 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		487AF1E4264B977100663047 /* CommandSettingViewController+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+ScrollView.swift"; sourceTree = "<group>"; };
+		487AF1E6264B9A2900663047 /* CommandSettingViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+SearchBar.swift"; sourceTree = "<group>"; };
+		487AF1E8264B9AA300663047 /* CommandSettingViewController+AddEditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+AddEditItem.swift"; sourceTree = "<group>"; };
 		4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+DataSource.swift"; sourceTree = "<group>"; };
 		4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+Layout.swift"; sourceTree = "<group>"; };
 		48AE802C2640B26F00CBDB5E /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -375,6 +381,9 @@
 				0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */,
 				4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */,
 				4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */,
+				487AF1E4264B977100663047 /* CommandSettingViewController+ScrollView.swift */,
+				487AF1E6264B9A2900663047 /* CommandSettingViewController+SearchBar.swift */,
+				487AF1E8264B9AA300663047 /* CommandSettingViewController+AddEditItem.swift */,
 			);
 			path = CommandSetting;
 			sourceTree = "<group>";
@@ -789,6 +798,7 @@
 				482681842645EBA80010543A /* CustomColor.swift in Sources */,
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
+				487AF1E9264B9AA300663047 /* CommandSettingViewController+AddEditItem.swift in Sources */,
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
 				0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */,
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,
@@ -810,10 +820,12 @@
 				482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */,
 				485635EA26437C7A0043AF21 /* CommandType.swift in Sources */,
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
+				487AF1E7264B9A2900663047 /* CommandSettingViewController+SearchBar.swift in Sources */,
 				482681882645EBA80010543A /* H3Label.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
 				4892E022264A170300C3EFB4 /* CommandSettingViewController+Layout.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
+				487AF1E5264B977100663047 /* CommandSettingViewController+ScrollView.swift in Sources */,
 				4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,
 				4826819A2645EBA80010543A /* UserIdIconView.swift in Sources */,
