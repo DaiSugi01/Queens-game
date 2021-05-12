@@ -67,7 +67,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     view.backgroundColor = CustomColor.background
     view.addSubview(verticalSV)
     view.addSubview(navButtons)
-
+    
     // set constraints
     verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
     verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
@@ -84,7 +84,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
   }
   
   //TODO: Implements card selection later
-
+  
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
@@ -94,7 +94,9 @@ class QueenSelectionViewController: CommonSelectionViewController {
     case Constant.QueenSelection.quickIndexPath:
       vm.selectQueen()
       let nx = QueenSelectedViewController()
-      navigationController?.pushViewController(nx, animated: true)
+      GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                          currentScreen: self,
+                                          nextScreen: nx)
     case  Constant.QueenSelection.cardIndexPath:
       print("Path for card selection page")
     default:
