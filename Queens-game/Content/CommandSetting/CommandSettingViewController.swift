@@ -7,93 +7,130 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class CommandSettingViewController: UIViewController {
+class CommandSettingViewController: UIViewController, UICollectionViewDelegate {
   
   let sections: [Section] = [.command]
   
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
-  
-  let lb = H2Label(text: "Dummy title")
-  let collectionView = UICollectionView(
+  let searchBar = CustomSearchBar()
+  var collectionView: UICollectionView = UICollectionView(
     frame: .zero,
-    collectionViewLayout: UICollectionViewLayout()
+    collectionViewLayout: UICollectionViewFlowLayout()
   )
-  lazy var stackView: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [lb, collectionView])
+  
+  let backButton: UIButton = {
+    let bt = SubButton()
+    bt.configBgColor(bgColor: CustomColor.background)
+    return bt
+  } ()
+  let searchIcon: UIButton = {
+    let bt = UIButton()
+    bt.configLayout(width: 40, height: 40, bgColor: CustomColor.main, radius: 20)
+    bt.setImage(UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    bt.tintColor = CustomColor.background
+    bt.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+    return bt
+  } ()
+  lazy var bottomNavigationBar: HorizontalStackView = {
+    let sv = HorizontalStackView(
+      arrangedSubviews: [backButton, searchIcon],
+      spacing: 64,
+      alignment: .center
+    )
     return sv
-  }()
+  } ()
   
   override func viewDidLoad() {
     view.configBgColor(bgColor: CustomColor.background)
-    stackView.configLayout(
-      superView: view
+    collectionView.configSuperView(under: view)
+    collectionView.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: view.bottomAnchor,
+      padding: .init(top: 0, left: 0, bottom: 0, right: 0)
     )
-    stackView.matchParent()
+    createDiffableDataSource()
+    createCollectionViewLayout()
+    navigationItem.hidesBackButton = true
+
+    
+    searchBar.delegate = self
+    searchBar.configSuperView(under: view)
+    searchBar.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor:  nil,
+      padding: .init(top: 24, left: 32-8, bottom: 0, right: 32-8)
+    )
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
+
+    collectionView.delegate = self
+    
+    bottomNavigationBar.configSuperView(under: view)
+    bottomNavigationBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
+    bottomNavigationBar.centerXin(view)
+    
+  }
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    
+    if !decelerate {
+      return
+    }
+    
+    if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
+        print("up")
+      UIView.animate(
+        withDuration: 0.24,
+        delay: 0,
+        options: .curveEaseIn)
+      { [unowned self] in
+        self.searchBar.isHidden = false
+        self.searchBar.alpha = 1
+      }
+    }
+    else {
+        print("down")
+      UIView.animate(
+        withDuration: 0.24,
+        delay: 0,
+        options: .curveEaseOut)
+      { [unowned self] in
+        self.searchBar.alpha = 0
+      } completion: { [unowned self] _ in
+        self.searchBar.isHidden = true
+      }
+    }
+  }
+  
+  @objc func searchButtonTapped() {
+    UIView.animate(
+      withDuration: 0.24,
+      delay: 0,
+      options: .curveEaseIn)
+    { [unowned self] in
+      self.searchBar.isHidden = false
+      self.searchBar.alpha = 1
+      searchBar.becomeFirstResponder()
+    }
+    
   }
 
-//  override func viewDidLoad() {
-//    super.viewDidLoad()
-//    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-//    setupLayout()
-//  }
-//  
-//  // MARK: UICollectionViewDataSource
-//  
-//  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-//    return 0
-//  }
-//  
-//  
-//  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    return 0
-//  }
-//  
-//  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-//    return cell
-//  }
-//  
-//  
-//  
-//  // TODO: Delete below before you imprement
-//  let screenName: UILabel = {
-//    let lb = UILabel()
-//    lb.translatesAutoresizingMaskIntoConstraints = false
-//    lb.text = "Edit command"
-//    
-//    return lb
-//  }()
-//  
-//  let addButton: UIButton = {
-//    let bt = UIButton()
-//    bt.translatesAutoresizingMaskIntoConstraints = false
-//    bt.setTitle("Add", for: .normal)
-//    bt.backgroundColor = .black
-//    bt.setTitleColor(.white, for: .normal)
-//    bt.addTarget(self, action: #selector(goToaddEdit(_:)), for: .touchUpInside)
-//    
-//    return bt
-//  }()
-//  
-//  @objc func goToaddEdit(_ sender: UIButton) {
-//    let nx = CommandEditViewController()
-//    present(nx, animated: true, completion: nil)
-//  }
-//  
-//  private func setupLayout() {
-//    collectionView.backgroundColor = .white
-//    
-//    view.addSubview(screenName)
-//    view.addSubview(addButton)
-//
-//    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-//    
-//    addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//    addButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true    
-//  }
+}
 
+extension CommandSettingViewController: UISearchBarDelegate {
+  func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    searchBar.setShowsCancelButton(true, animated: true)
+    return true
+  }
+  func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+    searchBar.setShowsCancelButton(false, animated: true)
+    return true
+  }
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    searchBar.setShowsCancelButton(false, animated: true)
+  }
 }

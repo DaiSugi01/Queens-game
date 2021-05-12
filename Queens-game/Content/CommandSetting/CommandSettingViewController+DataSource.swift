@@ -10,7 +10,53 @@ import UIKit
 //  Configure Diffable Data source
 extension CommandSettingViewController {
   
+  /// temporary
   static var commands = [
+    Command(
+      detail: "Sing a song in front of others",
+      difficulty: .hard,
+      commandType: .cToA
+    ),
+    Command(
+      detail: "Buy something worth maximum 5$ to Queen",
+      difficulty: .normal,
+      commandType: .cToQ
+    ),
+    Command(
+      detail: "Look each other deeply 30secs",
+      difficulty: .easy,
+      commandType: .cToA
+    ),
+    Command(
+      detail: "Sing a song in front of others",
+      difficulty: .hard,
+      commandType: .cToA
+    ),
+    Command(
+      detail: "Buy something worth maximum 5$ to Queen",
+      difficulty: .normal,
+      commandType: .cToQ
+    ),
+    Command(
+      detail: "Look each other deeply 30secs",
+      difficulty: .easy,
+      commandType: .cToA
+    ),
+    Command(
+      detail: "Sing a song in front of others",
+      difficulty: .hard,
+      commandType: .cToA
+    ),
+    Command(
+      detail: "Buy something worth maximum 5$ to Queen",
+      difficulty: .normal,
+      commandType: .cToQ
+    ),
+    Command(
+      detail: "Look each other deeply 30secs",
+      difficulty: .easy,
+      commandType: .cToA
+    ),
     Command(
       detail: "Sing a song in front of others",
       difficulty: .hard,
@@ -35,8 +81,6 @@ extension CommandSettingViewController {
   /// 3. Define cells (and headers) with data source.
   /// 4. Apply snapshot to data source.
   func createDiffableDataSource(){
-    
-
     registerCells()
     
     // Reset snapshot
@@ -47,8 +91,7 @@ extension CommandSettingViewController {
       Item.wrap(items: CommandSettingViewController.commands),
       toSection: .command
     )
-
-
+    
     // Define cells with data source.
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
       collectionView: collectionView,
@@ -63,31 +106,21 @@ extension CommandSettingViewController {
             cell.configContent(by: command)
             return cell
           }
-
+          
           return nil
         }
     )
-      
+    
     // Define headers with data source.
     dataSource.supplementaryViewProvider = {
       [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
-
-
+      
       if let headerView = self.collectionView.dequeueReusableSupplementaryView(
         ofKind: kind,
-        withReuseIdentifier: GeneticLabelCollectionReusableView.identifier,
+        withReuseIdentifier: CommandHeaderCollectionReusableView.identifier,
         for: indexPath
-      ) as? GeneticLabelCollectionReusableView {
+      ) as? CommandHeaderCollectionReusableView {
         // Config view
-        // You can set any UIlabel as Header.
-        switch self.sections[indexPath.section] {
-          case .userName:
-            headerView.configLabel(lb: H3Label(text: "User name input"))
-          case .command:
-            headerView.configLabel(lb: H3Label(text: "Command List"))
-          case .selection:
-            headerView.configLabel(lb: H2Label(text: "Selection"))
-        }
         return headerView
       }
       return nil
@@ -100,30 +133,22 @@ extension CommandSettingViewController {
   func resetSnapshot() {
     snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
     snapshot.deleteAllItems()
-    snapshot.appendSections([.userName, .command, .selection])
+    snapshot.appendSections([.command])
   }
-  
   
   /// Register all cells and headers with identifier.
   private func registerCells() {
     // cell
     collectionView.register(
-      UsernameInputCollectionViewCell.self,
-      forCellWithReuseIdentifier: UsernameInputCollectionViewCell.identifier
-    )
-    collectionView.register(
       CommandCollectionViewCell.self,
       forCellWithReuseIdentifier: CommandCollectionViewCell.identifier
     )
-    collectionView.register(
-      SelectionCollectionViewCell.self,
-      forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier
-    )
+    
     // Header
     collectionView.register(
-      GeneticLabelCollectionReusableView.self,
-      forSupplementaryViewOfKind: GeneticLabelCollectionReusableView.identifier,
-      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
+      CommandHeaderCollectionReusableView.self,
+      forSupplementaryViewOfKind: CommandHeaderCollectionReusableView.identifier,
+      withReuseIdentifier: CommandHeaderCollectionReusableView.identifier
     )
   }
 }
