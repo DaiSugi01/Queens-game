@@ -20,7 +20,7 @@ struct Constant {
         return 128
       }
     }
-    
+
     static var bottomSpacing: CGFloat {
       if UIScreen.main.bounds.height < 700 {
         return -48
