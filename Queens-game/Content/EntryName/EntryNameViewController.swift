@@ -66,7 +66,7 @@ class EntryNameViewController: UICollectionViewController {
   }()
   
   @objc func goToNext(_ sender: UIButton) {
-    let nx = QueenSelectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let nx = QueenSelectionViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   

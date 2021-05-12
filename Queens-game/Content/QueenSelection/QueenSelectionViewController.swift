@@ -2,92 +2,111 @@
 //  QueenSelectionViewController.swift
 //  Queens-game
 //
-//  Created by 杉原大貴 on 2021/04/27.
+//  Created by 杉原大貴 on 2021/05/09.
 //
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class QueenSelectionViewController: UICollectionViewController {
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    setupLayout()
-  }
+class QueenSelectionViewController: CommonSelectionViewController {
   
-  // MARK: UICollectionViewDataSource
+  //TODO: Delete users later
+  let users: [User] = [
+    User(id: UUID(), playerId: 0, name: "Player1"),
+    User(id: UUID(), playerId: 1, name: "Player2"),
+    User(id: UUID(), playerId: 2, name: "Player3"),
+    User(id: UUID(), playerId: 3, name: "Player4"),
+    User(id: UUID(), playerId: 4, name: "Player5"),
+    User(id: UUID(), playerId: 5, name: "Player6"),
+    User(id: UUID(), playerId: 6, name: "Player7"),
+    User(id: UUID(), playerId: 7, name: "Player8"),
+    User(id: UUID(), playerId: 8, name: "Player9")
+  ]
   
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 0
-  }
+  let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
-  
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
-  }
-  
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    return cell
-  }
-  
-  
-  
-  // TODO: Delete below before you imprement
-  let screenName: UILabel = {
-    let lb = UILabel()
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "Let's decide the Queen")
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Queen Selection"
-    
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 2
+    lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
   
-  let nextButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Next", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
+  let navButtons = NextAndBackButtons()
+  
+  lazy var verticalSV: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    return sv
   }()
   
-  let backButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = QueenSelectedViewController()
-    navigationController?.pushViewController(nx, animated: true)
+  //TPDP: delete unnecessary line "GameManager.shared.users = users" later
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupCollectionView()
+    setupLayout()
+    setButtonActions()
+    GameManager.shared.users = users
   }
   
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+  /// Setup collection view layout and datasource
+  private func setupCollectionView() {
+    createCollectionViewLayout()
+    createDiffableDataSource(with: Constant.QueenSelection.options)
   }
   
+  /// Setup whole layout
   private func setupLayout() {
-    collectionView.backgroundColor = .white
+    // config navigation
     navigationItem.hidesBackButton = true
     
-    view.addSubview(screenName)
-    view.addSubview(nextButton)
-    view.addSubview(backButton)
+    // add components to super view
+    view.backgroundColor = CustomColor.background
+    view.addSubview(verticalSV)
+    view.addSubview(navButtons)
     
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    // set constraints
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  Constant.Common.trailingSpacing).isActive = true
     
-    nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.centerXin(view)
+  }
+  
+  /// Set Button Actions
+  private func setButtonActions() {
+    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+  }
+  
+  //TODO: Implements card selection later
+  
+  /// Go to next screen depends on user selection
+  /// - Parameter sender: UIButton
+  @objc private func goToNext(_ sender: UIButton) {
+    guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
     
-    backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  }}
+    switch indexPath {
+    case Constant.QueenSelection.quickIndexPath:
+      vm.selectQueen()
+      let nx = QueenSelectedViewController()
+      GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                          currentScreen: self,
+                                          nextScreen: nx)
+    case  Constant.QueenSelection.cardIndexPath:
+      print("Path for card selection page")
+    default:
+      print("None of them are selected")
+    }
+  }
+  
+  /// Go back to previous screen
+  /// - Parameter sender: UIButton
+  @objc private func goBackToPrevious(_ sender: UIButton) {
+    navigationController?.popViewController(animated: true)
+  }
+}
