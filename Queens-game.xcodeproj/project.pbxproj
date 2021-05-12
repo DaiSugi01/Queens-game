@@ -69,6 +69,7 @@
 		485635F026438AB80043AF21 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EF26438AB80043AF21 /* Selection.swift */; };
 		485635F226438F4F0043AF21 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635F126438F4F0043AF21 /* Item.swift */; };
 		4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */; };
+		4892E022264A170300C3EFB4 /* CommandSettingViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */; };
 		48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802C2640B26F00CBDB5E /* DemoViewController.swift */; };
 		48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */; };
 		48AE80402640B26F00CBDB5E /* DemoCellCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */; };
@@ -80,6 +81,7 @@
 		48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */; };
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
+		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
 		4E6E9700739F0AEC971F1213 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +152,7 @@
 		485635EF26438AB80043AF21 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		485635F126438F4F0043AF21 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+DataSource.swift"; sourceTree = "<group>"; };
+		4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommandSettingViewController+Layout.swift"; sourceTree = "<group>"; };
 		48AE802C2640B26F00CBDB5E /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSearchViewController.swift; sourceTree = "<group>"; };
 		48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DemoCellCVC+DataSource.swift"; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoColorViewController.swift; sourceTree = "<group>"; };
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
+		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Queens_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -370,6 +374,7 @@
 			children = (
 				0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */,
 				4892E01F264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift */,
+				4892E021264A170300C3EFB4 /* CommandSettingViewController+Layout.swift */,
 			);
 			path = CommandSetting;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				482681762645EBA70010543A /* GeneticLabelCollectionReusableView.swift */,
+				48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */,
 			);
 			path = SupplementaryView;
 			sourceTree = "<group>";
@@ -806,6 +812,7 @@
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
 				482681882645EBA80010543A /* H3Label.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
+				4892E022264A170300C3EFB4 /* CommandSettingViewController+Layout.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
 				4892E020264A02D900C3EFB4 /* CommandSettingViewController+DataSource.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,
@@ -819,6 +826,7 @@
 				485635EC26437CED0043AF21 /* Command.swift in Sources */,
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
 				4826819B2645EBA80010543A /* IconSource.swift in Sources */,
+				48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -960,13 +968,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game.e";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -980,13 +988,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game.e";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
