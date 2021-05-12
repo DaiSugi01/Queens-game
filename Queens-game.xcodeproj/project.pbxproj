@@ -29,6 +29,7 @@
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
+		0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9C26486A1300654A05 /* TopViewModel.swift */; };
 		0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */; };
 		0AD08AA72649FBC500654A05 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AA62649FBC500654A05 /* Constant.swift */; };
 		0AD08ACF264A6F1900654A05 /* CommonSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08ACE264A6F1900654A05 /* CommonSelectionViewController.swift */; };
@@ -112,6 +113,7 @@
 		0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBookViewController.swift; sourceTree = "<group>"; };
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
+		0AD08A9C26486A1300654A05 /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
 		0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewController.swift; sourceTree = "<group>"; };
 		0AD08AA62649FBC500654A05 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		0AD08ACE264A6F1900654A05 /* CommonSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSelectionViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62942638B1830082ACAE /* TopViewController.swift */,
+				0AD08A9C26486A1300654A05 /* TopViewModel.swift */,
 			);
 			path = Top;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				482681872645EBA80010543A /* PLabel.swift in Sources */,
 				482681842645EBA80010543A /* CustomColor.swift in Sources */,
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
+				0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */,
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
 				0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */,
