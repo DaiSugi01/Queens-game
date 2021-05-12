@@ -30,6 +30,8 @@
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
+		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
+		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -109,6 +111,8 @@
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
 		33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
+		3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		4826815D2645EBA70010543A /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		4826815F2645EBA70010543A /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -198,14 +202,7 @@
 				0A306FDA25F7078C0059CDEE /* Info.plist */,
 				0A3A627426379D2B0082ACAE /* Model */,
 				0A3A627C2637A5450082ACAE /* Support */,
-				48AE7FE12640B1EA00CBDB5E /* UIComponents */,
-				0A306FCD25F7078B0059CDEE /* ViewController.swift */,
-				0A3A627C2637A5450082ACAE /* Support */,
-				0A3A627A2637A2F30082ACAE /* Content */,
 				4826815A2645EBA70010543A /* UIComponents */,
-				0A3A627426379D2B0082ACAE /* Model */,
-				0A3A62792637A2C50082ACAE /* Extention */,
-				0A306FDA25F7078C0059CDEE /* Info.plist */,
 			);
 			path = "Queens-game";
 			sourceTree = "<group>";
@@ -266,7 +263,6 @@
 				0A306FD525F7078C0059CDEE /* Assets.xcassets */,
 				48AE80292640B26F00CBDB5E /* Demo */,
 				0A306FD725F7078C0059CDEE /* LaunchScreen.storyboard */,
-				0A306FD225F7078B0059CDEE /* Queens_game.xcdatamodeld */,
 				0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */,
 			);
 			path = Support;
@@ -404,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */,
+				3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -419,16 +416,6 @@
 		4826815A2645EBA70010543A /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				48AE7FF72640B1EA00CBDB5E /* Button */,
-				48AE7FEE2640B1EA00CBDB5E /* Cell */,
-				48AE7FE52640B1EA00CBDB5E /* Color */,
-				48AE7FF22640B1EA00CBDB5E /* Common */,
-				48AE7FFD2640B1EA00CBDB5E /* Font */,
-				48AE7FFF2640B1EA00CBDB5E /* Icon */,
-				48AE7FE82640B1EA00CBDB5E /* Label */,
-				48AE7FE22640B1EA00CBDB5E /* SearchBar */,
-				48AE80062640B1EA00CBDB5E /* SegmentControl */,
-				48AE7FFB2640B1EA00CBDB5E /* SupplementaryView */,
 				4826815B2645EBA70010543A /* SearchBar */,
 				4826815E2645EBA70010543A /* Color */,
 				482681612645EBA70010543A /* Label */,
@@ -477,8 +464,9 @@
 			isa = PBXGroup;
 			children = (
 				482681682645EBA70010543A /* CommandCollectionViewCell.swift */,
-				482681692645EBA70010543A /* UsernameInputCollectionViewCell.swift */,
 				4826816A2645EBA70010543A /* SelectionCollectionViewCell.swift */,
+				3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */,
+				482681692645EBA70010543A /* UsernameInputCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -557,11 +545,9 @@
 				48AE802F2640B26F00CBDB5E /* Cell */,
 				48AE80392640B26F00CBDB5E /* Color+UIView */,
 				48AE80352640B26F00CBDB5E /* Font */,
-				48AE80372640B26F00CBDB5E /* Icon */,
+				48AE80372640B26F00CBDB5E /* Icons */,
 				48AE802D2640B26F00CBDB5E /* Search */,
 				48AE802B2640B26F00CBDB5E /* Top */,
-				48AE80372640B26F00CBDB5E /* Icons */,
-				48AE80392640B26F00CBDB5E /* Color+UIView */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
@@ -815,9 +801,11 @@
 				482681832645EBA80010543A /* CustomSearchBar.swift in Sources */,
 				485635F226438F4F0043AF21 /* Item.swift in Sources */,
 				482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */,
+				3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */,
 				485635EA26437C7A0043AF21 /* CommandType.swift in Sources */,
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
 				482681882645EBA80010543A /* H3Label.swift in Sources */,
+				3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,
