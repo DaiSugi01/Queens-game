@@ -23,13 +23,17 @@ class SettingsViewController: UIViewController {
   }()
 
   let collectionView : UICollectionView = {
-    var configuration = UICollectionLayoutListConfiguration(appearance: .sidebarPlain)
+    var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
     configuration.backgroundColor = CustomColor.background
     let layout = UICollectionViewCompositionalLayout.list(using: configuration)
     let collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
     collectionView.register(
       SettingsSwitcherCollectionViewCell.self,
       forCellWithReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier
+    )
+    collectionView.register(
+      SettingsWaitingSecondsCollectionViewCell.self,
+      forCellWithReuseIdentifier: SettingsWaitingSecondsCollectionViewCell.identifier
     )
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
@@ -69,9 +73,24 @@ extension SettingsViewController {
       ],
       spacing: 32
     )
-    stackView.configLayout(superView: view, width: 360)
-    stackView.centerXYin(view)
-    stackView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+    view.addSubview(stackView)
+    stackView.topAnchor.constraint(
+      equalTo: view.topAnchor,
+      constant: Constant.Common.topSpacing
+    ).isActive = true
+    stackView.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
+    stackView.leadingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+      constant: Constant.Common.leadingSpacing
+    ).isActive = true
+    stackView.trailingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+      constant:  Constant.Common.trailingSpacing
+    ).isActive = true
+
   }
 
   @objc func closeTapped(_ sender: UIButton) {
@@ -82,22 +101,37 @@ extension SettingsViewController {
 extension SettingsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
   func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 1
+    return 2
   }
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.viewModel.settings.skipSettings().count
+    if section == 0 {
+      return self.viewModel.settings.skipSettings().count
+    }
+    return self.viewModel.settings.waitingSeconds().count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier,
-      for: indexPath as IndexPath
-    ) as! SettingsSwitcherCollectionViewCell
-    let row = self.viewModel.settings.skipSettings()
-    cell.descriptionLabel.text = row[indexPath.row].description
-    cell.switcher.setOn(row[indexPath.row].canSkip, animated: false)
-    return cell
+    if indexPath.section == 0 {
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier,
+        for: indexPath as IndexPath
+      ) as! SettingsSwitcherCollectionViewCell
+      let row = self.viewModel.settings.skipSettings()
+      cell.descriptionLabel.text = row[indexPath.item].description
+      cell.switcher.setOn(row[indexPath.item].canSkip, animated: false)
+      return cell
+    } else {
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: SettingsWaitingSecondsCollectionViewCell.identifier,
+        for: indexPath as IndexPath
+      ) as! SettingsWaitingSecondsCollectionViewCell
+      let row = self.viewModel.settings.waitingSeconds()
+      cell.descriptionLabel.text = row[indexPath.item].description
+      cell.sec.text = row[indexPath.item].sec
+      return cell
+    }
+
   }
 
 

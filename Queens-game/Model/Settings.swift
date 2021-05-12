@@ -16,7 +16,7 @@ extension SettingsProtocol {
   var canSkipQueenSelection: Bool { return true }
   var canSkipOrderSelection: Bool { return false }
   var queenSelectionWaitingSeconds: Int { return 5 }
-  var citizenSelectionWaitingSeconds: Int { return 5 }
+  var citizenSelectionWaitingSeconds: Int { return 7 }
   var textSkipQueenSelection: String {
     return "Always skip manual Queen selection"
   }
@@ -24,7 +24,7 @@ extension SettingsProtocol {
     return "Always skip manual Order selection"
   }
   var textQueenWaitingSeconds: String {
-    return "Always skip manual Order selection"
+    return "Queen’s selction countdown"
   }
   var textCitizenWaitingSeconds: String {
     return "Citizens’ selction countdown"
@@ -34,6 +34,18 @@ extension SettingsProtocol {
     let firstRow = (self.textSkipQueenSelection, self.canSkipQueenSelection)
     let secondRow = (self.textSkipOrderSelection, self.canSkipOrderSelection)
     return [firstRow, secondRow]
+  }
+
+  func waitingSeconds() -> [(description: String, sec: String)] {
+    let firstRow = (
+      self.textQueenWaitingSeconds,
+      "\(self.queenSelectionWaitingSeconds) sec"
+    )
+    let secondRow = (
+      self.textCitizenWaitingSeconds,
+      "\(self.citizenSelectionWaitingSeconds) sec"
+    )
+    return [firstRow,secondRow]
   }
 }
 
