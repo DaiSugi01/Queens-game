@@ -11,7 +11,7 @@ class TopViewController: UIViewController {
   
   let vm = TopViewModel()
   
-  let gameTitle: H1Label = {
+  let screenTitle: H1Label = {
     let lb = H1Label()
     let title = NSMutableAttributedString(string: "Queen's Game")
     title.addAttribute(.foregroundColor, value: CustomColor.accent, range: NSMakeRange(0, 1))
@@ -57,12 +57,12 @@ class TopViewController: UIViewController {
   
   private func setupLayout() {
     view.backgroundColor = CustomColor.background
-    view.addSubview(gameTitle)
+    view.addSubview(screenTitle)
     view.addSubview(buttonWrapper)
     
-    gameTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 128).isActive = true
-    gameTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-    gameTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+    screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 128).isActive = true
+    screenTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+    screenTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
     buttonWrapper.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
     buttonWrapper.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
   }

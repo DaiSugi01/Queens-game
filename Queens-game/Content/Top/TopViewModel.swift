@@ -8,11 +8,9 @@
 import Foundation
 
 class TopViewModel {
-  init() {
-  }
-  
+
   public func resetGameManeger() {
-    GameManager.shared.users = []
+    GameManager.shared.users.removeAll()
     GameManager.shared.queen = nil
     GameManager.shared.gameProgress = 0
   }
