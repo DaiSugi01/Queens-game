@@ -43,13 +43,13 @@ class QueenSelectionViewController: CommonSelectionViewController {
     return sv
   }()
   
+  //TPDP: delete unnecessary line "GameManager.shared.users = users" later
   override func viewDidLoad() {
     super.viewDidLoad()
     setupCollectionView()
     setupLayout()
     setButtonActions()
     GameManager.shared.users = users
-    print(Constant.Common.topSpacing)
   }
   
   /// Setup collection view layout and datasource

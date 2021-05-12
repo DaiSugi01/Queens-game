@@ -21,7 +21,7 @@ import UIKit
 /// - with considering multiple sections
 class DemoCellCollectionViewController: UICollectionViewController {
 
-  let sections: [Section] = [.userName, .command, .selection]
+  let sections: [DemoSection] = [.userName, .command, .selection]
   
   var snapshot: NSDiffableDataSourceSnapshot<DemoSection, DemoItem>!
   var dataSource: UICollectionViewDiffableDataSource<DemoSection, DemoItem>!
