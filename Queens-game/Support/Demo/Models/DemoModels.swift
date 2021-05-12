@@ -10,13 +10,13 @@ import Foundation
 // These are fake models used in demonstrations of UI components. Do not use in the release version.
 
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
-enum DemoCommandType {
+enum DemoCommandType: Int {
   case cToC
   case cToA
   case cToQ
 }
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
-enum DemoDifficulty {
+enum DemoDifficulty: Int {
   case easy
   case normal
   case hard
@@ -30,7 +30,7 @@ struct DemoUser: Hashable {
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
 struct DemoCommand:Hashable {
   var detail: String
-  var level: DemoDifficulty
+  var difficulty: DemoDifficulty
   var commandType: DemoCommandType
 }
 /// ⚠️ Fake model used in demonstrations of UI components. Do not use in the release version.
@@ -49,9 +49,9 @@ struct DemoSampleData {
   ]
 
   static var commands = [
-    DemoCommand(detail: "Sing a song in front of others", level: .hard, commandType: .cToA),
-    DemoCommand(detail: "Buy something worth maximum 5$ to Queen", level: .normal, commandType: .cToQ),
-    DemoCommand(detail: "Look each other deeply 30secs", level: .easy, commandType: .cToA)
+    DemoCommand(detail: "Sing a song in front of others", difficulty: .hard, commandType: .cToA),
+    DemoCommand(detail: "Buy something worth maximum 5$ to Queen", difficulty: .normal, commandType: .cToQ),
+    DemoCommand(detail: "Look each other deeply 30secs", difficulty: .easy, commandType: .cToA)
   ]
   
   static var options = [

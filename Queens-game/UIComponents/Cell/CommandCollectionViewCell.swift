@@ -66,14 +66,14 @@ class CommandCollectionViewCell: UICollectionViewCell {
   // FIXME: - DemoSelection -> Command
   /// Update command text, level, type based on source
   /// - Parameter command: Command source
-  func configContent(by command: DemoCommand) {
+  func configContent(by command: Command) {
     
     // update detail text
     contentLabel.text = command.detail
     
     // update level icon
     levelIcon.removeFromSuperview() // to update view, we have to remove and add again.
-    switch command.level {
+    switch command.difficulty {
       case .easy:
         levelIcon = IconFactory.createImageView(type: .levelOne, height: 16)
       case .normal:

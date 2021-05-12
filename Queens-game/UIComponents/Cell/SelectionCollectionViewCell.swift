@@ -42,10 +42,9 @@ class SelectionCollectionViewCell: UICollectionViewCell {
   }
   
   
-  // FIXME: - DemoSelection -> Selection
   /// Update content text by Selection model
   /// - Parameter selection:
-  func configContent(by selection: DemoSelection) {
+  func configContent(by selection: Selection) {
     titleLabel.text = selection.title
     bodyLabel.text  = selection.detail
   }
