@@ -12,6 +12,6 @@ class TopViewModel {
   public func resetGameManeger() {
     GameManager.shared.users.removeAll()
     GameManager.shared.queen = nil
-    GameManager.shared.gameProgress = 0
+    GameManager.shared.gameProgress.removeAll()
   }
 }

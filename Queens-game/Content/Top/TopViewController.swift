@@ -32,7 +32,9 @@ class TopViewController: UIViewController {
   let startButton = MainButton(superView: nil, title: "Start game")
   @objc func startTapped(_ sender: UIButton) {
     let nx = PlayerSelectionViewController()
-    navigationController?.pushViewController(nx, animated: true)
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
   }
 
   let editCommandButton  = SubButton(superView: nil, title: "Edit commands")
@@ -47,6 +49,14 @@ class TopViewController: UIViewController {
     navigationController?.present(nx, animated: true, completion: nil)
   }
   
+  lazy var verticalSV: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, buttonWrapper])
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    return sv
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.resetGameManeger()
@@ -57,14 +67,17 @@ class TopViewController: UIViewController {
   
   private func setupLayout() {
     view.backgroundColor = CustomColor.background
-    view.addSubview(screenTitle)
-    view.addSubview(buttonWrapper)
+    view.addSubview(verticalSV)
     
-    screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 128).isActive = true
-    screenTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-    screenTitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-    buttonWrapper.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35).isActive = true
-    buttonWrapper.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
+    // Set constraints
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
+                                     constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                         constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                          constant: Constant.Common.trailingSpacing).isActive = true
+    verticalSV.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                          constant: Constant.Common.bottomSpacing).isActive = true
   }
   
   private func setActions() {
