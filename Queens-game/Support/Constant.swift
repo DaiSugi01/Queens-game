@@ -42,6 +42,5 @@ struct Constant {
     
     static let quickIndexPath: [IndexPath] = [[0, 0]]
     static let cardIndexPath: [IndexPath] = [[0, 1]]
-    static let cardBottomSpacing: CGFloat = 112
   }
 }
