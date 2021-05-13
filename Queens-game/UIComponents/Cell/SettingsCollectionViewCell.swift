@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+fileprivate let disposeBag = DisposeBag()
 
 class SettingsSwitcherCollectionViewCell: UICollectionViewCell {
 
@@ -58,6 +62,8 @@ class SettingsWaitingSecondsCollectionViewCell: UICollectionViewCell {
 
   static let identifier = "settings waiting seconds cell"
 
+  var didTap = { (sec: Double) -> Void in print(sec) }
+
   var descriptionLabel: PLabel = {
     let lb = PLabel()
     lb.numberOfLines = 3
@@ -72,10 +78,10 @@ class SettingsWaitingSecondsCollectionViewCell: UICollectionViewCell {
     return lb
   }()
 
-  let stepper: UIStepper = {
+  var stepper: UIStepper = {
     let stepper = UIStepper()
     stepper.value = 5
-    stepper.minimumValue = 3
+    stepper.minimumValue = 2
     stepper.maximumValue = 8
     return stepper
   }()

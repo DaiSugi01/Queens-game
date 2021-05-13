@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SettingsViewController: UIViewController {
 
-  let data = ["item1", "item2", "item3"]
+  let disposeBag = DisposeBag()
 
   let viewModel: SettingViewModel = SettingViewModel(settings: Settings.shared)
 
@@ -117,18 +119,39 @@ extension SettingsViewController: UICollectionViewDataSource, UICollectionViewDe
         withReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier,
         for: indexPath as IndexPath
       ) as! SettingsSwitcherCollectionViewCell
+
       let row = self.viewModel.settings.skipSettings()
       cell.descriptionLabel.text = row[indexPath.item].description
       cell.switcher.setOn(row[indexPath.item].canSkip, animated: false)
+
+      // RxSwift
+      let relay = self.viewModel.skipRelays[indexPath.item]
+      cell.switcher.rx.isOn.asObservable()
+        .subscribe(onNext: {
+          relay.accept($0)
+        })
+        .disposed(by: disposeBag)
       return cell
     } else {
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: SettingsWaitingSecondsCollectionViewCell.identifier,
         for: indexPath as IndexPath
       ) as! SettingsWaitingSecondsCollectionViewCell
+
       let row = self.viewModel.settings.waitingSeconds()
       cell.descriptionLabel.text = row[indexPath.item].description
-      cell.sec.text = row[indexPath.item].sec
+      let sec = row[indexPath.item].sec
+      cell.stepper.value = sec
+      cell.sec.text = "\(Int(sec)) sec"
+
+      // RxSwift
+      let relay = self.viewModel.waitingRelays[indexPath.item]
+      cell.stepper.rx.value.asObservable()
+        .subscribe(onNext: {
+          relay.accept($0)
+          cell.sec.text = "\(Int($0)) sec"
+        })
+        .disposed(by: disposeBag)
       return cell
     }
 

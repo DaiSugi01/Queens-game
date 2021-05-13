@@ -8,15 +8,22 @@
 import Foundation
 
 protocol SettingsProtocol {
+  var canSkipQueenSelection: Bool { get set }
+  var canSkipOrderSelection: Bool { get set }
+  var queenSelectionWaitingSeconds: Double { get set }
+  var citizenSelectionWaitingSeconds: Double { get set }
 
+  func saveByMySelf() -> Void
 }
 
 extension SettingsProtocol {
 
-  var canSkipQueenSelection: Bool { return true }
-  var canSkipOrderSelection: Bool { return false }
-  var queenSelectionWaitingSeconds: Int { return 5 }
-  var citizenSelectionWaitingSeconds: Int { return 7 }
+  var userDefaultsKey: String { "Settings" }
+
+  var canSkipQueenSelection: Bool { true }
+  var canSkipOrderSelection: Bool { false }
+  var queenSelectionWaitingSeconds: Double { 5 }
+  var citizenSelectionWaitingSeconds: Double { 6 }
   var textSkipQueenSelection: String {
     return "Always skip manual Queen selection"
   }
@@ -36,25 +43,67 @@ extension SettingsProtocol {
     return [firstRow, secondRow]
   }
 
-  func waitingSeconds() -> [(description: String, sec: String)] {
+  func waitingSeconds() -> [(description: String, sec: Double)] {
     let firstRow = (
       self.textQueenWaitingSeconds,
-      "\(self.queenSelectionWaitingSeconds) sec"
+      self.queenSelectionWaitingSeconds
     )
     let secondRow = (
       self.textCitizenWaitingSeconds,
-      "\(self.citizenSelectionWaitingSeconds) sec"
+      self.citizenSelectionWaitingSeconds
     )
     return [firstRow,secondRow]
   }
+
+  /// Update Settings Parameters.
+  mutating func updateSkipQueenSelection(_ bool: Bool) {
+    self.canSkipQueenSelection = bool
+  }
+
+  mutating func updateSkipOrderSelection(_ bool: Bool) {
+    self.canSkipOrderSelection = bool
+  }
+
+  mutating func updateQueenSelectionWaitingSeconds(sec: Double) {
+    self.queenSelectionWaitingSeconds = sec
+  }
+
+  mutating func updateCitizenSelectionWaitingSeconds(sec: Double) {
+    self.citizenSelectionWaitingSeconds = sec
+  }
+
 }
 
-class Settings: SettingsProtocol {
-  private init() {}
+class Settings: SettingsProtocol, Codable {
+
   static let shared = Settings()
-  
-  enum Section: String, CaseIterable {
-    case toggle
-    case options
+
+  var canSkipQueenSelection: Bool = true
+  var canSkipOrderSelection: Bool = false
+  var queenSelectionWaitingSeconds: Double = 5
+  var citizenSelectionWaitingSeconds: Double = 6
+
+  private init() {
+    let jsonDecoder = JSONDecoder()
+    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+    if let data = UserDefaults.standard.data(forKey: self.userDefaultsKey) {
+      print("init: \(data)")
+      let fromUserDefaults = try! jsonDecoder.decode(Settings.self, from: data)
+      self.canSkipQueenSelection = fromUserDefaults.canSkipQueenSelection
+      self.canSkipOrderSelection = fromUserDefaults.canSkipOrderSelection
+      self.queenSelectionWaitingSeconds = fromUserDefaults.queenSelectionWaitingSeconds
+      self.citizenSelectionWaitingSeconds = fromUserDefaults.citizenSelectionWaitingSeconds
+    }
   }
+
+  func saveByMySelf() {
+    let jsonEncoder = JSONEncoder()
+    jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+    guard let data = try? jsonEncoder.encode(Settings.shared) else {
+      return
+    }
+    print("save: \(data)")
+    UserDefaults.standard.set(data, forKey: self.userDefaultsKey)
+  }
+
 }
