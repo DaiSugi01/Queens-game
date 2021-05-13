@@ -29,6 +29,8 @@
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
+		0A618CA5264D239600ED3EDA /* EntryNameViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A618CA4264D239600ED3EDA /* EntryNameViewController+Layout.swift */; };
+		0A618CA7264D248200ED3EDA /* EntryNameViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A618CA6264D248200ED3EDA /* EntryNameViewController+DataSource.swift */; };
 		0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9C26486A1300654A05 /* TopViewModel.swift */; };
 		0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */; };
 		0AD08AA72649FBC500654A05 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AA62649FBC500654A05 /* Constant.swift */; };
@@ -113,6 +115,8 @@
 		0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBookViewController.swift; sourceTree = "<group>"; };
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
+		0A618CA4264D239600ED3EDA /* EntryNameViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryNameViewController+Layout.swift"; sourceTree = "<group>"; };
+		0A618CA6264D248200ED3EDA /* EntryNameViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryNameViewController+DataSource.swift"; sourceTree = "<group>"; };
 		0AD08A9C26486A1300654A05 /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
 		0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewController.swift; sourceTree = "<group>"; };
 		0AD08AA62649FBC500654A05 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */,
+				0A618CA4264D239600ED3EDA /* EntryNameViewController+Layout.swift */,
+				0A618CA6264D248200ED3EDA /* EntryNameViewController+DataSource.swift */,
 			);
 			path = EntryName;
 			sourceTree = "<group>";
@@ -785,6 +791,7 @@
 				48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */,
 				482681942645EBA80010543A /* NextAndBackButtons.swift in Sources */,
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
+				0A618CA7264D248200ED3EDA /* EntryNameViewController+DataSource.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
 				0A3A62C92638C2C80082ACAE /* CitizenSelectingViewController.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
@@ -807,6 +814,7 @@
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
 				0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */,
+				0A618CA5264D239600ED3EDA /* EntryNameViewController+Layout.swift in Sources */,
 				0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */,
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,
 				485635EE26438A140043AF21 /* Section.swift in Sources */,

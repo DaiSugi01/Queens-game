@@ -7,88 +7,100 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class EntryNameViewController: UICollectionViewController {
+class EntryNameViewController: UIViewController {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    setupLayout()
-  }
+  var playerCount: Int = 9
   
-  // MARK: UICollectionViewDataSource
+  let sections: [Section] = [.userName]
+  var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
+  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
   
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 0
-  }
+  lazy var verticalSV: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    sv.spacing = 40
+    return sv
+  }()
   
-  
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
-  }
-  
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    return cell
-  }
-  
-  
-  
-  // TODO: Delete below before you imprement
-  let screenName: UILabel = {
-    let lb = UILabel()
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "Enter Player names")
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Entry Name"
-    
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
   
-  let nextButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Next", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
+  let collectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    let collectionView = UICollectionView(
+      frame: .zero,collectionViewLayout: layout
+    )
+    collectionView.constraintHeight(equalToConstant: 360)
+    return collectionView
   }()
   
-  let backButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
+  let navButtons = NextAndBackButtons()
   
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = QueenSelectionViewController()
-    navigationController?.pushViewController(nx, animated: true)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setUserData()
+    setupCollectionView()
+    setupLayout()
+    setButtonActions()
   }
   
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+  private func setUserData() {
+    for i in 1 ... playerCount {
+      GameManager.shared.users.append(User(id: UUID(), playerId: i, name: "Player\(i)"))
+    }
   }
   
+  private func setupCollectionView() {
+    createCollectionViewLayout()
+    createDiffableDataSource()
+  }
+  
+  /// Setup whole layout
   private func setupLayout() {
-    collectionView.backgroundColor = .white
+    // config navigation
     navigationItem.hidesBackButton = true
     
-    view.addSubview(screenName)
-    view.addSubview(nextButton)
-    view.addSubview(backButton)
+    // add components to super view
+    view.backgroundColor = CustomColor.background
+    view.addSubview(verticalSV)
+    view.addSubview(navButtons)
     
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    // set constraints
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  Constant.Common.trailingSpacing).isActive = true
     
-    nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.centerXin(view)
   }
+  
+  /// Set Button Actions
+  private func setButtonActions() {
+    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+  }
+  
+  /// Go to next screen depends on user selection
+  /// - Parameter sender: UIButton
+  @objc private func goToNext(_ sender: UIButton) {
+    let nx = QueenSelectedViewController()
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
+  }
+  
+  /// Go back to previous screen
+  /// - Parameter sender: UIButton
+  @objc private func goBackToPrevious(_ sender: UIButton) {
+    GameManager.shared.popGameProgress(navVC: navigationController!)
+  }  
 }

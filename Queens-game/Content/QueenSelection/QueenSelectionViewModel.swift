@@ -9,8 +9,6 @@ import Foundation
 
 class QueenSelectionViewModel {
   
-  init() {}
-  
   public func selectQueen() {
     let queenIndex: Int = Int.random(in: 0 ..< GameManager.shared.users.count)
     GameManager.shared.users[queenIndex].isQueen = true

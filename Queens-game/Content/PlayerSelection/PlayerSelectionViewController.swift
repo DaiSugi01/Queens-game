@@ -44,7 +44,7 @@ class PlayerSelectionViewController: UIViewController {
   }()
   
   @objc func goToNext(_ sender: UIButton) {
-    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let nx = EntryNameViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   
