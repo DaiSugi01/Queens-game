@@ -15,7 +15,7 @@ struct CustomFont {
     return f
   }()
   static var h2: UIFont = {
-    let f = UIFont.systemFont(ofSize: 40, weight: .black)
+    let f = UIFont.systemFont(ofSize: CGFloat(40), weight: .black)
     return f
   }()
   static var h3: UIFont = {

@@ -9,63 +9,120 @@ import UIKit
 
 class CommandEditViewController: UIViewController {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupLayout()
-  }
-  
-  let screenName: UILabel = {
-    let lb = UILabel()
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Add Edit"
-    
-    return lb
-  }()
+  let viewModel: CommandSettingViewModel!
+  var itemIndex: Int? = nil
   
   let saveButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Save", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(save(_:)), for: .touchUpInside)
-    
+    let bt = MainButton(superView: nil, title: "Save")
+    bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
   }()
-  
   let cancelButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Cancel", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(cencelTapped(_:)), for: .touchUpInside)
-    
+    let bt = SubButton(superView: nil, title: "Cancel")
+    bt.addTarget(self, action: #selector(cancelTapped(_:)), for: .touchUpInside)
     return bt
   }()
   
-  @objc func save(_ sender: UIButton) {
+  let categoryLabel = H3Label(text: "Category")
+  let difficultySegment = CustomSegmentedView("Difficulity", [.levelOne, .levelTwo, .levelThree])
+  let commandTypeSegment = CustomSegmentedView("Type", [.cToC, .cToA, .cToQ])
+  let contentLabel = H3Label(text: "Content")
+  let textView: UITextView = {
+    let tv = UITextView()
+    tv.configSize(height: 128)
+    return tv
+  } ()
+  lazy var stackView = VerticalStackView(
+    arrangedSubviews: [categoryLabel, difficultySegment, commandTypeSegment, contentLabel, textView],
+    spacing: 24,
+    alignment: .fill,
+    distribution: .fill
+  )
+  
+  init(viewModel: CommandSettingViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configLayout()
+  }
+  
+  @objc func saveTapped(_ sender: UIButton) {
+    // MARK: - FIXME: validation
+    guard let difficulty = Difficulty.init(rawValue: difficultySegment.segmentedControl.selectedSegmentIndex),
+          let commandType = CommandType.init(rawValue: commandTypeSegment.segmentedControl.selectedSegmentIndex) else { return }
+    
+    guard let detail = textView.text else {
+      // please input invalid
+      return
+    }
+    
+    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
+      // too short
+      return
+    }
+    
+    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count <= 1024 else {
+      // too long
+      return
+    }
+    
+    // edit
+    if let itemIndex = itemIndex {
+      let editingCommand = viewModel.commandList[itemIndex]
+      editingCommand.detail = detail
+      editingCommand.difficulty = difficulty
+      editingCommand.commandType = commandType
+      viewModel.updateItem(command: editingCommand)
+    // add
+    } else {
+      let addingCommand = Command(detail: detail, difficulty: difficulty, commandType: commandType)
+      viewModel.createItem(command: addingCommand)
+    }
+
     dismiss(animated: true, completion: nil)
   }
   
-  @objc func cencelTapped(_ sender: UIButton) {
+  @objc func cancelTapped(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
   
-  private func setupLayout() {
-    view.backgroundColor = .white
-    navigationItem.hidesBackButton = true
+  private func configLayout() {
+    view.configBgColor(bgColor: CustomColor.background)
     
-    view.addSubview(screenName)
-    view.addSubview(saveButton)
-    view.addSubview(cancelButton)
+    stackView.configSuperView(under: view)
+    stackView.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: nil,
+      padding: .init(top: 108, left: 32, bottom: 0, right: 32)
+    )
+    stackView.setCustomSpacing(16, after: difficultySegment)
+    stackView.setCustomSpacing(32, after: commandTypeSegment)
     
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    cancelButton.configSuperView(under: view)
+    cancelButton.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: nil,
+      bottomAnchor: nil,
+      padding: .init(top: 32, left: 32 - 16, bottom: 0, right: 0)
+    )
     
-    saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    saveButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    cancelButton.trailingAnchor.constraint(equalTo: saveButton.leadingAnchor, constant: -10).isActive = true
-    cancelButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    saveButton.configSuperView(under: view)
+    saveButton.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: nil,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: nil,
+      padding: .init(top: 32, left: 0, bottom: 0, right: 32)
+    )
   }
 }

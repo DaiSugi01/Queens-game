@@ -14,12 +14,12 @@ class CommandHeaderCollectionReusableView: UICollectionReusableView {
   let subTitle = H3Label(text: "Command list")
   
   lazy var stackView: VerticalStackView = {
-    let uv = UIView()
     let sv = VerticalStackView(
-      arrangedSubviews: [uv, title, subTitle]
+      arrangedSubviews: [title, subTitle],
+      spacing: 24
     )
-    sv.setCustomSpacing(76, after: uv)
-    sv.setCustomSpacing(24, after: title)
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins = .init(top: 76, leading: 0, bottom: 0, trailing: 0)
     return sv
   } ()
   

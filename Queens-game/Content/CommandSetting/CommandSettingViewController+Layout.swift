@@ -94,6 +94,7 @@ extension CommandSettingViewController {
     
     // Header view of section
     section.boundarySupplementaryItems = [createHeader(CommandHeaderCollectionReusableView.identifier)]
+    
     return section
   }
   
@@ -106,7 +107,7 @@ extension CommandSettingViewController {
     
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(40)
+      heightDimension: .estimated(160)
     )
     let header = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize,

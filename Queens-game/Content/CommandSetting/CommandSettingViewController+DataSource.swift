@@ -9,70 +9,7 @@ import UIKit
 
 //  Configure Diffable Data source
 extension CommandSettingViewController {
-  
-  /// temporary
-  static var commands = [
-    Command(
-      detail: "Sing a song in front of others",
-      difficulty: .hard,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Buy something worth maximum 5$ to Queen",
-      difficulty: .normal,
-      commandType: .cToQ
-    ),
-    Command(
-      detail: "Look each other deeply 30secs",
-      difficulty: .easy,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Sing a song in front of others",
-      difficulty: .hard,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Buy something worth maximum 5$ to Queen",
-      difficulty: .normal,
-      commandType: .cToQ
-    ),
-    Command(
-      detail: "Look each other deeply 30secs",
-      difficulty: .easy,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Sing a song in front of others",
-      difficulty: .hard,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Buy something worth maximum 5$ to Queen",
-      difficulty: .normal,
-      commandType: .cToQ
-    ),
-    Command(
-      detail: "Look each other deeply 30secs",
-      difficulty: .easy,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Sing a song in front of others",
-      difficulty: .hard,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Buy something worth maximum 5$ to Queen",
-      difficulty: .normal,
-      commandType: .cToQ
-    ),
-    Command(
-      detail: "Look each other deeply 30secs",
-      difficulty: .easy,
-      commandType: .cToA
-    )
-  ]
+
   
   /// Configure Diffable Data source
   /// Internally, it's executing following steps
@@ -83,15 +20,6 @@ extension CommandSettingViewController {
   func createDiffableDataSource(){
     collectionView.delegate = self
     registerCells()
-    
-    // Reset snapshot
-    resetSnapshot()
-    
-    // Add all items in snapshot.
-    snapshot.appendItems(
-      Item.wrap(items: CommandSettingViewController.commands),
-      toSection: .command
-    )
     
     // Define cells with data source.
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
@@ -126,17 +54,10 @@ extension CommandSettingViewController {
       }
       return nil
     }
-    
-    dataSource.apply(snapshot, animatingDifferences: false)
+    viewModel.dataSource = dataSource
+    viewModel.applySnapshot()
   }
-  
-  /// Delete all items of snapshot
-  func resetSnapshot() {
-    snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-    snapshot.deleteAllItems()
-    snapshot.appendSections([.command])
-  }
-  
+
   /// Register all cells and headers with identifier.
   private func registerCells() {
     // cell
