@@ -8,4 +8,6 @@ target 'Queens-game' do
   # Pods for Queens-game
   pod 'RealmSwift'
   pod 'SwipeCellKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
