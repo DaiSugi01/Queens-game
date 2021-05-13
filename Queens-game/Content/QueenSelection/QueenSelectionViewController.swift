@@ -28,7 +28,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     let lb = H2Label(text: "Let's decide the Queen")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 2
+    lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
@@ -69,11 +69,15 @@ class QueenSelectionViewController: CommonSelectionViewController {
     view.addSubview(navButtons)
     
     // set constraints
-    verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
-    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
-    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  Constant.Common.trailingSpacing).isActive = true
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
+                                    constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant:  Constant.Common.trailingSpacing).isActive = true
     
-    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                       constant: Constant.Common.bottomSpacing).isActive = true
     navButtons.centerXin(view)
   }
   
@@ -107,6 +111,6 @@ class QueenSelectionViewController: CommonSelectionViewController {
   /// Go back to previous screen
   /// - Parameter sender: UIButton
   @objc private func goBackToPrevious(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
 }
