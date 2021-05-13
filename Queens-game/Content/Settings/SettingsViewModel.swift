@@ -54,6 +54,7 @@ class SettingViewModel {
         queenWaitingSecondsRelay,
         citizenWaitingSecondsRelay
       )
+      .skip(1)
       .subscribe(onNext: { value in
         self.settings.saveByMySelf()
       })
