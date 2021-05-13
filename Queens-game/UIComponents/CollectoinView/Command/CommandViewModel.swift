@@ -8,51 +8,33 @@
 import UIKit
 import Combine
 
-class CommandSettingViewModel {
+//protocol Diffable {
+//  var dataSource: UICollectionViewDiffableDataSource<Section, Item> { get }
+//}
+//
+//class DiffableCollectionView: UICollectionView {
+//  var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+//}
+
+class CommandViewModel {
   enum CRUDType{
     case create
     case update
     case delete
   }
   
-  @Published private var crudType: CRUDType = .create
-  private var cancellables = Set<AnyCancellable>()
-  
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
+  @Published var crudType: CRUDType = .create
+  var cancellables = Set<AnyCancellable>()
+
   var snapshot =  NSDiffableDataSourceSnapshot<Section, Item>()
-  weak var dataSource: DataSource?
   
-  var commandList: [Command] = CommandSettingViewModel.sampleCommands
-  private var targetCommand: Command?
+  var commandList: [Command] = CommandViewModel.sampleCommands
+  var targetCommand: Command?
   
   init() {
     updateSnapshot()
-    configObserver()
   }
-  
-  private func configObserver() {
-    $crudType.receive(on: DispatchQueue.main)
-      .sink { [unowned self] crudType in
-        guard let targetCommand = self.targetCommand else { return }
-        
-        switch crudType {
-          case .create:
-            self.commandList.append(targetCommand)
-          case .delete:
-            self.commandList.removeAll { $0.id == targetCommand.id }
-          case .update:
-            if let index = self.commandList.firstIndex(where: { $0.id == targetCommand.id }) {
-              self.commandList[index] = targetCommand
-            }
-        }
-        self.updateSnapshot()
-        self.applySnapshot()
-      }
-      // Keep cancelables
-      .store(in: &cancellables)
-    
-  }
-  
+
   func createItem(command: Command) {
     targetCommand = command
     crudType = .create
@@ -68,18 +50,20 @@ class CommandSettingViewModel {
   func deleteItem(index: Int) {
     deleteItem(command: commandList[index])
   }
+  func updateItems(searchText: String) {
+    
+  }
   
   func updateSnapshot() {
     snapshot.deleteAllItems()
     snapshot.appendSections([.command])
     snapshot.appendItems(Item.wrap(items: commandList), toSection: .command)
   }
-  func applySnapshot() {
-    dataSource?.apply(snapshot, animatingDifferences: false, completion: nil)
-  }
+  
 }
 
-extension CommandSettingViewModel {
+
+extension CommandViewModel {
   static var sampleCommands = [
     Command(
       detail: "Sing a song in front of others",

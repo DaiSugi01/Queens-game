@@ -37,14 +37,9 @@ class TopViewController: UIViewController {
                                         nextScreen: nx)
   }
 
-<<<<<<< HEAD
-  @objc func editCommand(_ sender: UIButton) {
-    let nx = CommandSettingViewController()
-=======
   let editCommandButton  = SubButton(superView: nil, title: "Edit commands")
   @objc func editCommandTapped(_ sender: UIButton) {
-    let nx = CommandSettingViewController(collectionViewLayout: UICollectionViewFlowLayout())
->>>>>>> master
+    let nx = CommandSettingViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CommandSettingViewController: UICollectionViewDelegate{
+extension CommonCommandViewController: UICollectionViewDelegate{
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     
     // Only allow large Dragging

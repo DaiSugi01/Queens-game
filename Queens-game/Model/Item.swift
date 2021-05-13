@@ -52,6 +52,7 @@ extension Item {
   static func wrap(items: [Command]) -> [Item] {
     return items.map {Item.command($0)}
   }
+  
 }
 
 // Selection

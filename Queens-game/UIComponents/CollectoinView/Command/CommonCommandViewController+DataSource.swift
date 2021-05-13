@@ -8,7 +8,7 @@
 import UIKit
 
 //  Configure Diffable Data source
-extension CommandSettingViewController {
+extension CommonCommandViewController {
 
   
   /// Configure Diffable Data source
@@ -26,7 +26,7 @@ extension CommandSettingViewController {
       collectionView: collectionView,
       cellProvider:
         { (collectionView, indexPath, item) -> UICollectionViewCell? in
-          
+
           if let command = item.command {
             let cell = collectionView.dequeueReusableCell(
               withReuseIdentifier: CommandCollectionViewCell.identifier,
@@ -35,7 +35,7 @@ extension CommandSettingViewController {
             cell.configContent(by: command)
             return cell
           }
-          
+
           return nil
         }
     )
@@ -50,12 +50,12 @@ extension CommandSettingViewController {
         for: indexPath
       ) as? CommandHeaderCollectionReusableView {
         // Config view
+        headerView.title.text = headerTitle
         return headerView
       }
       return nil
     }
-    viewModel.dataSource = dataSource
-    viewModel.applySnapshot()
+    dataSource?.apply(viewModel.snapshot, animatingDifferences: false, completion: nil)
   }
 
   /// Register all cells and headers with identifier.
@@ -72,5 +72,34 @@ extension CommandSettingViewController {
       forSupplementaryViewOfKind: CommandHeaderCollectionReusableView.identifier,
       withReuseIdentifier: CommandHeaderCollectionReusableView.identifier
     )
+  }
+  
+  func configBindings() {
+    viewModel.$crudType.receive(on: DispatchQueue.main)
+      .sink { [unowned self] crudType in
+        guard let targetCommand = viewModel.targetCommand else { return }
+        
+        switch crudType {
+          case .create:
+            viewModel.commandList.append(targetCommand)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
+              self.collectionView.scrollToBottom(animated: true)
+            }
+          case .delete:
+            viewModel.commandList.removeAll { $0.id == targetCommand.id }
+          case .update:
+            if let index = viewModel.commandList.firstIndex(where: { $0.id == targetCommand.id }) {
+              viewModel.commandList[index] = targetCommand
+            }
+        }
+        viewModel.updateSnapshot()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
+          dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
+        }
+
+      }
+      // Keep cancelables
+      .store(in: &viewModel.cancellables)
+    
   }
 }

@@ -7,12 +7,18 @@
 
 import UIKit
 
-extension CommandSettingViewController: UISearchBarDelegate {
+extension CommonCommandViewController: UISearchBarDelegate {
   
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+  }
+  
+  // Start edit
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
     searchBar.setShowsCancelButton(true, animated: true)
     return true
   }
+  // End edit
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
     searchBar.setShowsCancelButton(false, animated: true)
     return true

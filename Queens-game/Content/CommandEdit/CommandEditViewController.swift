@@ -7,19 +7,39 @@
 
 import UIKit
 
+
+// MARK: - Basics
+
 class CommandEditViewController: UIViewController {
   
-  let viewModel: CommandSettingViewModel!
+  let viewModel: CommandViewModel!
   var itemIndex: Int? = nil
   
   let saveButton: UIButton = {
-    let bt = MainButton(superView: nil, title: "Save")
+    let bt = MainButton(title: "Save")
     bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
   }()
   let cancelButton: UIButton = {
-    let bt = SubButton(superView: nil, title: "Cancel")
+    let bt = SubButton(title: "Cancel")
     bt.addTarget(self, action: #selector(cancelTapped(_:)), for: .touchUpInside)
+    return bt
+  }()
+  let deleteButton: UIButton = {
+    let bt = UIButton()
+    bt.configLayout(width: 48, height: 48, radius: 20)
+    let largeConfig = UIImage.SymbolConfiguration(
+      pointSize: 22,
+      weight: .medium,
+      scale: .default
+    )
+    bt.setImage(
+      UIImage(systemName: "trash", withConfiguration: largeConfig)?
+        .withRenderingMode(.alwaysTemplate),
+      for: .normal
+    )
+    bt.tintColor = CustomColor.accent
+    bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt
   }()
   
@@ -39,39 +59,25 @@ class CommandEditViewController: UIViewController {
     distribution: .fill
   )
   
-  init(viewModel: CommandSettingViewModel) {
+  init(viewModel: CommandViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     configLayout()
   }
-  
+}
+
+
+// MARK: - Target Action
+
+extension CommandEditViewController {
   @objc func saveTapped(_ sender: UIButton) {
-    // MARK: - FIXME: validation
-    guard let difficulty = Difficulty.init(rawValue: difficultySegment.segmentedControl.selectedSegmentIndex),
-          let commandType = CommandType.init(rawValue: commandTypeSegment.segmentedControl.selectedSegmentIndex) else { return }
-    
-    guard let detail = textView.text else {
-      // please input invalid
-      return
-    }
-    
-    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
-      // too short
-      return
-    }
-    
-    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count <= 1024 else {
-      // too long
-      return
-    }
+    guard let (detail, difficulty, commandType) = validateInput() else { return }
     
     // edit
     if let itemIndex = itemIndex {
@@ -85,13 +91,53 @@ class CommandEditViewController: UIViewController {
       let addingCommand = Command(detail: detail, difficulty: difficulty, commandType: commandType)
       viewModel.createItem(command: addingCommand)
     }
-
     dismiss(animated: true, completion: nil)
   }
   
   @objc func cancelTapped(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
+  
+  @objc func deleteTapped(_ sender: UIButton) {
+    if let itemIndex = itemIndex {
+      viewModel.deleteItem(command: viewModel.commandList[itemIndex])
+    }
+    dismiss(animated: true, completion: nil)
+  }
+}
+
+
+// MARK: - Vadidation
+
+extension CommandEditViewController {
+  private func validateInput() -> (String, Difficulty, CommandType)? {
+    // MARK: - FIXME: validation
+    guard let difficulty = Difficulty.init(rawValue: difficultySegment.segmentedControl.selectedSegmentIndex),
+          let commandType = CommandType.init(rawValue: commandTypeSegment.segmentedControl.selectedSegmentIndex) else { return nil }
+    
+    guard let detail = textView.text else {
+      // please input invalid
+      return nil
+    }
+    
+    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
+      // too short
+      return nil
+    }
+    
+    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count <= 512 else {
+      // too long
+      return nil
+    }
+    
+    return (detail, difficulty, commandType)
+  }
+}
+
+
+// MARK: - Layout
+
+extension CommandEditViewController {
   
   private func configLayout() {
     view.configBgColor(bgColor: CustomColor.background)
@@ -124,5 +170,19 @@ class CommandEditViewController: UIViewController {
       bottomAnchor: nil,
       padding: .init(top: 32, left: 0, bottom: 0, right: 32)
     )
+    
+    if let _ = itemIndex {
+      deleteButton.configSuperView(under: view)
+      deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
+      deleteButton.centerXin(view)
+    }
+    
+    if let itemIndex = itemIndex {
+      let editingCommand = viewModel.commandList[itemIndex]
+      difficultySegment.segmentedControl.selectedSegmentIndex = editingCommand.difficulty.rawValue
+      commandTypeSegment.segmentedControl.selectedSegmentIndex = editingCommand.commandType.rawValue
+      textView.text = editingCommand.detail
+    }
+    
   }
 }

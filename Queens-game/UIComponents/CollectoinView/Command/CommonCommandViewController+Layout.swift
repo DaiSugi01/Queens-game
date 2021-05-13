@@ -8,7 +8,7 @@
 import UIKit
 
 
-extension CommandSettingViewController {
+extension CommonCommandViewController {
   func configSearchBar() {
     searchBar.delegate = self
     searchBar.configSuperView(under: view)
@@ -34,7 +34,7 @@ extension CommandSettingViewController {
   }
 }
 
-extension CommandSettingViewController {
+extension CommonCommandViewController {
   /// Config layout of CollectionViewController
   /// Internally, it executes
   /// 1. General layout of collection view
@@ -90,7 +90,7 @@ extension CommandSettingViewController {
     // Section
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 16
-    section.contentInsets = .init(top: 16, leading: 32, bottom: 0, trailing: 32)
+    section.contentInsets = .init(top: 16, leading: 32, bottom: 128, trailing: 32)
     
     // Header view of section
     section.boundarySupplementaryItems = [createHeader(CommandHeaderCollectionReusableView.identifier)]
