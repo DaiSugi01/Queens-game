@@ -43,4 +43,10 @@ struct Constant {
     static let quickIndexPath: [IndexPath] = [[0, 0]]
     static let cardIndexPath: [IndexPath] = [[0, 1]]
   }
+  
+  struct PlayerSelection {
+    static let minPlayerCount = 3
+
+    static let maxPlayerCount = 9
+  }
 }

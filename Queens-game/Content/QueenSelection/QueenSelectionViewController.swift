@@ -28,7 +28,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     let lb = H2Label(text: "Let's decide the Queen")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 2
+    lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
