@@ -31,10 +31,10 @@ extension SettingsProtocol {
     return "Always skip manual Order selection"
   }
   var textQueenWaitingSeconds: String {
-    return "Queen’s selction countdown"
+    return "Queen’s selection countdown"
   }
   var textCitizenWaitingSeconds: String {
-    return "Citizens’ selction countdown"
+    return "Citizen’s selection countdown"
   }
 
   func skipSettings() -> [(description: String, canSkip: Bool)] {
