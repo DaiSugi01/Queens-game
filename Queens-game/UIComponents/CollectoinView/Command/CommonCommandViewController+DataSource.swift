@@ -10,7 +10,6 @@ import UIKit
 //  Configure Diffable Data source
 extension CommonCommandViewController {
   
-  
   /// Configure Diffable Data source
   /// Internally, it's executing following steps
   /// 1. Reset snapshot
@@ -74,26 +73,32 @@ extension CommonCommandViewController {
     )
   }
   
+  /// Set subscriber
   func configBindings() {
     // What will you do at view if items have changed?
-    viewModel.$commandList.receive(on: DispatchQueue.main)
-      .sink { [unowned self] _ in
-        viewModel.updateSnapshot()
-        if viewModel.crudType == .create {
+    viewModel.commandListSubject.subscribe(onNext: { [unowned self] _ in
+      viewModel.updateSnapshot()
+      
+      var animation = true
+      switch viewModel.crudType {
+        // If adding item, scroll to bottom
+        case .create:
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
             self.collectionView.scrollToBottom(animated: true)
           }
-        }
-        dataSource?.apply(viewModel.snapshot, animatingDifferences: false, completion: nil)
+        // If updating, false animation. This will invoke collectionView.reload and update view. Otherwise, data source won't detect any diff and stop updating.
+        case .update:
+          animation = false
+        default:
+          break
       }
-      .store(in: &viewModel.cancellables)
+      dataSource?.apply(viewModel.snapshot, animatingDifferences: animation, completion: nil)
+    }).disposed(by: viewModel.disposeBag)
     
     // What will you do at view if filtered items have changed?
-    viewModel.$filteredCommandList.receive(on: DispatchQueue.main)
-      .sink { [unowned self] crudType in
-        viewModel.updateSnapshotFiltered()
-        dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
-      }
-      .store(in: &viewModel.cancellables)
+    viewModel.filteredCommandListSubject.subscribe(onNext: { [unowned self] _ in
+      viewModel.updateSnapshotFiltered()
+      dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
+    }).disposed(by: viewModel.disposeBag)
   }
 }

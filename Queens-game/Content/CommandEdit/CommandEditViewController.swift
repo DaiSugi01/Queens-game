@@ -78,15 +78,21 @@ extension CommandEditViewController {
   @objc func saveTapped(_ sender: UIButton) {
     guard let (detail, difficulty, commandType) = validateInput() else { return }
     viewModel.createOrUpdateItem(detail, difficulty, commandType)
-    dismiss(animated: true, completion: nil)
+    viewModel.filterItems()
+    dismiss()
   }
   
   @objc func cancelTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
+    dismiss()
   }
   
   @objc func deleteTapped(_ sender: UIButton) {
     viewModel.deleteEditingItem()
+    viewModel.filterItems()
+    dismiss()
+  }
+  private func dismiss() {
+    viewModel.filterItems() // Before go back to view controller, filter item again.
     dismiss(animated: true, completion: nil)
   }
 }

@@ -11,7 +11,8 @@ extension CommonCommandViewController: UISearchBarDelegate {
   
   // Text change
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    viewModel.filterItems(searchText)
+    viewModel.searchText = searchText
+    viewModel.filterItems()
   }
   // Enter clicked
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -35,11 +36,10 @@ extension CommonCommandViewController: UISearchBarDelegate {
     searchBar.resignFirstResponder()
     // Hide cancel button
     searchBar.setShowsCancelButton(false, animated: true)
-    // Reset text and display full items
+    // Reset text to "" and search, so that all items will be displayed
     searchBar.text = nil
     searchBar.delegate?.searchBar?(searchBar, textDidChange: "")
   }
-  
   
   // Display search bar if search bottom icon is tapped.
   @objc func searchButtonTapped() {

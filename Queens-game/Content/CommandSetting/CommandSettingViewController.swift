@@ -36,6 +36,7 @@ class CommandSettingViewController: CommonCommandViewController {
 }
 
 extension CommandSettingViewController {
+  // If cell is tapped
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let nextVC = CommandEditViewController(viewModel: viewModel)
     viewModel.updateEditingCommand(index: indexPath.row)
