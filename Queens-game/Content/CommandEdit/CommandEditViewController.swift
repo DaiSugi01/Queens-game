@@ -13,7 +13,6 @@ import UIKit
 class CommandEditViewController: UIViewController {
   
   let viewModel: CommandViewModel!
-  var itemIndex: Int? = nil
   
   let saveButton: UIButton = {
     let bt = MainButton(title: "Save")
@@ -78,19 +77,7 @@ class CommandEditViewController: UIViewController {
 extension CommandEditViewController {
   @objc func saveTapped(_ sender: UIButton) {
     guard let (detail, difficulty, commandType) = validateInput() else { return }
-    
-    // edit
-    if let itemIndex = itemIndex {
-      let editingCommand = viewModel.commandList[itemIndex]
-      editingCommand.detail = detail
-      editingCommand.difficulty = difficulty
-      editingCommand.commandType = commandType
-      viewModel.updateItem(command: editingCommand)
-    // add
-    } else {
-      let addingCommand = Command(detail: detail, difficulty: difficulty, commandType: commandType)
-      viewModel.createItem(command: addingCommand)
-    }
+    viewModel.createOrUpdateItem(detail, difficulty, commandType)
     dismiss(animated: true, completion: nil)
   }
   
@@ -99,15 +86,13 @@ extension CommandEditViewController {
   }
   
   @objc func deleteTapped(_ sender: UIButton) {
-    if let itemIndex = itemIndex {
-      viewModel.deleteItem(command: viewModel.commandList[itemIndex])
-    }
+    viewModel.deleteEditingItem()
     dismiss(animated: true, completion: nil)
   }
 }
 
 
-// MARK: - Vadidation
+// MARK: - Validation
 
 extension CommandEditViewController {
   private func validateInput() -> (String, Difficulty, CommandType)? {
@@ -171,17 +156,17 @@ extension CommandEditViewController {
       padding: .init(top: 32, left: 0, bottom: 0, right: 32)
     )
     
-    if let _ = itemIndex {
+    // If edit mode, add delete button
+    if let _ = viewModel.editingCommand {
       deleteButton.configSuperView(under: view)
       deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
       deleteButton.centerXin(view)
     }
     
-    if let itemIndex = itemIndex {
-      let editingCommand = viewModel.commandList[itemIndex]
-      difficultySegment.segmentedControl.selectedSegmentIndex = editingCommand.difficulty.rawValue
-      commandTypeSegment.segmentedControl.selectedSegmentIndex = editingCommand.commandType.rawValue
-      textView.text = editingCommand.detail
+    if let command = viewModel.editingCommand {
+      difficultySegment.segmentedControl.selectedSegmentIndex = command .difficulty.rawValue
+      commandTypeSegment.segmentedControl.selectedSegmentIndex = command .commandType.rawValue
+      textView.text = command.detail
     }
     
   }

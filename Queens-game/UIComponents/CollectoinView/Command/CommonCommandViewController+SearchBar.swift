@@ -9,8 +9,14 @@ import UIKit
 
 extension CommonCommandViewController: UISearchBarDelegate {
   
+  // Text change
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    
+    viewModel.filterItems(searchText)
+  }
+  // Enter clicked
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    // Stop focus
+    searchBar.resignFirstResponder()
   }
   
   // Start edit
@@ -25,9 +31,15 @@ extension CommonCommandViewController: UISearchBarDelegate {
   }
   // If cancel is clicked, hide it.
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    // Stop focus
     searchBar.resignFirstResponder()
+    // Hide cancel button
     searchBar.setShowsCancelButton(false, animated: true)
+    // Reset text and display full items
+    searchBar.text = nil
+    searchBar.delegate?.searchBar?(searchBar, textDidChange: "")
   }
+  
   
   // Display search bar if search bottom icon is tapped.
   @objc func searchButtonTapped() {

@@ -8,56 +8,92 @@
 import UIKit
 import Combine
 
-//protocol Diffable {
-//  var dataSource: UICollectionViewDiffableDataSource<Section, Item> { get }
-//}
-//
-//class DiffableCollectionView: UICollectionView {
-//  var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
-//}
-
 class CommandViewModel {
+  /// This is to annotate what operation you are doing to the observer
   enum CRUDType{
     case create
     case update
     case delete
+    case other
   }
   
-  @Published var crudType: CRUDType = .create
+  var crudType: CRUDType = .other
   var cancellables = Set<AnyCancellable>()
-
+  @Published var commandList: [Command] = CommandViewModel.sampleCommands
+  @Published var filteredCommandList: [Command] = []
+  var editingCommand: Command?
+  
   var snapshot =  NSDiffableDataSourceSnapshot<Section, Item>()
   
-  var commandList: [Command] = CommandViewModel.sampleCommands
-  var targetCommand: Command?
-  
   init() {
+    filteredCommandList = commandList
     updateSnapshot()
   }
-
-  func createItem(command: Command) {
-    targetCommand = command
-    crudType = .create
-  }
-  func updateItem(command: Command) {
-    targetCommand = command
-    crudType = .update
-  }
-  func deleteItem(command: Command) {
-    targetCommand = command
-    crudType = .delete
-  }
-  func deleteItem(index: Int) {
-    deleteItem(command: commandList[index])
-  }
-  func updateItems(searchText: String) {
-    
+  
+  func updateEditingCommand(index: Int? = nil) {
+    guard let index = index else {
+      editingCommand = nil
+      return
+    }
+    editingCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
   }
   
+  func createItem(command: Command) {
+    crudType = .create
+    commandList.append(command)
+  }
+  func updateItem(command: Command) {
+    crudType = .update
+    if let index = commandList.firstIndex(where: { $0.id == command.id }) {
+      commandList[index] = command
+    }
+  }
+  func createOrUpdateItem(_ detail: String, _ difficulty: Difficulty, _ commandType: CommandType) {
+    // edit
+    if let command = editingCommand {
+      command.detail = detail
+      command.difficulty = difficulty
+      command.commandType = commandType
+      updateItem(command: command)
+    // add
+    } else {
+      let command = Command(detail: detail, difficulty: difficulty, commandType: commandType)
+      createItem(command: command)
+    }
+  }
+  
+  func deleteItem(command: Command) {
+    crudType = .delete
+    commandList.removeAll { $0.id == command.id }
+  }
+  func deleteEditingItem() {
+    if let command = editingCommand {
+      deleteItem(command: command)
+    }
+  }
+
+  func filterItems(_ searchText: String) {
+    if searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+      restoreItems()
+      return
+    }
+    filteredCommandList = commandList.filter { command in
+      command.detail.localizedCaseInsensitiveContains(searchText.localizedLowercase)
+    }
+  }
+  func restoreItems() {
+    filteredCommandList.removeAll()
+    filteredCommandList = commandList
+  }
   func updateSnapshot() {
     snapshot.deleteAllItems()
     snapshot.appendSections([.command])
     snapshot.appendItems(Item.wrap(items: commandList), toSection: .command)
+  }
+  func updateSnapshotFiltered() {
+    snapshot.deleteAllItems()
+    snapshot.appendSections([.command])
+    snapshot.appendItems(Item.wrap(items: filteredCommandList), toSection: .command)
   }
   
 }

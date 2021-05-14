@@ -26,7 +26,11 @@ class CommandSettingViewController: CommonCommandViewController {
   
   @objc func addButtonTapped() {
     let nextVC = CommandEditViewController(viewModel: viewModel)
-    present(nextVC, animated: true, completion: nil)
+    viewModel.updateEditingCommand()
+    present(nextVC, animated: true, completion: { [unowned self] in
+      // If you don't set this, buttons on presented view won't respond
+      self.searchBar.resignFirstResponder()
+    })
   }
   
 }
@@ -34,7 +38,10 @@ class CommandSettingViewController: CommonCommandViewController {
 extension CommandSettingViewController {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let nextVC = CommandEditViewController(viewModel: viewModel)
-    nextVC.itemIndex = indexPath.row
-    present(nextVC, animated: true, completion: nil)
+    viewModel.updateEditingCommand(index: indexPath.row)
+    present(nextVC, animated: true, completion: { [unowned self] in
+      // If you don't set this, buttons on presented view won't respond
+      self.searchBar.resignFirstResponder()
+    })
   }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 //  Configure Diffable Data source
 extension CommonCommandViewController {
-
+  
   
   /// Configure Diffable Data source
   /// Internally, it's executing following steps
@@ -26,7 +26,7 @@ extension CommonCommandViewController {
       collectionView: collectionView,
       cellProvider:
         { (collectionView, indexPath, item) -> UICollectionViewCell? in
-
+          
           if let command = item.command {
             let cell = collectionView.dequeueReusableCell(
               withReuseIdentifier: CommandCollectionViewCell.identifier,
@@ -35,7 +35,7 @@ extension CommonCommandViewController {
             cell.configContent(by: command)
             return cell
           }
-
+          
           return nil
         }
     )
@@ -57,7 +57,7 @@ extension CommonCommandViewController {
     }
     dataSource?.apply(viewModel.snapshot, animatingDifferences: false, completion: nil)
   }
-
+  
   /// Register all cells and headers with identifier.
   private func registerCells() {
     // cell
@@ -75,31 +75,25 @@ extension CommonCommandViewController {
   }
   
   func configBindings() {
-    viewModel.$crudType.receive(on: DispatchQueue.main)
-      .sink { [unowned self] crudType in
-        guard let targetCommand = viewModel.targetCommand else { return }
-        
-        switch crudType {
-          case .create:
-            viewModel.commandList.append(targetCommand)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
-              self.collectionView.scrollToBottom(animated: true)
-            }
-          case .delete:
-            viewModel.commandList.removeAll { $0.id == targetCommand.id }
-          case .update:
-            if let index = viewModel.commandList.firstIndex(where: { $0.id == targetCommand.id }) {
-              viewModel.commandList[index] = targetCommand
-            }
-        }
+    // What will you do at view if items have changed?
+    viewModel.$commandList.receive(on: DispatchQueue.main)
+      .sink { [unowned self] _ in
         viewModel.updateSnapshot()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
-          dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
+        if viewModel.crudType == .create {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
+            self.collectionView.scrollToBottom(animated: true)
+          }
         }
-
+        dataSource?.apply(viewModel.snapshot, animatingDifferences: false, completion: nil)
       }
-      // Keep cancelables
       .store(in: &viewModel.cancellables)
     
+    // What will you do at view if filtered items have changed?
+    viewModel.$filteredCommandList.receive(on: DispatchQueue.main)
+      .sink { [unowned self] crudType in
+        viewModel.updateSnapshotFiltered()
+        dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
+      }
+      .store(in: &viewModel.cancellables)
   }
 }
