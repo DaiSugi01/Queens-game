@@ -22,48 +22,39 @@ class MenuViewController: UIViewController {
     let bt = UIButton()
     bt.translatesAutoresizingMaskIntoConstraints = false
     bt.setTitle("Close", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    return bt
-  }()
-
-  
-  let howToPlayButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("How to Palay", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(howToPlaytapped(_:)), for: .touchUpInside)
-    return bt
-  }()
-
-  @objc func howToPlaytapped(_ sender: UIButton) {
-    let nx = RuleBookViewController()
-    present(nx, animated: true, completion: nil)
-  }
-  
-  let settingButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Settings", for: .normal)
     bt.setTitleColor(.black, for: .normal)
+    bt.titleLabel?.font = CustomFont.p
+    bt.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
+    return bt
+  }()
+
+  
+  let howToPlayButton: MainButton = {
+    let bt = MainButton()
+    bt.setTitle("How to Palay", for: .normal)
+    bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
+    return bt
+  }()
+  
+  let settingButton: MainButton = {
+    let bt = MainButton()
+    bt.setTitle("Settings", for: .normal)
     bt.addTarget(self, action: #selector(settingTapped(_:)), for: .touchUpInside)
     return bt
   }()
-
-  @objc func settingTapped(_ sender: UIButton) {
-    let nx = SettingsViewController()
-    let navigationController = UINavigationController(rootViewController:nx)
-    present(navigationController, animated: true, completion: nil)
-  }
   
-  let goToTopButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
+  let goToTopButton: MainButton = {
+    let bt = MainButton()
     bt.setTitle("Go to Top", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
     bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
+    return bt
+  }()
+
+  let privacyPolicyButton: SubButton = {
+    let bt = SubButton()
+    bt.setTitle("Privacy policy", for: .normal)
+    bt.titleLabel?.font = CustomFont.p
+    bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     return bt
   }()
 
@@ -71,10 +62,10 @@ class MenuViewController: UIViewController {
     let sv = VerticalStackView(
       arrangedSubviews: [
         screenTitle,
-        closeButton,
         howToPlayButton,
         settingButton,
-        goToTopButton
+        goToTopButton,
+        privacyPolicyButton
       ]
     )
     sv.alignment = .fill
@@ -94,13 +85,7 @@ extension MenuViewController {
 
   private func setupLayout() {
     view.configBgColor(bgColor: CustomColor.background)
-    navigationItem.hidesBackButton = true
-    navigationController?.navigationBar.barTintColor = CustomColor.background
-    navigationController?.navigationBar.shadowImage = UIImage()
-    navigationItem.setRightBarButton(
-      UIBarButtonItem(customView: closeButton),
-      animated: true
-    )
+
     view.addSubview(stackView)
     stackView.topAnchor.constraint(
       equalTo: view.topAnchor,
@@ -124,5 +109,24 @@ extension MenuViewController {
   @objc func goToTop(_ sender: UIButton) {
     let nx = ExitAlertViewController()
     present(nx, animated: true, completion: nil)
+  }
+
+  @objc func settingTapped(_ sender: UIButton) {
+    let nx = SettingsViewController()
+    let navigationController = UINavigationController(rootViewController:nx)
+    present(navigationController, animated: true, completion: nil)
+  }
+
+  @objc func closeTapped(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
+
+  @objc func howToPlayTapped(_ sender: UIButton) {
+    let nx = RuleBookViewController()
+    present(nx, animated: true, completion: nil)
+  }
+
+  @objc func privacyPolicyTapped(_ sender: UIButton) {
+
   }
 }
