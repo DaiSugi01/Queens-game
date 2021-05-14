@@ -129,7 +129,7 @@ class PlayerSelectionViewController: UIViewController {
   
   @objc func goToNext(_ sender: UIButton) {
     vm.initUserData(playerCount: playerCount)
-    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let nx = EntryNameViewController()
     GameManager.shared.pushGameProgress(navVC: navigationController!,
                                         currentScreen: self,
                                         nextScreen: nx)

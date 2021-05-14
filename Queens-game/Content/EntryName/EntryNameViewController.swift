@@ -9,8 +9,6 @@ import UIKit
 
 class EntryNameViewController: UIViewController {
   
-  var playerCount: Int = 9
-  
   let sections: [Section] = [.userName]
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
@@ -47,16 +45,9 @@ class EntryNameViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setUserData()
     setupCollectionView()
     setupLayout()
     setButtonActions()
-  }
-  
-  private func setUserData() {
-    for i in 1 ... playerCount {
-      GameManager.shared.users.append(User(id: UUID(), playerId: i, name: "Player\(i)"))
-    }
   }
   
   private func setupCollectionView() {
