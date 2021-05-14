@@ -15,7 +15,7 @@ struct CustomFont {
     return f
   }()
   static var h2: UIFont = {
-    let f = UIFont.systemFont(ofSize: CGFloat(40), weight: .black)
+    let f = UIFont.systemFont(ofSize: h2FontSize, weight: .black)
     return f
   }()
   static var h3: UIFont = {
@@ -31,4 +31,13 @@ struct CustomFont {
     let f = UIFont.systemFont(ofSize: 16, weight: .regular)
     return f
   }()
+  
+  static private var h2FontSize: CGFloat {
+    switch UIScreen.main.bounds.height {
+      case 0...700:
+        return 32
+      default:
+        return 40
+    }
+  }
 }
