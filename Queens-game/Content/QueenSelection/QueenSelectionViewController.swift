@@ -43,7 +43,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     return sv
   }()
   
-  //TPDP: delete unnecessary line "GameManager.shared.users = users" later
+  //TODO: delete unnecessary line "GameManager.shared.users = users" later
   override func viewDidLoad() {
     super.viewDidLoad()
     setupCollectionView()
@@ -69,11 +69,15 @@ class QueenSelectionViewController: CommonSelectionViewController {
     view.addSubview(navButtons)
     
     // set constraints
-    verticalSV.topAnchor.constraint(equalTo: view.topAnchor, constant: Constant.Common.topSpacing).isActive = true
-    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.Common.leadingSpacing).isActive = true
-    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  Constant.Common.trailingSpacing).isActive = true
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
+                                    constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant:  Constant.Common.trailingSpacing).isActive = true
     
-    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                       constant: Constant.Common.bottomSpacing).isActive = true
     navButtons.centerXin(view)
   }
   
@@ -107,6 +111,6 @@ class QueenSelectionViewController: CommonSelectionViewController {
   /// Go back to previous screen
   /// - Parameter sender: UIButton
   @objc private func goBackToPrevious(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
 }
