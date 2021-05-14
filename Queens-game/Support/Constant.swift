@@ -43,4 +43,14 @@ struct Constant {
     static let quickIndexPath: [IndexPath] = [[0, 0]]
     static let cardIndexPath: [IndexPath] = [[0, 1]]
   }
+
+  struct CommandSelection {
+    static let options = [
+      Selection(title: "Random select", detail: "The order will be randomly selected from the order list. You can see the list from the options.", isSelected: true),
+      Selection(title: "Manual select", detail: "You can choose the specific order from the order list. ", isSelected: false)
+    ]
+
+    static let randomIndexPath: [IndexPath] = [[0, 0]]
+    static let manualIndexPath: [IndexPath] = [[0, 1]]
+  }
 }

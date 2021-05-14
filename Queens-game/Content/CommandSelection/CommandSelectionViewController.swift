@@ -7,88 +7,93 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class CommandSelectionViewController: UICollectionViewController {
+class CommandSelectionViewController: CommonSelectionViewController {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    setupLayout()
-  }
-  
-  // MARK: UICollectionViewDataSource
-  
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 0
-  }
-  
-  
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
-  }
-  
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    return cell
-  }
-  
-  
-  
-  // TODO: Delete below before you imprement
-  let screenName: UILabel = {
-    let lb = UILabel()
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "How do make your command?")
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Command Selection"
-    
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
   
-  let nextButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Next", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
+  let navButtons = NextAndBackButtons()
+  
+  lazy var verticalSV: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    return sv
   }()
   
-  let backButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = CommandManualSelectingViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    navigationController?.pushViewController(nx, animated: true)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupCollectionView()
+    setupLayout()
+    setButtonActions()
   }
   
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+  /// Setup collection view layout and datasource
+  private func setupCollectionView() {
+    createCollectionViewLayout()
+    createDiffableDataSource(with: Constant.CommandSelection.options)
   }
   
+  /// Setup whole layout
   private func setupLayout() {
-    collectionView.backgroundColor = .white
+    // config navigation
     navigationItem.hidesBackButton = true
     
-    view.addSubview(screenName)
-    view.addSubview(nextButton)
-    view.addSubview(backButton)
+    // add components to super view
+    view.backgroundColor = CustomColor.background
+    view.addSubview(verticalSV)
+    view.addSubview(navButtons)
+
+    // set constraints
+    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
+                                    constant: Constant.Common.topSpacing).isActive = true
+    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Constant.Common.leadingSpacing).isActive = true
+    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant:  Constant.Common.trailingSpacing).isActive = true
     
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                       constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.centerXin(view)
+  }
+  
+  /// Set Button Actions
+  private func setButtonActions() {
+    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+  }
+  
+  /// Go to next screen depends on user selection
+  /// - Parameter sender: UIButton
+  @objc private func goToNext(_ sender: UIButton) {
+    guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
     
-    nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  }  
+    switch indexPath {
+    case Constant.CommandSelection.randomIndexPath:
+      let nx = QueenSelectedViewController()
+      GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                          currentScreen: self,
+                                          nextScreen: nx)
+    case Constant.CommandSelection.manualIndexPath:
+      let nx = CommandManualSelectingViewController(collectionViewLayout: UICollectionViewFlowLayout())
+      GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                          currentScreen: self,
+                                          nextScreen: nx)
+    default:
+      print("None of them are selected")
+    }
+  }
+  
+  /// Go back to previous screen
+  /// - Parameter sender: UIButton
+  @objc private func goBackToPrevious(_ sender: UIButton) {
+    GameManager.shared.popGameProgress(navVC: navigationController!)
+  }
 }
