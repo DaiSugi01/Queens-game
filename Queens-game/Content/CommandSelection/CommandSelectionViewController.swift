@@ -10,7 +10,7 @@ import UIKit
 class CommandSelectionViewController: CommonSelectionViewController {
   
   let screenTitle: H2Label = {
-    let lb = H2Label(text: "How do make your command?")
+    let lb = H2Label(text: "How do you make your command?")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 0
