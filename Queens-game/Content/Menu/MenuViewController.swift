@@ -62,7 +62,8 @@ class MenuViewController: UIViewController {
 
   @objc func settingTapped(_ sender: UIButton) {
     let nx = SettingsViewController()
-    present(nx, animated: true, completion: nil)
+    let navigationController = UINavigationController(rootViewController:nx)
+    present(navigationController, animated: true, completion: nil)
   }
   
   let goToTopButton: UIButton = {
