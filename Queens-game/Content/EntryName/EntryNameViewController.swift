@@ -11,8 +11,6 @@ private let reuseIdentifier = "Cell"
 
 class EntryNameViewController: UICollectionViewController {
   
-  var playerCount: Int?
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)

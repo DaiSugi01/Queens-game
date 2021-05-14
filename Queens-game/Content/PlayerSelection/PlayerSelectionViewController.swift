@@ -15,12 +15,14 @@ class PlayerSelectionViewController: UIViewController {
   }
   
   var playerCount: Int = Constant.PlayerSelection.minPlayerCount
-
+  let vm = PlayerSelectionViewModel()
+  
   lazy var verticalSV: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle, horizontalSV])
     sv.alignment = .fill
     sv.distribution = .equalSpacing
     sv.translatesAutoresizingMaskIntoConstraints = false
+    
     return sv
   }()
 
@@ -30,6 +32,7 @@ class PlayerSelectionViewController: UIViewController {
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
+    
     return lb
   }()
 
@@ -39,6 +42,7 @@ class PlayerSelectionViewController: UIViewController {
     sv.distribution = .fillEqually
     sv.translatesAutoresizingMaskIntoConstraints = false
     sv.constraintHeight(equalToConstant: 360)
+    
     return sv
   }()
   
@@ -48,6 +52,7 @@ class PlayerSelectionViewController: UIViewController {
     bt.setTitle("-", for: .normal)
     bt.setTitleColor(CustomColor.main, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
+    
     return bt
   }()
   
@@ -56,6 +61,7 @@ class PlayerSelectionViewController: UIViewController {
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.numberOfLines = 0
     lb.textAlignment = .center
+    
     return lb
   }()
 
@@ -65,11 +71,11 @@ class PlayerSelectionViewController: UIViewController {
     bt.setTitle("+", for: .normal)
     bt.setTitleColor(CustomColor.main, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
+    
     return bt
   }()
   
   let navButtons = NextAndBackButtons()
-
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -112,13 +118,25 @@ class PlayerSelectionViewController: UIViewController {
   @objc func decrementPlayerCount(_ sender: UIButton) {
     if !canChangePlayerCount(operation: .minus) { return }
     playerCount -= 1
-    updatePlayerCountLabel()
+    updateUI()
   }
 
   @objc func incrementPlayerCount(_ sender: UIButton) {
     if !canChangePlayerCount(operation: .plus) { return }
     playerCount += 1
-    updatePlayerCountLabel()
+    updateUI()
+  }
+  
+  @objc func goToNext(_ sender: UIButton) {
+    vm.initUserData(playerCount: playerCount)
+    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
+  }
+
+  @objc func goBackToPrevious(_ sender: UIButton) {
+    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
   
   /// Check if the player number is valid or invalid
@@ -134,19 +152,7 @@ class PlayerSelectionViewController: UIViewController {
   }
 
   /// Update player count label
-  private func updatePlayerCountLabel() {
+  private func updateUI() {
     playerCountLabel.text = "\(playerCount)"
-  }
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    nx.playerCount = playerCount
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
-                                        currentScreen: self,
-                                        nextScreen: nx)
-  }
-
-  @objc func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
 }
