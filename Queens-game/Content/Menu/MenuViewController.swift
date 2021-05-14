@@ -74,9 +74,41 @@ class MenuViewController: UIViewController {
     return sv
   }()
 
+  let alert = UIAlertController(
+    title: "Are you sure you want to quit current game ?",
+    message:  "",
+    preferredStyle:  UIAlertController.Style.alert
+  )
+
+  lazy var confirmAction = UIAlertAction(
+    title: "Yes",
+    style: UIAlertAction.Style.default,
+    handler: { [weak self] (action: UIAlertAction!) -> Void in
+      let nextViewController: UINavigationController = {
+        let navigationController = UINavigationController(rootViewController: TopViewController())
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.navigationBar.barTintColor = CustomColor.background
+        navigationController.navigationBar.shadowImage = UIImage()
+        return navigationController
+      }()
+      self?.present(nextViewController,  animated: true, completion: nil)
+    }
+  )
+
+  let cancelAction = UIAlertAction(
+    title: "No",
+    style: UIAlertAction.Style.cancel,
+    handler: { (action: UIAlertAction!) -> Void in
+      print("No")
+    }
+  )
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
+    self.alert.addAction(self.cancelAction)
+    self.alert.addAction(self.confirmAction)
+
   }
 
 }
@@ -107,8 +139,7 @@ extension MenuViewController {
   }
 
   @objc func goToTop(_ sender: UIButton) {
-    let nx = ExitAlertViewController()
-    present(nx, animated: true, completion: nil)
+    present(self.alert, animated: true, completion: nil)
   }
 
   @objc func settingTapped(_ sender: UIButton) {
