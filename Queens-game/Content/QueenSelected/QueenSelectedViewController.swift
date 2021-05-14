@@ -44,7 +44,7 @@ class QueenSelectedViewController: UIViewController {
   }()
   
   @objc func goToNext(_ sender: UIButton) {
-    let nx = CommandSelectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let nx = CommandSelectionViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   
