@@ -8,45 +8,56 @@
 import UIKit
 
 class RuleBookViewController: UIViewController {
+
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "How to play")
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
+    return lb
+  }()
+
+  lazy var stackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        screenTitle,
+      ]
+    )
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    return sv
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
   }
   
-  let screenName: UILabel = {
-    let lb = UILabel()
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "How to play"
-    
-    return lb
-  }()
   
-  let closeButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Close", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func closeTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
-  }
-  
+}
+
+extension RuleBookViewController {
+
   private func setupLayout() {
-    view.backgroundColor = .white
-    navigationItem.hidesBackButton = true
-    
-    view.addSubview(screenName)
-    view.addSubview(closeButton)
-    
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-    
-    closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    closeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    view.configBgColor(bgColor: CustomColor.background)
+
+    view.addSubview(stackView)
+    stackView.topAnchor.constraint(
+      equalTo: view.topAnchor,
+      constant: Constant.Common.topSpacing
+    ).isActive = true
+    stackView.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
+    stackView.leadingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+      constant: Constant.Common.leadingSpacing
+    ).isActive = true
+    stackView.trailingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+      constant:  Constant.Common.trailingSpacing
+    ).isActive = true
   }
 }
