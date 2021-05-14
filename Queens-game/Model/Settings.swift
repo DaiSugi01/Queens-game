@@ -102,7 +102,6 @@ class Settings: SettingsProtocol, Codable {
     guard let data = try? jsonEncoder.encode(Settings.shared) else {
       return
     }
-    print("save: \(data)")
     UserDefaults.standard.set(data, forKey: self.userDefaultsKey)
   }
 
