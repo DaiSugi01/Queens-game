@@ -15,6 +15,8 @@ class CitizenSelectedViewController: UIViewController {
 
   let viewModel = CitizenSelectedViewModel()
 
+  lazy var executor = self.createExecutor(self.getGameManager())
+
   lazy var countdownStackView = CountdownStackView(
     countdown: self.viewModel.countdonwTime
   )
@@ -51,7 +53,7 @@ class CitizenSelectedViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
-//    self.viewModel.countdown()
+    self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in
         self?.countdownStackView.countdownLabel.text = String(time!)
@@ -91,11 +93,11 @@ extension CitizenSelectedViewController {
 
   @objc func skipButtonTapped(_ sender: UIButton) {
     self.viewModel.rxCountdownTime.onCompleted()
-    self.toResult()
   }
 
   private func toResult() {
-    let nx = ResultViewController()
+    let (target, stakeholder) = self.executor.select(from: self.getGameManager())
+    let nx = ResultViewController(target:target, stakeholder:stakeholder)
     GameManager.shared.pushGameProgress(
       navVC: navigationController!,
       currentScreen: self,
@@ -105,6 +107,58 @@ extension CitizenSelectedViewController {
 
   private func replaceView() {
     self.stackView.removeFromSuperview()
+    self.toResult()
   }
+
+  private func createExecutor(_ gameManager: GameManagerProtocol) -> ExecutorProtocol {
+    switch gameManager.command.commandType {
+    case .cToC:
+      return ExecutorCtoC()
+    case .cToA:
+      return ExecutorCtoA()
+    case .cToQ:
+      return ExecutorCtoQ()
+    }
+  }
+
+  private func getGameManager() -> GameManagerProtocol {
+    if GameManager.shared.users.count > 0 {
+      return GameManager.shared
+    } else {
+      return MockGameManager()
+    }
+  }
+
+}
+
+struct MockGameManager: GameManagerProtocol {
+
+  var users: [User] = {
+    let user1 = User(id: UUID(), playerId: 1, name: "Dusk", isQueen: true)
+    let user2 = User(id: UUID(), playerId: 2, name: "Khumub")
+    let user3 = User(id: UUID(), playerId: 3, name: "Puyeim")
+    let user4 = User(id: UUID(), playerId: 4, name: "Tuugax")
+    let user5 = User(id: UUID(), playerId: 5, name: "Nosh")
+    let user6 = User(id: UUID(), playerId: 6, name: "Bengzeing")
+    let user7 = User(id: UUID(), playerId: 7, name: "Sogod")
+    return [user1,user2,user3,user4,user5,user6,user7]
+  }()
+
+  var queen: User?
+
+  var command = Command(
+    detail: """
+    Sing a song in front of others and Look each other deeply 30secs
+    Sing a song in front of others and Look each other deeply 30secs
+    Sing a song in front of others and Look each other deeply 30secs
+    """,
+    difficulty: .hard,
+    commandType: .cToA
+  )
+
+  init() {
+    self.queen = self.users[0]
+  }
+
 
 }

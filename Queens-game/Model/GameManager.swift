@@ -8,13 +8,21 @@
 import Foundation
 import UIKit
 
-class GameManager {
+protocol GameManagerProtocol {
+
+  var users: [User] { get set }
+  var queen: User? { get set }
+  var command: Command { get set }
+}
+
+class GameManager: GameManagerProtocol {
   private init() {}
   static let shared = GameManager()
 
   var users: [User] = []
   var queen: User?
   var gameProgress: [UIViewController] = []
+  var command: Command = Command()
 
   func pushGameProgress(navVC: UINavigationController,
                         currentScreen: UIViewController,

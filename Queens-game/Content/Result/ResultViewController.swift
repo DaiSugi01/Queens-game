@@ -11,8 +11,14 @@ class ResultViewController: UIViewController {
 
   let navButtons = NextAndBackButtons()
 
+  var target: User
+
+  var stakeholder: [User]
+
+  lazy var gameManager = self.getGameManager()
+
   let screenTitle: H2Label = {
-    let lb = H2Label(text: "It’s time to carry out ")
+    let lb = H2Label(text: "It’s time to carry out")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 0
@@ -20,10 +26,53 @@ class ResultViewController: UIViewController {
     return lb
   }()
 
+  lazy var icon: UIImageView = {
+    let img = IconFactory.createImageView(type: self.getIconType(), height: 32)
+    img.contentMode = .scaleAspectFit
+    img.clipsToBounds = true
+    return img
+  }()
+
+  lazy var detail: UILabel = {
+    let label = PLabel(text: self.gameManager.command.detail)
+    label.numberOfLines = 5
+    return label
+  }()
+
+  lazy var detailBlock: UIStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [detail],
+      alignment: .leading
+    )
+    stackView.configLayout(height: 130, radius: 16, shadow: true)
+    stackView.configBgColor(bgColor: CustomColor.convex)
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.directionalLayoutMargins = .init(
+      top: 16, leading: 16, bottom: 16, trailing: 16)
+    return stackView
+  }()
+
+  lazy var inner: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [icon,detailBlock],
+      spacing: 32
+    )
+    return stackView
+  }()
+
+  lazy var wrapper: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [inner]
+    )
+    stackView.alignment = .center
+    return stackView
+  }()
+
   lazy var stackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         screenTitle,
+        wrapper,
         navButtons,
       ]
     )
@@ -31,6 +80,15 @@ class ResultViewController: UIViewController {
     sv.distribution = .equalSpacing
     return sv
   }()
+
+  init(target: User, stakeholder: [User]) {
+    self.target = target
+    self.stakeholder = stakeholder
+    super.init(nibName: nil, bundle: nil)
+  }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,6 +119,10 @@ extension ResultViewController {
     stackView.trailingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.trailingAnchor,
       constant:  Constant.Common.trailingSpacing
+    ).isActive = true
+    inner.widthAnchor.constraint(
+      equalTo: stackView.widthAnchor,
+      multiplier: 0.8
     ).isActive = true
 
   }
@@ -96,6 +158,25 @@ extension ResultViewController {
 
   @objc private func toTop() {
     super.navigationController?.popToRootViewController(animated: true)
+  }
+
+  private func getGameManager() -> GameManagerProtocol {
+    if GameManager.shared.users.count > 0 {
+      return GameManager.shared
+    } else {
+      return MockGameManager()
+    }
+  }
+
+  private func getIconType() -> IconType {
+    switch self.getGameManager().command.difficulty {
+    case .easy:
+      return .levelOne
+    case .normal:
+      return .levelTwo
+    case .hard:
+      return .levelThree
+    }
   }
   
 }
