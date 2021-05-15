@@ -17,14 +17,25 @@ class CustomSearchBar: UISearchBar {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.placeholder = "Search"
-    self.configLayout(backgroundColor: CustomColor.concave,
+    configLayout(backgroundColor: CustomColor.concave,
                            inputTextColor: CustomColor.subMain,
                            placeholderColor: CustomColor.subMain.withAlphaComponent(0.3),
                            searchIconColor: CustomColor.subMain
     )
+    configCancelButton()
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }  
+  }
   
+  /// Change color of cancel button
+  private func configCancelButton() {
+    let attributes:[NSAttributedString.Key: Any] = [
+      .foregroundColor: CustomColor.accent,
+      .font: CustomFont.p,
+      .backgroundColor: CustomColor.background
+    ]
+    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
+  }
+
 }
