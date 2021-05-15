@@ -34,6 +34,7 @@ class Command: Object {
     self.difficulty = difficulty
     self.commandType = commandType
   }
+
 }
 
 
@@ -66,3 +67,4 @@ extension Command {
     }
   }
 }
+
