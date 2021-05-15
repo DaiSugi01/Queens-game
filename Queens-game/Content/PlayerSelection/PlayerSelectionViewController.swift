@@ -14,8 +14,9 @@ class PlayerSelectionViewController: UIViewController {
     case plus
   }
   
-  var playerCount: Int = Constant.PlayerSelection.minPlayerCount
   let vm = PlayerSelectionViewModel()
+
+  var playerCount: Int = Constant.PlayerSelection.minPlayerCount
   
   lazy var verticalSV: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle, horizontalSV])
@@ -52,9 +53,15 @@ class PlayerSelectionViewController: UIViewController {
     bt.setTitle("-", for: .normal)
     bt.setTitleColor(CustomColor.main, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
-    
+    bt.addTarget(self, action: #selector(decrementPlayerCount(_:)), for: .touchUpInside)
+
     return bt
   }()
+  @objc func decrementPlayerCount(_ sender: UIButton) {
+    if !canChangePlayerCount(operation: .minus) { return }
+    playerCount -= 1
+    updateUI()
+  }
   
   let playerCountLabel: H1Label = {
     let lb = H1Label(text: "\(Constant.PlayerSelection.minPlayerCount)")
@@ -71,16 +78,38 @@ class PlayerSelectionViewController: UIViewController {
     bt.setTitle("+", for: .normal)
     bt.setTitleColor(CustomColor.main, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
-    
+    bt.addTarget(self, action: #selector(incrementPlayerCount(_:)), for: .touchUpInside)
+
     return bt
   }()
-  
-  let navButtons = NextAndBackButtons()
+  @objc func incrementPlayerCount(_ sender: UIButton) {
+    if !canChangePlayerCount(operation: .plus) { return }
+    playerCount += 1
+    updateUI()
+  }
+
+  let navButtons: NextAndBackButtons = {
+    let bts = NextAndBackButtons()
+    bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+    
+    return bts
+  }()
+  @objc func goToNext(_ sender: UIButton) {
+    vm.initUserData(playerCount: playerCount)
+    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
+  }
+
+  @objc func goBackToPrevious(_ sender: UIButton) {
+    GameManager.shared.popGameProgress(navVC: navigationController!)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
-    setButtonActions()
   }
 
   /// Setup whole layout
@@ -104,39 +133,6 @@ class PlayerSelectionViewController: UIViewController {
     navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
                                        constant: Constant.Common.bottomSpacing).isActive = true
     navButtons.centerXin(view)
-  }
-  
-  /// Set Button Actions
-  private func setButtonActions() {
-    minusButton.addTarget(self, action: #selector(decrementPlayerCount(_:)), for: .touchUpInside)
-    plusButton.addTarget(self, action: #selector(incrementPlayerCount(_:)), for: .touchUpInside)
-
-    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
-  }
-  
-  @objc func decrementPlayerCount(_ sender: UIButton) {
-    if !canChangePlayerCount(operation: .minus) { return }
-    playerCount -= 1
-    updateUI()
-  }
-
-  @objc func incrementPlayerCount(_ sender: UIButton) {
-    if !canChangePlayerCount(operation: .plus) { return }
-    playerCount += 1
-    updateUI()
-  }
-  
-  @objc func goToNext(_ sender: UIButton) {
-    vm.initUserData(playerCount: playerCount)
-    let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
-                                        currentScreen: self,
-                                        nextScreen: nx)
-  }
-
-  @objc func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
   
   /// Check if the player number is valid or invalid
