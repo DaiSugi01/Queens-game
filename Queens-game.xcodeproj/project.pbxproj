@@ -23,7 +23,7 @@
 		0A3A62C92638C2C80082ACAE /* CitizenSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62C82638C2C80082ACAE /* CitizenSelectingViewController.swift */; };
 		0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62CD2638C3310082ACAE /* CitizenSelectedViewController.swift */; };
 		0A3A62D42638C3AA0082ACAE /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D32638C3AA0082ACAE /* ResultViewController.swift */; };
-		0A3A62D92638CF960082ACAE /* CommandSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */; };
+		0A3A62D92638CF960082ACAE /* CommonCommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */; };
 		0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62DC2638D19B0082ACAE /* CommandEditViewController.swift */; };
 		0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E22638D3320082ACAE /* MenuViewController.swift */; };
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
@@ -76,6 +76,13 @@
 		485635EE26438A140043AF21 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635ED26438A140043AF21 /* Section.swift */; };
 		485635F026438AB80043AF21 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635EF26438AB80043AF21 /* Selection.swift */; };
 		485635F226438F4F0043AF21 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485635F126438F4F0043AF21 /* Item.swift */; };
+		487AF1E5264B977100663047 /* CommonCommandViewController+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E4264B977100663047 /* CommonCommandViewController+ScrollView.swift */; };
+		487AF1E7264B9A2900663047 /* CommonCommandViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E6264B9A2900663047 /* CommonCommandViewController+SearchBar.swift */; };
+		487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1EA264C61AF00663047 /* CommandViewModel.swift */; };
+		487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1EF264CE75400663047 /* CommandSettingViewController.swift */; };
+		487AF1F2264CF22300663047 /* ScrollView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */; };
+		4892E020264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E01F264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift */; };
+		4892E022264A170300C3EFB4 /* CommonCommandViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E021264A170300C3EFB4 /* CommonCommandViewController+Layout.swift */; };
 		48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802C2640B26F00CBDB5E /* DemoViewController.swift */; };
 		48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */; };
 		48AE80402640B26F00CBDB5E /* DemoCellCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */; };
@@ -87,6 +94,7 @@
 		48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */; };
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
+		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
 		4E6E9700739F0AEC971F1213 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +118,7 @@
 		0A3A62C82638C2C80082ACAE /* CitizenSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectingViewController.swift; sourceTree = "<group>"; };
 		0A3A62CD2638C3310082ACAE /* CitizenSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedViewController.swift; sourceTree = "<group>"; };
 		0A3A62D32638C3AA0082ACAE /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
-		0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSettingViewController.swift; sourceTree = "<group>"; };
+		0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCommandViewController.swift; sourceTree = "<group>"; };
 		0A3A62DC2638D19B0082ACAE /* CommandEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandEditViewController.swift; sourceTree = "<group>"; };
 		0A3A62E22638D3320082ACAE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBookViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +172,13 @@
 		485635ED26438A140043AF21 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		485635EF26438AB80043AF21 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		485635F126438F4F0043AF21 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		487AF1E4264B977100663047 /* CommonCommandViewController+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+ScrollView.swift"; sourceTree = "<group>"; };
+		487AF1E6264B9A2900663047 /* CommonCommandViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+SearchBar.swift"; sourceTree = "<group>"; };
+		487AF1EA264C61AF00663047 /* CommandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewModel.swift; sourceTree = "<group>"; };
+		487AF1EF264CE75400663047 /* CommandSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSettingViewController.swift; sourceTree = "<group>"; };
+		487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+ScrollToBottom.swift"; sourceTree = "<group>"; };
+		4892E01F264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+DataSource.swift"; sourceTree = "<group>"; };
+		4892E021264A170300C3EFB4 /* CommonCommandViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+Layout.swift"; sourceTree = "<group>"; };
 		48AE802C2640B26F00CBDB5E /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		48AE802E2640B26F00CBDB5E /* DemoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSearchViewController.swift; sourceTree = "<group>"; };
 		48AE80302640B26F00CBDB5E /* DemoCellCVC+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DemoCellCVC+DataSource.swift"; sourceTree = "<group>"; };
@@ -175,6 +190,7 @@
 		48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoColorViewController.swift; sourceTree = "<group>"; };
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
+		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Queens_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -385,7 +401,7 @@
 		0A3A62D72638CF6B0082ACAE /* CommandSetting */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A62D82638CF960082ACAE /* CommandSettingViewController.swift */,
+				487AF1EF264CE75400663047 /* CommandSettingViewController.swift */,
 			);
 			path = CommandSetting;
 			sourceTree = "<group>";
@@ -434,6 +450,7 @@
 		0AD08AA32649F6F800654A05 /* CollectoinView */ = {
 			isa = PBXGroup;
 			children = (
+				487AF1EE264CE5D400663047 /* Command */,
 				0AD08ACE264A6F1900654A05 /* CommonSelectionViewController.swift */,
 				0AD08AD0264A6FD100654A05 /* CommonSelectionViewController+Layout.swift */,
 				0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */,
@@ -508,6 +525,7 @@
 				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */,
 				482681702645EBA70010543A /* UIView+ConfigLayout.swift */,
+				487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -526,6 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				482681762645EBA70010543A /* GeneticLabelCollectionReusableView.swift */,
+				48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */,
 			);
 			path = SupplementaryView;
 			sourceTree = "<group>";
@@ -556,6 +575,19 @@
 				482681812645EBA80010543A /* CustomSegmentedView.swift */,
 			);
 			path = SegmentControl;
+			sourceTree = "<group>";
+		};
+		487AF1EE264CE5D400663047 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */,
+				4892E01F264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift */,
+				4892E021264A170300C3EFB4 /* CommonCommandViewController+Layout.swift */,
+				487AF1E4264B977100663047 /* CommonCommandViewController+ScrollView.swift */,
+				487AF1E6264B9A2900663047 /* CommonCommandViewController+SearchBar.swift */,
+				487AF1EA264C61AF00663047 /* CommandViewModel.swift */,
+			);
+			path = Command;
 			sourceTree = "<group>";
 		};
 		48AE80292640B26F00CBDB5E /* Demo */ = {
@@ -780,7 +812,9 @@
 			files = (
 				482681992645EBA80010543A /* IconType.swift in Sources */,
 				4826819C2645EBA80010543A /* IconFactory.swift in Sources */,
+				487AF1F2264CF22300663047 /* ScrollView+ScrollToBottom.swift in Sources */,
 				482681952645EBA80010543A /* MainButton.swift in Sources */,
+				487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */,
 				482681862645EBA80010543A /* H2Label.swift in Sources */,
 				4826818D2645EBA80010543A /* SelectionCollectionViewCell.swift in Sources */,
 				0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */,
@@ -794,6 +828,7 @@
 				48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */,
 				482681942645EBA80010543A /* NextAndBackButtons.swift in Sources */,
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
+				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
 				0A3A62C92638C2C80082ACAE /* CitizenSelectingViewController.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
@@ -825,7 +860,7 @@
 				0A3A62982638B3780082ACAE /* PlayerSelectionViewController.swift in Sources */,
 				482681912645EBA80010543A /* UIView+ConstraintLayout.swift in Sources */,
 				0A3A62AF2638BC5A0082ACAE /* EntryNameViewController.swift in Sources */,
-				0A3A62D92638CF960082ACAE /* CommandSettingViewController.swift in Sources */,
+				0A3A62D92638CF960082ACAE /* CommonCommandViewController.swift in Sources */,
 				482681892645EBA80010543A /* H1Label.swift in Sources */,
 				0A3A62D42638C3AA0082ACAE /* ResultViewController.swift in Sources */,
 				48AE80402640B26F00CBDB5E /* DemoCellCVC+DataSource.swift in Sources */,
@@ -838,10 +873,14 @@
 				3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */,
 				485635EA26437C7A0043AF21 /* CommandType.swift in Sources */,
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
+				487AF1E7264B9A2900663047 /* CommonCommandViewController+SearchBar.swift in Sources */,
 				482681882645EBA80010543A /* H3Label.swift in Sources */,
 				3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
+				4892E022264A170300C3EFB4 /* CommonCommandViewController+Layout.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
+				487AF1E5264B977100663047 /* CommonCommandViewController+ScrollView.swift in Sources */,
+				4892E020264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,
 				4826819A2645EBA80010543A /* UserIdIconView.swift in Sources */,
 				0A3A62BC2638C0580082ACAE /* CommandSelectionViewController.swift in Sources */,
@@ -855,6 +894,7 @@
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
 				4826819B2645EBA80010543A /* IconSource.swift in Sources */,
 				3B7981A3264F09AA002D2F71 /* CitizenSelectedView.swift in Sources */,
+				48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -996,14 +1036,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game.e";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1017,14 +1057,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dsapp.Queens-game.e";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
