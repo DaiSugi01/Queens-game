@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A04254C264F22460019AEC1 /* PlayerSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */; };
 		0A306FCA25F7078B0059CDEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FC925F7078B0059CDEE /* AppDelegate.swift */; };
 		0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */; };
 		0A306FD625F7078C0059CDEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A306FD525F7078C0059CDEE /* Assets.xcassets */; };
@@ -29,8 +30,6 @@
 		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
-		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
-		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
 		0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9C26486A1300654A05 /* TopViewModel.swift */; };
 		0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */; };
 		0AD08AA72649FBC500654A05 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AA62649FBC500654A05 /* Constant.swift */; };
@@ -38,6 +37,8 @@
 		0AD08AD1264A6FD100654A05 /* CommonSelectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD0264A6FD100654A05 /* CommonSelectionViewController+Layout.swift */; };
 		0AD08AD3264A700B00654A05 /* CommonSelectionViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */; };
 		0AD08AD5264A7CD700654A05 /* QueenSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */; };
+		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
+		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -99,6 +100,7 @@
 
 /* Begin PBXFileReference section */
 		080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
+		0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewModel.swift; sourceTree = "<group>"; };
 		0A306FC625F7078B0059CDEE /* Queens-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Queens-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A306FC925F7078B0059CDEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62972638B3780082ACAE /* PlayerSelectionViewController.swift */,
+				0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */,
 			);
 			path = PlayerSelection;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 			files = (
 				482681992645EBA80010543A /* IconType.swift in Sources */,
 				4826819C2645EBA80010543A /* IconFactory.swift in Sources */,
+				0A04254C264F22460019AEC1 /* PlayerSelectionViewModel.swift in Sources */,
 				487AF1F2264CF22300663047 /* ScrollView+ScrollToBottom.swift in Sources */,
 				482681952645EBA80010543A /* MainButton.swift in Sources */,
 				487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */,
