@@ -37,6 +37,7 @@
 		0AD08AD3264A700B00654A05 /* CommonSelectionViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */; };
 		0AD08AD5264A7CD700654A05 /* QueenSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */; };
 		3B7981A3264F09AA002D2F71 /* CitizenSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */; };
+		3B7981C5264F8C66002D2F71 /* CountdownStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */; };
 		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
 		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
@@ -133,6 +134,7 @@
 		0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewModel.swift; sourceTree = "<group>"; };
 		33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
 		3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedView.swift; sourceTree = "<group>"; };
+		3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownStackView.swift; sourceTree = "<group>"; };
 		3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
@@ -458,20 +460,29 @@
 			path = CollectoinView;
 			sourceTree = "<group>";
 		};
+		3B7981C3264F8C2B002D2F71 /* StackView */ = {
+			isa = PBXGroup;
+			children = (
+				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
+			);
+			path = StackView;
+			sourceTree = "<group>";
+		};
 		4826815A2645EBA70010543A /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				0AD08AA32649F6F800654A05 /* CollectoinView */,
-				4826815B2645EBA70010543A /* SearchBar */,
-				4826815E2645EBA70010543A /* Color */,
-				482681612645EBA70010543A /* Label */,
-				482681672645EBA70010543A /* Cell */,
-				4826816B2645EBA70010543A /* Common */,
 				482681712645EBA70010543A /* Button */,
-				482681752645EBA70010543A /* SupplementaryView */,
+				482681672645EBA70010543A /* Cell */,
+				0AD08AA32649F6F800654A05 /* CollectoinView */,
+				4826815E2645EBA70010543A /* Color */,
+				4826816B2645EBA70010543A /* Common */,
 				482681772645EBA80010543A /* Font */,
 				482681792645EBA80010543A /* Icons */,
+				482681612645EBA70010543A /* Label */,
+				4826815B2645EBA70010543A /* SearchBar */,
 				482681802645EBA80010543A /* SegmentControl */,
+				3B7981C3264F8C2B002D2F71 /* StackView */,
+				482681752645EBA70010543A /* SupplementaryView */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -835,6 +846,7 @@
 				4826818A2645EBA80010543A /* H4Label.swift in Sources */,
 				48AE80442640B26F00CBDB5E /* DemoFontViewController.swift in Sources */,
 				48AE80412640B26F00CBDB5E /* DemoCellCVC+Layout.swift in Sources */,
+				3B7981C5264F8C66002D2F71 /* CountdownStackView.swift in Sources */,
 				48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */,
 				4826818B2645EBA80010543A /* CommandCollectionViewCell.swift in Sources */,
 				4826818F2645EBA80010543A /* UINavigationController+hideBarBackground.swift in Sources */,
