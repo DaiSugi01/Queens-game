@@ -48,7 +48,7 @@ class CommandViewModel {
   func createItem(command: Command) {
     crudType = .create
     commandList.append(command)
-    self.commandListSubject.onNext(self.commandList)
+    commandListSubject.onNext(commandList)
   }
   func updateItem(command: Command) {
     crudType = .update
