@@ -9,64 +9,93 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupLayout()
-  }
-  
-  let screenName: UILabel = {
-    let lb = UILabel()
+  let navButtons = NextAndBackButtons()
+
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "It’s time to carry out ")
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Result"
-    
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
-  
-  let playAgainButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Play again", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
+
+  lazy var stackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        screenTitle,
+        navButtons,
+      ]
+    )
+    sv.alignment = .fill
+    sv.distribution = .equalSpacing
+    return sv
   }()
-  
-  let backToTopButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back to start menu", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let previous = navigationController!.viewControllers[1]
-    navigationController?.popToViewController(previous, animated: true)
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.setupLayout()
+    self.configureButtons()
   }
-  
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popToRootViewController(animated: true)
-  }
-  
+}
+
+extension ResultViewController {
+
   private func setupLayout() {
-    view.backgroundColor = .white
+    view.configBgColor(bgColor: CustomColor.background)
     navigationItem.hidesBackButton = true
 
-    view.addSubview(screenName)
-    view.addSubview(playAgainButton)
-    view.addSubview(backToTopButton)
-    
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-    
-    playAgainButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    playAgainButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    backToTopButton.trailingAnchor.constraint(equalTo: playAgainButton.leadingAnchor, constant: -10).isActive = true
-    backToTopButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    view.addSubview(stackView)
+    stackView.topAnchor.constraint(
+      equalTo: view.topAnchor,
+      constant: Constant.Common.topSpacing
+    ).isActive = true
+    stackView.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
+    stackView.leadingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+      constant: Constant.Common.leadingSpacing
+    ).isActive = true
+    stackView.trailingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+      constant:  Constant.Common.trailingSpacing
+    ).isActive = true
+
   }
+
+  private func configureButtons() {
+    navButtons.nextButton.setTitle("Play again", for: .normal)
+    navButtons.nextButton.titleLabel?.font = CustomFont.h4
+    navButtons.nextButton.addTarget(
+      self,
+      action: #selector(toStart),
+      for: .touchUpInside
+    )
+    
+    navButtons.backButton.setTitle("Back to start menu", for: .normal)
+    navButtons.backButton.titleLabel?.font = CustomFont.h4
+    navButtons.backButton.titleLabel?.lineBreakMode = .byWordWrapping
+    navButtons.backButton.addTarget(
+      self,
+      action: #selector(toTop),
+      for: .touchUpInside
+    )
+
+  }
+
+  @objc private func toStart() {
+    let nx = PlayerSelectionViewController()
+    GameManager.shared.pushGameProgress(
+      navVC: navigationController!,
+      currentScreen: self,
+      nextScreen: nx
+    )
+  }
+
+  @objc private func toTop() {
+    super.navigationController?.popToRootViewController(animated: true)
+  }
+  
 }
