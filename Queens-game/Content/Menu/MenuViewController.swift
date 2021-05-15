@@ -31,7 +31,7 @@ class MenuViewController: UIViewController {
   
   let howToPlayButton: MainButton = {
     let bt = MainButton()
-    bt.setTitle("How to Palay", for: .normal)
+    bt.setTitle("How to Play", for: .normal)
     bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
     return bt
   }()
