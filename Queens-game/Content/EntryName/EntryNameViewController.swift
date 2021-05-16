@@ -129,8 +129,8 @@ extension EntryNameViewController: UICollectionViewDelegate, UICollectionViewDat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let cell = UsernameInputCollectionViewCell()
-//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsernameInputCollectionViewCell.identifier, for: indexPath) as! UsernameInputCollectionViewCell
+//    let cell = UsernameInputCollectionViewCell()
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsernameInputCollectionViewCell.identifier, for: indexPath) as! UsernameInputCollectionViewCell
     
     cell.configContent(by: GameManager.shared.users[indexPath.row].playerId,
                        and: GameManager.shared.users[indexPath.row].name)
