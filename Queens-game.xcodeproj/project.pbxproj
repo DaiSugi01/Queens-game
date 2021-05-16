@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A04254C264F22460019AEC1 /* PlayerSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */; };
+		0A04254E264FA8250019AEC1 /* EntryNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */; };
 		0A306FCA25F7078B0059CDEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FC925F7078B0059CDEE /* AppDelegate.swift */; };
 		0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */; };
 		0A306FD625F7078C0059CDEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A306FD525F7078C0059CDEE /* Assets.xcassets */; };
@@ -95,6 +96,7 @@
 /* Begin PBXFileReference section */
 		080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
 		0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewModel.swift; sourceTree = "<group>"; };
+		0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameViewModel.swift; sourceTree = "<group>"; };
 		0A306FC625F7078B0059CDEE /* Queens-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Queens-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A306FC925F7078B0059CDEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */,
 				0A618CA4264D239600ED3EDA /* EntryNameViewController+Layout.swift */,
 				0A618CA6264D248200ED3EDA /* EntryNameViewController+DataSource.swift */,
+				0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */,
 			);
 			path = EntryName;
 			sourceTree = "<group>";
@@ -864,6 +867,7 @@
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
 				4826819B2645EBA80010543A /* IconSource.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
+				0A04254E264FA8250019AEC1 /* EntryNameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

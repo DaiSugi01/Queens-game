@@ -7,13 +7,13 @@
 
 import UIKit
 
-
 /// Custom cell that includes
 /// - user id icon
 /// - text filed to keep user name
 class UsernameInputCollectionViewCell: UICollectionViewCell {
   static let identifier = "username cell"
-  
+  let maxLength: Int = 10
+
   let textField: UITextField = {
     let tf = UITextField()
     tf.configLayout(
@@ -44,11 +44,12 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     stackView.configSuperView(under: self)
     stackView.matchParent()
+    textField.delegate = self
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   /// /// Update label in user id icon
   /// - Parameters:
   ///   - id: user id which is displayed in userId icon
@@ -59,5 +60,17 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
     labelInIcon.text = String(id)
     // update text filed
     textField.text = text
+  }
+  
+}
+
+extension UsernameInputCollectionViewCell: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let text = textField.text! + string
+    if text.count <= maxLength {
+        return true
+    }
+    
+    return false
   }
 }

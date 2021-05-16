@@ -24,16 +24,6 @@ extension EntryNameViewController {
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }
   
-  /// Create CompositionalLayout. It is assigning CollectionLayoutSection to each section
-  /// - Returns: CompositionalLayout
-  //  private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-  //    return UICollectionViewCompositionalLayout
-  //    { [unowned self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-  //
-  //      return createSection()
-  //    }
-  //  }
-  
   private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout(section: createSection())
   }
