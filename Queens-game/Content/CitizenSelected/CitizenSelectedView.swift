@@ -13,6 +13,8 @@ class CitizenSelectedViewModel {
 
   var timer = Timer()
 
+  lazy var executor = self.createExecutor(self.getGameManager())
+
   let rxCountdownTime = PublishSubject<Int?>()
   var countdonwTime = Int(Settings.shared.citizenSelectionWaitingSeconds)
 
@@ -27,5 +29,24 @@ class CitizenSelectedViewModel {
           self?.rxCountdownTime.onCompleted()
         }
       })
+  }
+
+  private func createExecutor(_ gameManager: GameManagerProtocol) -> ExecutorProtocol {
+    switch gameManager.command.commandType {
+    case .cToC:
+      return ExecutorCtoC()
+    case .cToA:
+      return ExecutorCtoA()
+    case .cToQ:
+      return ExecutorCtoQ()
+    }
+  }
+
+  func getGameManager() -> GameManagerProtocol {
+    if GameManager.shared.users.count > 0 {
+      return GameManager.shared
+    } else {
+      return MockGameManager()
+    }
   }
 }

@@ -13,7 +13,9 @@ class ResultViewController: UIViewController {
 
   var target: User
 
-  var stakeholder: [User]
+  var stakeholder: User
+
+  var stakeholders: [User]
 
   lazy var gameManager = self.getGameManager()
 
@@ -26,11 +28,75 @@ class ResultViewController: UIViewController {
     return lb
   }()
 
-  lazy var icon: UIImageView = {
+  lazy var difficulty: UIImageView = {
     let img = IconFactory.createImageView(type: self.getIconType(), height: 32)
     img.contentMode = .scaleAspectFit
     img.clipsToBounds = true
     return img
+  }()
+
+  lazy var targetIcon = IconFactory.createImageView(type: .userId(self.target.playerId), width: 64)
+
+  lazy var targetName: PLabel = {
+    let label = PLabel(text: self.target.name)
+    label.textAlignment = .center
+    return label
+  }()
+
+  lazy var stakeholderIcon = IconFactory.createImageView(type: .userId(self.stakeholder.playerId), width: 64)
+
+  lazy var stakeholderName: PLabel = {
+    let label = PLabel(text: self.stakeholder.name)
+    label.textAlignment = .center
+    return label
+  }()
+
+  lazy var targetBlock: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [self.targetIcon, self.targetName]
+    )
+    stackView.spacing = 8
+    return stackView
+  }()
+
+  lazy var stakeholderBlock: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [self.stakeholderIcon, self.stakeholderName]
+    )
+    stackView.spacing = 8
+    return stackView
+  }()
+
+  lazy var allCitizen = IconFactory.createImageView(type: .allCitizen, height: 64)
+
+  lazy var queen = IconFactory.createImageView(type: .queen, height: 64)
+
+  lazy var rightBlock: UIView = {
+    var uiview = UIView()
+    switch self.getGameManager().command.commandType {
+    case .cToA:
+      uiview = self.allCitizen
+    case .cToC:
+      uiview = self.stakeholderBlock
+    case .cToQ:
+      uiview = self.queen
+    }
+    return uiview
+  }()
+
+  lazy var arrow = IconFactory.createImageView(type: .arrow, height: 64)
+
+  lazy var commandBlock: HorizontalStackView = {
+    let stackView = HorizontalStackView(
+      arrangedSubviews: [
+        self.targetBlock,
+        self.arrow,
+        self.rightBlock,
+      ],
+      alignment: .top,
+      distribution: .equalSpacing
+    )
+    return stackView
   }()
 
   lazy var detail: UILabel = {
@@ -54,7 +120,11 @@ class ResultViewController: UIViewController {
 
   lazy var inner: VerticalStackView = {
     let stackView = VerticalStackView(
-      arrangedSubviews: [icon,detailBlock],
+      arrangedSubviews: [
+        self.difficulty,
+        self.commandBlock,
+        self.detailBlock
+      ],
       spacing: 32
     )
     return stackView
@@ -81,9 +151,10 @@ class ResultViewController: UIViewController {
     return sv
   }()
 
-  init(target: User, stakeholder: [User]) {
+  init(target: User, stakeholders: [User]) {
     self.target = target
-    self.stakeholder = stakeholder
+    self.stakeholders = stakeholders
+    self.stakeholder = self.stakeholders[0]
     super.init(nibName: nil, bundle: nil)
   }
   required init?(coder: NSCoder) {
