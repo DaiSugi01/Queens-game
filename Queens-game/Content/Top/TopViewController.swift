@@ -32,7 +32,7 @@ class TopViewController: UIViewController {
   let startButton = MainButton(superView: nil, title: "Start game")
   @objc func startTapped(_ sender: UIButton) {
     let nx = PlayerSelectionViewController()
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
+    GameManager.shared.pushGameProgress(navVC: navigationController,
                                         currentScreen: self,
                                         nextScreen: nx)
   }
