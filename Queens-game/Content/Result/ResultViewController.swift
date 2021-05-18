@@ -150,7 +150,7 @@ extension ResultViewController {
   @objc private func toStart() {
     let nx = PlayerSelectionViewController()
     GameManager.shared.pushGameProgress(
-      navVC: navigationController!,
+      navVC: navigationController,
       currentScreen: self,
       nextScreen: nx
     )
