@@ -82,7 +82,7 @@ class CommandSelectionViewController: CommonSelectionViewController {
                                           currentScreen: self,
                                           nextScreen: nx)
     case Constant.CommandSelection.manualIndexPath:
-      let nx = CommandManualSelectingViewController(collectionViewLayout: UICollectionViewFlowLayout())
+      let nx = CommandManualSelectingViewController()
       GameManager.shared.pushGameProgress(navVC: navigationController!,
                                           currentScreen: self,
                                           nextScreen: nx)

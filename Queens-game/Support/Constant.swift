@@ -53,4 +53,13 @@ struct Constant {
     static let randomIndexPath: [IndexPath] = [[0, 0]]
     static let manualIndexPath: [IndexPath] = [[0, 1]]
   }
+  
+  struct CommandDescription {
+    static let easy = "Not so hard to do. But are you really satisfy with it?"
+    static let normal = "A bit challenging. But it shall give you a decent thrill...."
+    static let hard = "Warning. This will cause a hight chaos but excitement!"
+    static let cToC = "One of the citizens must perform a command to another citizen (not the Queen)."
+    static let cToA = "One of the citizens must perform a command to all citizen (including the Queen)."
+    static let cToQ = "One of the citizens must perform a command to the Queen"
+  }
 }

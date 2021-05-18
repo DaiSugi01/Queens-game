@@ -161,13 +161,13 @@ extension CommandEditViewController {
     )
     
     // If edit mode, add delete button
-    if let _ = viewModel.editingCommand {
+    if let _ = viewModel.selectedCommand {
       deleteButton.configSuperView(under: view)
       deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
       deleteButton.centerXin(view)
     }
     
-    if let command = viewModel.editingCommand {
+    if let command = viewModel.selectedCommand {
       difficultySegment.segmentedControl.selectedSegmentIndex = command .difficulty.rawValue
       commandTypeSegment.segmentedControl.selectedSegmentIndex = command .commandType.rawValue
       textView.text = command.detail

@@ -15,6 +15,7 @@ class H1Label: UILabel {
     self.font = CustomFont.h1
     self.textColor = CustomColor.main
     self.textAlignment = .left
+    self.numberOfLines = 0
   }
   convenience init(text: String) {
     self.init(frame: .zero)

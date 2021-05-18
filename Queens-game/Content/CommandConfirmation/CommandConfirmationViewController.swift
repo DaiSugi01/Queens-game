@@ -8,66 +8,183 @@
 import UIKit
 
 class CommandConfirmationViewController: UIViewController {
+  
+  var viewModel = CommandViewModel()
+  var selectedCommand: Command? {
+    viewModel.selectedCommand
+  }
+  
+  let scrollView = UIScrollView()
+  
+  // Details
+  let mainLabel: H2Label = {
+    let lb = H2Label(text: "Confirm this command?")
+    return lb
+  } ()
+  
+  let detailLabel: H3Label = {
+    let lb = H3Label(text: "Description")
+    return lb
+  } ()
+  
+  lazy var detail: UIStackView = {
+    let wrapper = UIStackView()
+    wrapper.configLayout(bgColor: CustomColor.convex, radius: 32)
+    let content: UILabel = H4Label(text: selectedCommand?.detail ?? "No description")
+    wrapper.addArrangedSubview(content)
+    wrapper.isLayoutMarginsRelativeArrangement = true
+    wrapper.directionalLayoutMargins = .init(top: 32, leading: 16, bottom: 32, trailing: 16)
+    return wrapper
+  } ()
+  
+  let confirmationButton: UIView = {
+    let bt = NextAndBackButtons()
+    bt.backButton.setTitle("Cancel", for: .normal)
+    bt.backButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+    bt.nextButton.setTitle("Yes", for: .normal)
+    bt.nextButton.configBgColor(bgColor: CustomColor.accent)
+    // Create a wrapper to float (don't let stretch) buttons.
+    let uv = UIView()
+    bt.configSuperView(under: uv)
+    // Don't let stretch buttons.
+    bt.setContentHuggingPriority(.required, for: .horizontal)
+    // Only set wrapper's height same as buttons.
+    bt.heightAnchor.constraint(equalTo: uv.heightAnchor).isActive = true
+    // let buttons float in center
+    bt.centerXYin(uv)
+    return uv
+  }()
+  
+  // Attributes
+  let difficultyLabel : H4Label = {
+    let lb = H4Label(text: "Difficulty")
+    lb.textColor = CustomColor.subMain
+    return lb
+  } ()
+  
+  lazy var difficultyIcon: UIImageView = {
+    guard let iconType = selectedCommand?.difficultyIconType else { return  UIImageView()}
+    let icon = IconFactory.createImageView(type: iconType, width: 40)
+    return icon
+  } ()
 
+  lazy var difficultyDescription : PLabel = {
+    let lb = PLabel(text: selectedCommand?.difficultyDescription ?? "")
+    lb.textColor = CustomColor.subMain
+    return lb
+  } ()
+  
+  let typeLabel : H4Label = {
+    let lb = H4Label(text: "Type")
+    lb.textColor = CustomColor.subMain
+    return lb
+  } ()
+  
+  lazy var typeIcon: UIImageView = {
+    guard let iconType = selectedCommand?.commandIconType else { return  UIImageView()}
+    let icon = IconFactory.createImageView(type: iconType, width: 40)
+    return icon
+  } ()
+  
+  lazy var typeDescription : PLabel = {
+    let lb = PLabel(text: selectedCommand?.commandTypeDescription ?? "")
+    lb.textColor = CustomColor.subMain
+    return lb
+  } ()
+  
+  lazy var attributesStackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        difficultyLabel,
+        difficultyIcon,
+        difficultyDescription,
+        typeLabel,
+        typeIcon,
+        typeDescription
+      ],
+      alignment: .leading
+    )
+    sv.setCustomSpacing(4, after: difficultyLabel)
+    sv.setCustomSpacing(8, after: difficultyIcon)
+    sv.setCustomSpacing(32, after: difficultyDescription)
+    sv.setCustomSpacing(4, after: typeLabel)
+    sv.setCustomSpacing(8, after: typeIcon)
+    return sv
+  } ()
+
+  // All in one
+  lazy var stackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        mainLabel,
+        detailLabel,
+        detail,
+        confirmationButton,
+        attributesStackView
+      ]
+    )
+    sv.setCustomSpacing(40, after: mainLabel)
+    sv.setCustomSpacing(16, after: detailLabel)
+    sv.setCustomSpacing(40, after: detail)
+    sv.setCustomSpacing(40, after: confirmationButton)
+    return sv
+  } ()
+  
+  init(viewModel: CommandViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupLayout()
-  }
-  
-  let screenName: UILabel = {
-    let lb = UILabel()
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Command Confirmation"
-    
-    return lb
-  }()
-  
-  let confirmButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Yes", for: .normal)
-    bt.backgroundColor = .systemRed
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  let cancelButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Cancel", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = CitizenSelectingViewController()
-    navigationController?.pushViewController(nx, animated: true)
-  }
-  
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
-  }
-  
-  private func setupLayout() {
-    view.backgroundColor = .white
-    navigationItem.hidesBackButton = true
-
-    view.addSubview(screenName)
-    view.addSubview(confirmButton)
-    view.addSubview(cancelButton)
-    
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-    
-    confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    confirmButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    cancelButton.trailingAnchor.constraint(equalTo: confirmButton.leadingAnchor, constant: -10).isActive = true
-    cancelButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    configScrollView()
   }
 
+}
+
+
+// MARK: - Scroll view
+
+extension CommandConfirmationViewController {
+  private func configScrollView() {
+    scrollView.configSuperView(under: view)
+    scrollView.matchParent()
+    scrollView.configBgColor(bgColor: CustomColor.background)
+
+    // This will create padding between content size and stack view
+    scrollView.contentInset = .init(
+      top: Constant.Common.topSpacing - 32,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.trailingSpacing,
+      right: 64
+    )
+    
+    // Only set stack-view's width
+    stackView.configSuperView(under: scrollView)
+    stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: -64).isActive = true
+    // By this, stack view won't scroll horizontally
+    stackView.centerXin(view)
+    
+    // This will create subviews earlier.
+    // Without this, it will cost few times to decide scroll height.
+    scrollView.layoutIfNeeded()
+  }
+  
+  // This will called when the subviews are created.
+  // After created, based on the stack view's height, we set content size.
+  override func viewDidLayoutSubviews() {
+    scrollView.contentSize = CGSize(width: view.frame.width, height: stackView.frame.height)
+  }
+}
+
+
+// MARK: -
+
+extension CommandConfirmationViewController {
+  @objc func cancelTapped() {
+    dismiss(animated: true, completion: nil)
+  }
 }

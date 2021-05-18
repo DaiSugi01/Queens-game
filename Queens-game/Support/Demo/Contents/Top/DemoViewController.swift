@@ -12,7 +12,7 @@ import UIKit
 ///
 /// This view controller and any other view controllers proceeding to this view are "not" going to be used in release version.
 class DemoViewController: UITableViewController {
-  let sectionName = ["Color + Rect","Fonts","Buttons", "Icons", "Cell", "Search"]
+  let sectionName = ["Color + Rect","Fonts","Buttons", "Icons", "Cell", "Search", "CommandManualSelecting"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,6 +52,8 @@ extension DemoViewController {
         nextVC = DemoCellCollectionViewController()
       case "Search":
         nextVC = DemoSearchViewController()
+      case "CommandManualSelecting":
+        nextVC = CommandManualSelectingViewController()
       default:
        return
     }

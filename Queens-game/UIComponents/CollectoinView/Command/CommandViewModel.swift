@@ -19,7 +19,7 @@ class CommandViewModel {
   
   // These are given by view (view controller)
   var crudType: CRUDType = .other
-  var editingCommand: Command?
+  var selectedCommand: Command?
   var searchText: String = ""
   var snapshot =  NSDiffableDataSourceSnapshot<Section, Item>()
   
@@ -39,9 +39,9 @@ class CommandViewModel {
   /// If you are just adding new item, editing command will be nil
   func updateEditingCommand(index: Int? = nil) {
     if let index = index  {
-      editingCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
+      selectedCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
     } else {
-      editingCommand = nil
+      selectedCommand = nil
     }
   }
   
@@ -59,7 +59,7 @@ class CommandViewModel {
   }
   func createOrUpdateItem(_ detail: String, _ difficulty: Difficulty, _ commandType: CommandType) {
     // edit
-    if let command = editingCommand {
+    if let command = selectedCommand {
       command.detail = detail
       command.difficulty = difficulty
       command.commandType = commandType
@@ -77,7 +77,7 @@ class CommandViewModel {
     commandListSubject.onNext(commandList)
   }
   func deleteEditingItem() {
-    if let command = editingCommand {
+    if let command = selectedCommand {
       deleteItem(command: command)
     }
   }
