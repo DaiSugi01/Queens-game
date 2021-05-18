@@ -11,6 +11,7 @@ import UIKit
 class EntryNameViewModel {
   let defaults: UserDefaults = UserDefaults.standard
   
+  /// Get stored user data from user defaults
   func getUsersFromUserDefaults() {
     let jsonDecoder = JSONDecoder()
     guard let data = defaults.data(forKey: Constant.UserDefaults.users),
@@ -23,13 +24,17 @@ class EntryNameViewModel {
     }
   }
   
+  /// Save users to user defaults
   func saveUsers() {
     let jsonEncoder = JSONEncoder()
     guard let users = try? jsonEncoder.encode(GameManager.shared.users) else { return }
     defaults.set(users, forKey: Constant.UserDefaults.users)
-    print("a")
   }
   
+  /// Update user name
+  /// - Parameters:
+  ///   - playerId: user player id which is displayed in userId icon - 1
+  ///   - newName: user's new name
   func updateUserName(playerId: Int, newName: String) {
     GameManager.shared.users[playerId].name = newName
   }

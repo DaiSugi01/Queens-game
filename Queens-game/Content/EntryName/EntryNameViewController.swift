@@ -13,18 +13,14 @@ class EntryNameViewController: UIViewController {
   
   let vm = EntryNameViewModel()
   let disposeBag: DisposeBag = DisposeBag()
-  let users = GameManager.shared.users
-
-  let sections: [Section] = [.userName]
-//  var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
-//  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
   
   lazy var verticalSV: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle, scrollView])
     sv.alignment = .fill
     sv.distribution = .equalSpacing
     sv.translatesAutoresizingMaskIntoConstraints = false
     sv.spacing = 40
+    
     return sv
   }()
   
@@ -34,17 +30,16 @@ class EntryNameViewController: UIViewController {
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
+    
     return lb
   }()
   
-  let collectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
-    let collectionView = UICollectionView(
-      frame: .zero,collectionViewLayout: layout
-    )
-    collectionView.constraintHeight(equalToConstant: 360)
-    return collectionView
+  let scrollView: UIScrollView = {
+    let sv = UIScrollView()
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    sv.constraintHeight(equalToConstant: 360)
+    
+    return sv
   }()
   
   let navButtons: NextAndBackButtons = {
@@ -56,14 +51,13 @@ class EntryNameViewController: UIViewController {
   }()
   
   @objc private func goToNext(_ sender: UIButton) {
-    for user in GameManager.shared.users {
-      print(user.playerId, user.name)
-    }
-//    vm.saveUsers()
-//    let nx = QueenSelectedViewController()
-//    GameManager.shared.pushGameProgress(navVC: navigationController!,
-//                                        currentScreen: self,
-//                                        nextScreen: nx)
+    // Save user to UserDefaults
+    vm.saveUsers()
+    
+    let nx = QueenSelectedViewController()
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
   }
   
   @objc private func goBackToPrevious(_ sender: UIButton) {
@@ -72,19 +66,9 @@ class EntryNameViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupCollectionView()
+    vm.getUsersFromUserDefaults()
     setupLayout()
-    collectionView.delegate = self
-    collectionView.dataSource = self
-    collectionView.register(UsernameInputCollectionViewCell.self,
-                            forCellWithReuseIdentifier: UsernameInputCollectionViewCell.identifier)
-//    vm.getUsersFromUserDefaults()
-  }
-  
-  /// Setup layout and datasource for collection view
-  private func setupCollectionView() {
-    createCollectionViewLayout()
-//    createDiffableDataSource()
+    createContent()
   }
   
   /// Setup whole layout
@@ -109,34 +93,35 @@ class EntryNameViewController: UIViewController {
                                         Constant.Common.bottomSpacing).isActive = true
     navButtons.centerXin(view)
   }
-}
-
-extension EntryNameViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 1
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return users.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  /// Create each EntryyName fields
+  private func createContent() {
+    let scrollViewWrapper: VerticalStackView = VerticalStackView(arrangedSubviews: [])
+    scrollView.addSubview(scrollViewWrapper)
     
-    let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: UsernameInputCollectionViewCell.identifier,
-      for: indexPath
-    ) as! UsernameInputCollectionViewCell
-    cell.configContent(by: users[indexPath.row].playerId, and: users[indexPath.row].name)
-
-    // Observe text field
-    cell.textField.rx.text.asObservable()
-      .subscribe(onNext: { [self] value in
-        vm.updateUserName(playerId: users[indexPath.row].playerId-1, newName: value!)
-//        self.collectionView.reloadItems(at: [indexPath])
-      })
-      .disposed(by: self.disposeBag)
-//    cell.prepareForReuse()
-    return cell
+    scrollViewWrapper.translatesAutoresizingMaskIntoConstraints = false
+    scrollViewWrapper.spacing = 16
+    scrollViewWrapper.alignment = .fill
+    scrollViewWrapper.distribution = .fill
+    scrollViewWrapper.anchors(topAnchor: scrollView.contentLayoutGuide.topAnchor,
+                              leadingAnchor: scrollView.frameLayoutGuide.leadingAnchor,
+                              trailingAnchor: scrollView.frameLayoutGuide.trailingAnchor,
+                              bottomAnchor: scrollView.contentLayoutGuide.bottomAnchor)
+    
+    // Make each EntryName field
+    for user in GameManager.shared.users {
+      
+      let userInputStackView = EntryNameStackView()
+      userInputStackView.configContent(by: user.playerId, and: user.name)
+      
+      // Observe text field
+      userInputStackView.textField.rx.text.asObservable()
+        .subscribe(onNext: { [self] value in
+          vm.updateUserName(playerId: user.playerId-1, newName: value!)
+        })
+        .disposed(by: self.disposeBag)
+      
+      scrollViewWrapper.addArrangedSubview(userInputStackView)
+    }
   }
 }
