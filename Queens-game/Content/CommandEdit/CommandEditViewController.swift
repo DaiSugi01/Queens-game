@@ -43,7 +43,7 @@ class CommandEditViewController: UIViewController {
   }()
   
   let categoryLabel = H3Label(text: "Category")
-  let difficultySegment = CustomSegmentedView("Difficulity", [.levelOne, .levelTwo, .levelThree])
+  let difficultySegment = CustomSegmentedView("Difficulty", [.levelOne, .levelTwo, .levelThree])
   let commandTypeSegment = CustomSegmentedView("Type", [.cToC, .cToA, .cToQ])
   let contentLabel = H3Label(text: "Content")
   let textView: UITextView = {

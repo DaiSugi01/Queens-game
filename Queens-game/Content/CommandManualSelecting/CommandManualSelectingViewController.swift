@@ -16,10 +16,15 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     super.viewDidLoad()
   }
   
-}
 
-// Delegate
-extension CommandManualSelectingViewController {
+  
+  // If back is tapped
+  override func backTapped() {
+    guard let navVC = navigationController else { return }
+    GameManager.shared.popGameProgress(navVC: navVC)
+  }
+  
+  
   // If cell is tapped
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let nx = CommandConfirmationViewController(viewModel: viewModel)

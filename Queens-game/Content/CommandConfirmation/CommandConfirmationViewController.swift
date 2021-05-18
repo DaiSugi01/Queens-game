@@ -156,15 +156,15 @@ extension CommandConfirmationViewController {
 
     // This will create padding between content size and stack view
     scrollView.contentInset = .init(
-      top: Constant.Common.topSpacing - 32,
+      top: Constant.Common.topSpacing/2,
       left: Constant.Common.leadingSpacing,
-      bottom: Constant.Common.trailingSpacing,
-      right: 64
+      bottom: 64,
+      right: Constant.Common.trailingSpacing
     )
     
     // Only set stack-view's width
     stackView.configSuperView(under: scrollView)
-    stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: -64).isActive = true
+    stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: -2*Constant.Common.leadingSpacing).isActive = true
     // By this, stack view won't scroll horizontally
     stackView.centerXin(view)
     
@@ -181,10 +181,21 @@ extension CommandConfirmationViewController {
 }
 
 
-// MARK: -
+// MARK: - Transition
 
 extension CommandConfirmationViewController {
   @objc func cancelTapped() {
     dismiss(animated: true, completion: nil)
+  }
+  
+  @objc func yesTapped() {
+    guard let navVC = navigationController else { return }
+    // GameManager.shared.command = viewModel.selectedCommand
+    // Fix me, how to bring navigation controller
+    GameManager.shared.pushGameProgress(
+      navVC: navVC,
+      currentScreen: self,
+      nextScreen: CitizenSelectedViewController()
+    )
   }
 }
