@@ -7,13 +7,13 @@
 
 import UIKit
 
-
 /// Custom cell which is used for showing command.
 /// Three contents are included in this cell
 /// - Difficulty : UIImageView
 /// - Command type : UIImageView
 /// - Details : UI label
 class CommandCollectionViewCell: UICollectionViewCell {
+  
   static let identifier = "command cell"
   
   // Components of cell
@@ -55,7 +55,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    stackView.configSuperView(under: self)
+    stackView.configSuperView(under: contentView)
     stackView.matchParent()
   }
   
@@ -63,7 +63,6 @@ class CommandCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // FIXME: - DemoSelection -> Command
   /// Update command text, level, type based on source
   /// - Parameter command: Command source
   func configContent(by command: Command) {

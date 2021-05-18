@@ -39,7 +39,7 @@ class TopViewController: UIViewController {
 
   let editCommandButton  = SubButton(superView: nil, title: "Edit commands")
   @objc func editCommandTapped(_ sender: UIButton) {
-    let nx = CommandSettingViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let nx = CommandSettingViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   
