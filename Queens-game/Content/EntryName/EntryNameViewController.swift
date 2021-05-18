@@ -12,11 +12,12 @@ import RxCocoa
 class EntryNameViewController: UIViewController {
   
   let vm = EntryNameViewModel()
-  let disposeBag = DisposeBag()
-  
+  let disposeBag: DisposeBag = DisposeBag()
+  let users = GameManager.shared.users
+
   let sections: [Section] = [.userName]
-  var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
-  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+//  var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
+//  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
   
   lazy var verticalSV: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
@@ -55,18 +56,10 @@ class EntryNameViewController: UIViewController {
   }()
   
   @objc private func goToNext(_ sender: UIButton) {
-    for i in 0 ..< GameManager.shared.users.count {
-      let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0)) as! UsernameInputCollectionViewCell
+    for user in GameManager.shared.users {
+      print(user.playerId, user.name)
     }
 //    vm.saveUsers()
-//    let cellCount = collectionView.numberOfItems(inSection: 0)
-//    for i in 0 ..< cellCount {
-//      let a = collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? UsernameInputCollectionViewCell
-//      print(a?.textField.text)
-//    }
-//    for i in GameManager.shared.users {
-//      print(i.playerId, i.name)
-//    }
 //    let nx = QueenSelectedViewController()
 //    GameManager.shared.pushGameProgress(navVC: navigationController!,
 //                                        currentScreen: self,
@@ -79,19 +72,19 @@ class EntryNameViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    vm.getUsersFromUserDefaults()
     setupCollectionView()
     setupLayout()
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.register(UsernameInputCollectionViewCell.self,
+                            forCellWithReuseIdentifier: UsernameInputCollectionViewCell.identifier)
+//    vm.getUsersFromUserDefaults()
   }
   
   /// Setup layout and datasource for collection view
   private func setupCollectionView() {
     createCollectionViewLayout()
 //    createDiffableDataSource()
-    collectionView.delegate = self
-    collectionView.dataSource = self
-    collectionView.register(UsernameInputCollectionViewCell.self,
-                            forCellWithReuseIdentifier: UsernameInputCollectionViewCell.identifier)
   }
   
   /// Setup whole layout
@@ -119,22 +112,31 @@ class EntryNameViewController: UIViewController {
 }
 
 extension EntryNameViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return GameManager.shared.users.count
-  }
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return users.count
+  }
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-//    let cell = UsernameInputCollectionViewCell()
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UsernameInputCollectionViewCell.identifier, for: indexPath) as! UsernameInputCollectionViewCell
-    
-    cell.configContent(by: GameManager.shared.users[indexPath.row].playerId,
-                       and: GameManager.shared.users[indexPath.row].name)
-    
+    let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: UsernameInputCollectionViewCell.identifier,
+      for: indexPath
+    ) as! UsernameInputCollectionViewCell
+    cell.configContent(by: users[indexPath.row].playerId, and: users[indexPath.row].name)
+
+    // Observe text field
+    cell.textField.rx.text.asObservable()
+      .subscribe(onNext: { [self] value in
+        vm.updateUserName(playerId: users[indexPath.row].playerId-1, newName: value!)
+//        self.collectionView.reloadItems(at: [indexPath])
+      })
+      .disposed(by: self.disposeBag)
+//    cell.prepareForReuse()
     return cell
   }
 }

@@ -6,18 +6,16 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
+import UIKit
 
 class EntryNameViewModel {
-  
   let defaults: UserDefaults = UserDefaults.standard
   
   func getUsersFromUserDefaults() {
     let jsonDecoder = JSONDecoder()
     guard let data = defaults.data(forKey: Constant.UserDefaults.users),
           let users = try? jsonDecoder.decode([User].self, from: data) else { return }
-
+    
     let playerCount = GameManager.shared.users.count
     for i in 0 ..< playerCount {
       guard users.count > i else { return }
@@ -32,10 +30,7 @@ class EntryNameViewModel {
     print("a")
   }
   
-  
-  let disposeBag = DisposeBag()
-
-  let users = BehaviorRelay<[User]>(value: GameManager.shared.users)
-  let textFieldVal = PublishRelay<String>()
-  
+  func updateUserName(playerId: Int, newName: String) {
+    GameManager.shared.users[playerId].name = newName
+  }
 }

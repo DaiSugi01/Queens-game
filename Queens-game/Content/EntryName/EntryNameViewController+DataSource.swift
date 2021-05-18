@@ -38,6 +38,13 @@
 //            ) as! UsernameInputCollectionViewCell
 //            cell.configContent(by: user.playerId, and: user.name)
 //
+//            // Observe text field
+//            cell.textField.rx.text.asObservable()
+//              .subscribe(onNext: { [self] value in
+//                vm.updateUserName(playerId: user.playerId-1, newName: value!)
+//              })
+//              .disposed(by: self.disposeBag)
+//
 //            return cell
 //          }
 //          
@@ -48,9 +55,6 @@
 //    dataSource.apply(snapshot, animatingDifferences: false)
 //  }
 //  
-//  private func test(playerId: Int, text: String) {
-//    GameManager.shared.users[playerId - 1].name = text
-//  }
 //  /// Delete all items of snapshot
 //  func resetSnapshot() {
 //    snapshot = NSDiffableDataSourceSnapshot<Section, Item>()

@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 /// Custom cell that includes
 /// - user id icon
 /// - text filed to keep user name
 class UsernameInputCollectionViewCell: UICollectionViewCell {
   static let identifier = "username cell"
+
+  var disposeBag: DisposeBag?
   let maxLength: Int = 10
 
   let textField: UITextField = {
@@ -46,6 +50,7 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
     stackView.matchParent()
     textField.delegate = self
   }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -54,12 +59,23 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
   /// - Parameters:
   ///   - id: user id which is displayed in userId icon
   ///   - text: default text which is displayed in text filed
-  func configContent(by id: Int, and text: String) {
+  func configContent(by id: Int, and text: String, disposeBag: DisposeBag? = nil) {
     // update usr id
     guard let labelInIcon = (userIcon.subviews.first! as? UILabel) else { return }
     labelInIcon.text = String(id)
     // update text filed
     textField.text = text
+    if let disposeBag = disposeBag {
+      self.disposeBag = disposeBag
+    }
+  }
+  
+  /// Dispose previous disposeBag for RxSwift to work correctly before reusing cell.
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    if let disposeBag = disposeBag {
+      self.disposeBag = disposeBag
+    }
   }
   
 }
