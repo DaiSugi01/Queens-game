@@ -98,13 +98,13 @@ class PlayerSelectionViewController: UIViewController {
   @objc func goToNext(_ sender: UIButton) {
     vm.initUserData(playerCount: playerCount)
     let nx = EntryNameViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
+    GameManager.shared.pushGameProgress(navVC: navigationController,
                                         currentScreen: self,
                                         nextScreen: nx)
   }
 
   @objc func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
+    GameManager.shared.popGameProgress(navVC: navigationController)
   }
 
   override func viewDidLoad() {
