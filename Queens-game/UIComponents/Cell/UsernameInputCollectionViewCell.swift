@@ -6,17 +6,12 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 /// Custom cell that includes
 /// - user id icon
 /// - text filed to keep user name
 class UsernameInputCollectionViewCell: UICollectionViewCell {
   static let identifier = "username cell"
-
-  var disposeBag: DisposeBag?
-  let maxLength: Int = 10
 
   let textField: UITextField = {
     let tf = UITextField()
@@ -48,45 +43,20 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     stackView.configSuperView(under: self)
     stackView.matchParent()
-    textField.delegate = self
   }
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   /// /// Update label in user id icon
   /// - Parameters:
   ///   - id: user id which is displayed in userId icon
   ///   - text: default text which is displayed in text filed
-  func configContent(by id: Int, and text: String, disposeBag: DisposeBag? = nil) {
+  func configContent(by id: Int, and text: String) {
     // update usr id
     guard let labelInIcon = (userIcon.subviews.first! as? UILabel) else { return }
     labelInIcon.text = String(id)
     // update text filed
     textField.text = text
-    if let disposeBag = disposeBag {
-      self.disposeBag = disposeBag
-    }
-  }
-  
-  /// Dispose previous disposeBag for RxSwift to work correctly before reusing cell.
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    if let disposeBag = disposeBag {
-      self.disposeBag = disposeBag
-    }
-  }
-  
-}
-
-extension UsernameInputCollectionViewCell: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let text = textField.text! + string
-    if text.count <= maxLength {
-        return true
-    }
-    
-    return false
   }
 }
