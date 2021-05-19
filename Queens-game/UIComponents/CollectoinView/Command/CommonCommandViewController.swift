@@ -28,7 +28,7 @@ class CommonCommandViewController: UIViewController {
   let backButton: UIButton = {
     let bt = SubButton()
     bt.configBgColor(bgColor: CustomColor.background)
-    bt.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    bt.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
     return bt
   } ()
   
@@ -65,7 +65,7 @@ class CommonCommandViewController: UIViewController {
     configBottomNavigationBar()
   }
  
-  @objc func backButtonTapped() {
+  @objc func backTapped() {
     navigationController?.popViewController(animated: true)
   }
   

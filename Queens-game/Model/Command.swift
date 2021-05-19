@@ -38,10 +38,10 @@ class Command: Object {
 }
 
 
-// MARK: - Getter and Setter of enum type
+// MARK: - Getter and Setter for enum type
 
 extension Command {
-  /// Get and Set `Difficulty` by enum type
+  /// Get and Set `Difficulty`
   var difficulty: Difficulty {
     get {
       return Difficulty(rawValue: intDifficulty) ?? .easy
@@ -54,7 +54,7 @@ extension Command {
     }
   }
   
-  /// Get and Set `CommandType` by enum type
+  /// Get and Set `CommandType`
   var commandType: CommandType {
     get {
       return CommandType(rawValue: intType) ?? .cToC
@@ -66,5 +66,78 @@ extension Command {
       }
     }
   }
+  
 }
 
+
+// MARK: - Getter for Icon Type
+
+extension Command {
+  /// Get `IconType`from `CommandType`
+  var commandIconType: IconType {
+    get {
+      switch CommandType(rawValue: intType) {
+        case .cToA:
+          return .cToA
+        case .cToC:
+          return .cToC
+        case .cToQ:
+          return .cToQ
+        default:
+          return .cToC
+      }
+    }
+  }
+  
+  /// Get `IconType`from `DifficultyType`
+  var difficultyIconType: IconType {
+    get {
+      switch Difficulty(rawValue: intDifficulty) {
+        case .easy:
+          return .levelOne
+        case .normal:
+          return .levelTwo
+        case .hard:
+          return .levelThree
+        default:
+          return .levelOne
+      }
+    }
+  }
+}
+
+// MARK: - Getter for description
+
+extension Command {
+  /// Get description for `CommandType`
+  var commandTypeDescription: String {
+    get {
+      switch CommandType(rawValue: intType) {
+        case .cToA:
+          return Constant.CommandDescription.cToA
+        case .cToC:
+          return Constant.CommandDescription.cToC
+        case .cToQ:
+          return Constant.CommandDescription.cToQ
+        default:
+          return Constant.CommandDescription.cToC
+      }
+    }
+  }
+  
+  /// Get description for `Difficulty`
+  var difficultyDescription: String {
+    get {
+      switch Difficulty(rawValue: intDifficulty) {
+        case .easy:
+          return Constant.CommandDescription.easy
+        case .normal:
+          return Constant.CommandDescription.normal
+        case .hard:
+          return Constant.CommandDescription.hard
+        default:
+          return Constant.CommandDescription.easy
+      }
+    }
+  }
+}

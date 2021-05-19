@@ -10,10 +10,11 @@ import UIKit
 class CommandHeaderCollectionReusableView: UICollectionReusableView {
   static let identifier = "command header"
   
-  let title = H2Label(text: "")
+  let title = H2Label(text: "Title")
   let subTitle = H3Label(text: "Command list")
   
   lazy var stackView: VerticalStackView = {
+    title.numberOfLines = 0
     let sv = VerticalStackView(
       arrangedSubviews: [title, subTitle],
       spacing: 24
