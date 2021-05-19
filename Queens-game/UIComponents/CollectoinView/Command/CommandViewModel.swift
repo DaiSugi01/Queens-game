@@ -25,6 +25,7 @@ class CommandViewModel {
   
   // RxSwift
   let disposeBag = DisposeBag()
+  let confirmedTriggerObservable = PublishSubject<Void>()
   var commandListSubject = BehaviorSubject<[Command]>(value: CommandViewModel.samples)
   var commandList: [Command] = CommandViewModel.samples
   var filteredCommandListSubject = BehaviorSubject<[Command]>(value: [])
@@ -37,7 +38,7 @@ class CommandViewModel {
   
   /// Update current editing item (command).
   /// If you are just adding new item, editing command will be nil
-  func updateEditingCommand(index: Int? = nil) {
+  func updateSelectedCommand(index: Int? = nil) {
     if let index = index  {
       selectedCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
     } else {

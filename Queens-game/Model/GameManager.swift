@@ -24,15 +24,19 @@ class GameManager: GameManagerProtocol {
   var gameProgress: [UIViewController] = []
   var command: Command = Command()
 
-  func pushGameProgress(navVC: UINavigationController,
+  func pushGameProgress(navVC: UINavigationController?,
                         currentScreen: UIViewController,
                         nextScreen: UIViewController) {
+    guard let navVC = navVC else { return }
     gameProgress.append(currentScreen)
     navVC.pushViewController(nextScreen, animated: true)
   }
 
-  func popGameProgress(navVC: UINavigationController) {
-    gameProgress.removeLast()
+  func popGameProgress(navVC: UINavigationController?) {
+    guard let navVC = navVC else { return }
+    if !gameProgress.isEmpty {
+      gameProgress.removeLast()
+    }
     navVC.popViewController(animated: true)
   }
 }

@@ -32,7 +32,7 @@ class TopViewController: UIViewController {
   let startButton = MainButton(superView: nil, title: "Start game")
   @objc func startTapped(_ sender: UIButton) {
     let nx = PlayerSelectionViewController()
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
+    GameManager.shared.pushGameProgress(navVC: navigationController,
                                         currentScreen: self,
                                         nextScreen: nx)
   }
@@ -93,11 +93,14 @@ class TopViewController: UIViewController {
 extension TopViewController {
     
   private func setUpDemoButton() {
-    let demoButton = UIBarButtonItem(systemItem: .organize)
-    demoButton.action = #selector(demoButtonTapped(_:))
-    demoButton.target = self
-    demoButton.tintColor = .black
-    navigationItem.leftBarButtonItems = [demoButton]
+    let demoButton = UIButton()
+    let largeConfig = UIImage.SymbolConfiguration(pointSize: 64, weight: .bold, scale: .large)
+    demoButton.setImage(UIImage(systemName: "ant" ,withConfiguration: largeConfig)?.withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal), for: .normal)
+    
+    demoButton.addTarget(self, action: #selector(demoButtonTapped(_:)), for: .touchUpInside)
+    demoButton.configSuperView(under: view)
+    demoButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
+    demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
   }
   
   @objc func demoButtonTapped(_ sender: UIButton) {

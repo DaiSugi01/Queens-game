@@ -99,7 +99,7 @@ extension CitizenSelectedViewController {
     let (target, stakeholder) = self.executor.select(from: self.getGameManager())
     let nx = ResultViewController(target:target, stakeholder:stakeholder)
     GameManager.shared.pushGameProgress(
-      navVC: navigationController!,
+      navVC: navigationController,
       currentScreen: self,
       nextScreen: nx
     )

@@ -78,12 +78,12 @@ class CommandSelectionViewController: CommonSelectionViewController {
     switch indexPath {
     case Constant.CommandSelection.randomIndexPath:
       let nx = QueenSelectedViewController()
-      GameManager.shared.pushGameProgress(navVC: navigationController!,
+      GameManager.shared.pushGameProgress(navVC: navigationController,
                                           currentScreen: self,
                                           nextScreen: nx)
     case Constant.CommandSelection.manualIndexPath:
       let nx = CommandManualSelectingViewController()
-      GameManager.shared.pushGameProgress(navVC: navigationController!,
+      GameManager.shared.pushGameProgress(navVC: navigationController,
                                           currentScreen: self,
                                           nextScreen: nx)
     default:
@@ -94,6 +94,6 @@ class CommandSelectionViewController: CommonSelectionViewController {
   /// Go back to previous screen
   /// - Parameter sender: UIButton
   @objc private func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
+    GameManager.shared.popGameProgress(navVC: navigationController)
   }
 }

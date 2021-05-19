@@ -7,12 +7,11 @@
 
 import UIKit
 
+// MARK: - Instance variables
 class CommandConfirmationViewController: UIViewController {
   
   var viewModel = CommandViewModel()
-  var selectedCommand: Command? {
-    viewModel.selectedCommand
-  }
+  var selectedCommand: Command!
   
   let scrollView = UIScrollView()
   
@@ -30,7 +29,7 @@ class CommandConfirmationViewController: UIViewController {
   lazy var detail: UIStackView = {
     let wrapper = UIStackView()
     wrapper.configLayout(bgColor: CustomColor.convex, radius: 32)
-    let content: UILabel = H4Label(text: selectedCommand?.detail ?? "No description")
+    let content: UILabel = H4Label(text: selectedCommand.detail)
     wrapper.addArrangedSubview(content)
     wrapper.isLayoutMarginsRelativeArrangement = true
     wrapper.directionalLayoutMargins = .init(top: 32, leading: 16, bottom: 32, trailing: 16)
@@ -42,6 +41,7 @@ class CommandConfirmationViewController: UIViewController {
     bt.backButton.setTitle("Cancel", for: .normal)
     bt.backButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
     bt.nextButton.setTitle("Yes", for: .normal)
+    bt.nextButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
     bt.nextButton.configBgColor(bgColor: CustomColor.accent)
     // Create a wrapper to float (don't let stretch) buttons.
     let uv = UIView()
@@ -63,13 +63,13 @@ class CommandConfirmationViewController: UIViewController {
   } ()
   
   lazy var difficultyIcon: UIImageView = {
-    guard let iconType = selectedCommand?.difficultyIconType else { return  UIImageView()}
+    let iconType = selectedCommand.difficultyIconType
     let icon = IconFactory.createImageView(type: iconType, width: 40)
     return icon
   } ()
 
   lazy var difficultyDescription : PLabel = {
-    let lb = PLabel(text: selectedCommand?.difficultyDescription ?? "")
+    let lb = PLabel(text: selectedCommand.difficultyDescription)
     lb.textColor = CustomColor.subMain
     return lb
   } ()
@@ -81,13 +81,13 @@ class CommandConfirmationViewController: UIViewController {
   } ()
   
   lazy var typeIcon: UIImageView = {
-    guard let iconType = selectedCommand?.commandIconType else { return  UIImageView()}
+    let iconType = selectedCommand.commandIconType
     let icon = IconFactory.createImageView(type: iconType, width: 40)
     return icon
   } ()
   
   lazy var typeDescription : PLabel = {
-    let lb = PLabel(text: selectedCommand?.commandTypeDescription ?? "")
+    let lb = PLabel(text: selectedCommand.commandTypeDescription)
     lb.textColor = CustomColor.subMain
     return lb
   } ()
@@ -132,6 +132,7 @@ class CommandConfirmationViewController: UIViewController {
   
   init(viewModel: CommandViewModel) {
     self.viewModel = viewModel
+    self.selectedCommand = viewModel.selectedCommand
     super.init(nibName: nil, bundle: nil)
   }
   required init?(coder: NSCoder) {
@@ -189,13 +190,9 @@ extension CommandConfirmationViewController {
   }
   
   @objc func yesTapped() {
-    guard let navVC = navigationController else { return }
-    // GameManager.shared.command = viewModel.selectedCommand
-    // Fix me, how to bring navigation controller
-    GameManager.shared.pushGameProgress(
-      navVC: navVC,
-      currentScreen: self,
-      nextScreen: CitizenSelectedViewController()
-    )
+    GameManager.shared.command = selectedCommand
+    
+    self.viewModel.confirmedTriggerObservable.onNext(())
+    dismiss(animated: true, completion:nil)
   }
 }
