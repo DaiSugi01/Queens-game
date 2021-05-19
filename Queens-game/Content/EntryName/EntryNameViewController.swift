@@ -54,7 +54,7 @@ class EntryNameViewController: UIViewController {
     // Save user to UserDefaults
     vm.saveUsers()
     
-    let nx = QueenSelectedViewController()
+    let nx = QueenSelectionViewController()
     GameManager.shared.pushGameProgress(navVC: navigationController!,
                                         currentScreen: self,
                                         nextScreen: nx)
