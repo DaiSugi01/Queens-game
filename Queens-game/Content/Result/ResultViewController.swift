@@ -199,27 +199,27 @@ extension ResultViewController {
   }
 
   private func configureButtons() {
-    navButtons.nextButton.setTitle("Play again", for: .normal)
+    navButtons.nextButton.setTitle("Go to Top", for: .normal)
     navButtons.nextButton.titleLabel?.font = CustomFont.h4
     navButtons.nextButton.addTarget(
       self,
-      action: #selector(toStart),
+      action: #selector(toTop),
       for: .touchUpInside
     )
     
-    navButtons.backButton.setTitle("Back to start menu", for: .normal)
+    navButtons.backButton.setTitle("Select Queen", for: .normal)
     navButtons.backButton.titleLabel?.font = CustomFont.h4
     navButtons.backButton.titleLabel?.lineBreakMode = .byWordWrapping
     navButtons.backButton.addTarget(
       self,
-      action: #selector(toTop),
+      action: #selector(reselectQueen),
       for: .touchUpInside
     )
 
   }
 
-  @objc private func toStart() {
-    let nx = PlayerSelectionViewController()
+  @objc private func reselectQueen() {
+    let nx = QueenSelectionViewController()
     GameManager.shared.pushGameProgress(
       navVC: navigationController,
       currentScreen: self,

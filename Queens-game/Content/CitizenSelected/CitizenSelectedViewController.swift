@@ -16,7 +16,7 @@ class CitizenSelectedViewController: UIViewController {
   let viewModel = CitizenSelectedViewModel()
 
   lazy var countdownStackView = CountdownStackView(
-    countdown: self.viewModel.countdonwTime
+    countdown: self.viewModel.countdownTime
   )
 
   let screenTitle: H2Label = {
@@ -46,6 +46,85 @@ class CitizenSelectedViewController: UIViewController {
     sv.alignment = .fill
     sv.distribution = .equalSpacing
     return sv
+  }()
+
+  // MARK: After Countdown
+
+  let afterTitle: H2Label = {
+    let lb = H2Label(text: "Target is...")
+    lb.translatesAutoresizingMaskIntoConstraints = false
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
+    return lb
+  }()
+
+  let nextButton: SubButton = {
+    let button = SubButton()
+    button.setTitle("Next", for: .normal)
+    button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+    return button
+  }()
+
+  lazy var targetIcon: UIImageView = {
+    let idIcon = IconFactory.createImageView(
+      type: .userId(self.viewModel.target.playerId),
+      width: 64
+    ) as! UserIdIconView
+    return idIcon
+  }()
+
+  lazy var targetName: PLabel = {
+    let label = PLabel(text: self.viewModel.target.name)
+    label.textAlignment = .center
+    return label
+  }()
+
+  lazy var stakeholderIcon = IconFactory.createImageView(
+    type: .userId(self.viewModel.stakeholder.playerId),
+    width: 64
+  )
+
+  lazy var stakeholderName: PLabel = {
+    let label = PLabel(text: self.viewModel.stakeholder.name)
+    label.textAlignment = .center
+    return label
+  }()
+
+  lazy var targetBlock: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [self.targetIcon, self.targetName]
+    )
+    stackView.spacing = 8
+    return stackView
+  }()
+
+  lazy var stakeholderBlock: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [self.stakeholderIcon, self.stakeholderName]
+    )
+    stackView.spacing = 8
+    return stackView
+  }()
+
+  lazy var commandBlock: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [self.targetBlock],
+      alignment: .center
+    )
+    stackView.spacing = 64
+    return stackView
+  }()
+
+  lazy var afterCountdown: VerticalStackView = {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [
+        self.afterTitle,
+        self.commandBlock
+      ],
+      distribution: .equalSpacing
+    )
+    return stackView
   }()
 
   override func viewDidLoad() {
@@ -89,13 +168,44 @@ extension CitizenSelectedViewController {
     ).isActive = true
   }
 
+  private func setLayoutAfterCountdown() {
+    super.view.addSubview(self.afterCountdown)
+    afterCountdown.topAnchor.constraint(
+      equalTo: view.topAnchor,
+      constant: Constant.Common.topSpacing
+    ).isActive = true
+    afterCountdown.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
+    afterCountdown.leadingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+      constant: Constant.Common.leadingSpacing
+    ).isActive = true
+    afterCountdown.trailingAnchor.constraint(
+      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+      constant:  Constant.Common.trailingSpacing
+    ).isActive = true
+
+    if self.viewModel.getGameManager().command.commandType == .cToC {
+      self.commandBlock.addArrangedSubview(self.stakeholderBlock)
+    }
+    self.afterCountdown.addArrangedSubview(self.nextButton)
+  }
+
   @objc func skipButtonTapped(_ sender: UIButton) {
     self.viewModel.rxCountdownTime.onCompleted()
   }
 
+  @objc func nextButtonTapped(_ sender: UIButton) {
+    self.toResult()
+  }
+
   private func toResult() {
-    let (target, stakeholders) = self.viewModel.executor.select(from: self.viewModel.getGameManager())
-    let nx = ResultViewController(target:target, stakeholders:stakeholders)
+    let nx = ResultViewController(
+      target:self.viewModel.target,
+      stakeholders:self.viewModel.stakeholders
+    )
     GameManager.shared.pushGameProgress(
       navVC: navigationController,
       currentScreen: self,
@@ -105,7 +215,7 @@ extension CitizenSelectedViewController {
 
   private func replaceView() {
     self.stackView.removeFromSuperview()
-    self.toResult()
+    self.setLayoutAfterCountdown()
   }
 
 }
@@ -132,7 +242,7 @@ struct MockGameManager: GameManagerProtocol {
     Sing a song in front of others and Look each other deeply 30secs
     """,
     difficulty: .easy,
-    commandType: .cToC
+    commandType: .cToQ
   )
 
   init() {
