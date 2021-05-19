@@ -16,3 +16,6 @@ struct User {
 
 // This makes `User` usabel in snapshot.
 extension User: Hashable { }
+
+// This makes `User` usabel in UserDefaults.
+extension User: Codable { }

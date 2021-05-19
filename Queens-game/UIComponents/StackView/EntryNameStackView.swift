@@ -1,18 +1,16 @@
 //
-//  UsernameInputCollectionViewCell.swift
-//  UISample
+//  EntryNameStackView.swift
+//  Queens-game
 //
-//  Created by Takayuki Yamaguchi on 2021-04-26.
+//  Created by 杉原大貴 on 2021/05/18.
 //
 
 import UIKit
 
-/// Custom cell that includes
-/// - user id icon
-/// - text filed to keep user name
-class UsernameInputCollectionViewCell: UICollectionViewCell {
-  static let identifier = "username cell"
+class EntryNameStackView: UIStackView {
 
+  let maxLength = 10
+  
   let textField: UITextField = {
     let tf = UITextField()
     tf.configLayout(
@@ -28,7 +26,7 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
 
   private var userIcon = IconFactory.createImageView(type: .userId(0), width: 64)
   
-  private lazy var stackView: UIStackView = {
+  lazy var stackView: HorizontalStackView = {
     let sv = HorizontalStackView(
       arrangedSubviews: [userIcon, textField],
       spacing: 24,
@@ -43,20 +41,33 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     stackView.configSuperView(under: self)
     stackView.matchParent()
+    textField.delegate = self
   }
-  required init?(coder: NSCoder) {
+  
+  required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   /// /// Update label in user id icon
   /// - Parameters:
   ///   - id: user id which is displayed in userId icon
   ///   - text: default text which is displayed in text filed
   func configContent(by id: Int, and text: String) {
-    // update usr id
     guard let labelInIcon = (userIcon.subviews.first! as? UILabel) else { return }
     labelInIcon.text = String(id)
-    // update text filed
     textField.text = text
+  }
+}
+
+extension EntryNameStackView: UITextFieldDelegate {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    let text = textField.text! + string
+    if text.count <= maxLength {
+        return true
+    }
+    
+    return false
   }
 }

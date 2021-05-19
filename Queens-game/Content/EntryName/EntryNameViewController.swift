@@ -6,89 +6,130 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-private let reuseIdentifier = "Cell"
+class EntryNameViewController: UIViewController {
+  
+  let spacing: CGFloat = 16
+  let vm: EntryNameViewModel = EntryNameViewModel()
+  let disposeBag: DisposeBag = DisposeBag()
+  
+  let scrollView: UIScrollView = {
+    let sv = UIScrollView()
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    return sv
+  }()
+  
+  lazy var contentWrapper: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle])
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    sv.spacing = spacing
+    sv.alignment = .fill
+    sv.distribution = .fill
+    sv.setCustomSpacing(40, after: screenTitle)
 
-class EntryNameViewController: UICollectionViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    setupLayout()
-  }
-  
-  // MARK: UICollectionViewDataSource
-  
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 0
-  }
-  
-  
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
-  }
-  
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    return cell
-  }
-  
-  
-  
-  // TODO: Delete below before you imprement
-  let screenName: UILabel = {
-    let lb = UILabel()
+    return sv
+  }()
+
+  let screenTitle: H2Label = {
+    let lb = H2Label(text: "Enter Player names")
     lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Entry Name"
+    lb.lineBreakMode = .byWordWrapping
+    lb.numberOfLines = 0
+    lb.setContentHuggingPriority(.required, for: .vertical)
     
     return lb
   }()
-  
-  let nextButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Next", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+
+  let navButtons: NextAndBackButtons = {
+    let bts = NextAndBackButtons()
+    bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
     
-    return bt
+    return bts
   }()
   
-  let backButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
+  @objc private func goToNext(_ sender: UIButton) {
+    // Save user to UserDefaults
+    vm.saveUsers()
     
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
     let nx = QueenSelectionViewController()
-    navigationController?.pushViewController(nx, animated: true)
+    GameManager.shared.pushGameProgress(navVC: navigationController!,
+                                        currentScreen: self,
+                                        nextScreen: nx)
   }
   
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
+  @objc private func goBackToPrevious(_ sender: UIButton) {
+    GameManager.shared.popGameProgress(navVC: navigationController!)
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    vm.getUsersFromUserDefaults()
+    setupLayout()
+    createContent()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    setScrollViewInset()
+  }
+  
+  /// Setup whole layout
   private func setupLayout() {
-    collectionView.backgroundColor = .white
+    // config navigation
     navigationItem.hidesBackButton = true
     
-    view.addSubview(screenName)
-    view.addSubview(nextButton)
-    view.addSubview(backButton)
+    // Add components
+    view.backgroundColor = CustomColor.background
+    view.addSubview(scrollView)
+    view.addSubview(navButtons)
+    scrollView.addSubview(contentWrapper)
     
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-    
-    nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    // set constraints
+    scrollView.topAnchor.constraint(equalTo: view.topAnchor,
+                                    constant: Constant.Common.topSpacing).isActive = true
+    scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Constant.Common.leadingSpacing).isActive = true
+    scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant:  Constant.Common.trailingSpacing).isActive = true
+    scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
+    contentWrapper.anchors(topAnchor: scrollView.contentLayoutGuide.topAnchor,
+                              leadingAnchor: scrollView.frameLayoutGuide.leadingAnchor,
+                              trailingAnchor: scrollView.frameLayoutGuide.trailingAnchor,
+                              bottomAnchor: scrollView.contentLayoutGuide.bottomAnchor)
+
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                       constant: Constant.Common.bottomSpacing).isActive = true
+    navButtons.centerXin(view)
+  }
+  
+  /// Create each EntryyName fields
+  private func createContent() {
+    // Make each EntryName field
+    for user in GameManager.shared.users {
+      
+      let userInputStackView = EntryNameStackView()
+      userInputStackView.configContent(by: user.playerId, and: user.name)
+      
+      // Observe text field
+      userInputStackView.textField.rx.text.asObservable()
+        .subscribe(onNext: { [self] value in
+          vm.updateUserName(playerId: user.playerId-1, newName: value!)
+        })
+        .disposed(by: self.disposeBag)
+      
+      contentWrapper.addArrangedSubview(userInputStackView)
+    }
+  }
+  
+  private func setScrollViewInset() {
+    let navButtonsHeight: CGFloat = navButtons.nextButton.frame.size.height
+    let inset = UIEdgeInsets(top: 0,
+                             left: 0,
+                             bottom: -Constant.Common.bottomSpacing + navButtonsHeight + spacing,
+                             right: 0)
+    scrollView.contentInset = inset
   }
 }

@@ -30,6 +30,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
 
   lazy var stackView: UIStackView = {
     let sv = VerticalStackView(arrangedSubviews: [titleSet, bodyLabel], alignment: .leading)
+    sv.alignment = .fill
     sv.configLayout(height: 160, radius: 16, shadow: true)
     // Config margin
     sv.isLayoutMarginsRelativeArrangement = true
