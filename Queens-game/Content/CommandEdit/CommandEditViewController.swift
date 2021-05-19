@@ -43,7 +43,7 @@ class CommandEditViewController: UIViewController {
   }()
   
   let categoryLabel = H3Label(text: "Category")
-  let difficultySegment = CustomSegmentedView("Difficulity", [.levelOne, .levelTwo, .levelThree])
+  let difficultySegment = CustomSegmentedView("Difficulty", [.levelOne, .levelTwo, .levelThree])
   let commandTypeSegment = CustomSegmentedView("Type", [.cToC, .cToA, .cToQ])
   let contentLabel = H3Label(text: "Content")
   let textView: UITextView = {
@@ -78,7 +78,6 @@ extension CommandEditViewController {
   @objc func saveTapped(_ sender: UIButton) {
     guard let (detail, difficulty, commandType) = validateInput() else { return }
     viewModel.createOrUpdateItem(detail, difficulty, commandType)
-    viewModel.filterItems()
     dismiss()
   }
   
@@ -88,7 +87,6 @@ extension CommandEditViewController {
   
   @objc func deleteTapped(_ sender: UIButton) {
     viewModel.deleteEditingItem()
-    viewModel.filterItems()
     dismiss()
   }
   private func dismiss() {
@@ -163,13 +161,13 @@ extension CommandEditViewController {
     )
     
     // If edit mode, add delete button
-    if let _ = viewModel.editingCommand {
+    if let _ = viewModel.selectedCommand {
       deleteButton.configSuperView(under: view)
       deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
       deleteButton.centerXin(view)
     }
     
-    if let command = viewModel.editingCommand {
+    if let command = viewModel.selectedCommand {
       difficultySegment.segmentedControl.selectedSegmentIndex = command .difficulty.rawValue
       commandTypeSegment.segmentedControl.selectedSegmentIndex = command .commandType.rawValue
       textView.text = command.detail

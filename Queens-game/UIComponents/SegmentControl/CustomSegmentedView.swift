@@ -17,15 +17,16 @@ class CustomSegmentedView: UIStackView {
   }()
   /// This icon is displayed next to title as ℹ️
   let infoIcon: UIView = {
-    let uv = UIView()
+    // Create wrapper to adjust position
+    let wrapper = UIView()
     let image = UIImage(systemName: "info.circle")?.withRenderingMode(.alwaysTemplate)
     let imgv = UIImageView(image: image)
     imgv.tintColor = CustomColor.subMain
     imgv.configSize(width: 16, height: 16)
-    imgv.translatesAutoresizingMaskIntoConstraints = false
-    imgv.configSuperView(under: uv)
-    imgv.centerYAnchor.constraint(equalTo: uv.centerYAnchor, constant: 0).isActive = true
-    return uv
+    imgv.configSuperView(under: wrapper)
+    imgv.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 0).isActive = true
+    imgv.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0).isActive = true
+    return wrapper
   }()
   lazy var titleStackView = HorizontalStackView(
     arrangedSubviews: [titleLabel, infoIcon],
