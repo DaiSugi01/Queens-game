@@ -86,11 +86,10 @@ extension CommandEditViewController {
   }
   
   @objc func deleteTapped(_ sender: UIButton) {
-    viewModel.deleteEditingItem()
+    viewModel.deleteSelectedItem()
     dismiss()
   }
   private func dismiss() {
-    viewModel.filterItems() // Before go back to view controller, filter item again.
     dismiss(animated: true, completion: nil)
   }
 }

@@ -192,7 +192,7 @@ extension CommandConfirmationViewController {
   @objc func yesTapped() {
     GameManager.shared.command = selectedCommand
     
-    self.viewModel.confirmedTriggerObservable.onNext(())
+    self.viewModel.confirmedTriggerSubject.onNext(())
     dismiss(animated: true, completion:nil)
   }
 }
