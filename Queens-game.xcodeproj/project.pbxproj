@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A04254C264F22460019AEC1 /* PlayerSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */; };
+		0A04254E264FA8250019AEC1 /* EntryNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */; };
+		0A0425A226539E3A0019AEC1 /* EntryNameStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */; };
 		0A306FCA25F7078B0059CDEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FC925F7078B0059CDEE /* AppDelegate.swift */; };
 		0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */; };
 		0A306FD625F7078C0059CDEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A306FD525F7078C0059CDEE /* Assets.xcassets */; };
@@ -103,6 +105,8 @@
 
 /* Begin PBXFileReference section */
 		0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewModel.swift; sourceTree = "<group>"; };
+		0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameViewModel.swift; sourceTree = "<group>"; };
+		0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameStackView.swift; sourceTree = "<group>"; };
 		0A306FC625F7078B0059CDEE /* Queens-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Queens-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A306FC925F7078B0059CDEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A306FCB25F7078B0059CDEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */,
+				0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */,
 			);
 			path = EntryName;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 		3B7981C3264F8C2B002D2F71 /* StackView */ = {
 			isa = PBXGroup;
 			children = (
+				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 			);
 			path = StackView;
@@ -865,6 +871,7 @@
 				0A3A62AA2638BBF20082ACAE /* QueenSelectingViewController.swift in Sources */,
 				482681872645EBA80010543A /* PLabel.swift in Sources */,
 				482681842645EBA80010543A /* CustomColor.swift in Sources */,
+				0A0425A226539E3A0019AEC1 /* EntryNameStackView.swift in Sources */,
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
 				0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */,
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
@@ -916,6 +923,7 @@
 				3B7981A3264F09AA002D2F71 /* CitizenSelectedView.swift in Sources */,
 				48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
+				0A04254E264FA8250019AEC1 /* EntryNameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

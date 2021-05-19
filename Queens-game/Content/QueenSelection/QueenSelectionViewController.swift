@@ -88,7 +88,6 @@ class QueenSelectionViewController: CommonSelectionViewController {
   }
   
   //TODO: Implements card selection later
-  
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
