@@ -340,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */,
-				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */,
 			);
 			path = EntryName;
@@ -483,6 +482,7 @@
 		3B7981C3264F8C2B002D2F71 /* StackView */ = {
 			isa = PBXGroup;
 			children = (
+				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 			);
 			path = StackView;
