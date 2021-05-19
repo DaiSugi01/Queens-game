@@ -11,19 +11,27 @@ import RxCocoa
 
 class EntryNameViewController: UIViewController {
   
+  let spacing: CGFloat = 16
   let vm = EntryNameViewModel()
   let disposeBag: DisposeBag = DisposeBag()
   
-  lazy var verticalSV: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [screenTitle, scrollView])
-    sv.alignment = .fill
-    sv.distribution = .equalSpacing
+  let scrollView: UIScrollView = {
+    let sv = UIScrollView()
     sv.translatesAutoresizingMaskIntoConstraints = false
-    sv.spacing = 40
-    
     return sv
   }()
   
+  lazy var contentWrapper: VerticalStackView = {
+    let sv = VerticalStackView(arrangedSubviews: [screenTitle])
+    sv.translatesAutoresizingMaskIntoConstraints = false
+    sv.spacing = spacing
+    sv.alignment = .fill
+    sv.distribution = .fill
+    sv.setCustomSpacing(40, after: screenTitle)
+
+    return sv
+  }()
+
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Enter Player names")
     lb.translatesAutoresizingMaskIntoConstraints = false
@@ -33,15 +41,7 @@ class EntryNameViewController: UIViewController {
     
     return lb
   }()
-  
-  let scrollView: UIScrollView = {
-    let sv = UIScrollView()
-    sv.translatesAutoresizingMaskIntoConstraints = false
-    sv.constraintHeight(equalToConstant: 360)
-    
-    return sv
-  }()
-  
+
   let navButtons: NextAndBackButtons = {
     let bts = NextAndBackButtons()
     bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
@@ -71,43 +71,42 @@ class EntryNameViewController: UIViewController {
     createContent()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    setupScrollViewInset()
+  }
+  
   /// Setup whole layout
   private func setupLayout() {
     // config navigation
     navigationItem.hidesBackButton = true
     
-    // add components to super view
+    // Add components
     view.backgroundColor = CustomColor.background
-    view.addSubview(verticalSV)
+    view.addSubview(scrollView)
     view.addSubview(navButtons)
+    scrollView.addSubview(contentWrapper)
     
     // set constraints
-    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
+    scrollView.topAnchor.constraint(equalTo: view.topAnchor,
                                     constant: Constant.Common.topSpacing).isActive = true
-    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+    scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                         constant: Constant.Common.leadingSpacing).isActive = true
-    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+    scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                          constant:  Constant.Common.trailingSpacing).isActive = true
-    
-    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:
-                                        Constant.Common.bottomSpacing).isActive = true
+    scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
+    contentWrapper.anchors(topAnchor: scrollView.contentLayoutGuide.topAnchor,
+                              leadingAnchor: scrollView.frameLayoutGuide.leadingAnchor,
+                              trailingAnchor: scrollView.frameLayoutGuide.trailingAnchor,
+                              bottomAnchor: scrollView.contentLayoutGuide.bottomAnchor)
+
+    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                       constant: Constant.Common.bottomSpacing).isActive = true
     navButtons.centerXin(view)
   }
   
   /// Create each EntryyName fields
   private func createContent() {
-    let scrollViewWrapper: VerticalStackView = VerticalStackView(arrangedSubviews: [])
-    scrollView.addSubview(scrollViewWrapper)
-    
-    scrollViewWrapper.translatesAutoresizingMaskIntoConstraints = false
-    scrollViewWrapper.spacing = 16
-    scrollViewWrapper.alignment = .fill
-    scrollViewWrapper.distribution = .fill
-    scrollViewWrapper.anchors(topAnchor: scrollView.contentLayoutGuide.topAnchor,
-                              leadingAnchor: scrollView.frameLayoutGuide.leadingAnchor,
-                              trailingAnchor: scrollView.frameLayoutGuide.trailingAnchor,
-                              bottomAnchor: scrollView.contentLayoutGuide.bottomAnchor)
-    
     // Make each EntryName field
     for user in GameManager.shared.users {
       
@@ -121,7 +120,16 @@ class EntryNameViewController: UIViewController {
         })
         .disposed(by: self.disposeBag)
       
-      scrollViewWrapper.addArrangedSubview(userInputStackView)
+      contentWrapper.addArrangedSubview(userInputStackView)
     }
+  }
+  
+  private func setupScrollViewInset() {
+    let navButtonsHeight: CGFloat = navButtons.nextButton.frame.size.height
+    let inset = UIEdgeInsets(top: 0,
+                             left: 0,
+                             bottom: -Constant.Common.bottomSpacing + navButtonsHeight + spacing,
+                             right: 0)
+    scrollView.contentInset = inset
   }
 }
