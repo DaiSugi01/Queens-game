@@ -97,7 +97,7 @@ class QueenSelectionViewController: CommonSelectionViewController {
     case Constant.QueenSelection.quickIndexPath:
       vm.selectQueen()
       let nx = QueenSelectedViewController()
-      GameManager.shared.pushGameProgress(navVC: navigationController!,
+      GameManager.shared.pushGameProgress(navVC: navigationController,
                                           currentScreen: self,
                                           nextScreen: nx)
     case  Constant.QueenSelection.cardIndexPath:
@@ -110,6 +110,6 @@ class QueenSelectionViewController: CommonSelectionViewController {
   /// Go back to previous screen
   /// - Parameter sender: UIButton
   @objc private func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
+    GameManager.shared.popGameProgress(navVC: navigationController)
   }
 }

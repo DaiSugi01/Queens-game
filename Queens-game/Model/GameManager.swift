@@ -8,23 +8,35 @@
 import Foundation
 import UIKit
 
-class GameManager {
+protocol GameManagerProtocol {
+
+  var users: [User] { get set }
+  var queen: User? { get set }
+  var command: Command { get set }
+}
+
+class GameManager: GameManagerProtocol {
   private init() {}
   static let shared = GameManager()
 
   var users: [User] = []
   var queen: User?
   var gameProgress: [UIViewController] = []
+  var command: Command = Command()
 
-  func pushGameProgress(navVC: UINavigationController,
+  func pushGameProgress(navVC: UINavigationController?,
                         currentScreen: UIViewController,
                         nextScreen: UIViewController) {
+    guard let navVC = navVC else { return }
     gameProgress.append(currentScreen)
     navVC.pushViewController(nextScreen, animated: true)
   }
 
-  func popGameProgress(navVC: UINavigationController) {
-    gameProgress.removeLast()
+  func popGameProgress(navVC: UINavigationController?) {
+    guard let navVC = navVC else { return }
+    if !gameProgress.isEmpty {
+      gameProgress.removeLast()
+    }
     navVC.popViewController(animated: true)
   }
 }
