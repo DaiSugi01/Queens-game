@@ -19,12 +19,13 @@ class CommandViewModel {
   
   // These are given by view (view controller)
   var crudType: CRUDType = .other
-  var editingCommand: Command?
+  var selectedCommand: Command?
   var searchText: String = ""
   var snapshot =  NSDiffableDataSourceSnapshot<Section, Item>()
   
   // RxSwift
   let disposeBag = DisposeBag()
+  let confirmedTriggerObservable = PublishSubject<Void>()
   var commandListSubject = BehaviorSubject<[Command]>(value: CommandViewModel.samples)
   var commandList: [Command] = CommandViewModel.samples
   var filteredCommandListSubject = BehaviorSubject<[Command]>(value: [])
@@ -37,18 +38,18 @@ class CommandViewModel {
   
   /// Update current editing item (command).
   /// If you are just adding new item, editing command will be nil
-  func updateEditingCommand(index: Int? = nil) {
+  func updateSelectedCommand(index: Int? = nil) {
     if let index = index  {
-      editingCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
+      selectedCommand = snapshot.itemIdentifiers(inSection: .command)[index].command
     } else {
-      editingCommand = nil
+      selectedCommand = nil
     }
   }
   
   func createItem(command: Command) {
     crudType = .create
     commandList.append(command)
-    self.commandListSubject.onNext(self.commandList)
+    commandListSubject.onNext(commandList)
   }
   func updateItem(command: Command) {
     crudType = .update
@@ -59,7 +60,7 @@ class CommandViewModel {
   }
   func createOrUpdateItem(_ detail: String, _ difficulty: Difficulty, _ commandType: CommandType) {
     // edit
-    if let command = editingCommand {
+    if let command = selectedCommand {
       command.detail = detail
       command.difficulty = difficulty
       command.commandType = commandType
@@ -77,7 +78,7 @@ class CommandViewModel {
     commandListSubject.onNext(commandList)
   }
   func deleteEditingItem() {
-    if let command = editingCommand {
+    if let command = selectedCommand {
       deleteItem(command: command)
     }
   }

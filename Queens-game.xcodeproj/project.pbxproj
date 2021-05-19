@@ -100,11 +100,10 @@
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
 		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
-		4E6E9700739F0AEC971F1213 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */; };
+		99655A9E23AAC208A3A831A5 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
 		0A04254B264F22460019AEC1 /* PlayerSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewModel.swift; sourceTree = "<group>"; };
 		0A04254D264FA8250019AEC1 /* EntryNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameViewModel.swift; sourceTree = "<group>"; };
 		0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameStackView.swift; sourceTree = "<group>"; };
@@ -139,7 +138,6 @@
 		0AD08AD0264A6FD100654A05 /* CommonSelectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonSelectionViewController+Layout.swift"; sourceTree = "<group>"; };
 		0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonSelectionViewController+DataSource.swift"; sourceTree = "<group>"; };
 		0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewModel.swift; sourceTree = "<group>"; };
-		33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
 		3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedView.swift; sourceTree = "<group>"; };
 		3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownStackView.swift; sourceTree = "<group>"; };
 		3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -201,7 +199,9 @@
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
 		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Queens_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
+		7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Queens_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA9CF4C862F24BBA9ED313FA /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,20 +209,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E6E9700739F0AEC971F1213 /* Pods_Queens_game.framework in Frameworks */,
+				99655A9E23AAC208A3A831A5 /* Pods_Queens_game.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002115034286E08805F36B5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0A306FBD25F7078B0059CDEE = {
 			isa = PBXGroup;
 			children = (
-				DF27715BED272FE4B7134D97 /* Frameworks */,
 				947E72FD06C84FBAA1E7B9CC /* Pods */,
 				0A306FC725F7078B0059CDEE /* Products */,
 				0A306FC825F7078B0059CDEE /* Queens-game */,
+				002115034286E08805F36B5C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -706,18 +714,10 @@
 		947E72FD06C84FBAA1E7B9CC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */,
-				080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */,
+				BA9CF4C862F24BBA9ED313FA /* Pods-Queens-game.debug.xcconfig */,
+				70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		DF27715BED272FE4B7134D97 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				67DCB0510075262BB2E36142 /* Pods_Queens_game.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -727,11 +727,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A306FDD25F7078C0059CDEE /* Build configuration list for PBXNativeTarget "Queens-game" */;
 			buildPhases = (
-				CCADDCE5AB75D2A6DA79999D /* [CP] Check Pods Manifest.lock */,
+				8E9A0955F5332C7808AFAEF3 /* [CP] Check Pods Manifest.lock */,
 				0A306FC225F7078B0059CDEE /* Sources */,
 				0A306FC325F7078B0059CDEE /* Frameworks */,
 				0A306FC425F7078B0059CDEE /* Resources */,
-				5533D389EC38DFEC030F84A9 /* [CP] Embed Pods Frameworks */,
+				30F2850C4A4D051D0FE6E89B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -787,7 +787,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5533D389EC38DFEC030F84A9 /* [CP] Embed Pods Frameworks */ = {
+		30F2850C4A4D051D0FE6E89B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -804,7 +804,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Queens-game/Pods-Queens-game-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CCADDCE5AB75D2A6DA79999D /* [CP] Check Pods Manifest.lock */ = {
+		8E9A0955F5332C7808AFAEF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1059,7 +1059,7 @@
 		};
 		0A306FDE25F7078C0059CDEE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33AFACB523E7457DD20F212F /* Pods-Queens-game.debug.xcconfig */;
+			baseConfigurationReference = BA9CF4C862F24BBA9ED313FA /* Pods-Queens-game.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1080,7 +1080,7 @@
 		};
 		0A306FDF25F7078C0059CDEE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 080290B056028F546A19A273 /* Pods-Queens-game.release.xcconfig */;
+			baseConfigurationReference = 70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -25,7 +25,7 @@ class SubButton: UIButton {
     )
     
     // Config label
-    self.titleLabel?.font = CustomFont.h3
+    self.titleLabel?.font = CustomFont.h4
     self.setTitle(title, for: .normal)
     self.titleLabel?.textAlignment = .center
     // Config color

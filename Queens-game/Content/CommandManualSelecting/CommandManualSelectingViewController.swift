@@ -9,88 +9,37 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CommandManualSelectingViewController: UICollectionViewController {
-
+class CommandManualSelectingViewController: CommonCommandViewController {
+  
   override func viewDidLoad() {
+    headerTitle = "What is your command?"
     super.viewDidLoad()
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    setupLayout()
+    
+    viewModel.confirmedTriggerObservable.subscribe(onNext:{
+      GameManager.shared.pushGameProgress(
+        navVC: self.navigationController,
+        currentScreen: self,
+        nextScreen: CitizenSelectedViewController()
+      )
+    }).disposed(by: viewModel.disposeBag)
+    
   }
   
-  // MARK: UICollectionViewDataSource
-  
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 0
+  // If back is tapped
+  override func backTapped() {
+    guard let navVC = navigationController else { return }
+    GameManager.shared.popGameProgress(navVC: navVC)
   }
   
-  
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
+  // If cell is tapped
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    viewModel.updateSelectedCommand(index: indexPath.row)
+    let nx = CommandConfirmationViewController(viewModel: viewModel)
+    
+    present(nx, animated: true, completion: { [unowned self] in
+      // If you don't set this, buttons on presented view won't respond
+      self.searchBar.resignFirstResponder()
+    })
   }
   
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    return cell
-  }
-  
-  
-  
-  // TODO: Delete below before you imprement
-  let screenName: UILabel = {
-    let lb = UILabel()
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.text = "Command Manual Selecting"
-    
-    return lb
-  }()
-  
-  let nextButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Next", for: .normal)
-    bt.backgroundColor = .black
-    bt.setTitleColor(.white, for: .normal)
-    bt.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  let backButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Back", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
-    
-    return bt
-  }()
-  
-  @objc func goToNext(_ sender: UIButton) {
-    let nx = CommandConfirmationViewController()
-    navigationController?.pushViewController(nx, animated: true)
-  }
-  
-  @objc func goBack(_ sender: UIButton) {
-    navigationController?.popViewController(animated: true)
-  }
-  
-  private func setupLayout() {
-    collectionView.backgroundColor = .white
-    navigationItem.hidesBackButton = true
-    
-    view.addSubview(screenName)
-    view.addSubview(nextButton)
-    view.addSubview(backButton)
-    
-    screenName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    screenName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-    
-    nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    backButton.trailingAnchor.constraint(equalTo: nextButton.leadingAnchor, constant: -10).isActive = true
-    backButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-  }
-  
-
 }
