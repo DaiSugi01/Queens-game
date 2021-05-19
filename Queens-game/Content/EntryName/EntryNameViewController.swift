@@ -12,7 +12,7 @@ import RxCocoa
 class EntryNameViewController: UIViewController {
   
   let spacing: CGFloat = 16
-  let vm = EntryNameViewModel()
+  let vm: EntryNameViewModel = EntryNameViewModel()
   let disposeBag: DisposeBag = DisposeBag()
   
   let scrollView: UIScrollView = {
@@ -72,7 +72,7 @@ class EntryNameViewController: UIViewController {
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    setupScrollViewInset()
+    setScrollViewInset()
   }
   
   /// Setup whole layout
@@ -124,7 +124,7 @@ class EntryNameViewController: UIViewController {
     }
   }
   
-  private func setupScrollViewInset() {
+  private func setScrollViewInset() {
     let navButtonsHeight: CGFloat = navButtons.nextButton.frame.size.height
     let inset = UIEdgeInsets(top: 0,
                              left: 0,
