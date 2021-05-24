@@ -77,7 +77,7 @@ class CommandSelectionViewController: CommonSelectionViewController {
     
     switch indexPath {
     case Constant.CommandSelection.randomIndexPath:
-      let nx = QueenSelectedViewController()
+      let nx = CitizenSelectedViewController()
       GameManager.shared.pushGameProgress(navVC: navigationController,
                                           currentScreen: self,
                                           nextScreen: nx)
