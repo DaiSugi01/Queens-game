@@ -8,20 +8,7 @@
 import UIKit
 
 class QueenSelectionViewController: CommonSelectionViewController {
-  
-  //TODO: Delete users later
-  let users: [User] = [
-    User(id: UUID(), playerId: 0, name: "Player1"),
-    User(id: UUID(), playerId: 1, name: "Player2"),
-    User(id: UUID(), playerId: 2, name: "Player3"),
-    User(id: UUID(), playerId: 3, name: "Player4"),
-    User(id: UUID(), playerId: 4, name: "Player5"),
-    User(id: UUID(), playerId: 5, name: "Player6"),
-    User(id: UUID(), playerId: 6, name: "Player7"),
-    User(id: UUID(), playerId: 7, name: "Player8"),
-    User(id: UUID(), playerId: 8, name: "Player9")
-  ]
-  
+
   let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
   let screenTitle: H2Label = {
@@ -43,13 +30,11 @@ class QueenSelectionViewController: CommonSelectionViewController {
     return sv
   }()
   
-  //TODO: delete unnecessary line "GameManager.shared.users = users" later
   override func viewDidLoad() {
     super.viewDidLoad()
     setupCollectionView()
     setupLayout()
     setButtonActions()
-    GameManager.shared.users = users
   }
   
   /// Setup collection view layout and datasource
