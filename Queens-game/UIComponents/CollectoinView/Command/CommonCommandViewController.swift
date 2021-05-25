@@ -55,8 +55,7 @@ class CommonCommandViewController: UIViewController {
     createCollectionViewLayout()
     createDiffableDataSource()
     
-    // Config View model
-    configBindings()
+    configSubscriber()
 
     // Config Other ui views
     view.configBgColor(bgColor: CustomColor.background)
@@ -67,6 +66,27 @@ class CommonCommandViewController: UIViewController {
  
   @objc func backTapped() {
     navigationController?.popViewController(animated: true)
+  }
+  
+  // Rx swift
+  /// Subscriber of snapshot. This is called after snapshot in view model is modified.
+  func configSubscriber() {
+    
+    viewModel.snapshotSubject.subscribe { [unowned self] event in
+      guard let snapshot = event.element else { return }
+      
+      var willAnimate = true
+      switch viewModel.crudType {
+        // If updating, false animation. This will invoke collectionView.reload and update view. Otherwise, data source won't detect any diff and stop updating.
+        case .update:
+          willAnimate = false
+        default:
+          break
+      }
+
+      self.dataSource.apply(snapshot, animatingDifferences: willAnimate)
+    }.disposed(by: viewModel.disposeBag)
+
   }
   
 }
