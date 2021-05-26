@@ -14,15 +14,19 @@ class CommandManualSelectingViewController: CommonCommandViewController {
   override func viewDidLoad() {
     headerTitle = "What is your command?"
     super.viewDidLoad()
+  }
+  
+  override func configSubscriber() {
+    super.configSubscriber()
     
-    viewModel.confirmedTriggerObservable.subscribe(onNext:{
+    // Trigger of confirm button
+    viewModel.confirmedTriggerSubject.subscribe(onNext:{
       GameManager.shared.pushGameProgress(
         navVC: self.navigationController,
         currentScreen: self,
         nextScreen: CitizenSelectedViewController()
       )
     }).disposed(by: viewModel.disposeBag)
-    
   }
   
   // If back is tapped
@@ -33,7 +37,8 @@ class CommandManualSelectingViewController: CommonCommandViewController {
   
   // If cell is tapped
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    viewModel.updateSelectedCommand(index: indexPath.row)
+    // pass selected item's index to view model
+    viewModel.updateEditMode(index: indexPath.row)
     let nx = CommandConfirmationViewController(viewModel: viewModel)
     
     present(nx, animated: true, completion: { [unowned self] in

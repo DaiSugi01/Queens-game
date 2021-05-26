@@ -12,7 +12,7 @@ extension CommonCommandViewController: UISearchBarDelegate {
   // Text change
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.searchText = searchText
-    viewModel.filterItems()
+    viewModel.readItems()
   }
   // Enter clicked
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -22,11 +22,13 @@ extension CommonCommandViewController: UISearchBarDelegate {
   
   // Start edit
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    // show cancel button
     searchBar.setShowsCancelButton(true, animated: true)
     return true
   }
   // End edit
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+    // hide cancel button
     searchBar.setShowsCancelButton(false, animated: true)
     return true
   }

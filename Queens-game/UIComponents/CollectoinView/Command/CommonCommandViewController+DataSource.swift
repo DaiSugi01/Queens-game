@@ -73,32 +73,4 @@ extension CommonCommandViewController {
     )
   }
   
-  /// Set subscriber
-  func configBindings() {
-    // What will you do at view if items have changed?
-    viewModel.commandListSubject.subscribe(onNext: { [unowned self] _ in
-      viewModel.updateSnapshot()
-      
-      var animation = true
-      switch viewModel.crudType {
-        // If adding item, scroll to bottom
-        case .create:
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
-            self.collectionView.scrollToBottom(animated: true)
-          }
-        // If updating, false animation. This will invoke collectionView.reload and update view. Otherwise, data source won't detect any diff and stop updating.
-        case .update:
-          animation = false
-        default:
-          break
-      }
-      dataSource?.apply(viewModel.snapshot, animatingDifferences: animation, completion: nil)
-    }).disposed(by: viewModel.disposeBag)
-    
-    // What will you do at view if filtered items have changed?
-    viewModel.filteredCommandListSubject.subscribe(onNext: { [unowned self] _ in
-      viewModel.updateSnapshotFiltered()
-      dataSource?.apply(viewModel.snapshot, animatingDifferences: true, completion: nil)
-    }).disposed(by: viewModel.disposeBag)
-  }
 }
