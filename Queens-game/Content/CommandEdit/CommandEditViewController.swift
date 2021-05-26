@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 // MARK: - Basics
 
 class CommandEditViewController: UIViewController {
@@ -68,6 +67,18 @@ class CommandEditViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configLayout()
+    configBinding()
+  }
+}
+
+// MARK: - Target Action
+extension CommandEditViewController {
+  func configBinding() {
+    // If #item reach min, disable delete button.
+    viewModel.didReachMinItemSubject
+      .map(!)
+      .bind(to: deleteButton.rx.isEnabled)
+      .disposed(by: viewModel.disposeBag)
   }
 }
 
