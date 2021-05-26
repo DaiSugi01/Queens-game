@@ -101,7 +101,7 @@ class ResultViewController: UIViewController {
 
   lazy var detail: UILabel = {
     let label = PLabel(text: self.gameManager.command.detail)
-    label.numberOfLines = 5
+    label.configLayout(width:200)
     return label
   }()
 
@@ -110,12 +110,19 @@ class ResultViewController: UIViewController {
       arrangedSubviews: [detail],
       alignment: .leading
     )
-    stackView.configLayout(height: 130, radius: 16, shadow: true)
-    stackView.configBgColor(bgColor: CustomColor.convex)
-    stackView.isLayoutMarginsRelativeArrangement = true
-    stackView.directionalLayoutMargins = .init(
-      top: 16, leading: 16, bottom: 16, trailing: 16)
     return stackView
+  }()
+
+  lazy var scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.addSubview(self.detailBlock)
+    scrollView.configLayout(height: 130, radius: 16, shadow: true)
+    scrollView.configBgColor(bgColor: CustomColor.convex)
+    scrollView.directionalLayoutMargins = .init(
+      top: 16, leading: 16, bottom: 16, trailing: 16)
+    scrollView.isScrollEnabled = true
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    return scrollView
   }()
 
   lazy var inner: VerticalStackView = {
@@ -123,7 +130,7 @@ class ResultViewController: UIViewController {
       arrangedSubviews: [
         self.difficulty,
         self.commandBlock,
-        self.detailBlock
+        self.scrollView
       ],
       spacing: 32
     )
@@ -150,6 +157,8 @@ class ResultViewController: UIViewController {
     sv.distribution = .equalSpacing
     return sv
   }()
+
+  // MARK: init
 
   init(target: User, stakeholders: [User]) {
     self.target = target
@@ -195,6 +204,21 @@ extension ResultViewController {
       equalTo: stackView.widthAnchor,
       multiplier: 0.8
     ).isActive = true
+    detailBlock.topAnchor.constraint(
+      equalTo: scrollView.topAnchor,
+      constant: 16
+    ).isActive = true
+    detailBlock.leadingAnchor.constraint(
+      equalTo: scrollView.leadingAnchor,
+      constant: 16
+    ).isActive = true
+    detailBlock.trailingAnchor.constraint(
+      equalTo: scrollView.trailingAnchor,
+      constant: -16
+    ).isActive = true
+    detailBlock.bottomAnchor.constraint(
+      equalTo: scrollView.bottomAnchor
+    ).isActive = true
 
   }
 
@@ -219,6 +243,7 @@ extension ResultViewController {
   }
 
   @objc private func reselectQueen() {
+    self.resetGameManager()
     let nx = QueenSelectionViewController()
     GameManager.shared.pushGameProgress(
       navVC: navigationController,
@@ -228,6 +253,9 @@ extension ResultViewController {
   }
 
   @objc private func toTop() {
+    self.resetGameManager()
+    GameManager.shared.users = []
+    GameManager.shared.queen = nil
     super.navigationController?.popToRootViewController(animated: true)
   }
 
@@ -247,6 +275,12 @@ extension ResultViewController {
       return .levelTwo
     case .hard:
       return .levelThree
+    }
+  }
+
+  private func resetGameManager() {
+    for (i, _) in GameManager.shared.users.enumerated() {
+      GameManager.shared.users[i].isQueen = false
     }
   }
   

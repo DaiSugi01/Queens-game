@@ -16,7 +16,8 @@ protocol ExecutorProtocol {
 extension ExecutorProtocol {
 
   func removeQueen(from gameManager: GameManagerProtocol) -> [User] {
-    return gameManager.users.filter { user in
+    let users = gameManager.users
+    return users.filter { user in
       return !user.isQueen
     }
   }
