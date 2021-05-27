@@ -34,6 +34,16 @@ class CommandSettingViewController: CommonCommandViewController {
     })
   }
   
+  override func configBinding() {
+    super.configBinding()
+    
+    // If #item reach max, disable add button.
+    viewModel.didReachMaxItemSubject
+      .bind(to: addButton.rx.isHidden)
+      .disposed(by: viewModel.disposeBag)
+    
+  }
+  
 }
 
 extension CommandSettingViewController {
@@ -47,4 +57,5 @@ extension CommandSettingViewController {
       self.searchBar.resignFirstResponder()
     })
   }
+  
 }

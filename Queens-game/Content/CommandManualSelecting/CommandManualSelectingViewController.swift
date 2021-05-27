@@ -16,11 +16,11 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     super.viewDidLoad()
   }
   
-  override func configSubscriber() {
-    super.configSubscriber()
+  override func configBinding() {
+    super.configBinding()
     
     // Trigger of confirm button
-    viewModel.confirmedTriggerSubject.subscribe(onNext:{
+    viewModel.confirmedTriggerSubject.subscribe(onCompleted:{
       GameManager.shared.pushGameProgress(
         navVC: self.navigationController,
         currentScreen: self,

@@ -30,7 +30,15 @@ class CommandViewModel {
   let disposeBag = DisposeBag()
   let confirmedTriggerSubject = PublishSubject<Void>()
   var snapshot =  Snapshot()
-  lazy var snapshotSubject = PublishSubject<Snapshot>()
+  var snapshotSubject = PublishSubject<Snapshot>()
+  var didReachMinItem: Bool {
+    realm.objects(Command.self).count <= 3
+  }
+  var didReachMaxItem: Bool {
+    realm.objects(Command.self).count >= 6
+  }
+  lazy var didReachMinItemSubject = BehaviorSubject<Bool>(value: didReachMinItem)
+  lazy var didReachMaxItemSubject = BehaviorSubject<Bool>(value: didReachMaxItem)
   
   // Realm
   let realm = try! Realm()
@@ -89,6 +97,7 @@ extension CommandViewModel {
   private func createItems(commandList: [Command]) {
     try! realm.write {
       realm.add(commandList)
+      sendItemCount()
     }
     
     crudType = .create
@@ -120,7 +129,9 @@ extension CommandViewModel {
 
       try! realm.write {
         realm.delete(command)
+        sendItemCount()
       }
+      
     }
   }
   
@@ -157,6 +168,16 @@ extension CommandViewModel {
     } else {
       selectedCommand = nil
     }
+  }
+  
+  
+  /// Send the number of items in realm. This will be used if you display add or delete buttons.
+  /// Ex, if items <= 3 -> disable delete button
+  /// Ex, if items >= 256 -> disable add button
+  func sendItemCount() {
+//    itemCountSubject.onNext(realm.objects(Command.self).count)
+    didReachMinItemSubject.onNext(didReachMinItem)
+    didReachMaxItemSubject.onNext(didReachMaxItem)
   }
   
 }
