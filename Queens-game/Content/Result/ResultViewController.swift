@@ -254,8 +254,6 @@ extension ResultViewController {
 
   @objc private func toTop() {
     self.resetGameManager()
-    GameManager.shared.users = []
-    GameManager.shared.queen = nil
     super.navigationController?.popToRootViewController(animated: true)
   }
 
@@ -282,6 +280,7 @@ extension ResultViewController {
     for (i, _) in GameManager.shared.users.enumerated() {
       GameManager.shared.users[i].isQueen = false
     }
+    GameManager.shared.queen = nil
   }
   
 }
