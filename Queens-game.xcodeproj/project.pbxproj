@@ -40,7 +40,7 @@
 		0AD08AD1264A6FD100654A05 /* CommonSelectionViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD0264A6FD100654A05 /* CommonSelectionViewController+Layout.swift */; };
 		0AD08AD3264A700B00654A05 /* CommonSelectionViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */; };
 		0AD08AD5264A7CD700654A05 /* QueenSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */; };
-		3B7981A3264F09AA002D2F71 /* CitizenSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */; };
+		3B7981A3264F09AA002D2F71 /* CitizenSelectedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981A2264F09A9002D2F71 /* CitizenSelectedViewModel.swift */; };
 		3B7981C5264F8C66002D2F71 /* CountdownStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */; };
 		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
 		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
@@ -140,7 +140,7 @@
 		0AD08AD0264A6FD100654A05 /* CommonSelectionViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonSelectionViewController+Layout.swift"; sourceTree = "<group>"; };
 		0AD08AD2264A700B00654A05 /* CommonSelectionViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonSelectionViewController+DataSource.swift"; sourceTree = "<group>"; };
 		0AD08AD4264A7CD700654A05 /* QueenSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewModel.swift; sourceTree = "<group>"; };
-		3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedView.swift; sourceTree = "<group>"; };
+		3B7981A2264F09A9002D2F71 /* CitizenSelectedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedViewModel.swift; sourceTree = "<group>"; };
 		3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownStackView.swift; sourceTree = "<group>"; };
 		3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62CD2638C3310082ACAE /* CitizenSelectedViewController.swift */,
-				3B7981A2264F09A9002D2F71 /* CitizenSelectedView.swift */,
+				3B7981A2264F09A9002D2F71 /* CitizenSelectedViewModel.swift */,
 			);
 			path = CitizenSelected;
 			sourceTree = "<group>";
@@ -924,7 +924,7 @@
 				485635EC26437CED0043AF21 /* Command.swift in Sources */,
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
 				4826819B2645EBA80010543A /* IconSource.swift in Sources */,
-				3B7981A3264F09AA002D2F71 /* CitizenSelectedView.swift in Sources */,
+				3B7981A3264F09AA002D2F71 /* CitizenSelectedViewModel.swift in Sources */,
 				48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */,
 				48AE803F2640B26F00CBDB5E /* DemoSearchViewController.swift in Sources */,
 				0A04254E264FA8250019AEC1 /* EntryNameViewModel.swift in Sources */,

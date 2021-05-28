@@ -15,6 +15,8 @@ class CitizenSelectedViewModel {
 
   lazy var executor = self.createExecutor(self.getGameManager())
 
+  var settings = Settings.shared
+
   var target = User(id: UUID(), playerId: 0, name: "")
 
   var stakeholders = [User(id: UUID(), playerId: 0, name: "")]
