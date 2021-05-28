@@ -28,9 +28,9 @@ class CommandSettingViewController: CommonCommandViewController {
     let nextVC = CommandEditViewController(viewModel: viewModel)
     // Pass no editing command == create item.
     viewModel.updateEditMode()
-    present(nextVC, animated: true, completion: { [unowned self] in
+    present(nextVC, animated: true, completion: { [weak self] in
       // If you don't set this, buttons on presented view won't respond
-      self.searchBar.resignFirstResponder()
+      self?.searchBar.resignFirstResponder()
     })
   }
   
@@ -39,7 +39,8 @@ class CommandSettingViewController: CommonCommandViewController {
     
     // If #item reach max, disable add button.
     viewModel.didReachMaxItemSubject
-      .bind(to: addButton.rx.isHidden)
+      .map(!)
+      .bind(to: addButton.rx.isValid)
       .disposed(by: viewModel.disposeBag)
     
   }
