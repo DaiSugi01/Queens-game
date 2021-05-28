@@ -130,6 +130,9 @@ class CitizenSelectedViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
+    if self.viewModel.settings.canSkipOrderSelection {
+      self.replaceView()
+    }
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in
