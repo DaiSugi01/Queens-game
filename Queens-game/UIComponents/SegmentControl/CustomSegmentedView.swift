@@ -35,6 +35,10 @@ class CustomSegmentedView: UIStackView {
   
   let segmentedControl: UISegmentedControl = {
     let sc = UISegmentedControl()
+//    let bg = UIImage(color: CustomColor.concave, size: CGSize(width: 1, height: 32))
+//    sc.setBackgroundImage(bg, for: .highlighted, barMetrics: .default)
+//    let bg2 = UIImage(color: CustomColor.convex, size: CGSize(width: 1, height: 32))
+//    sc.setBackgroundImage(bg2, for: .selected, barMetrics: .default)
     sc.backgroundColor = CustomColor.concave
     sc.selectedSegmentTintColor = CustomColor.convex
     return sc
@@ -70,4 +74,17 @@ class CustomSegmentedView: UIStackView {
     fatalError("init(coder:) has not been implemented")
   }
   
+}
+
+extension UIImage {
+    convenience init(color: UIColor, size: CGSize) {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        color.set()
+        let ctx = UIGraphicsGetCurrentContext()!
+        ctx.fill(CGRect(origin: .zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        self.init(data: image.pngData()!)!
+    }
 }

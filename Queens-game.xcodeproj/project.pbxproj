@@ -101,6 +101,7 @@
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
 		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
+		48EECAE6265F6E5600B74066 /* UIButton+RxIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */; };
 		99655A9E23AAC208A3A831A5 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +202,7 @@
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
 		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+RxIsValid.swift"; sourceTree = "<group>"; };
 		70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
 		7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Queens_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9CF4C862F24BBA9ED313FA /* Pods-Queens-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.debug.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.debug.xcconfig"; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				482681722645EBA70010543A /* SubButton.swift */,
 				482681732645EBA70010543A /* NextAndBackButtons.swift */,
 				482681742645EBA70010543A /* MainButton.swift */,
+				48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				4826818F2645EBA80010543A /* UINavigationController+hideBarBackground.swift in Sources */,
 				485635E826437C3F0043AF21 /* Difficulty.swift in Sources */,
 				48AE80432640B26F00CBDB5E /* DemoButtonViewController.swift in Sources */,
+				48EECAE6265F6E5600B74066 /* UIButton+RxIsValid.swift in Sources */,
 				0AD08ACF264A6F1900654A05 /* CommonSelectionViewController.swift in Sources */,
 				0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */,
 				485635E626436FA40043AF21 /* GameManager.swift in Sources */,

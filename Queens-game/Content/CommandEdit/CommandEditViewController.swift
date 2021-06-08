@@ -45,13 +45,17 @@ class CommandEditViewController: UIViewController {
   let difficultySegment = CustomSegmentedView("Difficulty", [.levelOne, .levelTwo, .levelThree])
   let commandTypeSegment = CustomSegmentedView("Type", [.cToC, .cToA, .cToQ])
   let contentLabel = H3Label(text: "Content")
-  let textView: UITextView = {
+  lazy var textView: UITextView = {
     let tv = UITextView()
-    tv.configSize(height: 128)
+    tv.configLayout( bgColor: CustomColor.concave, radius: 18)
+    tv.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
+    tv.font = CustomFont.p
+    tv.textColor = CustomColor.subMain
+    tv.tintColor = CustomColor.accent
     return tv
   } ()
   lazy var stackView = VerticalStackView(
-    arrangedSubviews: [categoryLabel, difficultySegment, commandTypeSegment, contentLabel, textView],
+    arrangedSubviews: [categoryLabel, difficultySegment, commandTypeSegment, contentLabel],
     spacing: 24,
     alignment: .fill,
     distribution: .fill
@@ -78,6 +82,18 @@ extension CommandEditViewController {
     viewModel.didReachMinItemSubject
       .map(!)
       .bind(to: deleteButton.rx.isEnabled)
+      .disposed(by: viewModel.disposeBag)
+    
+    // If #character in text field is less than 0 or more than 512, disable save botton.
+    textView
+      .rx
+      .text
+      .map { text in
+        guard let text = text else { return false }
+        return text.trimmingCharacters(in: .whitespacesAndNewlines).count > 0
+          && text.count <= 128
+      }
+      .bind(to: saveButton.rx.isValid)
       .disposed(by: viewModel.disposeBag)
   }
 }
@@ -110,22 +126,12 @@ extension CommandEditViewController {
 
 extension CommandEditViewController {
   private func validateInput() -> (String, Difficulty, CommandType)? {
-    // MARK: - FIXME: validation
+    // MARK: - validation
     guard let difficulty = Difficulty.init(rawValue: difficultySegment.segmentedControl.selectedSegmentIndex),
           let commandType = CommandType.init(rawValue: commandTypeSegment.segmentedControl.selectedSegmentIndex) else { return nil }
     
     guard let detail = textView.text else {
       // please input invalid
-      return nil
-    }
-    
-    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
-      // too short
-      return nil
-    }
-    
-    guard detail.trimmingCharacters(in: .whitespacesAndNewlines).count <= 512 else {
-      // too long
       return nil
     }
     
@@ -152,6 +158,16 @@ extension CommandEditViewController {
     stackView.setCustomSpacing(16, after: difficultySegment)
     stackView.setCustomSpacing(32, after: commandTypeSegment)
     
+    // Exclude textview from stack view. This is because we can't use .fill for text view. The only way to set size of text view is set static size or set anchor.
+    textView.configSuperView(under: view)
+    textView.anchors(
+      topAnchor: stackView.bottomAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: view.bottomAnchor,
+      padding: .init(top: 24, left: 32, bottom: -Constant.Common.bottomSpacing*2, right: 32)
+    )
+    
     cancelButton.configSuperView(under: view)
     cancelButton.anchors(
       topAnchor: view.topAnchor,
@@ -173,7 +189,7 @@ extension CommandEditViewController {
     // If edit mode, add delete button
     if let _ = viewModel.selectedCommand {
       deleteButton.configSuperView(under: view)
-      deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -64).isActive = true
+      deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
       deleteButton.centerXin(view)
     }
     
