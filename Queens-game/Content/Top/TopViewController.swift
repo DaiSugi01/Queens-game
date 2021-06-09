@@ -24,26 +24,26 @@ class TopViewController: UIViewController {
   
   lazy var buttonWrapper: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [startButton, editCommandButton, menuButton])
-    sv.spacing = 24
     sv.alignment = .leading
+    sv.setCustomSpacing(16, after: startButton)
     return sv
   }()
   
-  let startButton = MainButton(superView: nil, title: "Start game")
+  let startButton = MainButton(title: "Start game")
   @objc func startTapped(_ sender: UIButton) {
     let nx = PlayerSelectionViewController()
     GameManager.shared.pushGameProgress(navVC: navigationController,
                                         currentScreen: self,
                                         nextScreen: nx)
   }
-
-  let editCommandButton  = SubButton(superView: nil, title: "Edit commands")
+  
+  let editCommandButton = SubButton(title: "Edit commands")
   @objc func editCommandTapped(_ sender: UIButton) {
     let nx = CommandSettingViewController()
     navigationController?.pushViewController(nx, animated: true)
   }
   
-  let menuButton  = SubButton(superView: nil, title: "Menu")
+  let menuButton: SubButton = SubButton(title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
     navigationController?.present(nx, animated: true, completion: nil)
@@ -53,7 +53,6 @@ class TopViewController: UIViewController {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle, buttonWrapper])
     sv.alignment = .fill
     sv.distribution = .equalSpacing
-    sv.translatesAutoresizingMaskIntoConstraints = false
     return sv
   }()
   
@@ -70,14 +69,15 @@ class TopViewController: UIViewController {
     view.addSubview(verticalSV)
     
     // Set constraints
-    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
-                                     constant: Constant.Common.topSpacing).isActive = true
-    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                         constant: Constant.Common.leadingSpacing).isActive = true
-    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                          constant: Constant.Common.trailingSpacing).isActive = true
-    verticalSV.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                          constant: Constant.Common.bottomSpacing).isActive = true
+    verticalSV.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing,
+        left: Constant.Common.leadingSpacing,
+        bottom: -Constant.Common.bottomSpacing,
+        right: -Constant.Common.trailingSpacing
+      )
+    )
+    
   }
   
   private func setActions() {
@@ -91,20 +91,30 @@ class TopViewController: UIViewController {
 // MARK: - Debug button
 
 extension TopViewController {
-    
+  
   private func setUpDemoButton() {
     let demoButton = UIButton()
-    let largeConfig = UIImage.SymbolConfiguration(pointSize: 64, weight: .bold, scale: .large)
-    demoButton.setImage(UIImage(systemName: "ant" ,withConfiguration: largeConfig)?.withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal), for: .normal)
     
+    // Set image
+    let imgConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold, scale: .large)
+    let btImage = UIImage(
+      systemName: "heart.fill" ,
+      withConfiguration: imgConfig
+    )? // change color
+    .withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal)
+    demoButton.setImage(btImage, for: .normal)
+    // rotate image
+    demoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+    // target
     demoButton.addTarget(self, action: #selector(demoButtonTapped(_:)), for: .touchUpInside)
+    // constraint
     demoButton.configSuperView(under: view)
-    demoButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
-    demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+    demoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80).isActive = true
+    demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
   }
   
   @objc func demoButtonTapped(_ sender: UIButton) {
     navigationController?.pushViewController(DemoViewController(), animated: true)
   }
-
+  
 }

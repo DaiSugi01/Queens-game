@@ -23,7 +23,7 @@ struct CustomFont {
     return f
   }()
   static var h4: UIFont = {
-    let f = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    let f = UIFont.systemFont(ofSize: 20, weight: .bold)
     return f
   }()
   /// Regular font used in paragraph.
