@@ -44,7 +44,7 @@ extension CommonCommandViewController {
   ///    - section
   ///     - with section header
   func createCollectionViewLayout() {
-    collectionView.configSuperView(under: view)
+    collectionView.configLayout(superView: view, bgColor: .clear)
     collectionView.anchors(
       topAnchor: view.topAnchor,
       leadingAnchor: view.leadingAnchor,
@@ -53,7 +53,6 @@ extension CommonCommandViewController {
       padding: .init(top: 0, left: 0, bottom: 0, right: 0)
     )
     
-    collectionView.backgroundColor = CustomColor.background
     // Config compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }

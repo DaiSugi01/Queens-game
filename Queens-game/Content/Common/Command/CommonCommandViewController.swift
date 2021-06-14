@@ -7,7 +7,8 @@
 
 import UIKit
 
-class CommonCommandViewController: UIViewController {
+class CommonCommandViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
   
   let viewModel = CommandViewModel()
   
@@ -51,14 +52,14 @@ class CommonCommandViewController: UIViewController {
   } ()
   
   override func viewDidLoad() {
-    // Config Collection view
+    super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     createCollectionViewLayout()
     createDiffableDataSource()
     
     configBinding()
     
     // Config Other ui views
-    view.configBgColor(bgColor: CustomColor.background)
     disableDefaultNavigation()
     configSearchBar()
     configBottomNavigationBar()

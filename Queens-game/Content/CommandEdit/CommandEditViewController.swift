@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - Basics
 
-class CommandEditViewController: UIViewController {
+class CommandEditViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
   
   let viewModel: CommandViewModel!
   
@@ -70,6 +71,7 @@ class CommandEditViewController: UIViewController {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     configLayout()
     configBinding()
   }

@@ -9,7 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class QueenSelectedViewController: UIViewController {
+class QueenSelectedViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
 
   let disposeBag = DisposeBag()
 
@@ -116,6 +117,7 @@ class QueenSelectedViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
@@ -129,8 +131,6 @@ class QueenSelectedViewController: UIViewController {
   }
 
   private func setupLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
-    navigationItem.hidesBackButton = true
 
     view.addSubview(stackView)
     stackView.topAnchor.constraint(

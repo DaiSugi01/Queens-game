@@ -9,7 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CitizenSelectedViewController: UIViewController {
+class CitizenSelectedViewController:  UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  
 
   let disposeBag = DisposeBag()
 
@@ -129,6 +131,7 @@ class CitizenSelectedViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
     if self.viewModel.settings.canSkipOrderSelection {
       self.replaceView()
@@ -149,8 +152,6 @@ class CitizenSelectedViewController: UIViewController {
 extension CitizenSelectedViewController {
 
   private func setupLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
-    navigationItem.hidesBackButton = true
 
     view.addSubview(stackView)
     stackView.topAnchor.constraint(
