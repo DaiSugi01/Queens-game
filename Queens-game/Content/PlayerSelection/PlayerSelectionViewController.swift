@@ -9,7 +9,7 @@ import UIKit
 
 class PlayerSelectionViewController: UIViewController, QueensGameViewControllerProtocol {
   
-  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
   enum Operation {
     case minus
@@ -20,7 +20,9 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   var playerCount: Int = Constant.PlayerSelection.minPlayerCount
   
-  lazy var verticalSV = VerticalStackView(arrangedSubviews: [screenTitle, horizontalSV, navButtons])
+  lazy var verticalSV = VerticalStackView(
+    arrangedSubviews: [screenTitle, horizontalSV, navButtons]
+  )
   
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Choose max players")
@@ -80,12 +82,19 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     updateUI()
   }
   
-  let navButtons: NextAndBackButtons = {
+  let navButtons: UIView = {
+    
     let bts = NextAndBackButtons()
     bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
     bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
     
-    return bts
+    let wrapper = UIView()
+    bts.configSuperView(under: wrapper)
+    bts.centerXYin(wrapper)
+    bts.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 1).isActive = true
+    wrapper.setContentHuggingPriority(.required, for: .vertical)
+    
+    return wrapper
   }()
   @objc func goToNext(_ sender: UIButton) {
     vm.initUserData(playerCount: playerCount)
@@ -101,7 +110,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
   }
   

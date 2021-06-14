@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
 
   let disposeBag = DisposeBag()
 
@@ -45,7 +45,7 @@ class SettingsViewController: UIViewController, QueensGameViewControllerProtocol
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
   }
 

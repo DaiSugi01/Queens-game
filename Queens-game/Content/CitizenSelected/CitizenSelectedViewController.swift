@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class CitizenSelectedViewController:  UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
 
   let disposeBag = DisposeBag()
@@ -131,7 +131,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
     if self.viewModel.settings.canSkipOrderSelection {
       self.replaceView()

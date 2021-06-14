@@ -8,7 +8,7 @@
 import UIKit
 
 class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
   let navButtons = NextAndBackButtons()
 
@@ -173,7 +173,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     self.setupLayout()
     self.configureButtons()
   }

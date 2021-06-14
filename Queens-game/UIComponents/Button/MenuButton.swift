@@ -21,6 +21,7 @@ class MenuButton: UIButton {
     .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
 
     self.setBackgroundImage(image, for: .normal)
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
 
   required init?(coder: NSCoder) {

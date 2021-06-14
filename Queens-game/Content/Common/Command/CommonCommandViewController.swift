@@ -8,7 +8,7 @@
 import UIKit
 
 class CommonCommandViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
   let viewModel = CommandViewModel()
   
@@ -53,7 +53,7 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     createCollectionViewLayout()
     createDiffableDataSource()
     

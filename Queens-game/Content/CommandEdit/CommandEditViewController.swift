@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Basics
 
 class CommandEditViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
   let viewModel: CommandViewModel!
   
@@ -71,7 +71,7 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     configLayout()
     configBinding()
   }

@@ -13,7 +13,7 @@ struct Constant {
     static var topSpacing: CGFloat {
       let screenHeight: CGFloat = UIScreen.main.bounds.height
       if screenHeight < 700 {
-        return 72
+        return 80
       } else if screenHeight < 800 {
         return 96
       } else {

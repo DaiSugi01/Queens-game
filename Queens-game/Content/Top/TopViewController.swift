@@ -8,7 +8,7 @@
 import UIKit
 
 class TopViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   let vm = TopViewModel()
   
   let screenTitle: H1Label = {
@@ -59,7 +59,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.resetGameManeger()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
     setActions()
     setUpDemoButton() // debug button
