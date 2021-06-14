@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PlayerSelectionViewController: UIViewController {
+class PlayerSelectionViewController: UIViewController, QueensGameViewControllerProtocol {
+  
+  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
   
   enum Operation {
     case minus
@@ -99,6 +101,7 @@ class PlayerSelectionViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
   }
   
@@ -106,9 +109,6 @@ class PlayerSelectionViewController: UIViewController {
   private func setupLayout() {
     // config navigation
     navigationItem.hidesBackButton = true
-    
-    // add components to super view
-    view.backgroundColor = CustomColor.background
     
     verticalSV.configSuperView(under: view)
     verticalSV.anchors(

@@ -15,7 +15,7 @@ extension UINavigationController{
   /// - bg image
   /// - bg Effect
   /// - bg boarder image
-  /// - bg boarder color
+  /// - bg boarder color 
   /// - Parameter color: color you want to fill navigation bar with.
   func clearNavigationBar(with color: UIColor) {
 

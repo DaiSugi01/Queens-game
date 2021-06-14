@@ -8,9 +8,11 @@
 import UIKit
 
 class QueenSelectingViewController: UIViewController {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
   }
   
@@ -53,8 +55,6 @@ class QueenSelectingViewController: UIViewController {
   }
   
   private func setupLayout() {
-    view.backgroundColor = .white
-    navigationItem.hidesBackButton = true
 
     view.addSubview(screenName)
     view.addSubview(nextButton)

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
 
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Menu")
@@ -87,8 +88,8 @@ class MenuViewController: UIViewController {
       let nextViewController: UINavigationController = {
         let navigationController = UINavigationController(rootViewController: TopViewController())
         navigationController.modalPresentationStyle = .fullScreen
-        navigationController.navigationBar.barTintColor = CustomColor.background
-        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.isHidden = true
+        
         return navigationController
       }()
       self?.present(nextViewController,  animated: true, completion: nil)
@@ -105,6 +106,7 @@ class MenuViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)

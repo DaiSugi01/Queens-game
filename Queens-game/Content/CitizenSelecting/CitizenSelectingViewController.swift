@@ -7,10 +7,12 @@
 
 import UIKit
 
-class CitizenSelectingViewController: UIViewController {
-
+class CitizenSelectingViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     setupLayout()
   }
   
@@ -53,8 +55,6 @@ class CitizenSelectingViewController: UIViewController {
   }
   
   private func setupLayout() {
-    view.backgroundColor = .white
-    navigationItem.hidesBackButton = true
 
     view.addSubview(screenName)
     view.addSubview(nextButton)

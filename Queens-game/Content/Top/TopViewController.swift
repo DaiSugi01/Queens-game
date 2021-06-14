@@ -7,8 +7,8 @@
 
 import UIKit
 
-class TopViewController: UIViewController {
-  
+class TopViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
   let vm = TopViewModel()
   
   let screenTitle: H1Label = {
@@ -23,7 +23,7 @@ class TopViewController: UIViewController {
   }()
   
   lazy var buttonWrapper: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [startButton, editCommandButton, menuButton])
+    let sv = VerticalStackView(arrangedSubviews: [startButton, editCommandButton, menuButtonAtTop])
     sv.alignment = .leading
     sv.setCustomSpacing(16, after: startButton)
     return sv
@@ -43,7 +43,7 @@ class TopViewController: UIViewController {
     navigationController?.pushViewController(nx, animated: true)
   }
   
-  let menuButton: SubButton = SubButton(title: "Menu")
+  let menuButtonAtTop: SubButton = SubButton(title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
     navigationController?.present(nx, animated: true, completion: nil)
@@ -59,14 +59,15 @@ class TopViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.resetGameManeger()
+    backgroundView.configBackgroundLayout()
     setupLayout()
     setActions()
     setUpDemoButton() // debug button
   }
   
   private func setupLayout() {
-    view.backgroundColor = CustomColor.background
-    view.addSubview(verticalSV)
+    
+    verticalSV.configSuperView(under: view)
     
     // Set constraints
     verticalSV.matchParent(
@@ -83,7 +84,7 @@ class TopViewController: UIViewController {
   private func setActions() {
     startButton.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
     editCommandButton.addTarget(self, action: #selector(editCommandTapped(_:)), for: .touchUpInside)
-    menuButton.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
+    menuButtonAtTop.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
   }
 }
 

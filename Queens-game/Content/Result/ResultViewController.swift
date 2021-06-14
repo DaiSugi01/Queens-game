@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
 
   let navButtons = NextAndBackButtons()
 
@@ -172,6 +173,7 @@ class ResultViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     self.setupLayout()
     self.configureButtons()
   }
@@ -180,8 +182,6 @@ class ResultViewController: UIViewController {
 extension ResultViewController {
 
   private func setupLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
-    navigationItem.hidesBackButton = true
 
     view.addSubview(stackView)
     stackView.topAnchor.constraint(

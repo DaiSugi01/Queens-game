@@ -8,7 +8,8 @@
 import UIKit
 
 // MARK: - Instance variables
-class CommandConfirmationViewController: UIViewController {
+class CommandConfirmationViewController:  UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
   
   var viewModel = CommandViewModel()
   var selectedCommand: Command!
@@ -141,6 +142,7 @@ class CommandConfirmationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    backgroundView.configBackgroundLayout()
     configScrollView()
   }
 
@@ -153,7 +155,6 @@ extension CommandConfirmationViewController {
   private func configScrollView() {
     scrollView.configSuperView(under: view)
     scrollView.matchParent()
-    scrollView.configBgColor(bgColor: CustomColor.background)
 
     // This will create padding between content size and stack view
     scrollView.contentInset = .init(

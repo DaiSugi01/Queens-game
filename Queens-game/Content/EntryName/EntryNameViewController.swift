@@ -9,7 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class EntryNameViewController: UIViewController {
+class EntryNameViewController: UIViewController, QueensGameViewControllerProtocol {
+  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
   
   let spacing: CGFloat = 16
   let vm: EntryNameViewModel = EntryNameViewModel()
@@ -67,6 +68,7 @@ class EntryNameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.getUsersFromUserDefaults()
+    backgroundView.configBackgroundLayout()
     setupLayout()
     createContent()
   }
