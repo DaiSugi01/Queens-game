@@ -8,7 +8,7 @@
 import UIKit
 
 class RuleBookViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
 
   let screenTitle: H2Label = {
     let lb = H2Label(text: "How to play")
@@ -32,7 +32,7 @@ class RuleBookViewController: UIViewController, QueensGameViewControllerProtocol
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
   }
   

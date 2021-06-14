@@ -10,7 +10,8 @@ import RxSwift
 import RxCocoa
 
 class EntryNameViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
+  
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
   let spacing: CGFloat = 16
   let vm: EntryNameViewModel = EntryNameViewModel()
@@ -56,9 +57,11 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     vm.saveUsers()
     
     let nx = QueenSelectionViewController()
-    GameManager.shared.pushGameProgress(navVC: navigationController!,
-                                        currentScreen: self,
-                                        nextScreen: nx)
+    GameManager.shared.pushGameProgress(
+      navVC: navigationController!,
+      currentScreen: self,
+      nextScreen: nx
+    )
   }
   
   @objc private func goBackToPrevious(_ sender: UIButton) {
@@ -68,46 +71,66 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.getUsersFromUserDefaults()
-    backgroundView.configBackgroundLayout()
-    setupLayout()
     createContent()
+    
+    configureSuperView()
+    configureNavButtons()
+    configureScrollView()
+    // Do this lastly to add menu button in top layer.
+    backgroundCreator.configureLayout()
+    
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    setScrollViewInset()
+  private func configureSuperView() {
+    scrollView.configSuperView(under: view)
+    contentWrapper.configSuperView(under: scrollView)
+    navButtons.configSuperView(under: view)
   }
   
-  /// Setup whole layout
-  private func setupLayout() {
-    // config navigation
-    navigationItem.hidesBackButton = true
-    
-    // Add components
-    view.backgroundColor = CustomColor.background
-    view.addSubview(scrollView)
-    view.addSubview(navButtons)
-    scrollView.addSubview(contentWrapper)
-    
-    // set constraints
-    scrollView.topAnchor.constraint(equalTo: view.topAnchor,
-                                    constant: Constant.Common.topSpacing).isActive = true
-    scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                        constant: Constant.Common.leadingSpacing).isActive = true
-    scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                         constant:  Constant.Common.trailingSpacing).isActive = true
-    scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-
-    contentWrapper.anchors(topAnchor: scrollView.contentLayoutGuide.topAnchor,
-                              leadingAnchor: scrollView.frameLayoutGuide.leadingAnchor,
-                              trailingAnchor: scrollView.frameLayoutGuide.trailingAnchor,
-                              bottomAnchor: scrollView.contentLayoutGuide.bottomAnchor)
-
-    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                       constant: Constant.Common.bottomSpacing).isActive = true
+  private func configureNavButtons() {
+    navButtons.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
     navButtons.centerXin(view)
+    // Load this view to get height.
+    navButtons.layoutIfNeeded()
   }
   
-  /// Create each EntryyName fields
+  private func configureScrollView() {
+    // Scroll View
+    scrollView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing/2,
+        left: 0,
+        bottom: -Constant.Common.bottomSpacing/2,
+        right: 0
+      )
+    )
+    
+    // Content
+    // This will set the content  wrapper's width
+    contentWrapper.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1, constant: -Constant.Common.leadingSpacing*2).isActive = true
+    // This will create scroll view's `contentSize` equal to content wrapper.
+    let cg = scrollView.contentLayoutGuide
+    contentWrapper.anchors(
+      topAnchor: cg.topAnchor,
+      leadingAnchor: cg.leadingAnchor,
+      trailingAnchor: cg.trailingAnchor,
+      bottomAnchor: cg.bottomAnchor
+    )
+    
+    // Inset
+    // This will set padding between scroll view and content wrapper.
+    scrollView.contentInset = .init(
+      top: Constant.Common.topSpacing/2,
+      left: Constant.Common.leadingSpacing,
+      bottom: -Constant.Common.bottomSpacing/2 + navButtons.frame.height + spacing,
+      right: -Constant.Common.trailingSpacing
+    )
+  }
+  
+  /// Create each EntryName fields
   private func createContent() {
     // Make each EntryName field
     for user in GameManager.shared.users {
@@ -126,12 +149,4 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     }
   }
   
-  private func setScrollViewInset() {
-    let navButtonsHeight: CGFloat = navButtons.nextButton.frame.size.height
-    let inset = UIEdgeInsets(top: 0,
-                             left: 0,
-                             bottom: -Constant.Common.bottomSpacing + navButtonsHeight + spacing,
-                             right: 0)
-    scrollView.contentInset = inset
-  }
 }

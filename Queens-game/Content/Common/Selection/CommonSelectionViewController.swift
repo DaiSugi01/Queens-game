@@ -8,7 +8,7 @@
 import UIKit
 
 class CommonSelectionViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewWithMenu(viewController: self)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
   let sections: [Section] = [.selection]
   
@@ -27,6 +27,6 @@ class CommonSelectionViewController: UIViewController, QueensGameViewControllerP
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
   }
 }

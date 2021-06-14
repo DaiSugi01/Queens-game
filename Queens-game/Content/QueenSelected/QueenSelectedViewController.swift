@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class QueenSelectedViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
 
   let disposeBag = DisposeBag()
 
@@ -117,7 +117,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime

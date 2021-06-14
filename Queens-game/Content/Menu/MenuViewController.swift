@@ -8,7 +8,7 @@
 import UIKit
 
 class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
 
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Menu")
@@ -106,7 +106,7 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     setupLayout()
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)

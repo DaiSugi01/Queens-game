@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Instance variables
 class CommandConfirmationViewController:  UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundView: BackgroundView = BackgroundViewPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
   var viewModel = CommandViewModel()
   var selectedCommand: Command!
@@ -142,7 +142,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundView.configBackgroundLayout()
+    backgroundCreator.configureLayout()
     configScrollView()
   }
 
