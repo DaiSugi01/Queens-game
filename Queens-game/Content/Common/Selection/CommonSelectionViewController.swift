@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CommonSelectionViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
+class CommonSelectionViewController: UIViewController {
+
   
   let sections: [Section] = [.selection]
   
@@ -16,17 +16,11 @@ class CommonSelectionViewController: UIViewController, QueensGameViewControllerP
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
   let collectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .vertical
     let collectionView = UICollectionView(
-      frame: .zero,collectionViewLayout: layout
+      frame: .zero,
+      collectionViewLayout: UICollectionViewFlowLayout()
     )
-    collectionView.constraintHeight(equalToConstant: 360)
     return collectionView
   }()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    backgroundCreator.configureLayout()
-  }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CommandSelectionViewController: CommonSelectionViewController {
   
-  let screenTitle: H2Label = {
+  var screenTitle: H2Label = {
     let lb = H2Label(text: "How do you make your command?")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
@@ -38,7 +38,10 @@ class CommandSelectionViewController: CommonSelectionViewController {
   /// Setup collection view layout and datasource
   private func setupCollectionView() {
     createCollectionViewLayout()
-    createDiffableDataSource(with: Constant.CommandSelection.options)
+    createDiffableDataSource(
+      with: Constant.CommandSelection.options,
+      and: Constant.CommandSelection.title
+    )
   }
   
   /// Setup whole layout

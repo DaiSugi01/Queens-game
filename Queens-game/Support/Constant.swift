@@ -39,6 +39,8 @@ struct Constant {
   }
   
   struct QueenSelection {
+    static let title = "Now, who will be the Queen?"
+    
     static let options = [
       Selection(title: "Quick select", detail: "The queen is selected as you as you tap next", isSelected: true),
       Selection(title: "Card select", detail: "Those who select Queen will be the Queen!", isSelected: false)
@@ -55,6 +57,7 @@ struct Constant {
   }
   
   struct CommandSelection {
+    static let title = "How do you give the command?"
     static let options = [
       Selection(title: "Random select", detail: "The order will be randomly selected from the order list. You can see the list from the options.", isSelected: true),
       Selection(title: "Manual select", detail: "You can choose the specific order from the order list. ", isSelected: false)

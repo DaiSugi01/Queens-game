@@ -16,7 +16,7 @@ extension CommonSelectionViewController {
   /// 2. Add all items in snapshot.
   /// 3. Define cells (and headers) with data source.
   /// 4. Apply snapshot to data source.
-  func createDiffableDataSource(with options: [Selection]){
+  func createDiffableDataSource(with options: [Selection], and title: String) {
     registerCells()
     
     // Reset snapshot
@@ -45,6 +45,29 @@ extension CommonSelectionViewController {
         }
     )
     
+    // Define headers with data source.
+    dataSource.supplementaryViewProvider = {
+      [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
+
+      if let headerView = self.collectionView.dequeueReusableSupplementaryView(
+        ofKind: kind,
+        withReuseIdentifier: GeneticLabelCollectionReusableView.identifier,
+        for: indexPath
+      ) as? GeneticLabelCollectionReusableView {
+        
+        let screenTitle: H2Label = {
+          let lb = H2Label(text: title)
+          lb.lineBreakMode = .byWordWrapping
+          lb.numberOfLines = 0
+          return lb
+        }()
+        
+        headerView.configLabel(lb: screenTitle)
+        return headerView
+      }
+      return nil
+    }
+    
     dataSource.apply(snapshot, animatingDifferences: false)
   }
   
@@ -58,6 +81,15 @@ extension CommonSelectionViewController {
   
   /// Register all cells and headers with identifier.
   private func registerCells() {
-    collectionView.register(SelectionCollectionViewCell.self, forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier)
+    collectionView.register(
+      SelectionCollectionViewCell.self,
+      forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier
+    )
+    
+    collectionView.register(
+      GeneticLabelCollectionReusableView.self,
+      forSupplementaryViewOfKind: GeneticLabelCollectionReusableView.identifier,
+      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
+    )
   }
 }
