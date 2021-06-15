@@ -21,9 +21,8 @@ class SelectionCollectionViewCell: UICollectionViewCell {
   }()
   let titleLabel = H3Label(text: "title")
   lazy var titleSet = HorizontalStackView(arrangedSubviews: [checkIcon, titleLabel], spacing: 16)
-//  let bodyLabel = PLabel(text: "this is content, adlkfjal;sjdf;laj;f")
   let bodyLabel: PLabel = {
-    let lb = PLabel(text: "this is content, adlkfjal;sjdf;laj;f")
+    let lb = PLabel(text: "this is content")
     lb.numberOfLines = 3
     return lb
   }()
@@ -32,7 +31,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
     let sv = VerticalStackView(arrangedSubviews: [titleSet, bodyLabel], alignment: .leading)
     sv.alignment = .fill
     sv.configLayout(height: 160, radius: 16, shadow: true)
-    // Config margin
+    // Configure margin
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
     return sv

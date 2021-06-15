@@ -3,73 +3,85 @@
 //  Queens-game
 //
 //  Created by 杉原大貴 on 2021/05/09.
-//
+//  Updated by Tak
 
 import UIKit
 
-class QueenSelectionViewController: CommonSelectionViewController {
+class QueenSelectionViewController: CommonSelectionViewController, QueensGameViewControllerProtocol {
+  
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
   let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
-  let screenTitle: H2Label = {
-    let lb = H2Label(text: "Let's decide the Queen")
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 0
-    lb.setContentHuggingPriority(.required, for: .vertical)
-    return lb
-  }()
-  
   let navButtons = NextAndBackButtons()
-  
-  lazy var verticalSV: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [screenTitle, collectionView])
-    sv.alignment = .fill
-    sv.distribution = .equalSpacing
-    sv.translatesAutoresizingMaskIntoConstraints = false
-    return sv
-  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupCollectionView()
-    setupLayout()
-    setButtonActions()
+    configureCollectionView()
+    configureLayout()
+    configureButtonActions()
+    backgroundCreator.configureLayout()
   }
   
   /// Setup collection view layout and datasource
-  private func setupCollectionView() {
+  private func configureCollectionView() {
     createCollectionViewLayout()
-    createDiffableDataSource(with: Constant.QueenSelection.options)
+    createDiffableDataSource(
+      with: Constant.QueenSelection.options,
+      and: Constant.QueenSelection.title
+    )
+    
+    // Select first item by default
+    guard let sectionIndex = sections.firstIndex(of: .selection) else { return }
+    collectionView.selectItem(
+      at: IndexPath(row: 0, section: sectionIndex),
+      animated: false,
+      scrollPosition: .top
+    )
   }
   
   /// Setup whole layout
-  private func setupLayout() {
-    // config navigation
-    navigationItem.hidesBackButton = true
+  private func configureLayout() {
+    // configure superview
+    collectionView.configSuperView(under: view)
+    navButtons.configSuperView(under: view)
     
-    // add components to super view
-    view.backgroundColor = CustomColor.background
-    view.addSubview(verticalSV)
-    view.addSubview(navButtons)
-    
-    // set constraints
-    verticalSV.topAnchor.constraint(equalTo: view.topAnchor,
-                                    constant: Constant.Common.topSpacing).isActive = true
-    verticalSV.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                        constant: Constant.Common.leadingSpacing).isActive = true
-    verticalSV.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                         constant:  Constant.Common.trailingSpacing).isActive = true
-    
-    navButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                       constant: Constant.Common.bottomSpacing).isActive = true
+    // collection view
+    collectionView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing/2,
+        left: 0,
+        bottom: -Constant.Common.bottomSpacing/2,
+        right: 0
+      )
+    )
+    collectionView.contentInset = .init(
+      top: Constant.Common.topSpacing/2,
+      left: 0,
+      bottom: -Constant.Common.bottomSpacing/2,
+      right: 0
+    )
+
+    // Buttons
+    navButtons.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: Constant.Common.bottomSpacing
+    ).isActive = true
     navButtons.centerXin(view)
   }
   
   /// Set Button Actions
-  private func setButtonActions() {
-    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+  private func configureButtonActions() {
+    navButtons.nextButton.addTarget(
+      self,
+      action: #selector(goToNext(_:)),
+      for: .touchUpInside
+    )
+    navButtons.backButton.addTarget(
+      self,
+      action: #selector(goBackToPrevious(_:)),
+      for: .touchUpInside
+    )
   }
   
   //TODO: Implements card selection later
@@ -82,9 +94,11 @@ class QueenSelectionViewController: CommonSelectionViewController {
     case Constant.QueenSelection.quickIndexPath:
       vm.selectQueen()
       let nx = QueenSelectedViewController()
-      GameManager.shared.pushGameProgress(navVC: navigationController,
-                                          currentScreen: self,
-                                          nextScreen: nx)
+      GameManager.shared.pushGameProgress(
+        navVC: navigationController,
+        currentScreen: self,
+        nextScreen: nx
+      )
     case  Constant.QueenSelection.cardIndexPath:
       print("Path for card selection page")
     default:

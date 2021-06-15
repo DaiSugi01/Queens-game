@@ -20,6 +20,7 @@ class CommandHeaderCollectionReusableView: UICollectionReusableView {
       spacing: 24
     )
     sv.isLayoutMarginsRelativeArrangement = true
+    // This is to set top padding in the collection view.
     sv.directionalLayoutMargins = .init(top: 76, leading: 0, bottom: 0, trailing: 0)
     return sv
   } ()

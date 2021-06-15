@@ -10,19 +10,21 @@ import RxSwift
 import RxCocoa
 
 class QueenSelectedViewController: UIViewController, QueensGameViewControllerProtocol {
+  
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
 
   let disposeBag = DisposeBag()
-
   let viewModel = QueenSelectedViewModel()
 
+  
+  // MARK: - First half views
+  
   lazy var countdownStackView = CountdownStackView(
     countdown: self.viewModel.countdownTime
   )
 
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Selecting the Queen...")
-    lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     return lb
   }()
@@ -34,7 +36,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return button
   }()
 
-  lazy var stackView: VerticalStackView = {
+  lazy var firstHalfStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         screenTitle,
@@ -47,7 +49,8 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return sv
   }()
 
-  // MARK: After Countdown
+  
+  // MARK: Last half views (After Countdown)
 
   let afterTitle: H2Label = {
     let lb = H2Label(text: "The Queen is")
@@ -59,7 +62,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   lazy var queenIcon: UIImageView = {
     let icon = IconFactory.createImageView(
       type: .queen,
-      height: 150
+      height: 152
     )
     return icon
   }()
@@ -92,8 +95,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       arrangedSubviews: [self.noLabel, targetIcon]
     )
     sv.distribution = .equalSpacing
-    sv.alignment = .bottom
+    sv.alignment = .center
     sv.spacing = 16
+    sv.setContentHuggingPriority(.required, for: .vertical)
     return sv
   }()
     
@@ -102,9 +106,13 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       arrangedSubviews: [self.queenIcon, self.hStackView, self.queenName]
     )
     sv.alignment = .center
-    sv.distribution = .fill
     sv.spacing = 32
     sv.setCustomSpacing(24, after: hStackView)
+    
+    // Set negative padding. This is to crop image.
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins = .init(top: -40, leading: 0, bottom: 0, trailing: 0)
+
     return sv
   }()
   
@@ -114,6 +122,15 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
     return button
   }()
+  
+  lazy var lastHalfStackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [self.afterTitle, self.queenBlock, self.nextButton],
+      alignment: .center,
+      distribution: .equalSpacing
+    )
+    return sv
+  } ()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -132,56 +149,48 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
 
   private func setupLayout() {
 
-    view.addSubview(stackView)
-    stackView.topAnchor.constraint(
-      equalTo: view.topAnchor,
-      constant: Constant.Common.topSpacing
-    ).isActive = true
-    stackView.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
-    ).isActive = true
-    stackView.leadingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-      constant: Constant.Common.leadingSpacing
-    ).isActive = true
-    stackView.trailingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  Constant.Common.trailingSpacing
-    ).isActive = true
+    firstHalfStackView.configSuperView(under: view)
+    firstHalfStackView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing,
+        left: Constant.Common.leadingSpacing,
+        bottom: -Constant.Common.bottomSpacing,
+        right: -Constant.Common.trailingSpacing
+      )
+    )
   }
 
   private func setupLayoutAfterCountdown() {
-    super.view.addSubview(self.afterTitle)
-    super.view.addSubview(self.queenBlock)
-    super.view.addSubview(self.nextButton)
-
-    afterTitle.topAnchor.constraint(
-      equalTo: view.topAnchor,
-      constant: Constant.Common.topSpacing
-    ).isActive = true
-    afterTitle.leadingAnchor.constraint(
-      equalTo: view.leadingAnchor,
-      constant: Constant.Common.leadingSpacing
-    ).isActive = true
-    afterTitle.trailingAnchor.constraint(
-      equalTo: view.trailingAnchor,
-      constant: Constant.Common.trailingSpacing
-    ).isActive = true
     
-    queenBlock.centerYin(view)
-    queenBlock.centerXin(view)
-
-    nextButton.centerXin(view)
-    nextButton.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
-    ).isActive = true
+    lastHalfStackView.configSuperView(under: super.view)
+    lastHalfStackView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing,
+        left: Constant.Common.leadingSpacing,
+        bottom: -Constant.Common.bottomSpacing,
+        right: -Constant.Common.trailingSpacing
+      )
+    )
   }
   
   private func replaceView() {
-    self.stackView.removeFromSuperview()
+    self.firstHalfStackView.removeFromSuperview()
+    
+    // Set up, but make last half views invisible
+    lastHalfStackView.alpha = 0
     self.setupLayoutAfterCountdown()
+    
+    // Fade in the last half views
+    UIView.animate(
+      withDuration: 2.4,
+      delay: 0,
+      options: .curveEaseIn,
+      animations: { [weak self] in
+        self?.lastHalfStackView.alpha = 1
+      },
+      completion: nil
+    )
+    
   }
   
   @objc func skipButtonTapped(_ sender: UIButton) {
