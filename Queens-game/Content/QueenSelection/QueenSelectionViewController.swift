@@ -13,14 +13,14 @@ class QueenSelectionViewController: CommonSelectionViewController, QueensGameVie
 
   let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
-  let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     configureCollectionView()
     configureLayout()
-    configureButtonActions()
     backgroundCreator.configureLayout()
+    configureButtonActions()
+    
   }
   
   /// Setup collection view layout and datasource
@@ -40,35 +40,6 @@ class QueenSelectionViewController: CommonSelectionViewController, QueensGameVie
     )
   }
   
-  /// Setup whole layout
-  private func configureLayout() {
-    // configure superview
-    collectionView.configSuperView(under: view)
-    navButtons.configSuperView(under: view)
-    
-    // collection view
-    collectionView.matchParent(
-      padding: .init(
-        top: Constant.Common.topSpacing/2,
-        left: 0,
-        bottom: -Constant.Common.bottomSpacing/2,
-        right: 0
-      )
-    )
-    collectionView.contentInset = .init(
-      top: Constant.Common.topSpacing/2,
-      left: 0,
-      bottom: -Constant.Common.bottomSpacing/2,
-      right: 0
-    )
-
-    // Buttons
-    navButtons.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
-    ).isActive = true
-    navButtons.centerXin(view)
-  }
   
   /// Set Button Actions
   private func configureButtonActions() {

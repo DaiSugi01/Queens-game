@@ -160,7 +160,7 @@ extension CitizenSelectedViewController {
     ).isActive = true
     stackView.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
+      constant: -Constant.Common.bottomSpacing
     ).isActive = true
     stackView.leadingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.leadingAnchor,
@@ -168,7 +168,7 @@ extension CitizenSelectedViewController {
     ).isActive = true
     stackView.trailingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  Constant.Common.trailingSpacing
+      constant:  -Constant.Common.trailingSpacing
     ).isActive = true
   }
 
@@ -180,7 +180,7 @@ extension CitizenSelectedViewController {
     ).isActive = true
     afterCountdown.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
+      constant: -Constant.Common.bottomSpacing
     ).isActive = true
     afterCountdown.leadingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.leadingAnchor,
@@ -188,7 +188,7 @@ extension CitizenSelectedViewController {
     ).isActive = true
     afterCountdown.trailingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  Constant.Common.trailingSpacing
+      constant:  -Constant.Common.trailingSpacing
     ).isActive = true
 
     if self.viewModel.getGameManager().command.commandType == .cToC {

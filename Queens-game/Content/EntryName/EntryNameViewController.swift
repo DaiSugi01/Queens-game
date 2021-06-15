@@ -90,7 +90,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   private func configureNavButtons() {
     navButtons.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
+      constant: -Constant.Common.bottomSpacing
     ).isActive = true
     navButtons.centerXin(view)
     // Load this view to get height.
@@ -103,7 +103,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
       padding: .init(
         top: Constant.Common.topSpacing/2,
         left: 0,
-        bottom: -Constant.Common.bottomSpacing/2,
+        bottom: Constant.Common.bottomSpacing/2,
         right: 0
       )
     )
@@ -125,8 +125,8 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     scrollView.contentInset = .init(
       top: Constant.Common.topSpacing/2,
       left: Constant.Common.leadingSpacing,
-      bottom: -Constant.Common.bottomSpacing/2 + navButtons.frame.height + spacing,
-      right: -Constant.Common.trailingSpacing
+      bottom: Constant.Common.bottomSpacing/2 + navButtons.frame.height + spacing,
+      right: Constant.Common.trailingSpacing
     )
   }
   

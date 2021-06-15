@@ -11,27 +11,30 @@ struct Constant {
   
   struct Common {
     static var topSpacing: CGFloat {
-      let screenHeight: CGFloat = UIScreen.main.bounds.height
-      if screenHeight < 700 {
-        return 80
-      } else if screenHeight < 800 {
-        return 96
-      } else {
-        return 128
+      switch UIScreen.main.bounds.height {
+        case 0..<700:
+          return 80
+        case 700..<800:
+          return 96
+        default:
+          return 128
       }
     }
 
     static var bottomSpacing: CGFloat {
-      if UIScreen.main.bounds.height < 700 {
-        return -48
-      } else {
-        return -96
+      switch UIScreen.main.bounds.height {
+        case 0..<700:
+          return 72
+        case 700..<800:
+          return 80
+        default:
+          return 112
       }
     }
     
     static let leadingSpacing: CGFloat = 32
     
-    static let trailingSpacing: CGFloat = -32
+    static let trailingSpacing: CGFloat = 32
   }
   
   struct UserDefaults {
@@ -59,12 +62,14 @@ struct Constant {
   struct CommandSelection {
     static let title = "How do you give the command?"
     static let options = [
-      Selection(title: "Random select", detail: "The order will be randomly selected from the order list. You can see the list from the options.", isSelected: true),
-      Selection(title: "Manual select", detail: "You can choose the specific order from the order list. ", isSelected: false)
+      Selection(title: "Manual select", detail: "You can choose the specific order from the order list. ", isSelected: false),
+      
+      Selection(title: "Random select", detail: "The order will be randomly selected from the order list. You can see the list from the options.", isSelected: true)
     ]
 
-    static let randomIndexPath: [IndexPath] = [[0, 0]]
-    static let manualIndexPath: [IndexPath] = [[0, 1]]
+    static let manualIndexPath: [IndexPath] = [[0, 0]]
+    static let randomIndexPath: [IndexPath] = [[0, 1]]
+    
   }
   
   struct CommandDescription {

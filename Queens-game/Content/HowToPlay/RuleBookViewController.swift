@@ -51,7 +51,7 @@ extension RuleBookViewController {
     ).isActive = true
     stackView.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
-      constant: Constant.Common.bottomSpacing
+      constant: -Constant.Common.bottomSpacing
     ).isActive = true
     stackView.leadingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.leadingAnchor,
@@ -59,7 +59,7 @@ extension RuleBookViewController {
     ).isActive = true
     stackView.trailingAnchor.constraint(
       equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  Constant.Common.trailingSpacing
+      constant:  -Constant.Common.trailingSpacing
     ).isActive = true
   }
 }

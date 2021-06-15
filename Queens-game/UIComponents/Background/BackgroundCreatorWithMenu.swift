@@ -32,7 +32,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   func configureMenuButton() {
     NSLayoutConstraint.activate([
       menuButton.centerYAnchor.constraint(equalTo: parentView.topAnchor, constant: Constant.Common.topSpacing*0.5),
-      menuButton.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: Constant.Common.trailingSpacing*0.8)
+      menuButton.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -Constant.Common.trailingSpacing*0.8)
     ])
     menuButton.addTarget(self, action: #selector(menuTapped), for: .touchUpInside)
   }
@@ -54,7 +54,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
     bottomLine.configSuperView(under: parentView)
     NSLayoutConstraint.activate([
       bottomLine.widthAnchor.constraint(equalTo: parentView.widthAnchor, constant: -Constant.Common.leadingSpacing*2),
-      bottomLine.topAnchor.constraint(equalTo: parentView.bottomAnchor, constant: Constant.Common.bottomSpacing*0.5),
+      bottomLine.topAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -Constant.Common.bottomSpacing*0.64),
       bottomLine.centerXAnchor.constraint(equalTo: parentView.centerXAnchor)
     ])
   }

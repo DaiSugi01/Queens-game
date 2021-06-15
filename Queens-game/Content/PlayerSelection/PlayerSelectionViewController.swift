@@ -128,8 +128,8 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,
-        bottom: -Constant.Common.bottomSpacing,
-        right: -Constant.Common.trailingSpacing
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing
       )
     )
   }
