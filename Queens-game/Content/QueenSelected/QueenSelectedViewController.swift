@@ -154,8 +154,8 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,
-        bottom: -Constant.Common.bottomSpacing,
-        right: -Constant.Common.trailingSpacing
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing
       )
     )
   }
@@ -167,8 +167,8 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,
-        bottom: -Constant.Common.bottomSpacing,
-        right: -Constant.Common.trailingSpacing
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing
       )
     )
   }
@@ -182,7 +182,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     
     // Fade in the last half views
     UIView.animate(
-      withDuration: 2.4,
+      withDuration: 1.8,
       delay: 0,
       options: .curveEaseIn,
       animations: { [weak self] in

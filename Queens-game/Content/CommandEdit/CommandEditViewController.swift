@@ -167,7 +167,12 @@ extension CommandEditViewController {
       leadingAnchor: view.leadingAnchor,
       trailingAnchor: view.trailingAnchor,
       bottomAnchor: view.bottomAnchor,
-      padding: .init(top: 24, left: 32, bottom: -Constant.Common.bottomSpacing*2, right: 32)
+      padding: .init(
+        top: 24,
+        left: 32,
+        bottom: Constant.Common.bottomSpacing*2,
+        right: 32
+      )
     )
     
     cancelButton.configSuperView(under: view)
@@ -191,7 +196,10 @@ extension CommandEditViewController {
     // If edit mode, add delete button
     if let _ = viewModel.selectedCommand {
       deleteButton.configSuperView(under: view)
-      deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+      deleteButton.bottomAnchor.constraint(
+        equalTo: view.bottomAnchor,
+        constant: -Constant.Common.bottomSpacing
+      ).isActive = true
       deleteButton.centerXin(view)
     }
     

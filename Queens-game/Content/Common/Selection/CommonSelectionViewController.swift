@@ -23,4 +23,7 @@ class CommonSelectionViewController: UIViewController {
     return collectionView
   }()
   
+  let navButtons = NextAndBackButtons()
+  
+  
 }

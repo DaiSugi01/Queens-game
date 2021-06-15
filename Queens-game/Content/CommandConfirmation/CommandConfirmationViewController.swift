@@ -161,7 +161,7 @@ extension CommandConfirmationViewController {
       top: Constant.Common.topSpacing/2,
       left: Constant.Common.leadingSpacing,
       bottom: 64,
-      right: Constant.Common.trailingSpacing
+      right: -Constant.Common.trailingSpacing
     )
     
     // Only set stack-view's width

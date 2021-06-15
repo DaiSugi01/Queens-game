@@ -9,7 +9,38 @@ import UIKit
 
 extension CommonSelectionViewController {
   
-  /// Config layout of CollectionViewController
+  /// Setup whole layout except background.
+  func configureLayout() {
+
+    collectionView.configSuperView(under: view)
+    navButtons.configSuperView(under: view)
+    
+    // collection view
+    collectionView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing/2,
+        left: 0,
+        bottom: Constant.Common.bottomSpacing/2,
+        right: 0
+      )
+    )
+    collectionView.contentInset = .init(
+      top: Constant.Common.topSpacing/2,
+      left: 0,
+      bottom: Constant.Common.bottomSpacing/2,
+      right: 0
+    )
+
+    // Buttons
+    navButtons.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: -Constant.Common.bottomSpacing
+    ).isActive = true
+    navButtons.centerXin(view)
+  }
+  
+  
+  /// Configure layout of CollectionViewController
   /// Internally, it executes
   /// 1. General layout of collection view
   /// 2. CompositionalLayout
@@ -57,7 +88,7 @@ extension CommonSelectionViewController {
       top: 40,
       leading: Constant.Common.leadingSpacing,
       bottom: 64,
-      trailing: -Constant.Common.trailingSpacing
+      trailing: Constant.Common.trailingSpacing
     )
     
     // Header view of section

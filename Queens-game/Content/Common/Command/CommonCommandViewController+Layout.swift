@@ -24,7 +24,10 @@ extension CommonCommandViewController {
   
   func configBottomNavigationBar() {
     bottomNavigationBar.configSuperView(under: view)
-    bottomNavigationBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constant.Common.bottomSpacing).isActive = true
+    bottomNavigationBar.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: -Constant.Common.bottomSpacing
+    ).isActive = true
     bottomNavigationBar.centerXin(view)
   }
   
