@@ -25,7 +25,6 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   
   lazy var contentWrapper: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle])
-    sv.translatesAutoresizingMaskIntoConstraints = false
     sv.spacing = spacing
     sv.alignment = .fill
     sv.distribution = .fill
@@ -36,7 +35,6 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
 
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Enter Player names")
-    lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
@@ -93,6 +91,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
       constant: -Constant.Common.bottomSpacing
     ).isActive = true
     navButtons.centerXin(view)
+//    navButtons.constraintWidth(equalToConstant: view.frame.width - Constant.Common.leadingSpacing*2)
     // Load this view to get height.
     navButtons.layoutIfNeeded()
   }
@@ -101,33 +100,35 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     // Scroll View
     scrollView.matchParent(
       padding: .init(
-        top: Constant.Common.topSpacing/2,
+        top: Constant.Common.topLineHeight,
         left: 0,
-        bottom: Constant.Common.bottomSpacing/2,
+        bottom: Constant.Common.bottomLineHeight,
         right: 0
       )
     )
     
     // Content
     // This will set the content  wrapper's width
-    contentWrapper.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1, constant: -Constant.Common.leadingSpacing*2).isActive = true
+    contentWrapper.widthAnchor.constraint(
+      equalTo: scrollView.widthAnchor,
+      multiplier: 1,
+      constant: -Constant.Common.leadingSpacing*2)
+      .isActive = true
     // This will create scroll view's `contentSize` equal to content wrapper.
     let cg = scrollView.contentLayoutGuide
     contentWrapper.anchors(
       topAnchor: cg.topAnchor,
       leadingAnchor: cg.leadingAnchor,
       trailingAnchor: cg.trailingAnchor,
-      bottomAnchor: cg.bottomAnchor
+      bottomAnchor: cg.bottomAnchor,
+      padding: .init(
+        top: Constant.Common.topSpacingFromTopLine,
+        left: Constant.Common.leadingSpacing,
+        bottom: Constant.Common.bottomSpacingFromBottomLine + navButtons.frame.height + spacing,
+        right: Constant.Common.trailingSpacing
+      )
     )
-    
-    // Inset
-    // This will set padding between scroll view and content wrapper.
-    scrollView.contentInset = .init(
-      top: Constant.Common.topSpacing/2,
-      left: Constant.Common.leadingSpacing,
-      bottom: Constant.Common.bottomSpacing/2 + navButtons.frame.height + spacing,
-      right: Constant.Common.trailingSpacing
-    )
+
   }
   
   /// Create each EntryName fields

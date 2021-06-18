@@ -9,20 +9,31 @@ import UIKit
 
 
 extension CommonCommandViewController {
-  func configSearchBar() {
+  func configureSearchBar() {
     searchBar.delegate = self
     searchBar.configSuperView(under: view)
     searchBar.anchors(
-      topAnchor: view.topAnchor,
+      topAnchor: nil,
       leadingAnchor: view.leadingAnchor,
       trailingAnchor: view.trailingAnchor,
       bottomAnchor:  nil,
-      padding: .init(top: Constant.Common.topSpacing*0.64 - 24, left: 32-8, bottom: 0, right: 32-8)
+      padding: .init(
+        top: 0 ,
+        left: Constant.Common.leadingSpacing - 10,
+        bottom: 0,
+        right: Constant.Common.trailingSpacing - 10
+      )
     )
+    // Set search bar same height as topLine of background
+    if let background = backgroundCreator as? BackgroundCreatorPlain {
+      searchBar.centerYAnchor.constraint(
+        greaterThanOrEqualTo: background.topLine.centerYAnchor
+      ).isActive = true
+    }
     searchBar.isHidden = true
   }
   
-  func configBottomNavigationBar() {
+  func configureBottomNavigationBar() {
     bottomNavigationBar.configSuperView(under: view)
     bottomNavigationBar.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
@@ -30,15 +41,10 @@ extension CommonCommandViewController {
     ).isActive = true
     bottomNavigationBar.centerXin(view)
   }
-  
-  func disableDefaultNavigation() {
-    navigationItem.hidesBackButton = true
-    navigationController?.setNavigationBarHidden(true, animated: false)
-  }
 }
 
 extension CommonCommandViewController {
-  /// Config layout of CollectionViewController
+  /// Configure layout of CollectionViewController
   /// Internally, it executes
   /// 1. General layout of collection view
   /// 2. CompositionalLayout
@@ -53,11 +59,22 @@ extension CommonCommandViewController {
       leadingAnchor: view.leadingAnchor,
       trailingAnchor: view.trailingAnchor,
       bottomAnchor: view.bottomAnchor,
-      padding: .init(top: 0, left: 0, bottom: 0, right: 0)
+      padding: .init(
+        top: Constant.Common.topLineHeight,
+        left: 0,
+        bottom: Constant.Common.bottomLineHeight,
+        right: 0
+      )
     )
     
     // Config compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
+    collectionView.contentInset = .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: 0,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
+      right: 0
+    )
   }
   
   
@@ -92,7 +109,12 @@ extension CommonCommandViewController {
     // Section
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 16
-    section.contentInsets = .init(top: 16, leading: 32, bottom: 128, trailing: 32)
+    section.contentInsets = .init(
+      top: 24, // This space is between header view and section. We can't set space with this. This. Thus, For Top space, we set it by collectionView.contentInsets.
+      leading: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacing,
+      trailing: Constant.Common.trailingSpacing
+    )
     
     // Header view of section
     section.boundarySupplementaryItems = [createHeader(CommandHeaderCollectionReusableView.identifier)]

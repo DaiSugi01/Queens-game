@@ -92,6 +92,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     bts.configSuperView(under: wrapper)
     bts.centerXYin(wrapper)
     bts.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 1).isActive = true
+    bts.widthAnchor.constraint(equalTo: wrapper.widthAnchor, multiplier: 1).isActive = true
     wrapper.setContentHuggingPriority(.required, for: .vertical)
     
     return wrapper
@@ -110,21 +111,15 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundCreator.configureLayout()
     setupLayout()
+    backgroundCreator.configureLayout()
   }
   
   /// Setup whole layout
   private func setupLayout() {
-    // config navigation
-    navigationItem.hidesBackButton = true
     
     verticalSV.configSuperView(under: view)
-    verticalSV.anchors(
-      topAnchor: view.topAnchor,
-      leadingAnchor: view.leadingAnchor,
-      trailingAnchor: view.trailingAnchor,
-      bottomAnchor: view.bottomAnchor,
+    verticalSV.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,

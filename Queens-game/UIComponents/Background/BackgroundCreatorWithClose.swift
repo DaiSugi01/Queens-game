@@ -1,17 +1,17 @@
 //
-//  BackgroundViewWithMenu.swift
+//  BackgroundCreatorWithClose.swift
 //  Queens-game
 //
-//  Created by Takayuki Yamaguchi on 2021-06-13.
+//  Created by Takayuki Yamaguchi on 2021-06-16.
 //
 
 import UIKit
 
 
-/// BackgroundView which also have menu bottom on top right in addition to `backgroundPlain`
-class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
+/// BackgroundView which also have close bottom on top right in addition to `backgroundPlain`
+class BackgroundCreatorWithClose: BackgroundCreatorPlain {
 
-  let menuButton = MenuButton()
+  let closeButton = CloseButton()
   /// This is used for `present` and getting `view`
   weak var viewController: QueensGameViewControllerProtocol!
   
@@ -24,31 +24,30 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
   
   override func configureLayout() {
-    menuButton.configSuperView(under: parentView)
+    closeButton.configSuperView(under: parentView)
     super.configureLayout()
     configureMenuButton()
   }
   
   func configureMenuButton() {
     NSLayoutConstraint.activate([
-      menuButton.centerYAnchor.constraint(
+      closeButton.centerYAnchor.constraint(
         equalTo: parentView.topAnchor,
         constant: Constant.Common.topLineHeight
       ),
-      menuButton.trailingAnchor.constraint(
+      closeButton.trailingAnchor.constraint(
         equalTo: parentView.trailingAnchor,
         constant: -Constant.Common.trailingSpacing*0.8
       )
     ])
-    menuButton.addTarget(
+    closeButton.addTarget(
       self,
-      action: #selector(menuTapped),
+      action: #selector(closeTapped),
       for: .touchUpInside
     )
   }
-  @objc func menuTapped() {
-    let nx = MenuViewController()
-    viewController.present(nx, animated: true, completion: nil)
+  @objc func closeTapped() {
+    viewController.dismiss(animated: true, completion: nil)
   }
   
   override func configureBorder() {
@@ -64,7 +63,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
         constant: Constant.Common.topLineHeight
       ),
       topLine.trailingAnchor.constraint(
-        equalTo: menuButton.leadingAnchor,
+        equalTo: closeButton.leadingAnchor,
         constant: -16
       )
     ])

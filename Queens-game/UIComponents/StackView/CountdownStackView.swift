@@ -39,9 +39,8 @@ class CountdownStackView: VerticalStackView {
     return label
   }()
 
-  lazy var sec: UILabel = {
-    let label = UILabel()
-    label.text = "sec"
+  lazy var sec: H4Label = {
+    let label = H4Label(text: "sec")
     label.textAlignment = .center
     return label
   }()
