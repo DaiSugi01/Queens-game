@@ -10,7 +10,7 @@ import UIKit
 class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
-  let navButtons = NextAndBackButtons()
+  let navButtons = MainButton()
 
   var target: User
 
@@ -182,39 +182,51 @@ extension ResultViewController {
   }
 
   private func configureButtons() {
-    navButtons.nextButton.setTitle("Go to Top", for: .normal)
-    navButtons.nextButton.titleLabel?.font = CustomFont.h4
-    navButtons.nextButton.addTarget(
+    navButtons.setTitle("Done!", for: .normal)
+    navButtons.addTarget(
       self,
-      action: #selector(toTop),
+      action: #selector(nextTapped),
       for: .touchUpInside
     )
+    navButtons.configSuperView(under: view)
+    navButtons.centerXin(view)
+    navButtons.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: -Constant.Common.bottomSpacing
+    ).isActive = true
     
-    navButtons.backButton.setTitle("Select Queen", for: .normal)
-    navButtons.backButton.titleLabel?.font = CustomFont.h4
-    navButtons.backButton.titleLabel?.lineBreakMode = .byWordWrapping
-    navButtons.backButton.addTarget(
-      self,
-      action: #selector(reselectQueen),
-      for: .touchUpInside
-    )
+//    navButtons.backButton.setTitle("Select Queen", for: .normal)
+//    navButtons.backButton.titleLabel?.font = CustomFont.h4
+//    navButtons.backButton.titleLabel?.lineBreakMode = .byWordWrapping
+//    navButtons.backButton.addTarget(
+//      self,
+//      action: #selector(reselectQueen),
+//      for: .touchUpInside
+//    )
 
   }
-
-  @objc private func reselectQueen() {
-    self.resetGameManager()
-    let nx = QueenSelectionViewController()
-    GameManager.shared.pushGameProgress(
-      navVC: navigationController,
-      currentScreen: self,
-      nextScreen: nx
-    )
+  
+  @objc private func nextTapped() {
+    let nx = UIViewController()
+    GameManager.shared.pushGameProgress(navVC: navigationController,
+                                        currentScreen: self,
+                                        nextScreen: nx)
   }
 
-  @objc private func toTop() {
-    self.resetGameManager()
-    super.navigationController?.popToRootViewController(animated: true)
-  }
+//  @objc private func reselectQueen() {
+//    self.resetGameManager()
+//    let nx = QueenSelectionViewController()
+//    GameManager.shared.pushGameProgress(
+//      navVC: navigationController,
+//      currentScreen: self,
+//      nextScreen: nx
+//    )
+//  }
+
+//  @objc private func toTop() {
+//    self.resetGameManager()
+//    super.navigationController?.popToRootViewController(animated: true)
+//  }
 
   private func getGameManager() -> GameManagerProtocol {
     if GameManager.shared.users.count > 0 {
@@ -235,12 +247,12 @@ extension ResultViewController {
     }
   }
 
-  private func resetGameManager() {
-    for (i, _) in GameManager.shared.users.enumerated() {
-      GameManager.shared.users[i].isQueen = false
-    }
-    GameManager.shared.queen = nil
-  }
+//  private func resetGameManager() {
+//    for (i, _) in GameManager.shared.users.enumerated() {
+//      GameManager.shared.users[i].isQueen = false
+//    }
+//    GameManager.shared.queen = nil
+//  }
   
   private func iconLabelCreator(_ iconType: IconType, _ label: String) -> UIStackView {
     let icon = IconFactory.createImageView(type: iconType, height: 64)

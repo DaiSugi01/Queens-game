@@ -7,29 +7,70 @@
 
 import UIKit
 
-class QueenSelectionViewController: CommonSelectionViewController, QueensGameViewControllerProtocol {
+class QueenSelectionViewController:
+  UIViewController,
+  QueensGameSelectionProtocol,
+  QueensGameViewControllerProtocol
+{
+  var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
+  
+  var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+  
+  var collectionView: UICollectionView! = UICollectionView(
+    frame: .zero,
+    collectionViewLayout: UICollectionViewLayout()
+  )
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
+  
+  let navButtons = NextAndBackButtons()
 
   let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureCollectionView()
-    configureLayout()
+    configureRegistration()
+    configureViewControllerLayout()
+    configureCollectionViewLayout()
+    configureDiffableDataSource()
+    
     backgroundCreator.configureLayout()
     configureButtonActions()
     
   }
   
-  /// Setup collection view layout and datasource
-  private func configureCollectionView() {
-    createCollectionViewLayout()
-    createDiffableDataSource(
+  func configureRegistration() {
+    collectionView.register(
+      SelectionCollectionViewCell.self,
+      forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier
+    )
+    
+    collectionView.register(
+      GeneticLabelCollectionReusableView.self,
+      forSupplementaryViewOfKind: GeneticLabelCollectionReusableView.identifier,
+      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
+    )
+  }
+  
+  func configureDiffableDataSource() {
+    configureDiffableDataSourceHelper(
       with: Constant.QueenSelection.options,
       and: Constant.QueenSelection.title
-    )
+    ) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+      
+      if let selection = item.selection {
+        let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: SelectionCollectionViewCell.identifier,
+          for: indexPath
+        ) as! SelectionCollectionViewCell
+        cell.configContent(by: selection)
+
+        return cell
+      }
+      
+      return nil
+    }
     
     // Select first item by default
     guard let sectionIndex = sections.firstIndex(of: .selection) else { return }
@@ -39,10 +80,17 @@ class QueenSelectionViewController: CommonSelectionViewController, QueensGameVie
       scrollPosition: .top
     )
   }
-  
+
   
   /// Set Button Actions
   private func configureButtonActions() {
+    navButtons.configSuperView(under: view)
+    navButtons.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: -Constant.Common.bottomSpacing
+    ).isActive = true
+    navButtons.centerXin(view)
+    
     navButtons.nextButton.addTarget(
       self,
       action: #selector(goToNext(_:)),

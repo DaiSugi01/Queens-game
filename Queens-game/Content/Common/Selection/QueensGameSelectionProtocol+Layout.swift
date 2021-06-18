@@ -7,13 +7,12 @@
 
 import UIKit
 
-extension CommonSelectionViewController {
-  
-  /// Setup whole layout except background.
-  func configureLayout() {
 
+//ViewController
+extension QueensGameSelectionProtocol {
+  /// Setup whole layout except background.
+  func configureViewControllerLayout() {
     collectionView.configSuperView(under: view)
-    navButtons.configSuperView(under: view)
     
     // collection view
     collectionView.matchParent(
@@ -30,15 +29,12 @@ extension CommonSelectionViewController {
       bottom: Constant.Common.bottomSpacingFromBottomLine,
       right: 0
     )
-
-    // Buttons
-    navButtons.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: -Constant.Common.bottomSpacing
-    ).isActive = true
-    navButtons.centerXin(view)
   }
-  
+}
+
+
+// Collection View
+extension QueensGameSelectionProtocol {
   
   /// Configure layout of CollectionViewController
   /// Internally, it executes
@@ -48,7 +44,8 @@ extension CommonSelectionViewController {
   ///    - group
   ///    - section
   ///     - with section header
-  func createCollectionViewLayout() {
+  
+  func configureCollectionViewLayout() {
     collectionView.configBgColor(bgColor: .clear)
     // Config compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
