@@ -116,6 +116,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     let button = MainButton()
     button.setTitle("Next", for: .normal)
     button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+    button.isEnabled = false
     return button
   }()
 
@@ -189,7 +190,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       animations: { [weak self] in
         self?.afterCountdownStackView.alpha = 1
       },
-      completion: nil
+      completion: { [weak self] _ in
+        self?.nextButton.isEnabled = true
+      }
     )
     
   }

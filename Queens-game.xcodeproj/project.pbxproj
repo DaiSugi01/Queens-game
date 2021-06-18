@@ -89,7 +89,6 @@
 		487AF1E7264B9A2900663047 /* CommonCommandViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1E6264B9A2900663047 /* CommonCommandViewController+SearchBar.swift */; };
 		487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1EA264C61AF00663047 /* CommandViewModel.swift */; };
 		487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1EF264CE75400663047 /* CommandSettingViewController.swift */; };
-		487AF1F2264CF22300663047 /* ScrollView+ScrollToBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */; };
 		4888CA012675FEB4005F8BBD /* BackgroundCreatorWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4888CA002675FEB4005F8BBD /* BackgroundCreatorWithMenu.swift */; };
 		4892E020264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E01F264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift */; };
 		4892E022264A170300C3EFB4 /* CommonCommandViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892E021264A170300C3EFB4 /* CommonCommandViewController+Layout.swift */; };
@@ -105,6 +104,8 @@
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
 		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
+		48E54179267C48A300D891E1 /* DynamicHeightScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */; };
+		48E5417B267C741A00D891E1 /* CommandAttributeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */; };
 		48EBE7E02672974E00DAC164 /* UIImage+blend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EBE7DF2672974E00DAC164 /* UIImage+blend.swift */; };
 		48EECAE6265F6E5600B74066 /* UIButton+RxIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */; };
 		99655A9E23AAC208A3A831A5 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */; };
@@ -195,7 +196,6 @@
 		487AF1E6264B9A2900663047 /* CommonCommandViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+SearchBar.swift"; sourceTree = "<group>"; };
 		487AF1EA264C61AF00663047 /* CommandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewModel.swift; sourceTree = "<group>"; };
 		487AF1EF264CE75400663047 /* CommandSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSettingViewController.swift; sourceTree = "<group>"; };
-		487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+ScrollToBottom.swift"; sourceTree = "<group>"; };
 		4888CA002675FEB4005F8BBD /* BackgroundCreatorWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithMenu.swift; sourceTree = "<group>"; };
 		4892E01F264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+DataSource.swift"; sourceTree = "<group>"; };
 		4892E021264A170300C3EFB4 /* CommonCommandViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonCommandViewController+Layout.swift"; sourceTree = "<group>"; };
@@ -211,6 +211,8 @@
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
 		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightScrollView.swift; sourceTree = "<group>"; };
+		48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAttributeStackView.swift; sourceTree = "<group>"; };
 		48EBE7DF2672974E00DAC164 /* UIImage+blend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+blend.swift"; sourceTree = "<group>"; };
 		48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+RxIsValid.swift"; sourceTree = "<group>"; };
 		70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
@@ -469,8 +471,11 @@
 		3B7981C3264F8C2B002D2F71 /* StackView */ = {
 			isa = PBXGroup;
 			children = (
+				4826816C2645EBA70010543A /* HorizontalStackView.swift */,
+				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
+				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
 			);
 			path = StackView;
 			sourceTree = "<group>";
@@ -549,12 +554,10 @@
 		4826816B2645EBA70010543A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4826816C2645EBA70010543A /* HorizontalStackView.swift */,
 				4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */,
-				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */,
 				482681702645EBA70010543A /* UIView+ConfigLayout.swift */,
-				487AF1F1264CF22300663047 /* ScrollView+ScrollToBottom.swift */,
+				48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -865,7 +868,6 @@
 				482681992645EBA80010543A /* IconType.swift in Sources */,
 				4826819C2645EBA80010543A /* IconFactory.swift in Sources */,
 				0A04254C264F22460019AEC1 /* PlayerSelectionViewModel.swift in Sources */,
-				487AF1F2264CF22300663047 /* ScrollView+ScrollToBottom.swift in Sources */,
 				482681952645EBA80010543A /* MainButton.swift in Sources */,
 				487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */,
 				0A85DFDA265B1AFA00F662B5 /* QueenSelectedViewModel.swift in Sources */,
@@ -939,6 +941,7 @@
 				3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */,
 				485635F026438AB80043AF21 /* Selection.swift in Sources */,
 				4892E022264A170300C3EFB4 /* CommonCommandViewController+Layout.swift in Sources */,
+				48E5417B267C741A00D891E1 /* CommandAttributeStackView.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
 				487AF1E5264B977100663047 /* CommonCommandViewController+ScrollView.swift in Sources */,
 				4892E020264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift in Sources */,
@@ -955,6 +958,7 @@
 				4826819D2645EBA80010543A /* CustomSegmentedView.swift in Sources */,
 				485635EC26437CED0043AF21 /* Command.swift in Sources */,
 				0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */,
+				48E54179267C48A300D891E1 /* DynamicHeightScrollView.swift in Sources */,
 				4826819B2645EBA80010543A /* IconSource.swift in Sources */,
 				3B7981A3264F09AA002D2F71 /* CitizenSelectedViewModel.swift in Sources */,
 				48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */,
