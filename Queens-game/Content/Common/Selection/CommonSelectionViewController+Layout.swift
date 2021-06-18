@@ -18,16 +18,16 @@ extension CommonSelectionViewController {
     // collection view
     collectionView.matchParent(
       padding: .init(
-        top: Constant.Common.topSpacing/2,
+        top: Constant.Common.topLineHeight,
         left: 0,
-        bottom: Constant.Common.bottomSpacing/2,
+        bottom: Constant.Common.bottomLineHeight,
         right: 0
       )
     )
     collectionView.contentInset = .init(
-      top: Constant.Common.topSpacing/2,
+      top: Constant.Common.topSpacingFromTopLine,
       left: 0,
-      bottom: Constant.Common.bottomSpacing/2,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
       right: 0
     )
 

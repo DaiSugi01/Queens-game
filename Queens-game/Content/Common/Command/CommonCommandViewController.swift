@@ -60,9 +60,8 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
     configBinding()
     
     // Config Other ui views
-    disableDefaultNavigation()
-    configSearchBar()
-    configBottomNavigationBar()
+    configureSearchBar()
+    configureBottomNavigationBar()
   }
   
   @objc func backTapped() {

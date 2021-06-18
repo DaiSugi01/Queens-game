@@ -17,15 +17,16 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   let viewModel = QueenSelectedViewModel()
 
   
-  // MARK: - First half views
+  // MARK: - Before countdown views
   
   lazy var countdownStackView = CountdownStackView(
     countdown: self.viewModel.countdownTime
   )
 
-  let screenTitle: H2Label = {
-    let lb = H2Label(text: "Selecting the Queen...")
+  let beforeCountdownTitle: H2Label = {
+    let lb = H2Label(text: "Choosing a Queen...")
     lb.lineBreakMode = .byWordWrapping
+    lb.textAlignment = .center
     return lb
   }()
 
@@ -36,10 +37,10 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return button
   }()
 
-  lazy var firstHalfStackView: VerticalStackView = {
+  lazy var beforeCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
-        screenTitle,
+        beforeCountdownTitle,
         countdownStackView,
         skipButton
       ]
@@ -50,9 +51,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   }()
 
   
-  // MARK: Last half views (After Countdown)
+  // MARK: After Countdown views
 
-  let afterTitle: H2Label = {
+  let afterCountdownTitle: H2Label = {
     let lb = H2Label(text: "The Queen is")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
@@ -67,14 +68,14 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return icon
   }()
   
-  lazy var noLabel: H2Label = {
+  lazy var userNumberLabel: H2Label = {
     let label = H2Label(text: "No.")
     label.textColor = CustomColor.accent
     label.textAlignment = .right
     return label
   }()
   
-  lazy var targetIcon: UIImageView = {
+  lazy var targetUserIcon: UIImageView = {
     let icon = IconFactory.createImageView(
       type: .userId(GameManager.shared.queen!.playerId),
       width: 64
@@ -83,16 +84,16 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return icon
   }()
 
-  lazy var queenName: H2Label = {
+  lazy var targetUserName: H2Label = {
     let label = H2Label(text: GameManager.shared.queen!.name)
     label.textAlignment = .center
     label.textColor = CustomColor.accent
     return label
   }()
   
-  lazy var hStackView: HorizontalStackView = {
+  lazy var targetWrapper: HorizontalStackView = {
     let sv = HorizontalStackView(
-      arrangedSubviews: [self.noLabel, targetIcon]
+      arrangedSubviews: [self.userNumberLabel, targetUserIcon]
     )
     sv.distribution = .equalSpacing
     sv.alignment = .center
@@ -101,13 +102,13 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return sv
   }()
     
-  lazy var queenBlock: VerticalStackView = {
+  lazy var queenWrapper: VerticalStackView = {
     let sv = VerticalStackView(
-      arrangedSubviews: [self.queenIcon, self.hStackView, self.queenName]
+      arrangedSubviews: [self.queenIcon, self.targetWrapper, self.targetUserName]
     )
     sv.alignment = .center
     sv.spacing = 32
-    sv.setCustomSpacing(24, after: hStackView)
+    sv.setCustomSpacing(24, after: targetWrapper)
     
     // Set negative padding. This is to crop image.
     sv.isLayoutMarginsRelativeArrangement = true
@@ -122,10 +123,15 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
     return button
   }()
+
   
-  lazy var lastHalfStackView: VerticalStackView = {
+  lazy var afterCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
-      arrangedSubviews: [self.afterTitle, self.queenBlock, self.nextButton],
+      arrangedSubviews: [
+        self.afterCountdownTitle,
+        self.queenWrapper,
+        self.nextButton
+      ],
       alignment: .center,
       distribution: .equalSpacing
     )
@@ -135,7 +141,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   override func viewDidLoad() {
     super.viewDidLoad()
     backgroundCreator.configureLayout()
-    setupLayout()
+    configureLayoutBeforeCountdown()
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in
@@ -147,10 +153,10 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       .disposed(by: disposeBag)
   }
 
-  private func setupLayout() {
+  private func configureLayoutBeforeCountdown() {
 
-    firstHalfStackView.configSuperView(under: view)
-    firstHalfStackView.matchParent(
+    beforeCountdownStackView.configSuperView(under: view)
+    beforeCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,
@@ -160,10 +166,10 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     )
   }
 
-  private func setupLayoutAfterCountdown() {
+  private func configureLayoutAfterCountdown() {
     
-    lastHalfStackView.configSuperView(under: super.view)
-    lastHalfStackView.matchParent(
+    afterCountdownStackView.configSuperView(under: super.view)
+    afterCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
         left: Constant.Common.leadingSpacing,
@@ -174,11 +180,11 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   }
   
   private func replaceView() {
-    self.firstHalfStackView.removeFromSuperview()
+    self.beforeCountdownStackView.removeFromSuperview()
     
     // Set up, but make last half views invisible
-    lastHalfStackView.alpha = 0
-    self.setupLayoutAfterCountdown()
+    afterCountdownStackView.alpha = 0
+    self.configureLayoutAfterCountdown()
     
     // Fade in the last half views
     UIView.animate(
@@ -186,7 +192,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       delay: 0,
       options: .curveEaseIn,
       animations: { [weak self] in
-        self?.lastHalfStackView.alpha = 1
+        self?.afterCountdownStackView.alpha = 1
       },
       completion: nil
     )

@@ -17,13 +17,11 @@
 		0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62832637A70C0082ACAE /* tempExtension.swift */; };
 		0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62942638B1830082ACAE /* TopViewController.swift */; };
 		0A3A62982638B3780082ACAE /* PlayerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62972638B3780082ACAE /* PlayerSelectionViewController.swift */; };
-		0A3A62AA2638BBF20082ACAE /* QueenSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62A92638BBF20082ACAE /* QueenSelectingViewController.swift */; };
 		0A3A62AF2638BC5A0082ACAE /* EntryNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */; };
 		0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62B72638BFC30082ACAE /* QueenSelectedViewController.swift */; };
 		0A3A62BC2638C0580082ACAE /* CommandSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62BB2638C0580082ACAE /* CommandSelectionViewController.swift */; };
 		0A3A62C12638C12A0082ACAE /* CommandManualSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62C02638C12A0082ACAE /* CommandManualSelectingViewController.swift */; };
 		0A3A62C52638C1AB0082ACAE /* CommandConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62C42638C1AB0082ACAE /* CommandConfirmationViewController.swift */; };
-		0A3A62C92638C2C80082ACAE /* CitizenSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62C82638C2C80082ACAE /* CitizenSelectingViewController.swift */; };
 		0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62CD2638C3310082ACAE /* CitizenSelectedViewController.swift */; };
 		0A3A62D42638C3AA0082ACAE /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D32638C3AA0082ACAE /* ResultViewController.swift */; };
 		0A3A62D92638CF960082ACAE /* CommonCommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */; };
@@ -46,6 +44,8 @@
 		3B93A6F72648AD8E009FB008 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */; };
 		3B9E940C2650610A003207F7 /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E940B2650610A003207F7 /* Executor.swift */; };
 		480952A32675DACA00A39166 /* BackgroundCreatorPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */; };
+		481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */; };
+		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -123,13 +123,11 @@
 		0A3A62832637A70C0082ACAE /* tempExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempExtension.swift; sourceTree = "<group>"; };
 		0A3A62942638B1830082ACAE /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		0A3A62972638B3780082ACAE /* PlayerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewController.swift; sourceTree = "<group>"; };
-		0A3A62A92638BBF20082ACAE /* QueenSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectingViewController.swift; sourceTree = "<group>"; };
 		0A3A62AE2638BC5A0082ACAE /* EntryNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryNameViewController.swift; sourceTree = "<group>"; };
 		0A3A62B72638BFC30082ACAE /* QueenSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectedViewController.swift; sourceTree = "<group>"; };
 		0A3A62BB2638C0580082ACAE /* CommandSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSelectionViewController.swift; sourceTree = "<group>"; };
 		0A3A62C02638C12A0082ACAE /* CommandManualSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandManualSelectingViewController.swift; sourceTree = "<group>"; };
 		0A3A62C42638C1AB0082ACAE /* CommandConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConfirmationViewController.swift; sourceTree = "<group>"; };
-		0A3A62C82638C2C80082ACAE /* CitizenSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectingViewController.swift; sourceTree = "<group>"; };
 		0A3A62CD2638C3310082ACAE /* CitizenSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedViewController.swift; sourceTree = "<group>"; };
 		0A3A62D32638C3AA0082ACAE /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCommandViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +150,8 @@
 		3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B9E940B2650610A003207F7 /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorPlain.swift; sourceTree = "<group>"; };
+		481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithClose.swift; sourceTree = "<group>"; };
+		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		4826815D2645EBA70010543A /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		4826815F2645EBA70010543A /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -299,7 +299,6 @@
 			children = (
 				48EBE7E22673429900DAC164 /* Common */,
 				0A3A62CC2638C3270082ACAE /* CitizenSelected */,
-				0A3A62C72638C2AE0082ACAE /* CitizenSelecting */,
 				0A3A62C32638C1850082ACAE /* CommandConfirmation */,
 				0A3A62DF2638D1A20082ACAE /* CommandEdit */,
 				0A3A62BF2638C10F0082ACAE /* CommandManualSelecting */,
@@ -311,7 +310,6 @@
 				0A3A62E12638D3110082ACAE /* Menu */,
 				0A3A629A2638B3880082ACAE /* PlayerSelection */,
 				0A3A62AD2638BC2B0082ACAE /* QueenSelected */,
-				0A3A62A82638BBE60082ACAE /* QueenSelecting */,
 				0A3A62A32638BB8A0082ACAE /* QueenSelection */,
 				0A3A62D22638C3950082ACAE /* Result */,
 				0A3A62EB2638D4650082ACAE /* Settings */,
@@ -369,14 +367,6 @@
 			path = QueenSelection;
 			sourceTree = "<group>";
 		};
-		0A3A62A82638BBE60082ACAE /* QueenSelecting */ = {
-			isa = PBXGroup;
-			children = (
-				0A3A62A92638BBF20082ACAE /* QueenSelectingViewController.swift */,
-			);
-			path = QueenSelecting;
-			sourceTree = "<group>";
-		};
 		0A3A62AD2638BC2B0082ACAE /* QueenSelected */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,14 +398,6 @@
 				0A3A62C42638C1AB0082ACAE /* CommandConfirmationViewController.swift */,
 			);
 			path = CommandConfirmation;
-			sourceTree = "<group>";
-		};
-		0A3A62C72638C2AE0082ACAE /* CitizenSelecting */ = {
-			isa = PBXGroup;
-			children = (
-				0A3A62C82638C2C80082ACAE /* CitizenSelectingViewController.swift */,
-			);
-			path = CitizenSelecting;
 			sourceTree = "<group>";
 		};
 		0A3A62CC2638C3270082ACAE /* CitizenSelected */ = {
@@ -498,6 +480,7 @@
 			children = (
 				480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */,
 				4888CA002675FEB4005F8BBD /* BackgroundCreatorWithMenu.swift */,
+				481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */,
 			);
 			path = Background;
 			sourceTree = "<group>";
@@ -584,6 +567,7 @@
 				482681742645EBA70010543A /* MainButton.swift */,
 				48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */,
 				48449FEA2671D47E007E569A /* MenuButton.swift */,
+				481C2CB4267AF5A1003975FF /* CloseButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -885,6 +869,7 @@
 				482681952645EBA80010543A /* MainButton.swift in Sources */,
 				487AF1EB264C61AF00663047 /* CommandViewModel.swift in Sources */,
 				0A85DFDA265B1AFA00F662B5 /* QueenSelectedViewModel.swift in Sources */,
+				481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */,
 				482681862645EBA80010543A /* H2Label.swift in Sources */,
 				4826818D2645EBA80010543A /* SelectionCollectionViewCell.swift in Sources */,
 				0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */,
@@ -902,7 +887,6 @@
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
 				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
-				0A3A62C92638C2C80082ACAE /* CitizenSelectingViewController.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
 				4826818A2645EBA80010543A /* H4Label.swift in Sources */,
 				48AE80442640B26F00CBDB5E /* DemoFontViewController.swift in Sources */,
@@ -919,7 +903,6 @@
 				0AD08ACF264A6F1900654A05 /* CommonSelectionViewController.swift in Sources */,
 				0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */,
 				485635E626436FA40043AF21 /* GameManager.swift in Sources */,
-				0A3A62AA2638BBF20082ACAE /* QueenSelectingViewController.swift in Sources */,
 				482681872645EBA80010543A /* PLabel.swift in Sources */,
 				482681842645EBA80010543A /* CustomColor.swift in Sources */,
 				0A0425A226539E3A0019AEC1 /* EntryNameStackView.swift in Sources */,
@@ -967,6 +950,7 @@
 				0A3A62C12638C12A0082ACAE /* CommandManualSelectingViewController.swift in Sources */,
 				482681962645EBA80010543A /* GeneticLabelCollectionReusableView.swift in Sources */,
 				0AD08AD3264A700B00654A05 /* CommonSelectionViewController+DataSource.swift in Sources */,
+				481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */,
 				3B9E940C2650610A003207F7 /* Executor.swift in Sources */,
 				4826819D2645EBA80010543A /* CustomSegmentedView.swift in Sources */,
 				485635EC26437CED0043AF21 /* Command.swift in Sources */,

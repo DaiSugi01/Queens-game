@@ -13,7 +13,7 @@ struct Constant {
     static var topSpacing: CGFloat {
       switch UIScreen.main.bounds.height {
         case 0..<700:
-          return 80
+          return 72
         case 700..<800:
           return 96
         default:
@@ -35,6 +35,23 @@ struct Constant {
     static let leadingSpacing: CGFloat = 32
     
     static let trailingSpacing: CGFloat = 32
+    
+    static var topLineHeight: CGFloat {
+      return topSpacing * 0.64
+    }
+    static var bottomLineHeight: CGFloat {
+      return bottomSpacing * 0.64
+    }
+    
+    /// Remaining space which is"`topSpacing - topLineHeight`". This is used for margin which top anchor is same as topLine.
+    static var topSpacingFromTopLine: CGFloat {
+      return topSpacing - topLineHeight
+    }
+    
+    /// Remaining space which is"`bottomSpacing - bottomLineHeight`". This is used for margin which bottom anchor is same as bottomLine.
+    static var bottomSpacingFromBottomLine: CGFloat {
+      return bottomSpacing - bottomLineHeight
+    }
   }
   
   struct UserDefaults {

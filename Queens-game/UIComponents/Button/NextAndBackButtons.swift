@@ -23,7 +23,7 @@ class NextAndBackButtons: HorizontalStackView {
     super.init(
       arrangedSubviews: [backButton, nextButton],
       spacing: 32,
-      distribution: .fillEqually
+      distribution: .equalSpacing
     )
     self.configLayout(superView: superView)
     backButton.configBgColor(bgColor: CustomColor.background)
@@ -32,6 +32,7 @@ class NextAndBackButtons: HorizontalStackView {
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   
 }

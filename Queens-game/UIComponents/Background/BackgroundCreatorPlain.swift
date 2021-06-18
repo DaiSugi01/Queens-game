@@ -56,23 +56,37 @@ class BackgroundCreatorPlain: BackgroundCreator {
   func configureBorder() {
     // Top border
     NSLayoutConstraint.activate([
-      topLine.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: Constant.Common.leadingSpacing),
-      topLine.centerYAnchor.constraint(equalTo: parentView.topAnchor, constant: Constant.Common.topSpacing*0.5),
-      topLine.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -Constant.Common.trailingSpacing)
+      topLine.leadingAnchor.constraint(
+        equalTo: parentView.leadingAnchor,
+        constant: Constant.Common.leadingSpacing
+      ),
+      topLine.centerYAnchor.constraint(
+        equalTo: parentView.topAnchor,
+        constant: Constant.Common.topLineHeight
+      ),
+      topLine.trailingAnchor.constraint(
+        equalTo: parentView.trailingAnchor,
+        constant: -Constant.Common.trailingSpacing
+      )
     ])
     
     // Bottom
     NSLayoutConstraint.activate([
-      bottomLine.widthAnchor.constraint(equalTo: parentView.widthAnchor, constant: -Constant.Common.leadingSpacing*2),
-      bottomLine.topAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -Constant.Common.bottomSpacing*0.64),
+      bottomLine.widthAnchor.constraint(
+        equalTo: parentView.widthAnchor,
+        constant: -Constant.Common.leadingSpacing*2
+      ),
+      bottomLine.topAnchor.constraint(
+        equalTo: parentView.bottomAnchor,
+        constant: -Constant.Common.bottomLineHeight
+      ),
       bottomLine.centerXAnchor.constraint(equalTo: parentView.centerXAnchor)
     ])
   }
   
   // Set bg image at the very bottom layer.
   private func configureBackgroundImage() {
-    let space: CGFloat = 0
-    backgroundView.matchParent(padding: .init(top: space, left: space, bottom: space, right: space))
+    backgroundView.matchParent()
   }
   
   private static func lineGenerator() -> UIView {

@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Instance variables
 class CommandConfirmationViewController:  UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
   
   var viewModel = CommandViewModel()
   var selectedCommand: Command!
@@ -17,13 +17,16 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   let scrollView = UIScrollView()
   
   // Details
-  let mainLabel: H2Label = {
-    let lb = H2Label(text: "Confirm this command?")
+  let sectionLabel: H2Label = {
+    let lb = H2Label(text: "Ready to give the order?")
     return lb
   } ()
   
-  let detailLabel: H3Label = {
-    let lb = H3Label(text: "Description")
+  
+  // MARK: - Command description
+
+  let subSectionDescriptionLabel: H3Label = {
+    let lb = H3Label(text: "Command")
     return lb
   } ()
   
@@ -56,7 +59,15 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     return uv
   }()
   
-  // Attributes
+  
+  
+  // MARK: - Attributes
+  
+  let subSectionAttributeLabel: H3Label = {
+    let lb = H3Label(text: "This command is")
+    return lb
+  } ()
+  
   let difficultyLabel : H4Label = {
     let lb = H4Label(text: "Difficulty")
     lb.textColor = CustomColor.subMain
@@ -68,7 +79,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     let icon = IconFactory.createImageView(type: iconType, width: 40)
     return icon
   } ()
-
+  
   lazy var difficultyDescription : PLabel = {
     let lb = PLabel(text: selectedCommand.difficultyDescription)
     lb.textColor = CustomColor.subMain
@@ -96,6 +107,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   lazy var attributesStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
+        subSectionAttributeLabel,
         difficultyLabel,
         difficultyIcon,
         difficultyDescription,
@@ -105,29 +117,32 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
       ],
       alignment: .leading
     )
+    sv.setCustomSpacing(16, after: subSectionAttributeLabel)
     sv.setCustomSpacing(4, after: difficultyLabel)
-    sv.setCustomSpacing(8, after: difficultyIcon)
+    sv.setCustomSpacing(16, after: difficultyIcon)
     sv.setCustomSpacing(32, after: difficultyDescription)
     sv.setCustomSpacing(4, after: typeLabel)
-    sv.setCustomSpacing(8, after: typeIcon)
+    sv.setCustomSpacing(16, after: typeIcon)
     return sv
   } ()
-
-  // All in one
+  
+  
+  // MARK: - All in one
+  
   lazy var stackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
-        mainLabel,
-        detailLabel,
+        sectionLabel,
+        subSectionDescriptionLabel,
         detail,
         confirmationButton,
         attributesStackView
       ]
     )
-    sv.setCustomSpacing(40, after: mainLabel)
-    sv.setCustomSpacing(16, after: detailLabel)
+    sv.setCustomSpacing(40, after: sectionLabel)
+    sv.setCustomSpacing(16, after: subSectionDescriptionLabel)
     sv.setCustomSpacing(40, after: detail)
-    sv.setCustomSpacing(40, after: confirmationButton)
+    sv.setCustomSpacing(56, after: confirmationButton)
     return sv
   } ()
   
@@ -142,44 +157,58 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    configureScrollView()
     backgroundCreator.configureLayout()
-    configScrollView()
   }
-
+  
 }
 
 
 // MARK: - Scroll view
 
 extension CommandConfirmationViewController {
-  private func configScrollView() {
+  private func configureScrollView() {
     scrollView.configSuperView(under: view)
-    scrollView.matchParent()
-
-    // This will create padding between content size and stack view
-    scrollView.contentInset = .init(
-      top: Constant.Common.topSpacing/2,
-      left: Constant.Common.leadingSpacing,
-      bottom: 64,
-      right: -Constant.Common.trailingSpacing
+    stackView.configSuperView(under: scrollView)
+    
+    // Scroll View
+    scrollView.matchParent(
+      padding: .init(
+        top: Constant.Common.topLineHeight,
+        left: 0,
+        bottom: Constant.Common.bottomLineHeight,
+        right: 0
+      )
     )
     
-    // Only set stack-view's width
-    stackView.configSuperView(under: scrollView)
-    stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: -2*Constant.Common.leadingSpacing).isActive = true
-    // By this, stack view won't scroll horizontally
-    stackView.centerXin(view)
+    // Inside content Content
     
-    // This will create subviews earlier.
-    // Without this, it will cost few times to decide scroll height.
-    scrollView.layoutIfNeeded()
+    // This will set the stack views's width
+    stackView.widthAnchor.constraint(
+      equalTo: scrollView.widthAnchor,
+      multiplier: 1,
+      constant: -Constant.Common.leadingSpacing*2)
+      .isActive = true
+    
+    // This will create scroll view's `contentSize` equal to stack view.
+    let cg = scrollView.contentLayoutGuide
+    stackView.anchors(
+      topAnchor: cg.topAnchor,
+      leadingAnchor: cg.leadingAnchor,
+      trailingAnchor: cg.trailingAnchor,
+      bottomAnchor: cg.bottomAnchor
+    )
+    
+    // Inset
+    // This will set padding between scroll view and stack view.
+    scrollView.contentInset = .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
+      right: Constant.Common.trailingSpacing
+    )
   }
-  
-  // This will called when the subviews are created.
-  // After created, based on the stack view's height, we set content size.
-  override func viewDidLayoutSubviews() {
-    scrollView.contentSize = CGSize(width: view.frame.width, height: stackView.frame.height)
-  }
+
 }
 
 
