@@ -36,51 +36,23 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
     return img
   }()
 
-  lazy var targetIcon = IconFactory.createImageView(type: .userId(self.target.playerId), width: 64)
+  lazy var targetIconLabel = iconLabelCreator(.userId(self.target.playerId), self.target.name)
+  
+  lazy var stakeholderIconLabel = iconLabelCreator(.userId(self.stakeholder.playerId), self.stakeholder.name)
 
-  lazy var targetName: PLabel = {
-    let label = PLabel(text: self.target.name)
-    label.textAlignment = .center
-    return label
-  }()
+  lazy var allCitizenIconLabel = iconLabelCreator(.allCitizen, "Others")
 
-  lazy var stakeholderIcon = IconFactory.createImageView(type: .userId(self.stakeholder.playerId), width: 64)
+  lazy var queenIconLabel = iconLabelCreator(.queen, "Queen")
 
-  lazy var stakeholderName: PLabel = {
-    let label = PLabel(text: self.stakeholder.name)
-    label.textAlignment = .center
-    return label
-  }()
-
-  lazy var targetBlock: VerticalStackView = {
-    let stackView = VerticalStackView(
-      arrangedSubviews: [self.targetIcon, self.targetName]
-    )
-    stackView.spacing = 8
-    return stackView
-  }()
-
-  lazy var stakeholderBlock: VerticalStackView = {
-    let stackView = VerticalStackView(
-      arrangedSubviews: [self.stakeholderIcon, self.stakeholderName]
-    )
-    stackView.spacing = 8
-    return stackView
-  }()
-
-  lazy var allCitizen = IconFactory.createImageView(type: .allCitizen, height: 64)
-
-  lazy var queen = IconFactory.createImageView(type: .queen, height: 64)
-
-  lazy var rightBlock: UIView = {
+  lazy var rightSideIconLabel: UIView = {
     var uiview = UIView()
     switch self.getGameManager().command.commandType {
     case .cToA:
-      uiview = self.allCitizen
+      uiview = self.allCitizenIconLabel
     case .cToC:
-      uiview = self.stakeholderBlock
+      uiview = self.stakeholderIconLabel
     case .cToQ:
-      uiview = self.queen
+      uiview = self.queenIconLabel
     }
     return uiview
   }()
@@ -90,9 +62,9 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var commandBlock: HorizontalStackView = {
     let stackView = HorizontalStackView(
       arrangedSubviews: [
-        self.targetBlock,
+        self.targetIconLabel,
         self.arrow,
-        self.rightBlock,
+        self.rightSideIconLabel,
       ],
       alignment: .top,
       distribution: .equalSpacing
@@ -283,4 +255,14 @@ extension ResultViewController {
     GameManager.shared.queen = nil
   }
   
+  private func iconLabelCreator(_ iconType: IconType, _ label: String) -> UIStackView {
+    let icon = IconFactory.createImageView(type: iconType, height: 64)
+    let lb = PLabel(text: label)
+    lb.textAlignment = .center
+    let sv = VerticalStackView(
+      arrangedSubviews: [icon, lb],
+      spacing: 8
+    )
+    return sv
+  }
 }

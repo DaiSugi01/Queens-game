@@ -22,7 +22,7 @@ class NextAndBackButtons: HorizontalStackView {
   init(superView: UIView? = nil) {
     super.init(
       arrangedSubviews: [backButton, nextButton],
-      spacing: 32,
+      spacing: 64,
       distribution: .equalSpacing
     )
     self.configLayout(superView: superView)

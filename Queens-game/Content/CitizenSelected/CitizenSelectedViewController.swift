@@ -230,10 +230,10 @@ extension CitizenSelectedViewController {
     
     let idIcon = IconFactory.createImageView(
       type: .userId(id),
-      width: isTwoIcon ? 112 : 136
+      width: isTwoIcon ? 112 : 152
     ) as! UserIdIconView
-    idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 56)
-    idIcon.configRadius(radius: (isTwoIcon ? 112 : 136)/4)
+    idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 64)
+    idIcon.configRadius(radius: (isTwoIcon ? 112 : 152)/4)
     return idIcon
   }
 

@@ -118,11 +118,11 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
       alignment: .leading
     )
     sv.setCustomSpacing(16, after: subSectionAttributeLabel)
-    sv.setCustomSpacing(4, after: difficultyLabel)
-    sv.setCustomSpacing(16, after: difficultyIcon)
+    sv.setCustomSpacing(8, after: difficultyLabel)
+    sv.setCustomSpacing(8, after: difficultyIcon)
     sv.setCustomSpacing(32, after: difficultyDescription)
-    sv.setCustomSpacing(4, after: typeLabel)
-    sv.setCustomSpacing(16, after: typeIcon)
+    sv.setCustomSpacing(8, after: typeLabel)
+    sv.setCustomSpacing(8, after: typeIcon)
     return sv
   } ()
   
