@@ -58,35 +58,65 @@ struct Constant {
     static let users: String = "Users"
   }
   
+  struct PlayerSelection {
+    static let minPlayerCount = 3
+    static let maxPlayerCount = 9
+  }
+  
   struct QueenSelection {
     static let title = "Now, who will be the Queen?"
     
     static let options = [
-      Selection(title: "Quick select", detail: "The queen is selected as you as you tap next", isSelected: true),
-      Selection(title: "Card select", detail: "Those who select Queen will be the Queen!", isSelected: false)
+      Selection(
+        title: "Quick select",
+        detail: "The queen is selected as you as you tap next"
+      ),
+      Selection(
+        title: "Card select",
+        detail: "Those who select Queen will be the Queen!"
+      )
     ]
-    
-    static let quickIndexPath: [IndexPath] = [[0, 0]]
-    static let cardIndexPath: [IndexPath] = [[0, 1]]
-  }
-  
-  struct PlayerSelection {
-    static let minPlayerCount = 3
-
-    static let maxPlayerCount = 9
+    enum Index: Int {
+      case quick, card
+    }
   }
   
   struct CommandSelection {
     static let title = "How do you give the command?"
     static let options = [
-      Selection(title: "Manual select", detail: "You can choose the specific order from the order list. ", isSelected: false),
-      
-      Selection(title: "Random select", detail: "The order will be randomly selected from the order list. You can see the list from the options.", isSelected: true)
+      Selection(
+        title: "Manual select",
+        detail: "You can choose the specific order from the order list. "
+      ),
+      Selection(
+        title: "Random select",
+        detail: "The order will be randomly selected from the order list. You can see the list from the options."
+      )
     ]
-
-    static let manualIndexPath: [IndexPath] = [[0, 0]]
-    static let randomIndexPath: [IndexPath] = [[0, 1]]
-    
+    enum Index: Int {
+      case manual, random
+    }
+  }
+  
+  struct ScreenSelection {
+    static let title = "Play again?"
+    static let options = [
+      Selection(
+        title: "Home screen",
+        detail: "Completely quit current game and go back to title screen."
+      ),
+      Selection(
+        title: "Select a Queen",
+        detail: "Re-select the Queen with same member."
+      ),
+      Selection(
+        title: "Select a command",
+        detail: "Re-select the command with same member and same queen."
+      ),
+    ]
+    enum Index: Int {
+      case home, queen, command
+    }
   }
   
   struct CommandDescription {

@@ -12,34 +12,41 @@ class QueenSelectionViewController:
   QueensGameSelectionProtocol,
   QueensGameViewControllerProtocol
 {
+  // QueensGameSelectionProtocol
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
-  
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
-  
   var collectionView: UICollectionView! = UICollectionView(
     frame: .zero,
     collectionViewLayout: UICollectionViewLayout()
   )
   
+  // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
-  let navButtons = NextAndBackButtons()
 
+  let navButtons = NextAndBackButtons()
   let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    // QueensGameSelectionProtocol
     configureRegistration()
     configureViewControllerLayout()
     configureCollectionViewLayout()
     configureDiffableDataSource()
     
+    // QueensGameViewControllerProtocol
     backgroundCreator.configureLayout()
+    
     configureButtonActions()
     
   }
-  
+}
+
+
+// QueensGameSelectionProtocol
+extension QueenSelectionViewController {
   func configureRegistration() {
     collectionView.register(
       SelectionCollectionViewCell.self,
@@ -80,8 +87,11 @@ class QueenSelectionViewController:
       scrollPosition: .top
     )
   }
+}
+ 
 
-  
+// Configuration for own class
+extension QueenSelectionViewController {
   /// Set Button Actions
   private func configureButtonActions() {
     navButtons.configSuperView(under: view)
@@ -107,10 +117,10 @@ class QueenSelectionViewController:
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
-    guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
+    guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
     
-    switch indexPath {
-    case Constant.QueenSelection.quickIndexPath:
+    switch Constant.QueenSelection.Index(rawValue: index) {
+    case .quick:
       vm.selectQueen()
       let nx = QueenSelectedViewController()
       GameManager.shared.pushGameProgress(
@@ -118,7 +128,7 @@ class QueenSelectionViewController:
         currentScreen: self,
         nextScreen: nx
       )
-    case  Constant.QueenSelection.cardIndexPath:
+    case  .card:
       print("Path for card selection page")
     default:
       print("None of them are selected")

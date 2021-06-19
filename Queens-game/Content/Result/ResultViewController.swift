@@ -207,7 +207,7 @@ extension ResultViewController {
   }
   
   @objc private func nextTapped() {
-    let nx = UIViewController()
+    let nx = ScreenSelectionViewController()
     GameManager.shared.pushGameProgress(navVC: navigationController,
                                         currentScreen: self,
                                         nextScreen: nx)

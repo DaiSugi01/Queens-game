@@ -64,8 +64,7 @@ extension DemoCellCollectionViewController {
             ) as! SelectionCollectionViewCell
             let selection = Selection(
               title: demoSelection.title,
-              detail: demoSelection.detail,
-              isSelected: demoSelection.isSelected
+              detail: demoSelection.detail
             )
             cell.configContent(by: selection)
             return cell

@@ -12,32 +12,39 @@ class CommandSelectionViewController:
   QueensGameSelectionProtocol,
   QueensGameViewControllerProtocol
 {
+  
+  // QueensGameSelectionProtocol
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
-  
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
-  
   var collectionView: UICollectionView! = UICollectionView(
     frame: .zero,
     collectionViewLayout: UICollectionViewLayout()
   )
   
-  
+  // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
   let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    // QueensGameSelectionProtocol
     configureRegistration()
     configureViewControllerLayout()
     configureCollectionViewLayout()
     configureDiffableDataSource()
     
+    // QueensGameViewControllerProtocol
     backgroundCreator.configureLayout()
+    
     configureButtonActions()
   }
-  
-  internal func configureDiffableDataSource() {
+}
+
+
+// QueensGameSelectionProtocol
+extension CommandSelectionViewController {
+  func configureDiffableDataSource() {
     configureDiffableDataSourceHelper(
       with: Constant.CommandSelection.options,
       and: Constant.CommandSelection.title
@@ -65,7 +72,7 @@ class CommandSelectionViewController:
     )
   }
   
-  internal func configureRegistration() {
+  func configureRegistration() {
     collectionView.register(
       SelectionCollectionViewCell.self,
       forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier
@@ -77,7 +84,10 @@ class CommandSelectionViewController:
       withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
     )
   }
-  
+}
+
+// Configuration for this own class
+extension CommandSelectionViewController {
   
   /// Set Button Actions
   private func configureButtonActions() {
@@ -95,20 +105,23 @@ class CommandSelectionViewController:
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
-    guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
+    guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
     
-    switch indexPath {
-    case Constant.CommandSelection.manualIndexPath:
-        let nx = CommandManualSelectingViewController()
-        GameManager.shared.pushGameProgress(navVC: navigationController,
-                                            currentScreen: self,
-                                            nextScreen: nx)
-    case Constant.CommandSelection.randomIndexPath:
+    switch Constant.CommandSelection.Index(rawValue: index) {
+    case .manual:
+      let nx = CommandManualSelectingViewController()
+      GameManager.shared.pushGameProgress(
+        navVC: navigationController,
+        currentScreen: self,
+        nextScreen: nx
+      )
+    case .random:
       let nx = CitizenSelectedViewController()
-      GameManager.shared.pushGameProgress(navVC: navigationController,
-                                          currentScreen: self,
-                                          nextScreen: nx)
-
+      GameManager.shared.pushGameProgress(
+        navVC: navigationController,
+        currentScreen: self,
+        nextScreen: nx
+      )
     default:
       print("None of them are selected")
     }
