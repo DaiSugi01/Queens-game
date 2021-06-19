@@ -96,6 +96,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
       action: #selector(nextButtonTapped(_:)),
       for: .touchUpInside
     )
+    button.isEnabled = false
     return button
   }()
 
@@ -221,7 +222,9 @@ extension CitizenSelectedViewController {
       animations: { [weak self] in
         self?.afterCountdownStackView.alpha = 1
       },
-      completion: nil
+      completion: { [weak self] _ in
+        self?.nextButton.isEnabled = true
+      }
     )
   }
   
@@ -230,10 +233,10 @@ extension CitizenSelectedViewController {
     
     let idIcon = IconFactory.createImageView(
       type: .userId(id),
-      width: isTwoIcon ? 112 : 136
+      width: isTwoIcon ? 112 : 152
     ) as! UserIdIconView
-    idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 56)
-    idIcon.configRadius(radius: (isTwoIcon ? 112 : 136)/4)
+    idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 64)
+    idIcon.configRadius(radius: (isTwoIcon ? 112 : 152)/4)
     return idIcon
   }
 
@@ -259,9 +262,7 @@ struct MockGameManager: GameManagerProtocol {
 
   var command = Command(
     detail: """
-    Sing a song in front of others and Look each other deeply 30secs
-    Sing a song in front of others and Look each other deeply 30secs
-    Sing a song in front of others and Look each other deeply 30secs
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     """,
     difficulty: .easy,
     commandType: .cToC

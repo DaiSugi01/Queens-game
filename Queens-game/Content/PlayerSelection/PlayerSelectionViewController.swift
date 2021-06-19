@@ -92,8 +92,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     bts.configSuperView(under: wrapper)
     bts.centerXYin(wrapper)
     bts.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 1).isActive = true
-    bts.widthAnchor.constraint(equalTo: wrapper.widthAnchor, multiplier: 1).isActive = true
-    wrapper.setContentHuggingPriority(.required, for: .vertical)
+    bts.setContentHuggingPriority(.required, for: .vertical)
     
     return wrapper
   }()

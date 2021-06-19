@@ -17,11 +17,15 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   let vm: EntryNameViewModel = EntryNameViewModel()
   let disposeBag: DisposeBag = DisposeBag()
   
-  let scrollView: UIScrollView = {
-    let sv = UIScrollView()
-    sv.translatesAutoresizingMaskIntoConstraints = false
-    return sv
-  }()
+  lazy var scrollView = DynamicHeightScrollView(
+    contentView: contentWrapper,
+    padding: .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine + navButtons.frame.height + spacing,
+      right: Constant.Common.trailingSpacing
+    )
+  )
   
   lazy var contentWrapper: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle])
@@ -91,7 +95,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
       constant: -Constant.Common.bottomSpacing
     ).isActive = true
     navButtons.centerXin(view)
-//    navButtons.constraintWidth(equalToConstant: view.frame.width - Constant.Common.leadingSpacing*2)
+
     // Load this view to get height.
     navButtons.layoutIfNeeded()
   }
@@ -106,29 +110,6 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
         right: 0
       )
     )
-    
-    // Content
-    // This will set the content  wrapper's width
-    contentWrapper.widthAnchor.constraint(
-      equalTo: scrollView.widthAnchor,
-      multiplier: 1,
-      constant: -Constant.Common.leadingSpacing*2)
-      .isActive = true
-    // This will create scroll view's `contentSize` equal to content wrapper.
-    let cg = scrollView.contentLayoutGuide
-    contentWrapper.anchors(
-      topAnchor: cg.topAnchor,
-      leadingAnchor: cg.leadingAnchor,
-      trailingAnchor: cg.trailingAnchor,
-      bottomAnchor: cg.bottomAnchor,
-      padding: .init(
-        top: Constant.Common.topSpacingFromTopLine,
-        left: Constant.Common.leadingSpacing,
-        bottom: Constant.Common.bottomSpacingFromBottomLine + navButtons.frame.height + spacing,
-        right: Constant.Common.trailingSpacing
-      )
-    )
-
   }
   
   /// Create each EntryName fields

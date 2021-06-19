@@ -11,5 +11,4 @@ import Foundation
 struct Selection: Hashable {
   var title: String
   var detail: String
-  var isSelected: Bool
 }

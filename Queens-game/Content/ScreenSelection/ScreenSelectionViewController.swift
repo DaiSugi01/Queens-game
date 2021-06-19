@@ -1,13 +1,13 @@
 //
-//  QueenSelectionViewController.swift
+//  ScreenSelectionViewController.swift
 //  Queens-game
 //
-//  Created by 杉原大貴 on 2021/05/09.
-//  Updated by Tak
+//  Created by Takayuki Yamaguchi on 2021-06-18.
+//
 
 import UIKit
 
-class QueenSelectionViewController:
+class ScreenSelectionViewController:
   UIViewController,
   QueensGameSelectionProtocol,
   QueensGameViewControllerProtocol
@@ -23,10 +23,8 @@ class QueenSelectionViewController:
   // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
-
-  let navButtons = NextAndBackButtons()
-  let vm: QueenSelectionViewModel = QueenSelectionViewModel()
   
+  let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,7 +44,7 @@ class QueenSelectionViewController:
 
 
 // QueensGameSelectionProtocol
-extension QueenSelectionViewController {
+extension ScreenSelectionViewController {
   func configureRegistration() {
     collectionView.register(
       SelectionCollectionViewCell.self,
@@ -62,8 +60,8 @@ extension QueenSelectionViewController {
   
   func configureDiffableDataSource() {
     configureDiffableDataSourceHelper(
-      with: Constant.QueenSelection.options,
-      and: Constant.QueenSelection.title
+      with: Constant.ScreenSelection.options,
+      and: Constant.ScreenSelection.title
     ) { (collectionView, indexPath, item) -> UICollectionViewCell? in
       
       if let selection = item.selection {
@@ -72,7 +70,7 @@ extension QueenSelectionViewController {
           for: indexPath
         ) as! SelectionCollectionViewCell
         cell.configContent(by: selection)
-
+        
         return cell
       }
       
@@ -88,10 +86,12 @@ extension QueenSelectionViewController {
     )
   }
 }
- 
 
-// Configuration for own class
-extension QueenSelectionViewController {
+
+
+// Configuration for this own class
+extension ScreenSelectionViewController {
+  
   /// Set Button Actions
   private func configureButtonActions() {
     navButtons.configSuperView(under: view)
@@ -101,37 +101,39 @@ extension QueenSelectionViewController {
     ).isActive = true
     navButtons.centerXin(view)
     
-    navButtons.nextButton.addTarget(
-      self,
-      action: #selector(goToNext(_:)),
-      for: .touchUpInside
-    )
-    navButtons.backButton.addTarget(
-      self,
-      action: #selector(goBackToPrevious(_:)),
-      for: .touchUpInside
-    )
+    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
+    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
   }
   
-  //TODO: Implements card selection later
   /// Go to next screen depends on user selection
   /// - Parameter sender: UIButton
   @objc private func goToNext(_ sender: UIButton) {
     guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
     
-    switch Constant.QueenSelection.Index(rawValue: index) {
-    case .quick:
-      vm.selectQueen()
-      let nx = QueenSelectedViewController()
+    switch Constant.ScreenSelection.Index(rawValue: index) {
+    case .home:
+      let nx = CommandManualSelectingViewController()
       GameManager.shared.pushGameProgress(
         navVC: navigationController,
         currentScreen: self,
         nextScreen: nx
       )
-    case  .card:
-      print("Path for card selection page")
-    default:
-      print("None of them are selected")
+    case .queen:
+      let nx = CitizenSelectedViewController()
+      GameManager.shared.pushGameProgress(
+        navVC: navigationController,
+        currentScreen: self,
+        nextScreen: nx
+      )
+    case .command:
+      let nx = CitizenSelectedViewController()
+      GameManager.shared.pushGameProgress(
+        navVC: navigationController,
+        currentScreen: self,
+        nextScreen: nx
+      )
+    case .none:
+      print("no page")
     }
   }
   

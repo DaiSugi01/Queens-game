@@ -29,7 +29,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
   private lazy var iconSet: UIStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [levelIcon, commandTypeIcon],
-      spacing: 16,
+      spacing: 8,
       alignment: .center,
       distribution: .fill
     )

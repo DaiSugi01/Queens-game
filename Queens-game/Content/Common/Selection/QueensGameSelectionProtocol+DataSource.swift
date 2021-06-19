@@ -7,18 +7,20 @@
 
 import UIKit
 
-//  Configure Diffable Data source
-extension CommonSelectionViewController {
-  
+
+extension QueensGameSelectionProtocol {
+    
   /// Configure Diffable Data source
   /// Internally, it's executing following steps
   /// 1. Reset snapshot
   /// 2. Add all items in snapshot.
   /// 3. Define cells (and headers) with data source.
   /// 4. Apply snapshot to data source.
-  func createDiffableDataSource(with options: [Selection], and title: String) {
-    registerCells()
-    
+  func configureDiffableDataSourceHelper (
+    with options: [Selection],
+    and title: String,
+    cellProvider: @escaping (UICollectionViewDiffableDataSource<Section, Item>.CellProvider)
+  ) {
     // Reset snapshot
     resetSnapshot()
     
@@ -28,21 +30,7 @@ extension CommonSelectionViewController {
     // Define cells with data source.
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
       collectionView: collectionView,
-      cellProvider:
-        { (collectionView, indexPath, item) -> UICollectionViewCell? in
-          
-          if let selection = item.selection {
-            let cell = collectionView.dequeueReusableCell(
-              withReuseIdentifier: SelectionCollectionViewCell.identifier,
-              for: indexPath
-            ) as! SelectionCollectionViewCell
-            cell.configContent(by: selection)
-
-            return cell
-          }
-          
-          return nil
-        }
+      cellProvider: cellProvider
     )
     
     // Define headers with data source.
@@ -58,7 +46,6 @@ extension CommonSelectionViewController {
         let screenTitle: H2Label = {
           let lb = H2Label(text: title)
           lb.lineBreakMode = .byWordWrapping
-          lb.numberOfLines = 0
           return lb
         }()
         
@@ -77,19 +64,5 @@ extension CommonSelectionViewController {
     snapshot.deleteAllItems()
     snapshot.appendSections([.selection])
   }
-  
-  
-  /// Register all cells and headers with identifier.
-  private func registerCells() {
-    collectionView.register(
-      SelectionCollectionViewCell.self,
-      forCellWithReuseIdentifier: SelectionCollectionViewCell.identifier
-    )
-    
-    collectionView.register(
-      GeneticLabelCollectionReusableView.self,
-      forSupplementaryViewOfKind: GeneticLabelCollectionReusableView.identifier,
-      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
-    )
-  }
 }
+

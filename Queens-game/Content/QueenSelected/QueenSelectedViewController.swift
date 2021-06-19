@@ -91,7 +91,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return label
   }()
   
-  lazy var targetWrapper: HorizontalStackView = {
+  lazy var targetIconLabel: HorizontalStackView = {
     let sv = HorizontalStackView(
       arrangedSubviews: [self.userNumberLabel, targetUserIcon]
     )
@@ -102,17 +102,12 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return sv
   }()
     
-  lazy var queenWrapper: VerticalStackView = {
+  lazy var queenIconLabel: VerticalStackView = {
     let sv = VerticalStackView(
-      arrangedSubviews: [self.queenIcon, self.targetWrapper, self.targetUserName]
+      arrangedSubviews: [self.queenIcon, self.targetIconLabel, self.targetUserName]
     )
     sv.alignment = .center
-    sv.spacing = 32
-    sv.setCustomSpacing(24, after: targetWrapper)
-    
-    // Set negative padding. This is to crop image.
-    sv.isLayoutMarginsRelativeArrangement = true
-    sv.directionalLayoutMargins = .init(top: -40, leading: 0, bottom: 0, trailing: 0)
+    sv.spacing = 24
 
     return sv
   }()
@@ -121,6 +116,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     let button = MainButton()
     button.setTitle("Next", for: .normal)
     button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+    button.isEnabled = false
     return button
   }()
 
@@ -129,7 +125,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     let sv = VerticalStackView(
       arrangedSubviews: [
         self.afterCountdownTitle,
-        self.queenWrapper,
+        self.queenIconLabel,
         self.nextButton
       ],
       alignment: .center,
@@ -194,7 +190,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       animations: { [weak self] in
         self?.afterCountdownStackView.alpha = 1
       },
-      completion: nil
+      completion: { [weak self] _ in
+        self?.nextButton.isEnabled = true
+      }
     )
     
   }
