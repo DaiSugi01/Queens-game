@@ -103,6 +103,8 @@ extension ScreenSelectionViewController {
     
     navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
     navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+    
+    navButtons.nextButton.titleLabel?.text = "Go !"
   }
   
   /// Go to next screen depends on user selection
@@ -112,28 +114,14 @@ extension ScreenSelectionViewController {
     
     switch Constant.ScreenSelection.Index(rawValue: index) {
     case .home:
-      let nx = CommandManualSelectingViewController()
-      GameManager.shared.pushGameProgress(
-        navVC: navigationController,
-        currentScreen: self,
-        nextScreen: nx
-      )
+      GameManager.shared.loadGameProgress(to: .home, with: navigationController)
     case .queen:
-      let nx = CitizenSelectedViewController()
-      GameManager.shared.pushGameProgress(
-        navVC: navigationController,
-        currentScreen: self,
-        nextScreen: nx
-      )
+      GameManager.shared.loadGameProgress(to: .queenSelection, with: navigationController)
     case .command:
-      let nx = CitizenSelectedViewController()
-      GameManager.shared.pushGameProgress(
-        navVC: navigationController,
-        currentScreen: self,
-        nextScreen: nx
-      )
+      GameManager.shared.loadGameProgress(to: .commandSelection, with: navigationController)
     case .none:
       print("no page")
+      GameManager.shared.loadGameProgress(to: .home, with: navigationController)
     }
   }
   

@@ -31,7 +31,6 @@
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
 		0A85DFDA265B1AFA00F662B5 /* QueenSelectedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A85DFD9265B1AFA00F662B5 /* QueenSelectedViewModel.swift */; };
-		0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9C26486A1300654A05 /* TopViewModel.swift */; };
 		0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */; };
 		0AD08AA72649FBC500654A05 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08AA62649FBC500654A05 /* Constant.swift */; };
 		0AD08ACF264A6F1900654A05 /* QueensGameSelectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD08ACE264A6F1900654A05 /* QueensGameSelectionProtocol.swift */; };
@@ -140,7 +139,6 @@
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
 		0A85DFD9265B1AFA00F662B5 /* QueenSelectedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectedViewModel.swift; sourceTree = "<group>"; };
-		0AD08A9C26486A1300654A05 /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
 		0AD08A9E26486F5900654A05 /* QueenSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectionViewController.swift; sourceTree = "<group>"; };
 		0AD08AA62649FBC500654A05 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		0AD08ACE264A6F1900654A05 /* QueensGameSelectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueensGameSelectionProtocol.swift; sourceTree = "<group>"; };
@@ -342,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62942638B1830082ACAE /* TopViewController.swift */,
-				0AD08A9C26486A1300654A05 /* TopViewModel.swift */,
 			);
 			path = Top;
 			sourceTree = "<group>";
@@ -476,6 +473,7 @@
 		3B7981C3264F8C2B002D2F71 /* StackView */ = {
 			isa = PBXGroup;
 			children = (
+				48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */,
 				4826816C2645EBA70010543A /* HorizontalStackView.swift */,
 				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
@@ -562,7 +560,6 @@
 				4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */,
 				4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */,
 				482681702645EBA70010543A /* UIView+ConfigLayout.swift */,
-				48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -925,7 +922,6 @@
 				0A0425A226539E3A0019AEC1 /* EntryNameStackView.swift in Sources */,
 				480952A32675DACA00A39166 /* BackgroundCreatorPlain.swift in Sources */,
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
-				0AD08A9D26486A1300654A05 /* TopViewModel.swift in Sources */,
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
 				0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */,

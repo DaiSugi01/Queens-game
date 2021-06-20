@@ -248,7 +248,7 @@ extension CitizenSelectedViewController {
 struct MockGameManager: GameManagerProtocol {
 
   var users: [User] = {
-    let user1 = User(id: UUID(), playerId: 1, name: "Paul", isQueen: true)
+    let user1 = User(id: UUID(), playerId: 1, name: "Paul")
     let user2 = User(id: UUID(), playerId: 2, name: "Freeman")
     let user3 = User(id: UUID(), playerId: 3, name: "Drake")
     let user4 = User(id: UUID(), playerId: 4, name: "Baldwin")

@@ -11,7 +11,6 @@ class QueenSelectionViewModel {
   
   public func selectQueen() {
     let queenIndex: Int = Int.random(in: 0 ..< GameManager.shared.users.count)
-    GameManager.shared.users[queenIndex].isQueen = true
     let queen = GameManager.shared.users[queenIndex]
     GameManager.shared.queen = queen
   }
