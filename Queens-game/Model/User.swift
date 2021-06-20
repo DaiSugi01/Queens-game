@@ -11,7 +11,6 @@ struct User {
   let id: UUID
   let playerId: Int
   var name: String
-  var isQueen: Bool = false
 }
 
 // This makes `User` hashabel in snapshot.
