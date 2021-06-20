@@ -9,7 +9,6 @@ import UIKit
 
 class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
-  let vm = TopViewModel()
   
   let screenTitle: H1Label = {
     let lb = H1Label()
@@ -58,7 +57,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    vm.resetGameManeger()
+    GameManager.shared.resetGameManeger()
     backgroundCreator.configureLayout()
     setupLayout()
     setActions()

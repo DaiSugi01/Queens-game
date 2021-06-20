@@ -194,15 +194,6 @@ extension ResultViewController {
       equalTo: view.bottomAnchor,
       constant: -Constant.Common.bottomSpacing
     ).isActive = true
-    
-//    navButtons.backButton.setTitle("Select Queen", for: .normal)
-//    navButtons.backButton.titleLabel?.font = CustomFont.h4
-//    navButtons.backButton.titleLabel?.lineBreakMode = .byWordWrapping
-//    navButtons.backButton.addTarget(
-//      self,
-//      action: #selector(reselectQueen),
-//      for: .touchUpInside
-//    )
 
   }
   
@@ -212,21 +203,6 @@ extension ResultViewController {
                                         currentScreen: self,
                                         nextScreen: nx)
   }
-
-//  @objc private func reselectQueen() {
-//    self.resetGameManager()
-//    let nx = QueenSelectionViewController()
-//    GameManager.shared.pushGameProgress(
-//      navVC: navigationController,
-//      currentScreen: self,
-//      nextScreen: nx
-//    )
-//  }
-
-//  @objc private func toTop() {
-//    self.resetGameManager()
-//    super.navigationController?.popToRootViewController(animated: true)
-//  }
 
   private func getGameManager() -> GameManagerProtocol {
     if GameManager.shared.users.count > 0 {
@@ -246,13 +222,6 @@ extension ResultViewController {
       return .levelThree
     }
   }
-
-//  private func resetGameManager() {
-//    for (i, _) in GameManager.shared.users.enumerated() {
-//      GameManager.shared.users[i].isQueen = false
-//    }
-//    GameManager.shared.queen = nil
-//  }
   
   private func iconLabelCreator(_ iconType: IconType, _ label: String) -> UIStackView {
     let icon = IconFactory.createImageView(type: iconType, height: 64)

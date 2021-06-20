@@ -14,8 +14,8 @@ struct User {
   var isQueen: Bool = false
 }
 
-// This makes `User` usabel in snapshot.
+// This makes `User` hashabel in snapshot.
 extension User: Hashable { }
 
-// This makes `User` usabel in UserDefaults.
+// This makes `User` codabel in UserDefaults.
 extension User: Codable { }
