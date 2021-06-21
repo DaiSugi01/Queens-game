@@ -13,6 +13,13 @@ extension CommonCommandViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.searchText = searchText
     viewModel.readItems()
+    
+    // If text is empty -> This is executed when "x" button is click. We want to stop focus.
+    if searchText.isEmpty {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            searchBar.resignFirstResponder()
+        }
+    }
   }
   
   // Enter clicked

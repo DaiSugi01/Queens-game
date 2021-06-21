@@ -20,8 +20,7 @@ class SubButton: UIButton {
     self.configLayout(
       superView: superview,
       bgColor: .clear,
-      radius: 24,
-      shadow: false
+      radius: 24
     )
     
     // Config label
@@ -42,6 +41,9 @@ class SubButton: UIButton {
       bottomAnchor: self.titleLabel?.bottomAnchor,
       padding: .init(top: margin, left: margin, bottom: margin , right: margin)
     )
+    
+    self.layer.borderWidth = 2
+    self.layer.borderColor = CustomColor.main.cgColor
   }
 
   required init?(coder: NSCoder) {
