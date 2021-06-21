@@ -11,6 +11,8 @@ import UIKit
 extension CommonCommandViewController {
   func configureSearchBar() {
     searchBar.delegate = self
+    // Position
+    searchBarMask.configSuperView(under: view)
     searchBar.configSuperView(under: view)
     searchBar.anchors(
       topAnchor: nil,
@@ -31,7 +33,15 @@ extension CommonCommandViewController {
       ).isActive = true
     }
     searchBar.isHidden = true
+    
+    // Mask
+    searchBarMask.configBgColor(bgColor: CustomColor.main)
+    searchBarMask.alpha = 0
+    searchBarMask.matchParent()
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(maskTapped))
+    searchBarMask.addGestureRecognizer(tapGesture)
   }
+  
   
   func configureBottomNavigationBar() {
     bottomNavigationBar.configSuperView(under: view)

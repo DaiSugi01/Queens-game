@@ -18,6 +18,8 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
   
   let searchBar = CustomSearchBar()
+  let searchBarMask = UIView()
+  
   var collectionView: UICollectionView = UICollectionView(
     frame: .zero,
     collectionViewLayout: UICollectionViewLayout()

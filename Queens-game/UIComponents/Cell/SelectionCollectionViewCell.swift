@@ -34,6 +34,8 @@ class SelectionCollectionViewCell: UICollectionViewCell {
     // Configure margin
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 24, leading: 16, bottom: 16, trailing: 16)
+    sv.layer.borderWidth = 2.4
+    sv.layer.borderColor = CustomColor.concave.cgColor
     return sv
   }()
 
@@ -64,6 +66,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         UIView.animate(withDuration: duration/2 , delay: 0, options: .curveEaseInOut)
         { [unowned self] in
           stackView.configBgColor(bgColor: CustomColor.convex)
+          stackView.layer.borderColor = UIColor.clear.cgColor
         }
         // `UIView.transition` is required for animation of UIImage, not `UIView.animate`
         UIView.transition(with: checkIcon, duration: duration/2, options: .transitionCrossDissolve) {
@@ -76,6 +79,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut)
         { [unowned self] in
           stackView.configBgColor(bgColor: .clear)
+          stackView.layer.borderColor = CustomColor.concave.cgColor
         }
         UIView.transition(with: checkIcon, duration: duration, options: .transitionCrossDissolve) {
           [unowned self] in
