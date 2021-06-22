@@ -26,6 +26,7 @@ extension CommonCommandViewController: UICollectionViewDelegate{
       UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseOut)
       { [unowned self] in
         self.searchBar.alpha = 0
+        self.searchBarMask.alpha = 0
       } completion: { [unowned self] _ in
         // After finish being invisible search bar, completely disable it.
         self.searchBar.isHidden = true

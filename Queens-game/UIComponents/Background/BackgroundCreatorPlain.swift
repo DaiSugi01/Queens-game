@@ -9,7 +9,7 @@ import UIKit
 
 
 /// This will set up background. This is used for all Queen's game screen.
-protocol BackgroundCreator {
+protocol BackgroundCreator  {
   func configureLayout()
 }
 

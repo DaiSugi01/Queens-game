@@ -70,7 +70,6 @@ extension GameManager {
     case home, queenSelection, commandSelection
   }
   
-  
   /// Load (go back and release) to some certain vc from the game manager.
   /// # The gameProcess from last till target vc  will be all deleted!
   /// - Parameters:

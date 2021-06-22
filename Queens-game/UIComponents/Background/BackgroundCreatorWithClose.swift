@@ -26,10 +26,10 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
   override func configureLayout() {
     closeButton.configSuperView(under: parentView)
     super.configureLayout()
-    configureMenuButton()
+    configureCloseButton()
   }
   
-  func configureMenuButton() {
+  func configureCloseButton() {
     NSLayoutConstraint.activate([
       closeButton.centerYAnchor.constraint(
         equalTo: parentView.topAnchor,

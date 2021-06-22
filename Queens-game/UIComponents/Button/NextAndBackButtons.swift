@@ -26,7 +26,7 @@ class NextAndBackButtons: HorizontalStackView {
       distribution: .equalSpacing
     )
     self.configLayout(superView: superView)
-    backButton.configBgColor(bgColor: CustomColor.background)
+//    backButton.configBgColor(bgColor: CustomColor.background)
   }
   
   required init(coder: NSCoder) {

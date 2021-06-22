@@ -12,6 +12,7 @@ import UIKit
 class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
 
   let menuButton = MenuButton()
+  private let popUpTransition = PopUpTransitioningDelegatee()
   /// This is used for `present` and getting `view`
   weak var viewController: QueensGameViewControllerProtocol!
   
@@ -48,7 +49,15 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
   @objc func menuTapped() {
     let nx = MenuViewController()
-    viewController.present(nx, animated: true, completion: nil)
+    nx.modalPresentationStyle = .overCurrentContext
+    nx.transitioningDelegate = popUpTransition
+    
+    // If already something is presented, present the view over it
+    if let presentedVC = viewController.presentedViewController {
+        presentedVC.present(nx, animated: true, completion: nil)
+    }else{
+      viewController.present(nx, animated: true, completion: nil)
+    }
   }
   
   override func configureBorder() {
@@ -84,3 +93,6 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
     ])
   }
 }
+
+
+

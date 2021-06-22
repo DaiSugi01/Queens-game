@@ -9,38 +9,62 @@ import UIKit
 
 extension CommonCommandViewController: UISearchBarDelegate {
   
-  // Text change
+  // Whenever Text is changed
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.searchText = searchText
     viewModel.readItems()
+    
+    // If text is empty -> This is executed when "x" button is click. We want to stop focus.
+    if searchText.isEmpty {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            searchBar.resignFirstResponder()
+        }
+    }
   }
+  
   // Enter clicked
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     // Stop focus
     searchBar.resignFirstResponder()
   }
   
-  // Start edit
+  // Before Start editing
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    
+    // reveal mask
+    UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
+    { [unowned self] in
+      self.searchBarMask.alpha = 0.4
+    }
     // show cancel button
     searchBar.setShowsCancelButton(true, animated: true)
     return true
   }
-  // End edit
+  
+  // Before End edit
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
     // hide cancel button
     searchBar.setShowsCancelButton(false, animated: true)
+    searchBar.resignFirstResponder()
+    
+    // hide and disable mask
+    UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
+    { [unowned self] in
+      self.searchBarMask.alpha = 0
+    }
     return true
   }
+
   // If cancel is clicked, hide it.
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    // Stop focus
-    searchBar.resignFirstResponder()
     // Hide cancel button
     searchBar.setShowsCancelButton(false, animated: true)
     // Reset text to "" and search, so that all items will be displayed
     searchBar.text = nil
     searchBar.delegate?.searchBar?(searchBar, textDidChange: "")
+    
+    // Quit focus
+    searchBar.resignFirstResponder()
   }
   
   // Display search bar if search bottom icon is tapped.
@@ -49,7 +73,13 @@ extension CommonCommandViewController: UISearchBarDelegate {
     { [unowned self] in
       self.searchBar.isHidden = false
       self.searchBar.alpha = 1
+      self.searchBarMask.alpha = 0.4
       searchBar.becomeFirstResponder()
     }
   }
+  
+  @objc func maskTapped() {
+    searchBar.endEditing(true)
+  }
 }
+

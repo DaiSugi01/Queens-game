@@ -10,37 +10,58 @@ import UIKit
 // MARK: - Basics
 
 class CommandEditViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
   
   let viewModel: CommandViewModel!
   
   let saveButton: UIButton = {
-    let bt = MainButton(title: "Save")
+    let bt = UIButton()
+    // Set image
+    let imgConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .large)
+    let image = UIImage(
+      systemName: "tray.and.arrow.down.fill",
+      withConfiguration: imgConfig
+    )? // change color
+    .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
+    bt.setBackgroundImage(image, for: .normal)
+    bt.translatesAutoresizingMaskIntoConstraints = false
+    // Set title
+//    bt.setTitle("Save", for: .normal)
+//    bt.titleEdgeInsets.bottom = -64
+//    bt.titleLabel?.font = CustomFont.h4
+//    bt.setTitleColor(CustomColor.main, for: .normal)
+    // Set target
     bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
   }()
-  let cancelButton: UIButton = {
-    let bt = SubButton(title: "Cancel")
-    bt.addTarget(self, action: #selector(cancelTapped(_:)), for: .touchUpInside)
-    return bt
-  }()
+
   let deleteButton: UIButton = {
     let bt = UIButton()
-    bt.configLayout(width: 48, height: 48, radius: 20)
-    let largeConfig = UIImage.SymbolConfiguration(
-      pointSize: 22,
-      weight: .medium,
-      scale: .default
-    )
-    bt.setImage(
-      UIImage(systemName: "trash", withConfiguration: largeConfig)?
-        .withRenderingMode(.alwaysTemplate),
-      for: .normal
-    )
-    bt.tintColor = CustomColor.accent
+    // Set image
+    let imgConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
+    let image = UIImage(
+      systemName: "trash.circle",
+      withConfiguration: imgConfig
+    )? // change color
+    .withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal)
+    bt.setBackgroundImage(image, for: .normal)
+    bt.translatesAutoresizingMaskIntoConstraints = false
+    // Set Ttile
+//    bt.setTitle("Delete", for: .normal)
+//    bt.titleEdgeInsets = .init(top: 0, left: -32, bottom: -64, right: -32)
+//    bt.titleLabel?.font = CustomFont.h4
+//    bt.setTitleColor(CustomColor.accent, for: .normal)
+    // Set target
     bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt
   }()
+  
+  lazy var saveDeleteWrapper = HorizontalStackView(
+    arrangedSubviews: [saveButton],
+    spacing: 64,
+    alignment: .center,
+    distribution: .equalCentering
+  )
   
   let categoryLabel = H3Label(text: "Category")
   let difficultySegment = CustomSegmentedView("Difficulty", [.levelOne, .levelTwo, .levelThree])
@@ -110,10 +131,6 @@ extension CommandEditViewController {
     dismiss()
   }
   
-  @objc func cancelTapped(_ sender: UIButton) {
-    dismiss()
-  }
-  
   @objc func deleteTapped(_ sender: UIButton) {
     viewModel.deleteSelectedItem()
     dismiss()
@@ -174,33 +191,17 @@ extension CommandEditViewController {
         right: 32
       )
     )
-    
-    cancelButton.configSuperView(under: view)
-    cancelButton.anchors(
-      topAnchor: view.topAnchor,
-      leadingAnchor: view.leadingAnchor,
-      trailingAnchor: nil,
-      bottomAnchor: nil,
-      padding: .init(top: 32, left: 32 - 16, bottom: 0, right: 0)
-    )
-    
-    saveButton.configSuperView(under: view)
-    saveButton.anchors(
-      topAnchor: view.topAnchor,
-      leadingAnchor: nil,
-      trailingAnchor: view.trailingAnchor,
-      bottomAnchor: nil,
-      padding: .init(top: 32, left: 0, bottom: 0, right: 32)
-    )
+
+    saveDeleteWrapper.configSuperView(under: view)
+    saveDeleteWrapper.bottomAnchor.constraint(
+      equalTo: view.bottomAnchor,
+      constant: -Constant.Common.bottomSpacing
+    ).isActive = true
+    saveDeleteWrapper.centerXin(view)
     
     // If edit mode, add delete button
     if let _ = viewModel.selectedCommand {
-      deleteButton.configSuperView(under: view)
-      deleteButton.bottomAnchor.constraint(
-        equalTo: view.bottomAnchor,
-        constant: -Constant.Common.bottomSpacing
-      ).isActive = true
-      deleteButton.centerXin(view)
+      saveDeleteWrapper.insertArrangedSubview(deleteButton, at: 0)
     }
     
     if let command = viewModel.selectedCommand {
