@@ -16,6 +16,8 @@ class H4Label: UILabel {
     self.textColor = CustomColor.main
     self.textAlignment = .left
     self.numberOfLines = 0
+    self.lineBreakMode = .byWordWrapping
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
   convenience init(text: String) {
     self.init(frame: .zero)

@@ -145,3 +145,18 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     playerCountLabel.text = "\(playerCount)"
   }
 }
+
+extension PlayerSelectionViewController: UIViewControllerTransitioningDelegate {
+  // Tells delegate What kind if animation transitioning do you want to use when presenting ?
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    print("aaaa")
+    PopUpTransitioning.shared.presenting = true
+    return PopUpTransitioning.shared
+  }
+  
+  // Tells delegate What kind if animation transitioning do you want to use when dismissing ?
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    PopUpTransitioning.shared.presenting = false
+    return PopUpTransitioning.shared
+  }
+}

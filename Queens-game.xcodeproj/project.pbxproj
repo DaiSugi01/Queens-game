@@ -103,6 +103,7 @@
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
 		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
+		48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */; };
 		48E54179267C48A300D891E1 /* DynamicHeightScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */; };
 		48E5417B267C741A00D891E1 /* CommandAttributeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */; };
 		48E5417D267D315700D891E1 /* ScreenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417C267D315700D891E1 /* ScreenSelectionViewController.swift */; };
@@ -211,6 +212,7 @@
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
 		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTransitioning.swift; sourceTree = "<group>"; };
 		48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightScrollView.swift; sourceTree = "<group>"; };
 		48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAttributeStackView.swift; sourceTree = "<group>"; };
 		48E5417C267D315700D891E1 /* ScreenSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelectionViewController.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62E22638D3320082ACAE /* MenuViewController.swift */,
+				48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
 				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
+				48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
 				4826818A2645EBA80010543A /* H4Label.swift in Sources */,
 				48AE80442640B26F00CBDB5E /* DemoFontViewController.swift in Sources */,

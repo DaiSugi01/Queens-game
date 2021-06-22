@@ -8,7 +8,6 @@
 import UIKit
 
 /// All Queens games view controller must have background view.
-protocol QueensGameViewControllerProtocol where Self: UIViewController {
+protocol QueensGameViewControllerProtocol where Self: UIViewController{
   var backgroundCreator: BackgroundCreator {get set}
 }
-

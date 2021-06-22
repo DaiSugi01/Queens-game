@@ -7,28 +7,14 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
-
+class MenuViewController: UIViewController {
+  
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Menu")
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
+    lb.textAlignment = .center
     return lb
   }()
-
-  let closeButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Close", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.titleLabel?.font = CustomFont.p
-    bt.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
-    return bt
-  }()
-
   
   let howToPlayButton: MainButton = {
     let bt = MainButton()
@@ -50,7 +36,7 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
     bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
     return bt
   }()
-
+  
   let privacyPolicyButton: SubButton = {
     let bt = SubButton()
     bt.setTitle("Privacy policy", for: .normal)
@@ -58,7 +44,7 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
     bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     return bt
   }()
-
+  
   lazy var stackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
@@ -67,20 +53,23 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
         settingButton,
         goToTopButton,
         privacyPolicyButton
-      ]
+      ],
+      spacing: 24,
+      alignment: .fill
     )
-    sv.alignment = .fill
-    sv.distribution = .equalSpacing
     sv.translatesAutoresizingMaskIntoConstraints = false
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 32, trailing: 40)
+    sv.layer.cornerRadius = 24
     return sv
   }()
-
+  
   let alert = UIAlertController(
     title: "Are you sure you want to quit current game ?",
     message:  "",
     preferredStyle:  UIAlertController.Style.alert
   )
-
+  
   lazy var confirmAction = UIAlertAction(
     title: "Yes",
     style: UIAlertAction.Style.default,
@@ -95,7 +84,7 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
       self?.present(nextViewController,  animated: true, completion: nil)
     }
   )
-
+  
   let cancelAction = UIAlertAction(
     title: "No",
     style: UIAlertAction.Style.cancel,
@@ -103,63 +92,57 @@ class MenuViewController: UIViewController, QueensGameViewControllerProtocol {
       print("No")
     }
   )
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundCreator.configureLayout()
+    //    backgroundCreator.configureLayout()
     setupLayout()
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)
-
+    
   }
-
+  
+  // This can detect if you touch outside of the content.
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    // Let user to dismiss when tapping out side
+    if touches.first?.view == view{
+      dismiss(animated: true, completion: nil)
+    }
+  }
+  
 }
 
 extension MenuViewController {
-
+  
   private func setupLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
-
-    view.addSubview(stackView)
-    stackView.topAnchor.constraint(
-      equalTo: view.topAnchor,
-      constant: Constant.Common.topSpacing
-    ).isActive = true
-    stackView.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: -Constant.Common.bottomSpacing
-    ).isActive = true
-    stackView.leadingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-      constant: Constant.Common.leadingSpacing
-    ).isActive = true
-    stackView.trailingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  -Constant.Common.trailingSpacing
-    ).isActive = true
-
+    view.configBgColor(bgColor: .clear)
+    stackView.configBgColor(bgColor: CustomColor.background)
+    stackView.configSuperView(under: view)
+    stackView.configSize(width: 296)
+    stackView.centerXYin(view)
   }
-
+  
   @objc func goToTop(_ sender: UIButton) {
     present(self.alert, animated: true, completion: nil)
   }
-
+  
   @objc func settingTapped(_ sender: UIButton) {
     let nx = SettingsViewController()
     let navigationController = UINavigationController(rootViewController:nx)
     present(navigationController, animated: true, completion: nil)
   }
-
+  
   @objc func closeTapped(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
-
+  
   @objc func howToPlayTapped(_ sender: UIButton) {
     let nx = RuleBookViewController()
     present(nx, animated: true, completion: nil)
   }
-
+  
   @objc func privacyPolicyTapped(_ sender: UIButton) {
-
+    
   }
 }
+
