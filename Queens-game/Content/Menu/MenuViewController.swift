@@ -129,6 +129,7 @@ extension MenuViewController {
   @objc func settingTapped(_ sender: UIButton) {
     let nx = SettingsViewController()
     let navigationController = UINavigationController(rootViewController:nx)
+    navigationController.navigationBar.isHidden = true
     present(navigationController, animated: true, completion: nil)
   }
   

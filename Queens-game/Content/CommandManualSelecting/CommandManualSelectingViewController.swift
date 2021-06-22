@@ -39,6 +39,7 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     // pass selected item's index to view model
     viewModel.updateEditMode(index: indexPath.row)
     let nx = CommandConfirmationViewController(viewModel: viewModel)
+    nx.modalPresentationStyle = .automatic
     
     present(nx, animated: true, completion: { [unowned self] in
       // If you don't set this, buttons on presented view won't respond
