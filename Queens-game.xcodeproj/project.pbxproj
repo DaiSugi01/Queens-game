@@ -40,7 +40,7 @@
 		3B7981A3264F09AA002D2F71 /* CitizenSelectedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981A2264F09A9002D2F71 /* CitizenSelectedViewModel.swift */; };
 		3B7981C5264F8C66002D2F71 /* CountdownStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */; };
 		3B93A6F32648A4F1009FB008 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */; };
-		3B93A6F72648AD8E009FB008 /* SettingsStackViewswift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsStackViewswift */; };
+		3B93A6F72648AD8E009FB008 /* SettingsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */; };
 		3B9E940C2650610A003207F7 /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E940B2650610A003207F7 /* Executor.swift */; };
 		480952A32675DACA00A39166 /* BackgroundCreatorPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */; };
 		481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */; };
@@ -149,7 +149,7 @@
 		3B7981A2264F09A9002D2F71 /* CitizenSelectedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenSelectedViewModel.swift; sourceTree = "<group>"; };
 		3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownStackView.swift; sourceTree = "<group>"; };
 		3B93A6F22648A4F1009FB008 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		3B93A6F62648AD8E009FB008 /* SettingsStackViewswift */ = {isa = PBXFileReference; lastKnownFileType = text; path = SettingsStackViewswift; sourceTree = "<group>"; };
+		3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStackView.swift; sourceTree = "<group>"; };
 		3B9E940B2650610A003207F7 /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorPlain.swift; sourceTree = "<group>"; };
 		481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithClose.swift; sourceTree = "<group>"; };
@@ -482,7 +482,7 @@
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
-				3B93A6F62648AD8E009FB008 /* SettingsStackViewswift */,
+				3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */,
 			);
 			path = StackView;
 			sourceTree = "<group>";
@@ -949,7 +949,7 @@
 				485635F226438F4F0043AF21 /* Item.swift in Sources */,
 				0AD08AD5264A7CD700654A05 /* QueenSelectionViewModel.swift in Sources */,
 				482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */,
-				3B93A6F72648AD8E009FB008 /* SettingsStackViewswift in Sources */,
+				3B93A6F72648AD8E009FB008 /* SettingsStackView.swift in Sources */,
 				485635EA26437C7A0043AF21 /* CommandType.swift in Sources */,
 				48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */,
 				487AF1E7264B9A2900663047 /* CommonCommandViewController+SearchBar.swift in Sources */,
