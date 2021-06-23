@@ -482,6 +482,7 @@
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
+				3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */,
 			);
 			path = StackView;
 			sourceTree = "<group>";
@@ -551,7 +552,6 @@
 			children = (
 				482681682645EBA70010543A /* CommandCollectionViewCell.swift */,
 				4826816A2645EBA70010543A /* SelectionCollectionViewCell.swift */,
-				3B93A6F62648AD8E009FB008 /* SettingsCollectionViewCell.swift */,
 				482681692645EBA70010543A /* UsernameInputCollectionViewCell.swift */,
 			);
 			path = Cell;
@@ -1120,7 +1120,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1141,7 +1141,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2PTMH7A8WP;
 				INFOPLIST_FILE = "Queens-game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (

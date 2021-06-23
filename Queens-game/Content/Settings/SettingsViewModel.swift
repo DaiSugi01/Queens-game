@@ -17,15 +17,42 @@ class SettingViewModel {
 
   let canSkipQueenSelectionRelay = PublishRelay<Bool>()
 
-  let canSkipOrderSelectionRelay = PublishRelay<Bool>()
+  let canSkipCommandSelectionRelay = PublishRelay<Bool>()
 
   let queenWaitingSecondsRelay = PublishRelay<Double>()
 
   let citizenWaitingSecondsRelay = PublishRelay<Double>()
-
-  lazy var skipRelays = [self.canSkipQueenSelectionRelay, self.canSkipOrderSelectionRelay]
-
-  lazy var waitingRelays = [self.queenWaitingSecondsRelay, self.citizenWaitingSecondsRelay]
+  
+  
+  /// Get `PublishRelay` related to `canSkip` type item in setting
+  /// - Parameter identifier: item id
+  /// - Returns: `PublishRelay` related to `canSkip` type item in setting
+  func getCanSkipRelay(_ identifier: String) ->  PublishRelay<Bool> {
+    switch identifier {
+      case Settings.canSkipQueenIdentifier:
+        return self.canSkipQueenSelectionRelay
+      case Settings.canSkipCommandIdentifier:
+        return self.canSkipCommandSelectionRelay
+      default:
+        print("no match")
+        return self.canSkipQueenSelectionRelay
+    }
+  }
+  
+  /// Get `PublishRelay` related to `waitingSeconds` type item in setting
+  /// - Parameter identifier: item id
+  /// - Returns: `PublishRelay` related to `waitingSeconds` type item in setting
+  func getWaitingSecondsRelay(_ identifier: String) ->  PublishRelay<Double> {
+    switch identifier {
+      case Settings.citizenWaitingSecondsIdentifier:
+        return self.citizenWaitingSecondsRelay
+      case Settings.queenWaitingSecondsIdentifier:
+        return self.queenWaitingSecondsRelay
+      default:
+        print("no match")
+        return  self.citizenWaitingSecondsRelay
+    }
+  }
 
   init(settings: SettingsProtocol) {
     self.settings = settings
@@ -35,7 +62,7 @@ class SettingViewModel {
       self?.settings.updateSkipQueenSelection($0)
     }.disposed(by: disposeBag)
 
-    self.canSkipOrderSelectionRelay.subscribe { [weak self]  in
+    self.canSkipCommandSelectionRelay.subscribe { [weak self]  in
       self?.settings.updateSkipOrderSelection($0)
     }.disposed(by: disposeBag)
 
@@ -49,7 +76,7 @@ class SettingViewModel {
 
     _ = Observable
       .combineLatest(
-        canSkipOrderSelectionRelay,
+        canSkipCommandSelectionRelay,
         canSkipQueenSelectionRelay,
         queenWaitingSecondsRelay,
         citizenWaitingSecondsRelay

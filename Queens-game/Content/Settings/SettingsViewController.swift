@@ -17,59 +17,75 @@ class SettingsViewController: UIViewController, QueensGameViewControllerProtocol
   let viewModel: SettingViewModel = SettingViewModel(settings: Settings.shared)
   
   let titleLabel = H2Label(text: "Settings")
-  let switchQueenSelection = SettingsSwitcherStackView()
-  let switchCommandSelection = SettingsSwitcherStackView()
-  let waitingTimeQueenSelection = SettingsWaitingTimeStackView()
-  let waitingTimeCommandSelection = SettingsWaitingTimeStackView()
+  let canSkipQueenView = SettingsSwitcherStackView(Settings.canSkipQueenIdentifier)
+  let canSkipCommandView = SettingsSwitcherStackView(Settings.canSkipCommandIdentifier)
+  let queenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.queenWaitingSecondsIdentifier)
+  let citizenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.citizenWaitingSecondsIdentifier)
   
   lazy var items = [
-    switchQueenSelection,
-    switchCommandSelection,
-    waitingTimeQueenSelection,
-    waitingTimeCommandSelection
+    canSkipQueenView,
+    queenWaitingSecondsView,
+    canSkipCommandView,
+    citizenWaitingSecondsView
   ]
   
-  lazy var contentView = VerticalStackView(
-    arrangedSubviews: [titleLabel] + items
-  )
+  lazy var contentView: VerticalStackView = {
+    let sv =  VerticalStackView(
+      arrangedSubviews: [titleLabel] + items
+    )
+    sv.setCustomSpacing(32, after: queenWaitingSecondsView)
+    return sv
+  } ()
+  
   
   lazy var scrollView =  DynamicHeightScrollView(
     contentView: contentView,
     padding: .init(
-      top: Constant.Common.topSpacing,
+      top: Constant.Common.topSpacingFromTopLine,
       left: Constant.Common.leadingSpacing,
-      bottom: Constant.Common.bottomSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
       right: Constant.Common.trailingSpacing
     )
   )
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundCreator.configureLayout()
-    setupLayout()
+    configureLayout()
     configureBinding()
-    
+    backgroundCreator.configureLayout()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
   }
   
 }
 
 extension SettingsViewController {
   
-  private func setupLayout() {
+  private func configureLayout() {
     view.configBgColor(bgColor: CustomColor.background)
+    
     scrollView.configSuperView(under: view)
-    scrollView.matchParent()
+    scrollView.matchParent(
+      padding: .init(
+        top: Constant.Common.topLineHeight,
+        left: 0,
+        bottom: Constant.Common.bottomLineHeight,
+        right: 0
+      )
+    )
   }
   
   private func configureBinding() {
     items.enumerated().forEach { (index, item) in
       if let switchItem = item as? SettingsSwitcherStackView {
-        let row = self.viewModel.settings.skipSettings()
-        switchItem.descriptionLabel.text = row[index].description
-        switchItem.switcher.setOn(row[index].canSkip, animated: false)
+        let data = self.viewModel.settings.getCanSkipSource(switchItem.identifier)
+        switchItem.descriptionLabel.text = data.description
+        switchItem.switcher.setOn(data.canSkip, animated: false)
         
         // RxSwift
-        let relay = self.viewModel.skipRelays[index]
+        let relay = self.viewModel.getCanSkipRelay(switchItem.identifier)
         switchItem.switcher.rx.isOn.asObservable()
           .subscribe(onNext: {
             relay.accept($0)
@@ -78,20 +94,20 @@ extension SettingsViewController {
       }
       
       if let waitingTimeItem = item as? SettingsWaitingTimeStackView {
-        
-        let index = index/2
-        let row = self.viewModel.settings.waitingSeconds()
-        waitingTimeItem.descriptionLabel.text = row[index].description
-        let sec = row[index].sec
+        let data = self.viewModel.settings.getWaitingSecondsSource(waitingTimeItem.identifier)
+        waitingTimeItem.descriptionLabel.text = data.description
+        let sec = data.sec
         waitingTimeItem.stepper.value = sec
         waitingTimeItem.sec.text = "\(Int(sec)) sec"
-        
+
         // RxSwift
-        let relay = self.viewModel.waitingRelays[index]
+        let relay = self.viewModel.getWaitingSecondsRelay(waitingTimeItem.identifier)
+
         waitingTimeItem.stepper.rx.value.asObservable()
           .subscribe(onNext: {
             relay.accept($0)
             waitingTimeItem.sec.text = "\(Int($0)) sec"
+
           })
           .disposed(by: disposeBag)
       }

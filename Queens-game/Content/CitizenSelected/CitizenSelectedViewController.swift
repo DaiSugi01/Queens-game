@@ -138,7 +138,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     super.viewDidLoad()
     backgroundCreator.configureLayout()
     configureLayoutBeforeCountdown()
-    if self.viewModel.settings.canSkipOrderSelection {
+    if self.viewModel.settings.canSkipCommand {
       self.replaceView()
     }
     self.viewModel.countdown()

@@ -26,7 +26,7 @@ class MainButton: UIButton {
     )
     
     // Config lable
-    self.titleLabel?.font = CustomFont.h3
+    self.titleLabel?.font = CustomFont.h4
     self.setTitle(title, for: .normal)
     self.titleLabel?.textAlignment = .center
     

@@ -14,7 +14,7 @@ class QueenSelectedViewModel {
   var timer = Timer()
 
   let rxCountdownTime = PublishSubject<Int?>()
-  var countdownTime = Int(Settings.shared.queenSelectionWaitingSeconds)
+  var countdownTime = Int(Settings.shared.queenWaitingSeconds)
 
   func countdown() {
     self.timer = Timer.scheduledTimer(
