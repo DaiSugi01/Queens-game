@@ -24,7 +24,7 @@ class CitizenSelectedViewModel {
   var stakeholder: User = User(id: UUID(), playerId: 0, name: "")
 
   let rxCountdownTime = PublishSubject<Int?>()
-  var countdownTime = Int(Settings.shared.citizenSelectionWaitingSeconds)
+  var countdownTime = Int(Settings.shared.citizenWaitingSeconds)
 
   init() {
     (self.target, self.stakeholders) = self.executor.select(from: self.getGameManager())

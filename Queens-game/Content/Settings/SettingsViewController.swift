@@ -10,45 +10,51 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewController: UIViewController, QueensGameViewControllerProtocol {
-  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
-
+  lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
+  
   let disposeBag = DisposeBag()
-
+  
   let viewModel: SettingViewModel = SettingViewModel(settings: Settings.shared)
-
-  let closeButton: UIButton = {
-    let bt = UIButton()
-    bt.translatesAutoresizingMaskIntoConstraints = false
-    bt.setTitle("Close", for: .normal)
-    bt.setTitleColor(.black, for: .normal)
-    bt.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
-    return bt
-  }()
-
-  let collectionView : UICollectionView = {
-    var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-    configuration.backgroundColor = CustomColor.background
-    let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-    let collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
-    collectionView.register(
-      SettingsSwitcherCollectionViewCell.self,
-      forCellWithReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier
+  
+  let titleLabel = H2Label(text: "Settings")
+  let canSkipQueenView = SettingsSwitcherStackView(Settings.canSkipQueenIdentifier)
+  let canSkipCommandView = SettingsSwitcherStackView(Settings.canSkipCommandIdentifier)
+  let queenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.queenWaitingSecondsIdentifier)
+  let citizenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.citizenWaitingSecondsIdentifier)
+  
+  lazy var items = [
+    canSkipQueenView,
+    queenWaitingSecondsView,
+    canSkipCommandView,
+    citizenWaitingSecondsView
+  ]
+  
+  lazy var contentView: VerticalStackView = {
+    let sv =  VerticalStackView(
+      arrangedSubviews: [titleLabel] + items
     )
-    collectionView.register(
-      SettingsWaitingSecondsCollectionViewCell.self,
-      forCellWithReuseIdentifier: SettingsWaitingSecondsCollectionViewCell.identifier
+    sv.setCustomSpacing(32, after: queenWaitingSecondsView)
+    return sv
+  } ()
+  
+  
+  lazy var scrollView =  DynamicHeightScrollView(
+    contentView: contentView,
+    padding: .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
+      right: Constant.Common.trailingSpacing
     )
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    return collectionView
-  }()
-
+  )
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    configureLayout()
+    configureBinding()
     backgroundCreator.configureLayout()
-    setupLayout()
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
@@ -56,109 +62,57 @@ class SettingsViewController: UIViewController, QueensGameViewControllerProtocol
 }
 
 extension SettingsViewController {
-
-  private func setupLayout() {
+  
+  private func configureLayout() {
     view.configBgColor(bgColor: CustomColor.background)
-    navigationItem.hidesBackButton = true
-    navigationController?.navigationBar.barTintColor = CustomColor.background
-    navigationController?.navigationBar.shadowImage = UIImage()
-    navigationItem.setRightBarButton(
-      UIBarButtonItem(customView: closeButton),
-      animated: true
+    
+    scrollView.configSuperView(under: view)
+    scrollView.matchParent(
+      padding: .init(
+        top: Constant.Common.topLineHeight,
+        left: 0,
+        bottom: Constant.Common.bottomLineHeight,
+        right: 0
+      )
     )
-
-    self.collectionView.delegate = self
-    self.collectionView.dataSource = self
-
-    let stackView = VerticalStackView(
-      arrangedSubviews: [
-        H2Label(text: "Settings"),
-        self.collectionView,
-      ],
-      spacing: 32
-    )
-    view.addSubview(stackView)
-    stackView.topAnchor.constraint(
-      equalTo: view.topAnchor,
-      constant: Constant.Common.topSpacing
-    ).isActive = true
-    stackView.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: -Constant.Common.bottomSpacing
-    ).isActive = true
-    stackView.leadingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-      constant: Constant.Common.leadingSpacing
-    ).isActive = true
-    stackView.trailingAnchor.constraint(
-      equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-      constant:  -Constant.Common.trailingSpacing
-    ).isActive = true
-
   }
+  
+  private func configureBinding() {
+    items.enumerated().forEach { (index, item) in
+      if let switchItem = item as? SettingsSwitcherStackView {
+        let data = self.viewModel.settings.getCanSkipSource(switchItem.identifier)
+        switchItem.descriptionLabel.text = data.description
+        switchItem.switcher.setOn(data.canSkip, animated: false)
+        
+        // RxSwift
+        let relay = self.viewModel.getCanSkipRelay(switchItem.identifier)
+        switchItem.switcher.rx.isOn.asObservable()
+          .subscribe(onNext: {
+            relay.accept($0)
+          })
+          .disposed(by: disposeBag)
+      }
+      
+      if let waitingTimeItem = item as? SettingsWaitingTimeStackView {
+        let data = self.viewModel.settings.getWaitingSecondsSource(waitingTimeItem.identifier)
+        waitingTimeItem.descriptionLabel.text = data.description
+        let sec = data.sec
+        waitingTimeItem.stepper.value = sec
+        waitingTimeItem.sec.text = "\(Int(sec)) sec"
 
-  @objc func closeTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
-  }
-}
+        // RxSwift
+        let relay = self.viewModel.getWaitingSecondsRelay(waitingTimeItem.identifier)
 
-extension SettingsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+        waitingTimeItem.stepper.rx.value.asObservable()
+          .subscribe(onNext: {
+            relay.accept($0)
+            waitingTimeItem.sec.text = "\(Int($0)) sec"
 
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 2
-  }
-
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if section == 0 {
-      return self.viewModel.settings.skipSettings().count
+          })
+          .disposed(by: disposeBag)
+      }
+      
     }
-    return self.viewModel.settings.waitingSeconds().count
   }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if indexPath.section == 0 {
-      let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: SettingsSwitcherCollectionViewCell.identifier,
-        for: indexPath as IndexPath
-      ) as! SettingsSwitcherCollectionViewCell
-
-      let row = self.viewModel.settings.skipSettings()
-      cell.descriptionLabel.text = row[indexPath.item].description
-      cell.switcher.setOn(row[indexPath.item].canSkip, animated: false)
-
-      // RxSwift
-      let relay = self.viewModel.skipRelays[indexPath.item]
-      cell.switcher.rx.isOn.asObservable()
-        .subscribe(onNext: {
-          relay.accept($0)
-        })
-        .disposed(by: disposeBag)
-      return cell
-    } else {
-      let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: SettingsWaitingSecondsCollectionViewCell.identifier,
-        for: indexPath as IndexPath
-      ) as! SettingsWaitingSecondsCollectionViewCell
-
-      let row = self.viewModel.settings.waitingSeconds()
-      cell.descriptionLabel.text = row[indexPath.item].description
-      let sec = row[indexPath.item].sec
-      cell.stepper.value = sec
-      cell.sec.text = "\(Int(sec)) sec"
-
-      // RxSwift
-      let relay = self.viewModel.waitingRelays[indexPath.item]
-      cell.stepper.rx.value.asObservable()
-        .subscribe(onNext: {
-          relay.accept($0)
-          cell.sec.text = "\(Int($0)) sec"
-        })
-        .disposed(by: disposeBag)
-      return cell
-    }
-
-  }
-
-
 }
 
