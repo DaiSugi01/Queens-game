@@ -10,6 +10,8 @@ import UIKit
 class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
+  let popUpTransitioning = PopUpTransitioningDelegatee()
+  
   let screenTitle: H1Label = {
     let lb = H1Label()
     let title = NSMutableAttributedString(string: "Queen's Game")
@@ -45,7 +47,16 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   let menuButtonAtTop: SubButton = SubButton(title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
-    navigationController?.present(nx, animated: true, completion: nil)
+    nx.needQuitButton = false
+    nx.modalPresentationStyle = .overCurrentContext
+    nx.transitioningDelegate = popUpTransitioning
+    
+    // If already something is presented, present the view over it
+    if let presentedVC = self.presentedViewController {
+        presentedVC.present(nx, animated: true, completion: nil)
+    }else{
+      self.present(nx, animated: true, completion: nil)
+    }
   }
   
   lazy var verticalSV: VerticalStackView = {
@@ -59,12 +70,12 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     super.viewDidLoad()
     GameManager.shared.resetGameManeger()
     backgroundCreator.configureLayout()
-    setupLayout()
-    setActions()
-    setUpDemoButton() // debug button
+    configureLayout()
+    configureActions()
+    configureDemoButton() // debug button
   }
   
-  private func setupLayout() {
+  private func configureLayout() {
     
     verticalSV.configSuperView(under: view)
     
@@ -80,7 +91,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     
   }
   
-  private func setActions() {
+  private func configureActions() {
     startButton.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
     editCommandButton.addTarget(self, action: #selector(editCommandTapped(_:)), for: .touchUpInside)
     menuButtonAtTop.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
@@ -92,7 +103,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
 
 extension TopViewController {
   
-  private func setUpDemoButton() {
+  private func configureDemoButton() {
     let demoButton = UIButton()
     
     // Set image
