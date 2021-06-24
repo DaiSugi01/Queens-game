@@ -24,6 +24,7 @@ class CommandSelectionViewController:
   // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
+  let viewModel = CommandSelectionViewModel()
   let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
@@ -117,6 +118,7 @@ extension CommandSelectionViewController {
       )
     case .random:
       let nx = CitizenSelectedViewController()
+      GameManager.shared.command = viewModel.rundomCommandSelector()
       GameManager.shared.pushGameProgress(
         navVC: navigationController,
         currentScreen: self,

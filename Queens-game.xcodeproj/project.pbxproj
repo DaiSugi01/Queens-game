@@ -102,6 +102,7 @@
 		48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */; };
 		48AE80472640B26F00CBDB5E /* DemoSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */; };
 		48AE80482640B26F00CBDB5E /* DemoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE803D2640B26F00CBDB5E /* DemoModels.swift */; };
+		48C82A5C268406D4003F7851 /* CommandSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C82A5B268406D4003F7851 /* CommandSelectionViewModel.swift */; };
 		48C9C556264A417400F61459 /* CommandHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */; };
 		48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */; };
 		48E54179267C48A300D891E1 /* DynamicHeightScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */; };
@@ -211,6 +212,7 @@
 		48AE803A2640B26F00CBDB5E /* DemoColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoColorViewController.swift; sourceTree = "<group>"; };
 		48AE803C2640B26F00CBDB5E /* DemoSectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSectionItem.swift; sourceTree = "<group>"; };
 		48AE803D2640B26F00CBDB5E /* DemoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModels.swift; sourceTree = "<group>"; };
+		48C82A5B268406D4003F7851 /* CommandSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSelectionViewModel.swift; sourceTree = "<group>"; };
 		48C9C555264A417400F61459 /* CommandHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTransitioning.swift; sourceTree = "<group>"; };
 		48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightScrollView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62BB2638C0580082ACAE /* CommandSelectionViewController.swift */,
+				48C82A5B268406D4003F7851 /* CommandSelectionViewModel.swift */,
 			);
 			path = CommandSelection;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				48AE80462640B26F00CBDB5E /* DemoColorViewController.swift in Sources */,
 				0A306FCC25F7078B0059CDEE /* SceneDelegate.swift in Sources */,
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
+				48C82A5C268406D4003F7851 /* CommandSelectionViewModel.swift in Sources */,
 				0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */,
 				0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */,
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,

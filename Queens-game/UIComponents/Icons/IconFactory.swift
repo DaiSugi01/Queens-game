@@ -222,3 +222,26 @@ extension IconFactory {
     return createImage(type: type, width: nil, height: height)
   }
 }
+
+
+extension IconFactory {
+  
+  static func createSystemIcon(
+    _ name: String,
+    color: UIColor = CustomColor.main,
+    pointSize: CGFloat = 20,
+    weight: UIImage.SymbolWeight = .black,
+    scale: UIImage.SymbolScale = .large
+  ) -> UIImage? {
+    
+    // Set image
+    let imgConfig = UIImage.SymbolConfiguration(pointSize: pointSize, weight: weight, scale: scale)
+    let image = UIImage(
+      systemName: name ,
+      withConfiguration: imgConfig
+    )? // change color
+    .withTintColor(color, renderingMode: .alwaysOriginal)
+    return image
+  }
+  
+}

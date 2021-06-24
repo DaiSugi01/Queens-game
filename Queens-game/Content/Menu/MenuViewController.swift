@@ -9,6 +9,10 @@ import UIKit
 
 class MenuViewController: UIViewController {
   
+  /// Determine if we need quit button (go to top button) or not.
+  /// Basically, it's true but from top VC, we make it false.
+  var needQuitButton: Bool = true
+  
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Menu")
     lb.setContentHuggingPriority(.required, for: .vertical)
@@ -32,7 +36,7 @@ class MenuViewController: UIViewController {
   
   let goToTopButton: MainButton = {
     let bt = MainButton()
-    bt.setTitle("Go to Top", for: .normal)
+    bt.setTitle("Back to Top", for: .normal)
     bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
     return bt
   }()
@@ -95,8 +99,8 @@ class MenuViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    //    backgroundCreator.configureLayout()
-    setupLayout()
+
+    configureLayout()
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)
     
@@ -114,8 +118,11 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController {
   
-  private func setupLayout() {
+  private func configureLayout() {
     view.configBgColor(bgColor: .clear)
+    if !needQuitButton {
+      goToTopButton.isHidden = true
+    }
     stackView.configBgColor(bgColor: CustomColor.background)
     stackView.configSuperView(under: view)
     stackView.configSize(width: 296)

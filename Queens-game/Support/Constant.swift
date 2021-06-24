@@ -72,8 +72,9 @@ struct Constant {
         detail: "The queen is selected as you as you tap next"
       ),
       Selection(
-        title: "Card select",
-        detail: "Those who select Queen will be the Queen!"
+        title: "(Card select)",
+        detail: "🛠 Coming soon... We're working on it now!"
+//      "Those who select Queen will be the Queen!"
       )
     ]
     enum Index: Int {

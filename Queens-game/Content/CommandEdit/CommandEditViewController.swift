@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 // MARK: - Basics
 
@@ -14,22 +16,15 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   
   let viewModel: CommandViewModel!
   
+  
+  // MARK: - Save and delete button
+  
   let saveButton: UIButton = {
     let bt = UIButton()
     // Set image
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .large)
-    let image = UIImage(
-      systemName: "tray.and.arrow.down.fill",
-      withConfiguration: imgConfig
-    )? // change color
-    .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
+    let image = IconFactory.createSystemIcon("tray.and.arrow.down.fill", pointSize: 24, weight: .regular)
     bt.setBackgroundImage(image, for: .normal)
     bt.translatesAutoresizingMaskIntoConstraints = false
-    // Set title
-//    bt.setTitle("Save", for: .normal)
-//    bt.titleEdgeInsets.bottom = -64
-//    bt.titleLabel?.font = CustomFont.h4
-//    bt.setTitleColor(CustomColor.main, for: .normal)
     // Set target
     bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
@@ -38,19 +33,9 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let deleteButton: UIButton = {
     let bt = UIButton()
     // Set image
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 28, weight: .regular, scale: .large)
-    let image = UIImage(
-      systemName: "trash.circle",
-      withConfiguration: imgConfig
-    )? // change color
-    .withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal)
+    let image = IconFactory.createSystemIcon("trash.circle", pointSize: 28, weight: .regular)
     bt.setBackgroundImage(image, for: .normal)
     bt.translatesAutoresizingMaskIntoConstraints = false
-    // Set Ttile
-//    bt.setTitle("Delete", for: .normal)
-//    bt.titleEdgeInsets = .init(top: 0, left: -32, bottom: -64, right: -32)
-//    bt.titleLabel?.font = CustomFont.h4
-//    bt.setTitleColor(CustomColor.accent, for: .normal)
     // Set target
     bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt
@@ -63,6 +48,10 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
     distribution: .equalCentering
   )
   
+  
+  
+  // MARK: - Content
+
   let categoryLabel = H3Label(text: "Category")
   let difficultySegment = CustomSegmentedView("Difficulty", [.levelOne, .levelTwo, .levelThree])
   let commandTypeSegment = CustomSegmentedView("Type", [.cToC, .cToA, .cToQ])
@@ -76,11 +65,33 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
     tv.tintColor = CustomColor.accent
     return tv
   } ()
-  lazy var stackView = VerticalStackView(
-    arrangedSubviews: [categoryLabel, difficultySegment, commandTypeSegment, contentLabel],
-    spacing: 24,
-    alignment: .fill,
-    distribution: .fill
+
+  lazy var stackView: VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        categoryLabel,
+        difficultySegment,
+        commandTypeSegment,
+        contentLabel,
+        textView
+      ],
+      spacing: 24,
+      alignment: .fill,
+      distribution: .fill
+    )
+    sv.setCustomSpacing(16, after: difficultySegment)
+    sv.setCustomSpacing(32, after: commandTypeSegment)
+    return sv
+  } ()
+    
+  lazy var scrollView = DynamicHeightScrollView(
+    contentView: stackView,
+    padding: .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
+      right: Constant.Common.trailingSpacing
+    )
   )
   
   init(viewModel: CommandViewModel) {
@@ -93,14 +104,16 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   override func viewDidLoad() {
     super.viewDidLoad()
     backgroundCreator.configureLayout()
-    configLayout()
-    configBinding()
+    configureScrollView()
+    configureButtons()
+    configureTextView()
+    configureKeyboard()
   }
 }
 
 // MARK: - Target Action
 extension CommandEditViewController {
-  func configBinding() {
+  func configureTextView() {
     // If #item reach min, disable delete button.
     viewModel.didReachMinItemSubject
       .map(!)
@@ -163,35 +176,35 @@ extension CommandEditViewController {
 
 extension CommandEditViewController {
   
-  private func configLayout() {
+  private func configureScrollView() {
     view.configBgColor(bgColor: CustomColor.background)
     
-    stackView.configSuperView(under: view)
-    stackView.anchors(
-      topAnchor: view.topAnchor,
-      leadingAnchor: view.leadingAnchor,
-      trailingAnchor: view.trailingAnchor,
-      bottomAnchor: nil,
-      padding: .init(top: 108, left: 32, bottom: 0, right: 32)
-    )
-    stackView.setCustomSpacing(16, after: difficultySegment)
-    stackView.setCustomSpacing(32, after: commandTypeSegment)
-    
-    // Exclude textview from stack view. This is because we can't use .fill for text view. The only way to set size of text view is set static size or set anchor.
-    textView.configSuperView(under: view)
-    textView.anchors(
-      topAnchor: stackView.bottomAnchor,
-      leadingAnchor: view.leadingAnchor,
-      trailingAnchor: view.trailingAnchor,
-      bottomAnchor: view.bottomAnchor,
+    scrollView.configSuperView(under: view)
+    scrollView.matchParent(
       padding: .init(
-        top: 24,
-        left: 32,
-        bottom: Constant.Common.bottomSpacing*2,
-        right: 32
+        top: Constant.Common.topLineHeight,
+        left: 0,
+        bottom: Constant.Common.bottomLineHeight,
+        right: 0
       )
     )
-
+    
+    // Determine width and height of text view. Otherwise text view will be .zero size
+    NSLayoutConstraint.activate([
+      textView.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor, multiplier: 1),
+      textView.heightAnchor.constraint(equalToConstant: 200)
+    ])
+    
+    // Attributes
+    if let command = viewModel.selectedCommand {
+      difficultySegment.segmentedControl.selectedSegmentIndex = command .difficulty.rawValue
+      commandTypeSegment.segmentedControl.selectedSegmentIndex = command .commandType.rawValue
+      textView.text = command.detail
+    }
+    
+  }
+  
+  private func configureButtons() {
     saveDeleteWrapper.configSuperView(under: view)
     saveDeleteWrapper.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
@@ -203,12 +216,49 @@ extension CommandEditViewController {
     if let _ = viewModel.selectedCommand {
       saveDeleteWrapper.insertArrangedSubview(deleteButton, at: 0)
     }
-    
-    if let command = viewModel.selectedCommand {
-      difficultySegment.segmentedControl.selectedSegmentIndex = command .difficulty.rawValue
-      commandTypeSegment.segmentedControl.selectedSegmentIndex = command .commandType.rawValue
-      textView.text = command.detail
-    }
-    
   }
+}
+
+
+// MARK: - Text view
+
+extension CommandEditViewController {
+  private func configureKeyboard() {
+
+
+    let willShownObservable = NotificationCenter.default
+      .rx.notification(UIResponder.keyboardWillShowNotification)
+      .map { notification -> CGFloat in
+        if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+          return height
+        }
+        return 0
+      }
+    
+    let willHideObservable = NotificationCenter.default
+      .rx.notification(UIResponder.keyboardWillHideNotification)
+      .map { _ -> CGFloat in
+        return 0
+      }
+    
+    Observable.of(willShownObservable, willHideObservable)
+      .merge()
+      .subscribe { [weak self] height in
+        self?.scrollView.contentInset = .init(top: 0, left: 0, bottom: height, right: 0)
+      }
+      .disposed(by: viewModel.disposeBag)
+
+    
+    // Add Gesture: when tap out of keyboard, dismiss
+    let gestureRecognizer = UITapGestureRecognizer(
+      target: self,
+      action: #selector(dismissKeyboard(_:))
+    )
+    view.addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    view.endEditing(true)
+  }
+
 }

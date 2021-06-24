@@ -42,9 +42,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   let minusButton: UIButton = {
     let bt = UIButton()
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold, scale: .large)
-    let btImage = UIImage(systemName: "minus.circle.fill", withConfiguration: imgConfig)?
-      .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
+    let btImage = IconFactory.createSystemIcon("minus.circle.fill", pointSize: 32)
     bt.setImage(btImage, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
     bt.addTarget(self, action: #selector(decrementPlayerCount(_:)), for: .touchUpInside)
@@ -67,9 +65,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   let plusButton: UIButton = {
     let bt = UIButton()
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold, scale: .large)
-    let btImage = UIImage(systemName: "plus.circle.fill", withConfiguration: imgConfig)?
-      .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
+    let btImage = IconFactory.createSystemIcon("plus.circle.fill", pointSize: 32)
     bt.setImage(btImage, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
     bt.addTarget(self, action: #selector(incrementPlayerCount(_:)), for: .touchUpInside)

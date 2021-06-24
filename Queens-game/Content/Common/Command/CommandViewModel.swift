@@ -44,26 +44,13 @@ class CommandViewModel {
   let realm = try! Realm()
   
   init() {
-    initSnapshot()
+    readItems()
   }
   
 }
 
 
 extension CommandViewModel {
-  
-  /// Called only when only instantiating
-  func initSnapshot() {
-    // Only when item is 0, fill sample data.
-    let restoredItems = realm.objects(Command.self)
-    if restoredItems.count == 0 {
-      // Because of reference type, we create copy objects (other wise sample date is also deleted when you delete from the list.)
-      let copy = CommandViewModel.samples.map {Command(value: $0)}
-      createItems(commandList: copy)
-    } else {
-      readItems()
-    }
-  }
   
   /// Replace all items in snapshot with new items.
   func updateSnapshot(newItems: [Command]) {

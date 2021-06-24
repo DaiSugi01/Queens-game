@@ -12,31 +12,32 @@ import RxCocoa
 class QueenSelectedViewController: UIViewController, QueensGameViewControllerProtocol {
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
-
+  
   let disposeBag = DisposeBag()
   let viewModel = QueenSelectedViewModel()
-
+  
   
   // MARK: - Before countdown views
   
   lazy var countdownStackView = CountdownStackView(
     countdown: self.viewModel.countdownTime
   )
-
+  
   let beforeCountdownTitle: H2Label = {
     let lb = H2Label(text: "Choosing a Queen...")
     lb.lineBreakMode = .byWordWrapping
     lb.textAlignment = .center
     return lb
   }()
-
+  
   let skipButton: SubButton = {
     let button = SubButton()
     button.setTitle("Skip", for: .normal)
     button.addTarget(self, action: #selector(skipButtonTapped(_:)), for: .touchUpInside)
     return button
   }()
-
+  
+  
   lazy var beforeCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
@@ -45,21 +46,21 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
         skipButton
       ]
     )
-    sv.alignment = .fill
+    sv.alignment = .center
     sv.distribution = .equalSpacing
     return sv
   }()
-
+  
   
   // MARK: After Countdown views
-
+  
   let afterCountdownTitle: H2Label = {
     let lb = H2Label(text: "The Queen is")
     lb.translatesAutoresizingMaskIntoConstraints = false
     lb.lineBreakMode = .byWordWrapping
     return lb
   }()
-    
+  
   lazy var queenIcon: UIImageView = {
     let icon = IconFactory.createImageView(
       type: .queen,
@@ -83,7 +84,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     icon.label.textColor = CustomColor.accent
     return icon
   }()
-
+  
   lazy var targetUserName: H2Label = {
     let label = H2Label(text: GameManager.shared.queen!.name)
     label.textAlignment = .center
@@ -101,14 +102,14 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     sv.setContentHuggingPriority(.required, for: .vertical)
     return sv
   }()
-    
+  
   lazy var queenIconLabel: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [self.queenIcon, self.targetIconLabel, self.targetUserName]
     )
     sv.alignment = .center
     sv.spacing = 24
-
+    
     return sv
   }()
   
@@ -119,7 +120,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     button.isEnabled = false
     return button
   }()
-
+  
   
   lazy var afterCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
@@ -133,15 +134,23 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     )
     return sv
   } ()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     backgroundCreator.configureLayout()
     configureLayoutBeforeCountdown()
+    if self.viewModel.settings.canSkipQueen {
+      self.replaceView()
+      return
+    }
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in
-        self?.countdownStackView.countdownLabel.text = String(time!)
+        guard let time = time else { return }
+        DispatchQueue.main.async {
+          self?.countdownStackView.countdownLabel.text = String(time)
+          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
+        }
       },
       onCompleted: {
         self.replaceView()
@@ -149,8 +158,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       .disposed(by: disposeBag)
   }
 
+  
   private func configureLayoutBeforeCountdown() {
-
+    
     beforeCountdownStackView.configSuperView(under: view)
     beforeCountdownStackView.matchParent(
       padding: .init(
@@ -161,7 +171,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       )
     )
   }
-
+  
   private func configureLayoutAfterCountdown() {
     
     afterCountdownStackView.configSuperView(under: super.view)
@@ -204,7 +214,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   @objc func nextButtonTapped(_ sender: UIButton) {
     self.goToNext()
   }
-
+  
   private func goToNext() {
     let nx = CommandSelectionViewController()
     GameManager.shared.pushGameProgress(
