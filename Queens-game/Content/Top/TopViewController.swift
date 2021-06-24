@@ -107,12 +107,8 @@ extension TopViewController {
     let demoButton = UIButton()
     
     // Set image
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold, scale: .large)
-    let btImage = UIImage(
-      systemName: "heart.fill" ,
-      withConfiguration: imgConfig
-    )? // change color
-    .withTintColor(CustomColor.accent, renderingMode: .alwaysOriginal)
+    let btImage = IconFactory.createSystemIcon("heart.fill", color: CustomColor.accent, pointSize: 40)
+
     demoButton.setImage(btImage, for: .normal)
     // rotate image
     demoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))

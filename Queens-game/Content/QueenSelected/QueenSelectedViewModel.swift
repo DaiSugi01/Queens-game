@@ -30,4 +30,40 @@ class QueenSelectedViewModel {
         }
       })
   }
+
+}
+
+
+// Completely redundant... just for fun.
+extension QueenSelectedViewModel {
+  func rotateSuite(time: Int, view: UIView?) {
+    guard let countDownView = view as? CountdownGroup else { return }
+    
+    var targetSuit: UIImageView?
+    switch (Int(Settings.shared.queenWaitingSeconds) - time - 1)%4 {
+      case 0:
+        targetSuit = countDownView.spadeSuit
+      case 1:
+        targetSuit = countDownView.heartSuit
+      case 2:
+        targetSuit = countDownView.clubSuit
+      case 3:
+        targetSuit = countDownView.diamondSuit
+      default:
+        targetSuit = countDownView.spadeSuit
+    }
+
+    guard let targetSuit = targetSuit else { return }
+    rotate(view: targetSuit)
+  }
+  
+  private func rotate(view: UIView) {
+    let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
+    rotation.toValue = NSNumber(value: Double.pi * 2)
+    rotation.duration = 0.8
+    rotation.isCumulative = true
+    rotation.repeatCount = 1
+    rotation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+    view.layer.add(rotation, forKey: "rotationAnimation")
+  }
 }

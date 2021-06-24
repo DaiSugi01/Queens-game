@@ -13,12 +13,7 @@ class MenuButton: UIButton {
     super.init(frame: frame)
     
     // Set image
-    let imgConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .black, scale: .large)
-    let image = UIImage(
-      systemName: "list.dash" ,
-      withConfiguration: imgConfig
-    )? // change color
-    .withTintColor(CustomColor.main, renderingMode: .alwaysOriginal)
+    let image = IconFactory.createSystemIcon("list.dash", pointSize: 20)
 
     self.setBackgroundImage(image, for: .normal)
     self.translatesAutoresizingMaskIntoConstraints = false

@@ -47,7 +47,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
         skipButton
       ]
     )
-    sv.alignment = .fill
+    sv.alignment = .center
     sv.distribution = .equalSpacing
     return sv
   }()
@@ -145,13 +145,19 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in
-        self?.countdownStackView.countdownLabel.text = String(time!)
+        guard let time = time else { return }
+        DispatchQueue.main.async {
+          self?.countdownStackView.countdownLabel.text = String(time)
+          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
+        }
       },
       onCompleted: {
         self.replaceView()
       })
       .disposed(by: disposeBag)
   }
+  
+
   
 }
 
@@ -168,6 +174,7 @@ extension CitizenSelectedViewController {
         right: Constant.Common.trailingSpacing
       )
     )
+    
   }
 
   private func configureLayoutAfterCountdown() {
