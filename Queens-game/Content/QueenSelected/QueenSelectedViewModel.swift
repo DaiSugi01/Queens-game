@@ -12,6 +12,8 @@ import RxCocoa
 class QueenSelectedViewModel {
   
   var timer = Timer()
+  
+  var settings = Settings.shared
 
   let rxCountdownTime = PublishSubject<Int?>()
   var countdownTime = Int(Settings.shared.queenWaitingSeconds)

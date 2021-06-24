@@ -138,6 +138,10 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     super.viewDidLoad()
     backgroundCreator.configureLayout()
     configureLayoutBeforeCountdown()
+    if self.viewModel.settings.canSkipQueen {
+      self.replaceView()
+      return
+    }
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
       .subscribe(onNext: { [weak self] time in

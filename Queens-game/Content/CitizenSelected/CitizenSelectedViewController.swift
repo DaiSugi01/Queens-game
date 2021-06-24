@@ -140,6 +140,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     configureLayoutBeforeCountdown()
     if self.viewModel.settings.canSkipCommand {
       self.replaceView()
+      return
     }
     self.viewModel.countdown()
     self.viewModel.rxCountdownTime
