@@ -476,18 +476,15 @@
 			path = ExitAlert;
 			sourceTree = "<group>";
 		};
-		3B7981C3264F8C2B002D2F71 /* StackView */ = {
+		3B7981C3264F8C2B002D2F71 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */,
-				4826816C2645EBA70010543A /* HorizontalStackView.swift */,
-				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
 				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
 				3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */,
 			);
-			path = StackView;
+			path = Group;
 			sourceTree = "<group>";
 		};
 		480952A12675DA1800A39166 /* Background */ = {
@@ -514,7 +511,7 @@
 				482681612645EBA70010543A /* Label */,
 				4826815B2645EBA70010543A /* SearchBar */,
 				482681802645EBA80010543A /* SegmentControl */,
-				3B7981C3264F8C2B002D2F71 /* StackView */,
+				3B7981C3264F8C2B002D2F71 /* Group */,
 				482681752645EBA70010543A /* SupplementaryView */,
 			);
 			path = UIComponents;
@@ -563,6 +560,9 @@
 		4826816B2645EBA70010543A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				48E54178267C48A300D891E1 /* DynamicHeightScrollView.swift */,
+				4826816C2645EBA70010543A /* HorizontalStackView.swift */,
+				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */,
 				4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */,
 				482681702645EBA70010543A /* UIView+ConfigLayout.swift */,
@@ -573,9 +573,9 @@
 		482681712645EBA70010543A /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				482681742645EBA70010543A /* MainButton.swift */,
 				482681722645EBA70010543A /* SubButton.swift */,
 				482681732645EBA70010543A /* NextAndBackButtons.swift */,
-				482681742645EBA70010543A /* MainButton.swift */,
 				48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */,
 				48449FEA2671D47E007E569A /* MenuButton.swift */,
 				481C2CB4267AF5A1003975FF /* CloseButton.swift */,

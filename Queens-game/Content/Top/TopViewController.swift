@@ -17,14 +17,19 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     let title = NSMutableAttributedString(string: "Queen's Game")
     title.addAttribute(.foregroundColor, value: CustomColor.accent, range: NSMakeRange(0, 1))
     lb.attributedText = title
-    lb.lineBreakMode = .byWordWrapping
     lb.numberOfLines = 2
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
   
   lazy var buttonWrapper: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [startButton, editCommandButton, menuButtonAtTop])
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        startButton,
+        editCommandButton,
+        menuButtonAtTopPage
+      ]
+    )
     sv.alignment = .leading
     sv.setCustomSpacing(16, after: startButton)
     return sv
@@ -44,7 +49,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     navigationController?.pushViewController(nx, animated: true)
   }
   
-  let menuButtonAtTop: SubButton = SubButton(title: "Menu")
+  let menuButtonAtTopPage: SubButton = SubButton(title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
     nx.needQuitButton = false
@@ -89,12 +94,34 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
       )
     )
     
+    startButton.insertIcon(
+      IconFactory.createSystemIcon(
+        "arrowtriangle.right.fill",
+        color: CustomColor.background,
+        pointSize: 14
+      ),
+      to: .left
+    )
+    
+    let image = IconFactory.createImage(type: .levelOne, width: 28)
+    editCommandButton.insertIcon(
+      image.withTintColor(CustomColor.main, renderingMode: .alwaysOriginal),
+      to: .left
+    )
+    editCommandButton.contentEdgeInsets.left -= 10.5
+    
+    menuButtonAtTopPage.insertIcon(
+      IconFactory.createSystemIcon("list.bullet", pointSize: 15 ),
+      to: .left
+    )
+    menuButtonAtTopPage.contentEdgeInsets.left -= 9
+    
   }
   
   private func configureActions() {
     startButton.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
     editCommandButton.addTarget(self, action: #selector(editCommandTapped(_:)), for: .touchUpInside)
-    menuButtonAtTop.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
+    menuButtonAtTopPage.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
   }
 }
 

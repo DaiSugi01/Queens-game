@@ -11,18 +11,24 @@ import UIKit
 /// This is a main button. It is mainly used for positive or strong meaning such as "Next", "Yes", "Ok", and "Save".
 class MainButton: UIButton {
   
+  enum Direction {
+    case left, right
+  }
+  
+  var contentInset: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
+  var paddingBetweenImageAndText: CGFloat = 8
+  
+  
   /// Custom initializer to create Button
   /// - Parameters:
   ///   - superView: The view you want to set as super view. nil will be ignored.
   ///   - title: The title displayed in the button.
   init(superView: UIView? = nil, title: String = "Next") {
     super.init(frame: .zero)
-
+    
     self.configLayout(
-      superView: superView,
       bgColor: CustomColor.main,
-      radius: 24,
-      shadow: true
+      radius: 24
     )
     
     // Config lable
@@ -35,19 +41,54 @@ class MainButton: UIButton {
     self.setTitleColor(self.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
     
     // Config position of label.
-    // There is no fix size for button, but always keeps +16 margin from label.
-    let margin: CGFloat = -16
-    self.anchors(
-      topAnchor: self.titleLabel?.topAnchor,
-      leadingAnchor: self.titleLabel?.leadingAnchor,
-      trailingAnchor: self.titleLabel?.trailingAnchor,
-      bottomAnchor: self.titleLabel?.bottomAnchor,
-      padding: .init(top: margin, left: margin, bottom: margin , right: margin)
+    self.contentEdgeInsets = contentInset
+    
+    self.insertIcon(
+      IconFactory.createSystemIcon("chevron.right", color: CustomColor.background)!,
+      to: .right
     )
   }
-
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  func insertIcon(_ image: UIImage?, to: Direction) {
+  
+    self.setImage(image, for: .normal)
+    self.setImage(image, for: .disabled) // This won't let change color at disable
+    
+    self.contentEdgeInsets.right += paddingBetweenImageAndText
+    self.titleEdgeInsets = UIEdgeInsets(
+        top: 0,
+        left: paddingBetweenImageAndText,
+        bottom: 0,
+        right: -paddingBetweenImageAndText
+    )
+    
+    switch to {
+      case .left:
+        self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.titleLabel?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.imageView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+      case .right:
+        self.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        self.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        self.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    }
+    
+  }
+  
+  func moveIcon(to direction: Direction, withReverse: Bool) {
+    guard let imageView = self.imageView, let image = imageView.image else { return }
+    self.insertIcon(
+      image,
+      to: direction
+    )
+    if withReverse {
+      imageView.transform = CGAffineTransform(scaleX: -imageView.transform.a, y: 1.0)
+    }
+  }
+  
   
 }

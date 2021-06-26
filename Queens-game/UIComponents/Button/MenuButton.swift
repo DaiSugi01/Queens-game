@@ -13,7 +13,7 @@ class MenuButton: UIButton {
     super.init(frame: frame)
     
     // Set image
-    let image = IconFactory.createSystemIcon("list.dash", pointSize: 20)
+    let image = IconFactory.createSystemIcon("list.bullet", pointSize: 24)
 
     self.setBackgroundImage(image, for: .normal)
     self.translatesAutoresizingMaskIntoConstraints = false

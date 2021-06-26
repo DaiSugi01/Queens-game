@@ -22,17 +22,31 @@ class NextAndBackButtons: HorizontalStackView {
   init(superView: UIView? = nil) {
     super.init(
       arrangedSubviews: [backButton, nextButton],
-      spacing: 64,
       distribution: .equalSpacing
     )
     self.configLayout(superView: superView)
-//    backButton.configBgColor(bgColor: CustomColor.background)
+
   }
   
   required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func configureLayoutToBottom() {
+    guard let view = superview else { return }
+    self.anchors(
+      topAnchor: nil,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: view.bottomAnchor,
+      padding: .init(
+        top: 0,
+        left: Constant.Common.leadingSpacing + 8,
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing + 8
+      )
+    )
+  }
   
   
 }

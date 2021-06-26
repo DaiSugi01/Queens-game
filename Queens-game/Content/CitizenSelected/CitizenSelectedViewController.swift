@@ -36,6 +36,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     let button = SubButton()
     button.setTitle("Skip", for: .normal)
     button.addTarget(self, action: #selector(skipButtonTapped(_:)), for: .touchUpInside)
+    button.insertIcon(IconFactory.createSystemIcon("chevron.right.2", weight: .bold), to: .right)
     return button
   }()
 

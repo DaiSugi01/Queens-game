@@ -22,22 +22,29 @@ class MenuViewController: UIViewController {
   
   let howToPlayButton: MainButton = {
     let bt = MainButton()
+    bt.configRadius(radius: 28)
     bt.setTitle("How to Play", for: .normal)
     bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
+    bt.insertIcon(IconFactory.createSystemIcon("questionmark.circle", color: CustomColor.background, pointSize: 17), to: .left)
     return bt
   }()
   
   let settingButton: MainButton = {
     let bt = MainButton()
+    bt.configRadius(radius: 28)
     bt.setTitle("Settings", for: .normal)
     bt.addTarget(self, action: #selector(settingTapped(_:)), for: .touchUpInside)
+    bt.insertIcon(IconFactory.createSystemIcon("gear", color: CustomColor.background, pointSize: 16), to: .left)
     return bt
   }()
   
   let goToTopButton: MainButton = {
     let bt = MainButton()
+    bt.configRadius(radius: 28)
     bt.setTitle("Back to Top", for: .normal)
+    bt.backgroundColor = CustomColor.accent
     bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
+    bt.insertIcon(IconFactory.createSystemIcon("suit.heart.fill", color: CustomColor.background, pointSize: 16), to: .left)
     return bt
   }()
   
@@ -46,6 +53,7 @@ class MenuViewController: UIViewController {
     bt.setTitle("Privacy policy", for: .normal)
     bt.titleLabel?.font = CustomFont.p
     bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
+    bt.insertIcon(nil, to: .left)
     return bt
   }()
   
@@ -61,10 +69,11 @@ class MenuViewController: UIViewController {
       spacing: 24,
       alignment: .fill
     )
+    sv.setCustomSpacing(16, after: goToTopButton)
     sv.translatesAutoresizingMaskIntoConstraints = false
     sv.isLayoutMarginsRelativeArrangement = true
-    sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 32, trailing: 40)
-    sv.layer.cornerRadius = 24
+    sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 24, trailing: 40)
+    sv.layer.cornerRadius = 16
     return sv
   }()
   

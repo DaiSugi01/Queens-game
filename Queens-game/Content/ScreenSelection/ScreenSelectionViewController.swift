@@ -95,11 +95,7 @@ extension ScreenSelectionViewController {
   /// Set Button Actions
   private func configureButtonActions() {
     navButtons.configSuperView(under: view)
-    navButtons.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: -Constant.Common.bottomSpacing
-    ).isActive = true
-    navButtons.centerXin(view)
+    navButtons.configureLayoutToBottom()
     
     navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
     navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)

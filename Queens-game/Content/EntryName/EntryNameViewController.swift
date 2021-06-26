@@ -90,14 +90,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   }
   
   private func configureNavButtons() {
-    navButtons.bottomAnchor.constraint(
-      equalTo: view.bottomAnchor,
-      constant: -Constant.Common.bottomSpacing
-    ).isActive = true
-    navButtons.centerXin(view)
-
-    // Load this view to get height.
-    navButtons.layoutIfNeeded()
+    navButtons.configureLayoutToBottom()
   }
   
   private func configureScrollView() {
