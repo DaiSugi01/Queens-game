@@ -183,6 +183,10 @@ extension ResultViewController {
 
   private func configureButtons() {
     navButtons.setTitle("Done!", for: .normal)
+    navButtons.insertIcon(
+      IconFactory.createSystemIcon("checkmark", color: CustomColor.background),
+      to: .right
+    )
     navButtons.addTarget(
       self,
       action: #selector(nextTapped),
