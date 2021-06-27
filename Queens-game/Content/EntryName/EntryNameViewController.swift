@@ -13,7 +13,6 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
-  let spacing: CGFloat = 16
   let vm: EntryNameViewModel = EntryNameViewModel()
   let disposeBag: DisposeBag = DisposeBag()
   
@@ -22,27 +21,25 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     padding: .init(
       top: Constant.Common.topSpacingFromTopLine,
       left: Constant.Common.leadingSpacing,
-      bottom: Constant.Common.bottomSpacingFromBottomLine + navButtons.frame.height + spacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine + 80,
       right: Constant.Common.trailingSpacing
     )
   )
   
   lazy var contentWrapper: VerticalStackView = {
-    let sv = VerticalStackView(arrangedSubviews: [screenTitle])
-    sv.spacing = spacing
-    sv.alignment = .fill
-    sv.distribution = .fill
-    sv.setCustomSpacing(40, after: screenTitle)
+    let sv = VerticalStackView(
+      arrangedSubviews: [screenTitle],
+      spacing: 16
+    )
+    sv.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: screenTitle)
 
     return sv
   }()
 
   let screenTitle: H2Label = {
-    let lb = H2Label(text: "Enter Player names")
+    let lb = H2Label(text: "Enter player's name")
     lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 0
     lb.setContentHuggingPriority(.required, for: .vertical)
-    
     return lb
   }()
 

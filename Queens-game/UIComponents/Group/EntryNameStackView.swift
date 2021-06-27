@@ -19,8 +19,9 @@ class EntryNameStackView: UIStackView {
       radius: 22
     )
     tf.textAlignment = .center
-    tf.font = CustomFont.h4
+    tf.font = CustomFont.p
     tf.textColor = CustomColor.subMain
+    tf.tintColor = CustomColor.accent
     return tf
   }()
 

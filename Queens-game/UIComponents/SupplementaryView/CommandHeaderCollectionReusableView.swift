@@ -17,11 +17,8 @@ class CommandHeaderCollectionReusableView: UICollectionReusableView {
     title.numberOfLines = 0
     let sv = VerticalStackView(
       arrangedSubviews: [title, subTitle],
-      spacing: 24
+      spacing: Constant.Common.topSpacingFromTitle
     )
-//    sv.isLayoutMarginsRelativeArrangement = true
-//    // This is to set top padding in the collection view.
-//    sv.directionalLayoutMargins = .init(top: 76, leading: 0, bottom: 0, trailing: 0)
     return sv
   } ()
   

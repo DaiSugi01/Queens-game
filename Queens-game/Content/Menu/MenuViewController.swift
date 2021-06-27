@@ -74,6 +74,8 @@ class MenuViewController: UIViewController {
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 24, trailing: 40)
     sv.layer.cornerRadius = 16
+    sv.layer.borderWidth = 4
+    sv.layer.backgroundColor = CustomColor.main.cgColor
     return sv
   }()
   

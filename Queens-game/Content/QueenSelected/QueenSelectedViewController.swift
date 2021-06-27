@@ -105,10 +105,12 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   lazy var queenIconLabel: VerticalStackView = {
     let sv = VerticalStackView(
-      arrangedSubviews: [self.queenIcon, self.targetIconLabel, self.targetUserName]
+      arrangedSubviews: [queenIcon, targetIconLabel, targetUserName]
     )
     sv.alignment = .center
     sv.spacing = 24
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins.bottom = 24
     
     return sv
   }()

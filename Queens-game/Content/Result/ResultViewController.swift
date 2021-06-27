@@ -67,6 +67,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       distribution: .equalSpacing
     )
     
+    // Wrapper to make side margin
     let wrapper = UIView()
     stackView.configSuperView(under: wrapper)
     stackView.matchParent(
@@ -118,6 +119,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
   )
   
 
+  // All
   lazy var stackView: VerticalStackView = {
     let stackView = VerticalStackView(
       arrangedSubviews: [
@@ -131,8 +133,9 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       ],
       spacing: 24
     )
+    stackView.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: screenTitle)
     stackView.setCustomSpacing(32, after: targetBlock)
-    stackView.setCustomSpacing(32, after: detailBlock)
+    stackView.setCustomSpacing(56, after: detailBlock)
     return stackView
   }()
 
