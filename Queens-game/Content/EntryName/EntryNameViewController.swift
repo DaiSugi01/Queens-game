@@ -14,7 +14,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
   let vm: EntryNameViewModel = EntryNameViewModel()
-  let disposeBag: DisposeBag = DisposeBag()
+
   
   lazy var scrollView = DynamicHeightScrollView(
     contentView: contentWrapper,
@@ -32,17 +32,17 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
       spacing: 16
     )
     sv.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: screenTitle)
-
+    
     return sv
   }()
-
+  
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Enter player's name")
     lb.lineBreakMode = .byWordWrapping
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
-
+  
   let navButtons: NextAndBackButtons = {
     let bts = NextAndBackButtons()
     bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
@@ -75,6 +75,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     configureSuperView()
     configureNavButtons()
     configureScrollView()
+    configureKeyboard()
     // Do this lastly to add menu button in top layer.
     backgroundCreator.configureLayout()
     
@@ -112,13 +113,50 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
       
       // Observe text field
       userInputStackView.textField.rx.text.asObservable()
-        .subscribe(onNext: { [self] value in
-          vm.updateUserName(playerId: user.playerId-1, newName: value!)
+        .subscribe(onNext: { [weak self] value in
+          self?.vm.updateUserName(playerId: user.playerId-1, newName: value!)
         })
-        .disposed(by: self.disposeBag)
+        .disposed(by: vm.disposeBag)
       
       contentWrapper.addArrangedSubview(userInputStackView)
     }
   }
   
+}
+
+extension EntryNameViewController {
+  private func configureKeyboard() {
+    
+    let willShownObservable = NotificationCenter.default
+      .rx.notification(UIResponder.keyboardWillShowNotification)
+      .map { notification -> CGFloat in
+        if let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+          return height
+        }
+        return 0
+      }
+    
+    let willHideObservable = NotificationCenter.default
+      .rx.notification(UIResponder.keyboardWillHideNotification)
+      .map { _ -> CGFloat in
+        return 0
+      }
+    
+    Observable.of(willShownObservable, willHideObservable)
+      .merge()
+      .subscribe { [weak self] height in
+        self?.scrollView.contentInset = .init(top: 0, left: 0, bottom: height, right: 0)
+      }
+      .disposed(by: vm.disposeBag)
+    
+    
+    // Add Gesture: when tap out of keyboard, dismiss
+    let tapGesture = UITapGestureRecognizer()
+    view.addGestureRecognizer(tapGesture)
+    tapGesture.rx.event
+      .bind { [weak self] _ in
+        self?.view.endEditing(true)
+      }
+      .disposed(by: vm.disposeBag)
+  }
 }

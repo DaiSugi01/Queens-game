@@ -7,9 +7,12 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class EntryNameViewModel {
   let defaults: UserDefaults = UserDefaults.standard
+  
+  let disposeBag: DisposeBag = DisposeBag()
   
   /// Get stored user data from user defaults
   func getUsersFromUserDefaults() {

@@ -259,15 +259,14 @@ extension CommandEditViewController {
 
     
     // Add Gesture: when tap out of keyboard, dismiss
-    let gestureRecognizer = UITapGestureRecognizer(
-      target: self,
-      action: #selector(dismissKeyboard(_:))
-    )
-    view.addGestureRecognizer(gestureRecognizer)
+    let tapGesture = UITapGestureRecognizer()
+    view.addGestureRecognizer(tapGesture)
+    tapGesture.rx.event
+      .bind { [weak self] _ in
+        self?.view.endEditing(true)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
-  
-  @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    view.endEditing(true)
-  }
+
 
 }
