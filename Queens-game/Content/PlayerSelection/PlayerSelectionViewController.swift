@@ -21,19 +21,15 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   var playerCount: Int = Constant.PlayerSelection.minPlayerCount
   
   lazy var verticalSV = VerticalStackView(
-    arrangedSubviews: [screenTitle, horizontalSV, navButtons]
+    arrangedSubviews: [screenTitle, plusMinusWrapper, navButtons],
+    distribution: .equalSpacing
   )
   
-  let screenTitle: H2Label = {
-    let lb = H2Label(text: "Choose max players")
-    lb.lineBreakMode = .byWordWrapping
-    lb.numberOfLines = 0
-    lb.setContentHuggingPriority(.required, for: .vertical)
-    
-    return lb
-  }()
+  // Title
+  let screenTitle = H2Label(text: "Choose max players")
   
-  lazy var horizontalSV: HorizontalStackView = {
+  // plusMinusWrapper
+  lazy var plusMinusWrapper: HorizontalStackView = {
     let sv = HorizontalStackView(arrangedSubviews: [minusButton, playerCountLabel, plusButton])
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
@@ -78,19 +74,14 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     updateUI()
   }
   
-  let navButtons: UIView = {
+  // nav Buttons
+  let navButtons: NextAndBackButtons = {
     
     let bts = NextAndBackButtons()
     bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
     bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
     
-    let wrapper = UIView()
-    bts.configSuperView(under: wrapper)
-    bts.centerXYin(wrapper)
-    bts.heightAnchor.constraint(equalTo: wrapper.heightAnchor, multiplier: 1).isActive = true
-    bts.setContentHuggingPriority(.required, for: .vertical)
-    
-    return wrapper
+    return bts
   }()
   @objc func goToNext(_ sender: UIButton) {
     vm.initUserData(playerCount: playerCount)
@@ -113,15 +104,27 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   /// Setup whole layout
   private func setupLayout() {
     
-    verticalSV.configSuperView(under: view)
-    verticalSV.matchParent(
+    screenTitle.configSuperView(under: view)
+    plusMinusWrapper.configSuperView(under: view)
+    navButtons.configSuperView(under: view)
+
+    screenTitle.anchors(
+      topAnchor: view.topAnchor,
+      leadingAnchor: view.leadingAnchor,
+      trailingAnchor: view.trailingAnchor,
+      bottomAnchor: nil,
       padding: .init(
         top: Constant.Common.topSpacing,
-        left: Constant.Common.leadingSpacing,
-        bottom: Constant.Common.bottomSpacing,
-        right: Constant.Common.trailingSpacing
+        left: Constant.Common.leadingSpacing + 8,
+        bottom: 0,
+        right: Constant.Common.trailingSpacing + 8
       )
     )
+    
+    plusMinusWrapper.centerXYin(view)
+    
+    navButtons.configureLayoutToBottom()
+
   }
   
   /// Check if the player number is valid or invalid
@@ -156,3 +159,4 @@ extension PlayerSelectionViewController: UIViewControllerTransitioningDelegate {
     return PopUpTransitioning.shared
   }
 }
+

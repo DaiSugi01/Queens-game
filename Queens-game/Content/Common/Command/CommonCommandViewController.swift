@@ -38,8 +38,14 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   let searchButton: UIButton = {
     let bt = UIButton()
     bt.configLayout(width: 48, height: 48, bgColor: CustomColor.main, radius: 20)
-    bt.setImage(UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate), for: .normal)
-    bt.tintColor = CustomColor.background
+    bt.setImage(
+      IconFactory.createSystemIcon(
+        "magnifyingglass",
+        color: CustomColor.background,
+        pointSize: 14
+      ),
+      for: .normal
+    )
     bt.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     return bt
   } ()

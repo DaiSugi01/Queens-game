@@ -22,7 +22,11 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let saveButton: UIButton = {
     let bt = UIButton()
     // Set image
-    let image = IconFactory.createSystemIcon("tray.and.arrow.down.fill", pointSize: 24, weight: .regular)
+    let image = IconFactory.createSystemIcon(
+      "tray.and.arrow.down.fill",
+      pointSize: 22,
+      weight: .bold
+    )
     bt.setBackgroundImage(image, for: .normal)
     bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
@@ -33,7 +37,12 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let deleteButton: UIButton = {
     let bt = UIButton()
     // Set image
-    let image = IconFactory.createSystemIcon("trash.circle", pointSize: 28, weight: .regular)
+    let image = IconFactory.createSystemIcon(
+      "trash.circle",
+      color: CustomColor.accent,
+      pointSize: 26,
+      weight: .bold
+    )
     bt.setBackgroundImage(image, for: .normal)
     bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
@@ -103,11 +112,11 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    backgroundCreator.configureLayout()
     configureScrollView()
     configureButtons()
     configureTextView()
     configureKeyboard()
+    backgroundCreator.configureLayout()
   }
 }
 

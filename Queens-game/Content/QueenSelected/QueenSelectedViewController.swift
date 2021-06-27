@@ -25,7 +25,6 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   let beforeCountdownTitle: H2Label = {
     let lb = H2Label(text: "Choosing a Queen...")
-    lb.lineBreakMode = .byWordWrapping
     lb.textAlignment = .center
     return lb
   }()
@@ -34,6 +33,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     let button = SubButton()
     button.setTitle("Skip", for: .normal)
     button.addTarget(self, action: #selector(skipButtonTapped(_:)), for: .touchUpInside)
+    button.insertIcon(IconFactory.createSystemIcon("chevron.right.2", weight: .bold), to: .right)
     return button
   }()
   

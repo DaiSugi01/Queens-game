@@ -51,19 +51,22 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   let confirmationButton: UIView = {
     let bt = NextAndBackButtons()
-    bt.backButton.setTitle("Cancel", for: .normal)
+    bt.backButton.setTitle("No", for: .normal)
+    bt.backButton.insertIcon(IconFactory.createSystemIcon("multiply"), to: .left)
     bt.backButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+    
     bt.nextButton.setTitle("Yes", for: .normal)
+    bt.nextButton.insertIcon(IconFactory.createSystemIcon("checkmark", color: CustomColor.background), to: .right)
     bt.nextButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
     bt.nextButton.configBgColor(bgColor: CustomColor.accent)
-    // Create a wrapper to float (don't let stretch) buttons.
+    
+    // Create a wrapper to set a local margin buttons.
     let uv = UIView()
     bt.configSuperView(under: uv)
-    // Don't let stretch buttons.
-    bt.setContentHuggingPriority(.required, for: .horizontal)
-    // Only set wrapper's height same as buttons.
-    bt.heightAnchor.constraint(equalTo: uv.heightAnchor).isActive = true
-    // let buttons float in center
+    NSLayoutConstraint.activate([
+      bt.widthAnchor.constraint(equalTo: uv.widthAnchor, multiplier: 1, constant: -32),
+      uv.heightAnchor.constraint(equalTo: bt.heightAnchor)
+    ])
     bt.centerXYin(uv)
     return uv
   }()

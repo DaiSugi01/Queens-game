@@ -12,8 +12,14 @@ class CommandSettingViewController: CommonCommandViewController {
   let addButton: UIButton = {
     let bt = UIButton()
     bt.configLayout(width: 48, height: 48, bgColor: CustomColor.main, radius: 20)
-    bt.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
-    bt.tintColor = CustomColor.background
+    bt.setImage(
+      IconFactory.createSystemIcon(
+        "plus",
+        color: CustomColor.background,
+        pointSize: 14
+      ),
+      for: .normal
+    )
     bt.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     return bt
   } ()
