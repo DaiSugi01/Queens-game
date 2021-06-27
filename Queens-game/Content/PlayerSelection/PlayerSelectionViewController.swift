@@ -6,108 +6,148 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
 
 class PlayerSelectionViewController: UIViewController, QueensGameViewControllerProtocol {
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
-  enum Operation {
-    case minus
-    case plus
-  }
-  
   let vm = PlayerSelectionViewModel()
-  
-  var playerCount: Int = Constant.PlayerSelection.minPlayerCount
-  
+
+  // All
   lazy var verticalSV = VerticalStackView(
     arrangedSubviews: [screenTitle, plusMinusWrapper, navButtons],
     distribution: .equalSpacing
   )
   
   // Title
-  let screenTitle = H2Label(text: "Choose max players")
+  let screenTitle = H2Label(text: "How many players?")
   
-  // plusMinusWrapper
-  lazy var plusMinusWrapper: HorizontalStackView = {
-    let sv = HorizontalStackView(arrangedSubviews: [minusButton, playerCountLabel, plusButton])
-    sv.isLayoutMarginsRelativeArrangement = true
-    sv.directionalLayoutMargins = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
-    return sv
-  }()
   
+  // minus
   let minusButton: UIButton = {
     let bt = UIButton()
-    let btImage = IconFactory.createSystemIcon("minus.circle.fill", pointSize: 32)
+    let btImage = IconFactory.createSystemIcon("minus.square", pointSize: 40, weight: .regular)
     bt.setImage(btImage, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
-    bt.addTarget(self, action: #selector(decrementPlayerCount(_:)), for: .touchUpInside)
-    
     return bt
   }()
-  @objc func decrementPlayerCount(_ sender: UIButton) {
-    if !canChangePlayerCount(operation: .minus) { return }
-    playerCount -= 1
-    updateUI()
-  }
   
+  // #player
   let playerCountLabel: H1Label = {
-    let lb = H1Label(text: "\(Constant.PlayerSelection.minPlayerCount)")
-    lb.numberOfLines = 0
+    let lb = H1Label()
     lb.textAlignment = .center
-    
     return lb
   }()
   
+  // plus
   let plusButton: UIButton = {
     let bt = UIButton()
-    let btImage = IconFactory.createSystemIcon("plus.circle.fill", pointSize: 32)
+    let btImage = IconFactory.createSystemIcon("plus.square.fill", pointSize: 40, weight: .regular)
     bt.setImage(btImage, for: .normal)
     bt.setContentHuggingPriority(.required, for: .horizontal)
-    bt.addTarget(self, action: #selector(incrementPlayerCount(_:)), for: .touchUpInside)
-    
     return bt
   }()
-  @objc func incrementPlayerCount(_ sender: UIButton) {
-    if !canChangePlayerCount(operation: .plus) { return }
-    playerCount += 1
-    updateUI()
-  }
+  
+  // wrapper
+  lazy var plusMinusWrapper: HorizontalStackView = {
+    let sv = HorizontalStackView(
+      arrangedSubviews: [minusButton, playerCountLabel, plusButton],
+      distribution: .equalSpacing
+    )
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+    
+    return sv
+  }()
   
   // nav Buttons
-  let navButtons: NextAndBackButtons = {
-    
-    let bts = NextAndBackButtons()
-    bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
-    
-    return bts
-  }()
-  @objc func goToNext(_ sender: UIButton) {
-    vm.initUserData(playerCount: playerCount)
-    let nx = EntryNameViewController()
-    GameManager.shared.pushGameProgress(navVC: navigationController,
-                                        currentScreen: self,
-                                        nextScreen: nx)
-  }
-  
-  @objc func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController)
-  }
+  let navButtons: NextAndBackButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupLayout()
+    configureLayout()
     backgroundCreator.configureLayout()
+    
+    configureCountBinding()
+    configureNavButtonBinding()
+    
+  }
+}
+
+
+// Binding
+extension PlayerSelectionViewController {
+  
+  private func configureNavButtonBinding() {
+    navButtons.nextButton.rx.tap
+      .bind{ [weak self] in
+        guard let self = self else { return }
+        
+        self.vm.initUserData(playerCount: self.vm.numOfPlayers.value)
+        let nx = EntryNameViewController()
+        GameManager.shared.pushGameProgress(
+          navVC: self.navigationController,
+          currentScreen: self,
+          nextScreen: nx
+        )
+      }
+      .disposed(by: vm.disposeBag)
+    
+    navButtons.backButton.rx.tap
+      .bind{ [weak self] in
+        guard let self = self else { return }
+        GameManager.shared.popGameProgress(navVC: self.navigationController)
+      }
+      .disposed(by: vm.disposeBag)
   }
   
+  private func configureCountBinding() {
+    // button tapped -> #player
+    plusButton.rx.tap
+      .subscribe { [weak self] _ in
+        self?.vm.numOfPlayers.accept((self?.vm.numOfPlayers.value)! + 1)
+      }
+      .disposed(by: vm.disposeBag)
+    
+    minusButton.rx.tap
+      .subscribe { [weak self] _ in
+        self?.vm.numOfPlayers.accept((self?.vm.numOfPlayers.value)! - 1)
+      }
+      .disposed(by: vm.disposeBag)
+    
+    // #player -> UI
+    vm.numOfPlayers
+      .map{String($0)}
+      .bind(to: playerCountLabel.rx.text)
+      .disposed(by: vm.disposeBag)
+    
+    vm.numOfPlayers
+      .map {$0 < 9}
+      .bind(to: plusButton.rx.isEnabled)
+      .disposed(by: vm.disposeBag)
+    
+    vm.numOfPlayers
+      .map {$0 > 3 }
+      .bind(to: minusButton.rx.isEnabled)
+      .disposed(by: vm.disposeBag)
+  }
+
+}
+
+
+// Layout
+extension PlayerSelectionViewController {
+  
   /// Setup whole layout
-  private func setupLayout() {
+  private func configureLayout() {
     
     screenTitle.configSuperView(under: view)
     plusMinusWrapper.configSuperView(under: view)
     navButtons.configSuperView(under: view)
-
+    
     screenTitle.anchors(
       topAnchor: view.topAnchor,
       leadingAnchor: view.leadingAnchor,
@@ -122,41 +162,16 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     )
     
     plusMinusWrapper.centerXYin(view)
+    plusMinusWrapper.widthAnchor.constraint(
+      equalTo: view.widthAnchor,
+      multiplier: 1,
+      constant: -Constant.Common.leadingSpacing*2
+    ).isActive = true
     
     navButtons.configureLayoutToBottom()
-
+    
   }
   
-  /// Check if the player number is valid or invalid
-  /// - Parameter operation: minus or plus
-  /// - Returns: true if the player number is  between the min number and max number, otherwise return false
-  private func canChangePlayerCount(operation: Operation) -> Bool {
-    switch operation {
-      case .minus:
-        return playerCount > Constant.PlayerSelection.minPlayerCount
-      case .plus:
-        return playerCount < Constant.PlayerSelection.maxPlayerCount
-    }
-  }
-  
-  /// Update player count label
-  private func updateUI() {
-    playerCountLabel.text = "\(playerCount)"
-  }
 }
 
-extension PlayerSelectionViewController: UIViewControllerTransitioningDelegate {
-  // Tells delegate What kind if animation transitioning do you want to use when presenting ?
-  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    print("aaaa")
-    PopUpTransitioning.shared.presenting = true
-    return PopUpTransitioning.shared
-  }
-  
-  // Tells delegate What kind if animation transitioning do you want to use when dismissing ?
-  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    PopUpTransitioning.shared.presenting = false
-    return PopUpTransitioning.shared
-  }
-}
 

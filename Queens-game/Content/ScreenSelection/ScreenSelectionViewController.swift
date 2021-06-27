@@ -101,6 +101,10 @@ extension ScreenSelectionViewController {
     navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
     
     navButtons.nextButton.titleLabel?.text = "Go !"
+    navButtons.nextButton.insertIcon(
+      IconFactory.createSystemIcon("play.fill", color: CustomColor.background, pointSize: 16),
+      to: .right
+    )
   }
   
   /// Go to next screen depends on user selection
