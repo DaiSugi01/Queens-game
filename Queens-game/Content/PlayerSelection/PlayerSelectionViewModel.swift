@@ -6,17 +6,23 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
+
 
 class PlayerSelectionViewModel {
+  
+  let numOfPlayers: BehaviorRelay = BehaviorRelay(value: Constant.PlayerSelection.defaultPlayerCount)
+  let disposeBag = DisposeBag()
   
   /// initialize user data
   /// - Parameter playerCount: the number of players
   func initUserData(playerCount: Int) {
     GameManager.shared.users.removeAll()
-    for i in 1 ... playerCount {
+    for id in 1 ... playerCount {
       GameManager.shared.users.append(User(id: UUID(),
-                                           playerId: i,
-                                           name: "Player\(i)")
+                                           playerId: id,
+                                           name: "Player\(id)")
       )
     }
   }

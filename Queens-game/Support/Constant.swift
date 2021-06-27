@@ -60,6 +60,7 @@ struct Constant {
   
   struct PlayerSelection {
     static let minPlayerCount = 3
+    static let defaultPlayerCount = 5
     static let maxPlayerCount = 9
   }
   
