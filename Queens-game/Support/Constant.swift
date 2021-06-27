@@ -10,17 +10,18 @@ import UIKit
 struct Constant {
   
   struct Common {
+    // Basics
     static var topSpacing: CGFloat {
       switch UIScreen.main.bounds.height {
         case 0..<700:
-          return 72
+          return 104
         case 700..<800:
-          return 96
+          return 112
         default:
           return 128
       }
     }
-
+    
     static var bottomSpacing: CGFloat {
       switch UIScreen.main.bounds.height {
         case 0..<700:
@@ -36,8 +37,16 @@ struct Constant {
     
     static let trailingSpacing: CGFloat = 32
     
+    // Line
     static var topLineHeight: CGFloat {
-      return topSpacing * 0.64
+      switch UIScreen.main.bounds.height {
+        case 0..<700:
+          return 56
+        case 700..<800:
+          return 64
+        default:
+          return 80
+      }
     }
     static var bottomLineHeight: CGFloat {
       return bottomSpacing * 0.64
@@ -52,6 +61,12 @@ struct Constant {
     static var bottomSpacingFromBottomLine: CGFloat {
       return bottomSpacing - bottomLineHeight
     }
+    
+    // Title
+    static var topSpacingFromTitle: CGFloat {
+      return topSpacing*0.38
+    }
+    
   }
   
   struct UserDefaults {
@@ -75,7 +90,7 @@ struct Constant {
       Selection(
         title: "(Card select)",
         detail: "🛠 Coming soon... We're working on it now!"
-//      "Those who select Queen will be the Queen!"
+        //      "Those who select Queen will be the Queen!"
       )
     ]
     enum Index: Int {

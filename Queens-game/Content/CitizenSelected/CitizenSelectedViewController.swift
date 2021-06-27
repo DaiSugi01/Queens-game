@@ -75,11 +75,13 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
       arrangedSubviews: [self.targetUserIcon, self.targetUserName]
     )
     stackView.spacing = 8
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.directionalLayoutMargins.bottom = 24
     return stackView
   }()
 
 
-  // We might insert stakeHolder views into here, if c to c
+  // We will insert stakeHolder views into here, if c to c which needs one more icon
   lazy var commandWrapper: VerticalStackView = {
     let stackView = VerticalStackView(
       arrangedSubviews: [self.targetWrapper],

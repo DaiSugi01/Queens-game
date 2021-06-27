@@ -26,7 +26,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   )
   
   // Details
-  let sectionLabel: H2Label = {
+  let titleLabel: H2Label = {
     let lb = H2Label(text: "Ready to give this order?")
     return lb
   } ()
@@ -34,12 +34,12 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   // MARK: - Command description
 
-  let subSectionDescriptionLabel: H3Label = {
+  let descriptionTitleLabel: H3Label = {
     let lb = H3Label(text: "Command")
     return lb
   } ()
   
-  lazy var detail: UIStackView = {
+  lazy var descriptionView: UIStackView = {
     let wrapper = UIStackView()
     wrapper.configLayout(bgColor: CustomColor.convex, radius: 32)
     let content: UILabel = H4Label(text: selectedCommand.detail)
@@ -49,7 +49,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     return wrapper
   } ()
   
-  let confirmationButton: UIView = {
+  let confirmationButtons: UIView = {
     let bt = NextAndBackButtons()
     bt.backButton.setTitle("No", for: .normal)
     bt.backButton.insertIcon(IconFactory.createSystemIcon("multiply"), to: .left)
@@ -113,17 +113,17 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   lazy var stackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
-        sectionLabel,
-        subSectionDescriptionLabel,
-        detail,
-        confirmationButton,
+        titleLabel,
+        descriptionTitleLabel,
+        descriptionView,
+        confirmationButtons,
         attributesStackView
       ]
     )
-    sv.setCustomSpacing(40, after: sectionLabel)
-    sv.setCustomSpacing(16, after: subSectionDescriptionLabel)
-    sv.setCustomSpacing(40, after: detail)
-    sv.setCustomSpacing(56, after: confirmationButton)
+    sv.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: titleLabel)
+    sv.setCustomSpacing(16, after: descriptionTitleLabel)
+    sv.setCustomSpacing(40, after: descriptionView)
+    sv.setCustomSpacing(48, after: confirmationButtons)
     return sv
   } ()
   

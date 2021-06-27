@@ -82,7 +82,7 @@ extension QueensGameSelectionProtocol {
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 24
     section.contentInsets = .init(
-      top: 40,
+      top: Constant.Common.topSpacingFromTitle,
       leading: Constant.Common.leadingSpacing,
       bottom: 64,
       trailing: Constant.Common.trailingSpacing
