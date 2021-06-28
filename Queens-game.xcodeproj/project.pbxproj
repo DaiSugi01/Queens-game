@@ -45,6 +45,8 @@
 		480952A32675DACA00A39166 /* BackgroundCreatorPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */; };
 		481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */; };
 		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
+		481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA3FF2689811800ADF48A /* MenuViewModel.swift */; };
+		481CA4022689928B00ADF48A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA4012689928B00ADF48A /* LoadingView.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -155,6 +157,8 @@
 		480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorPlain.swift; sourceTree = "<group>"; };
 		481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithClose.swift; sourceTree = "<group>"; };
 		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		481CA3FF2689811800ADF48A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		481CA4012689928B00ADF48A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		4826815D2645EBA70010543A /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		4826815F2645EBA70010543A /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -446,7 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62E22638D3320082ACAE /* MenuViewController.swift */,
-				48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */,
+				481CA3FF2689811800ADF48A /* MenuViewModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -497,9 +501,19 @@
 			path = Background;
 			sourceTree = "<group>";
 		};
+		481CA3FC2689449900ADF48A /* Transitioning */ = {
+			isa = PBXGroup;
+			children = (
+				48DD334A2681218A00A2FC1B /* PopUpTransitioning.swift */,
+				481CA4012689928B00ADF48A /* LoadingView.swift */,
+			);
+			path = Transitioning;
+			sourceTree = "<group>";
+		};
 		4826815A2645EBA70010543A /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				481CA3FC2689449900ADF48A /* Transitioning */,
 				480952A12675DA1800A39166 /* Background */,
 				48EBE7DE2672972E00DAC164 /* Image */,
 				482681712645EBA70010543A /* Button */,
@@ -905,6 +919,7 @@
 				48AE803E2640B26F00CBDB5E /* DemoViewController.swift in Sources */,
 				482681942645EBA80010543A /* NextAndBackButtons.swift in Sources */,
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
+				481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */,
 				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
 				48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */,
@@ -917,6 +932,7 @@
 				48EBE7E02672974E00DAC164 /* UIImage+blend.swift in Sources */,
 				4826818B2645EBA80010543A /* CommandCollectionViewCell.swift in Sources */,
 				4826818F2645EBA80010543A /* UINavigationController+hideBarBackground.swift in Sources */,
+				481CA4022689928B00ADF48A /* LoadingView.swift in Sources */,
 				485635E826437C3F0043AF21 /* Difficulty.swift in Sources */,
 				4888CA012675FEB4005F8BBD /* BackgroundCreatorWithMenu.swift in Sources */,
 				48AE80432640B26F00CBDB5E /* DemoButtonViewController.swift in Sources */,
