@@ -23,8 +23,6 @@ class GameManager: GameManagerProtocol {
   var gameProgress: [UIViewController] = []
   var command: Command = Command()
 
-
-  
   /// Record(append) current vc (progress) into game manager
   /// - Parameters:
   ///   - navVC: The navigation VC which current VC belongs to.

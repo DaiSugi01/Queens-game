@@ -13,16 +13,14 @@ class PopUpTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
   let duration = 0.2
   var presenting = true
   
-  /// Singleton object. Because this animation is reusable.
   static let shared = PopUpTransitioning()
   private override init() {}
   
-  // Animation duration
   func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
     duration
   }
   
-  // Animation behavior
+  // Animation behaviour
   func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
     
     // container that used in animation

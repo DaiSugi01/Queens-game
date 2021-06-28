@@ -9,9 +9,7 @@ import UIKit
 
 class MenuViewController: UIViewController {
   
-  /// Determine if we need quit button (go to top button) or not.
-  /// Basically, it's true but from top VC, we make it false.
-  var needQuitButton: Bool = true
+  let viewModel = MenuViewModel()
   
   let screenTitle: H2Label = {
     let lb = H2Label(text: "Menu")
@@ -89,16 +87,41 @@ class MenuViewController: UIViewController {
     title: "Yes",
     style: UIAlertAction.Style.default,
     handler: { [weak self] (action: UIAlertAction!) -> Void in
-      let nextViewController: UINavigationController = {
-        let navigationController = UINavigationController(rootViewController: TopViewController())
-        navigationController.modalPresentationStyle = .fullScreen
-        navigationController.navigationBar.isHidden = true
+      
+      if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
         
-        return navigationController
-      }()
-      self?.present(nextViewController,  animated: true, completion: nil)
+        let loadingView = LoadingView()
+        loadingView.alpha = 0
+        loadingView.frame = window.frame
+        window.addSubview(loadingView)
+        
+        UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseInOut) {
+          loadingView.alpha = 1
+        } completion: { _ in
+          GameManager.shared.loadGameProgress(
+            to: .home,
+            with: self?.viewModel.navigationController
+          )
+          
+          UIView.animate(withDuration: 0.6, delay: 0, options: .beginFromCurrentState) {
+            loadingView.icon.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+          } completion: { _ in
+            self?.dismiss(animated: false, completion: nil)
+            
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) {
+              loadingView.alpha = 0
+            } completion: { _ in
+              loadingView.removeFromSuperview()
+            }
+          }
+        }
+        
+      }
+      
     }
   )
+  
+  
   
   let cancelAction = UIAlertAction(
     title: "No",
@@ -110,11 +133,16 @@ class MenuViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     configureLayout()
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)
+
     
+  }
+  
+  deinit {
+    print("\(Self.self) is being deinitialized")
   }
   
   // This can detect if you touch outside of the content.
@@ -131,7 +159,7 @@ extension MenuViewController {
   
   private func configureLayout() {
     view.configBgColor(bgColor: .clear)
-    if !needQuitButton {
+    if !viewModel.needQuitButton {
       goToTopButton.isHidden = true
     }
     stackView.configBgColor(bgColor: CustomColor.background)
@@ -164,4 +192,6 @@ extension MenuViewController {
     
   }
 }
+
+
 

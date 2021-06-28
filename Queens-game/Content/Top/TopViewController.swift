@@ -52,7 +52,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   let menuButtonAtTopPage: SubButton = SubButton(title: "Menu")
   @objc func goToMenu(_ sender: UIButton) {
     let nx = MenuViewController()
-    nx.needQuitButton = false
+    nx.viewModel.needQuitButton = false
     nx.modalPresentationStyle = .overCurrentContext
     nx.transitioningDelegate = popUpTransitioning
     

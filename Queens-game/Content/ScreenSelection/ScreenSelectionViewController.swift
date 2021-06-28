@@ -40,6 +40,10 @@ class ScreenSelectionViewController:
     configureButtonActions()
     
   }
+  
+  deinit {
+    print("\(Self.self) is being deinitialized")
+  }
 }
 
 
@@ -112,16 +116,40 @@ extension ScreenSelectionViewController {
   @objc private func goToNext(_ sender: UIButton) {
     guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
     
-    switch Constant.ScreenSelection.Index(rawValue: index) {
-    case .home:
-      GameManager.shared.loadGameProgress(to: .home, with: navigationController)
-    case .queen:
-      GameManager.shared.loadGameProgress(to: .queenSelection, with: navigationController)
-    case .command:
-      GameManager.shared.loadGameProgress(to: .commandSelection, with: navigationController)
-    case .none:
-      print("no page")
-      GameManager.shared.loadGameProgress(to: .home, with: navigationController)
+    if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
+      
+      let loadingView = LoadingView()
+      loadingView.alpha = 0
+      loadingView.frame = window.frame
+      window.addSubview(loadingView)
+      
+      UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseInOut) {
+        loadingView.alpha = 1
+      } completion: { [unowned self] _ in
+        
+        switch Constant.ScreenSelection.Index(rawValue: index) {
+          case .home:
+            GameManager.shared.loadGameProgress(to: .home, with: navigationController)
+          case .queen:
+            GameManager.shared.loadGameProgress(to: .queenSelection, with: navigationController)
+          case .command:
+            GameManager.shared.loadGameProgress(to: .commandSelection, with: navigationController)
+          case .none:
+            print("no page")
+            GameManager.shared.loadGameProgress(to: .home, with: navigationController)
+        }
+        
+        UIView.animate(withDuration: 0.6, delay: 0, options: .beginFromCurrentState) {
+          loadingView.icon.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        } completion: { _ in
+          UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) {
+            loadingView.alpha = 0
+          } completion: { _ in
+            loadingView.removeFromSuperview()
+          }
+        }
+      }
+      
     }
   }
   

@@ -49,7 +49,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
   @objc func menuTapped() {
     let nx = MenuViewController()
-    
+    nx.viewModel.navigationController = viewController.navigationController
     nx.modalPresentationStyle = .overCurrentContext
     nx.transitioningDelegate = popUpTransition
     
