@@ -166,7 +166,10 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
     self.setupLayout()
     self.configureButtons()
     backgroundCreator.configureLayout()
+    
+    revealNavButton()
   }
+  
 }
 
 extension ResultViewController {
@@ -185,9 +188,9 @@ extension ResultViewController {
   }
 
   private func configureButtons() {
-    navButtons.setTitle("Done!", for: .normal)
+    navButtons.setTitle("Done?", for: .normal)
     navButtons.insertIcon(
-      IconFactory.createSystemIcon("checkmark", color: CustomColor.background),
+      nil,
       to: .right
     )
     navButtons.addTarget(
@@ -201,7 +204,26 @@ extension ResultViewController {
       equalTo: view.bottomAnchor,
       constant: -Constant.Common.bottomSpacing
     ).isActive = true
+    navButtons.isUserInteractionEnabled = false
+    navButtons.alpha = 0
+    navButtons.transform = CGAffineTransform(scaleX: -4.8, y: 4.8)
 
+  }
+  
+  // Revealing + bouncing button
+  private func revealNavButton() {
+    UIView.animate(
+      withDuration: 1,
+      delay: 2,
+      usingSpringWithDamping: 0.56,
+      initialSpringVelocity: 0,
+      options: .curveEaseInOut
+    ) { [weak self] in
+      self?.navButtons.alpha = 1
+      self?.navButtons.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    } completion: { [weak self] _ in
+      self?.navButtons.isUserInteractionEnabled = true
+    }
   }
   
   @objc private func nextTapped() {

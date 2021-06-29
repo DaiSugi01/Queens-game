@@ -38,7 +38,7 @@ class CitizenSelectedViewModel {
       block: { [weak self] timer in
         self?.countdownTime -= 1
         self?.rxCountdownTime.onNext(self?.countdownTime)
-        if self?.countdownTime == 0 {
+        if self?.countdownTime == -1 {
           self?.rxCountdownTime.onCompleted()
         }
       })
@@ -69,9 +69,8 @@ class CitizenSelectedViewModel {
 extension CitizenSelectedViewModel {
   func rotateSuite(time: Int, view: UIView?) {
     guard let countDownView = view as? CountdownGroup else { return }
-    
     var targetSuit: UIImageView?
-    switch (Int(Settings.shared.queenWaitingSeconds) - time - 1)%4 {
+    switch (Int(Settings.shared.citizenWaitingSeconds) - time - 1)%4 {
       case 0:
         targetSuit = countDownView.spadeSuit
       case 1:

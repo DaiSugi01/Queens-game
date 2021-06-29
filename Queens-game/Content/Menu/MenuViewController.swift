@@ -93,6 +93,7 @@ class MenuViewController: UIViewController {
         let loadingView = LoadingView()
         loadingView.alpha = 0
         loadingView.frame = window.frame
+        loadingView.label.text = "Quitting..."
         window.addSubview(loadingView)
         
         UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseInOut) {
@@ -189,9 +190,9 @@ extension MenuViewController {
   }
   
   @objc func privacyPolicyTapped(_ sender: UIButton) {
-    
+    let nx = PrivacyPolicyViewController()
+    present(nx, animated: true, completion: nil)
   }
 }
-
 
 

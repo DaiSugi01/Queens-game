@@ -21,8 +21,10 @@ class LoadingView: UIView {
   override init(frame: CGRect) {
     super.init(frame: .zero)
     self.backgroundColor = CustomColor.background
+    label.textAlignment = .center
     stackView.configSuperView(under: self)
     stackView.centerXYin(self)
+    stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -Constant.Common.leadingSpacing*2).isActive = true
   }
   
   required init?(coder: NSCoder) {

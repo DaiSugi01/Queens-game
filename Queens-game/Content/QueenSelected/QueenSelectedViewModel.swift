@@ -25,7 +25,7 @@ class QueenSelectedViewModel {
       block: { [weak self] timer in
         self?.countdownTime -= 1
         self?.rxCountdownTime.onNext(self?.countdownTime)
-        if self?.countdownTime == 0 {
+        if self?.countdownTime == -1 {
           self?.rxCountdownTime.onCompleted()
         }
       })
