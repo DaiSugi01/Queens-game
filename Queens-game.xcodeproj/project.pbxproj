@@ -47,6 +47,7 @@
 		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
 		481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA3FF2689811800ADF48A /* MenuViewModel.swift */; };
 		481CA4022689928B00ADF48A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA4012689928B00ADF48A /* LoadingView.swift */; };
+		481CA405268AEDE300ADF48A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -159,6 +160,7 @@
 		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		481CA3FF2689811800ADF48A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		481CA4012689928B00ADF48A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		4826815D2645EBA70010543A /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		4826815F2645EBA70010543A /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -325,7 +327,7 @@
 				0A3A62DF2638D1A20082ACAE /* CommandEdit */,
 				0A3A62D72638CF6B0082ACAE /* CommandSetting */,
 				0A3A62EB2638D4650082ACAE /* Settings */,
-				0A3A62E62638D3800082ACAE /* HowToPlay */,
+				481CA403268AED9D00ADF48A /* WebView */,
 				48EBE7E22673429900DAC164 /* Common */,
 			);
 			path = Content;
@@ -455,14 +457,6 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		0A3A62E62638D3800082ACAE /* HowToPlay */ = {
-			isa = PBXGroup;
-			children = (
-				0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */,
-			);
-			path = HowToPlay;
-			sourceTree = "<group>";
-		};
 		0A3A62EB2638D4650082ACAE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +502,15 @@
 				481CA4012689928B00ADF48A /* LoadingView.swift */,
 			);
 			path = Transitioning;
+			sourceTree = "<group>";
+		};
+		481CA403268AED9D00ADF48A /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */,
+				481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		4826815A2645EBA70010543A /* UIComponents */ = {
@@ -953,6 +956,7 @@
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,
 				485635EE26438A140043AF21 /* Section.swift in Sources */,
 				48E54180267D5EAD00D891E1 /* QueenGameCollectionViewProtocal.swift in Sources */,
+				481CA405268AEDE300ADF48A /* PrivacyPolicyViewController.swift in Sources */,
 				482681982645EBA80010543A /* UIImage+append.swift in Sources */,
 				482681932645EBA80010543A /* SubButton.swift in Sources */,
 				0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */,
