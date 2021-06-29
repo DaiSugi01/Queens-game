@@ -89,7 +89,7 @@ extension GameManager {
   }
   
   private func goHome(_ navVC: UINavigationController?) {
-    navVC?.popToRootViewController(animated: true)
+    navVC?.popToRootViewController(animated: false)
     resetGameManeger()
   }
   
@@ -112,7 +112,7 @@ extension GameManager {
     if let index = gameProgress.lastIndex(where: { type(of: $0) == T.self }) {
       let vc = gameProgress[index]
       gameProgress.removeSubrange( index..<gameProgress.count )
-      navVC?.popToViewController(vc, animated: true)
+      navVC?.popToViewController(vc, animated: false)
     } else {
       print("error: couldn't find target vc. Go back to home instead")
       goHome(navVC)
