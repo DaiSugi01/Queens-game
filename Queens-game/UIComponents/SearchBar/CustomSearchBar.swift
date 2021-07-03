@@ -17,10 +17,10 @@ class CustomSearchBar: UISearchBar {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.placeholder = "Search"
-    configLayout(backgroundColor: CustomColor.concave,
-                           inputTextColor: CustomColor.subMain,
-                           placeholderColor: CustomColor.subMain.withAlphaComponent(0.3),
-                           searchIconColor: CustomColor.subMain
+    configLayout(backgroundColor: CustomColor.backgroundLower,
+                           inputTextColor: CustomColor.subText,
+                           placeholderColor: CustomColor.subText.withAlphaComponent(0.3),
+                           searchIconColor: CustomColor.subText
     )
     configCancelButton()
   }

@@ -7,16 +7,19 @@
 
 import UIKit
 
-class MenuButton: UIButton {
+class MenuButton: QueensGameButton {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     // Set image
-    let image = IconFactory.createSystemIcon("list.bullet", pointSize: 24)
+    let image = IconFactory.createSystemIcon(
+      "list.bullet",
+      color: CustomColor.subText,
+      pointSize: 24
+    )
 
-    self.setBackgroundImage(image, for: .normal)
-    self.translatesAutoresizingMaskIntoConstraints = false
+    self.setImage(image, for: .normal)
   }
 
   required init?(coder: NSCoder) {

@@ -99,7 +99,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       padding: .init(top: 0, left: 24, bottom: 0, right: 24)
     )
     background.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
-    background.configLayout(bgColor: CustomColor.convex, radius: 16)
+    background.configLayout(bgColor: CustomColor.backgroundUpper, radius: 16)
     return wrapper
   }()
   
@@ -109,13 +109,13 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var difficultyStackView = CommandAttributeStackView(
     command: GameManager.shared.command,
     attributeType: .difficulty,
-    color: CustomColor.subMain
+    color: CustomColor.subText
   )
   
   lazy var typeStackView = CommandAttributeStackView(
     command:  GameManager.shared.command,
     attributeType: .targetType,
-    color: CustomColor.subMain
+    color: CustomColor.subText
   )
   
 

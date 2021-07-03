@@ -9,6 +9,7 @@ import UIKit
 
 extension UIImage {
   static func blend(_ color: UIColor, _ image: UIImage) -> UIImage {
+    
     let imageRect = CGRect(origin: .zero, size: image.size)
     let colorRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
     let renderer = UIGraphicsImageRenderer(size: image.size)
@@ -22,3 +23,4 @@ extension UIImage {
       return tintedImage
   }
 }
+

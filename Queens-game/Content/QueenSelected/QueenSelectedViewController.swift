@@ -81,7 +81,6 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
       type: .userId(GameManager.shared.queen!.playerId),
       width: 64
     ) as! UserIdIconView
-    icon.label.textColor = CustomColor.accent
     return icon
   }()
   

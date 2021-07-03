@@ -45,7 +45,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
       alignment: .center,
       distribution: .fill
     )
-    sv.configLayout(bgColor: CustomColor.convex, radius: 12, shadow: true)
+    sv.configLayout(bgColor: CustomColor.backgroundUpper, radius: 12, shadow: true)
     
     // Config margin
     sv.isLayoutMarginsRelativeArrangement = true

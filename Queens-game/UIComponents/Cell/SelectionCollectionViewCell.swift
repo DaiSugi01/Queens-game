@@ -14,7 +14,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
   let checkIcon: UIImageView = {
     let imv = UIImageView()
     let img = UIImage(systemName: "circle")?.withRenderingMode(.alwaysTemplate)
-    imv.tintColor = CustomColor.subMain
+    imv.tintColor = CustomColor.subText
     imv.image = img
     imv.configSize(width: 22, height: 22)
     return imv
@@ -35,7 +35,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 24, leading: 16, bottom: 16, trailing: 16)
     sv.layer.borderWidth = 2.4
-    sv.layer.borderColor = CustomColor.concave.cgColor
+    sv.layer.borderColor = CustomColor.backgroundLower.cgColor
     return sv
   }()
 
@@ -65,7 +65,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         // Display background and check mark
         UIView.animate(withDuration: duration/2 , delay: 0, options: .curveEaseInOut)
         { [unowned self] in
-          stackView.configBgColor(bgColor: CustomColor.convex)
+          stackView.configBgColor(bgColor: CustomColor.backgroundUpper)
           stackView.layer.borderColor = UIColor.clear.cgColor
         }
         // `UIView.transition` is required for animation of UIImage, not `UIView.animate`
@@ -79,7 +79,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut)
         { [unowned self] in
           stackView.configBgColor(bgColor: .clear)
-          stackView.layer.borderColor = CustomColor.concave.cgColor
+          stackView.layer.borderColor = CustomColor.backgroundLower.cgColor
         }
         UIView.transition(with: checkIcon, duration: duration, options: .transitionCrossDissolve) {
           [unowned self] in

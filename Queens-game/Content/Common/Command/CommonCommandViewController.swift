@@ -28,16 +28,15 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   var headerTitle: String = ""
   
   // Bottom navigation bar
-  let backButton: UIButton = {
+  let backButton: SubButton = {
     let bt = SubButton()
-    bt.configBgColor(bgColor: CustomColor.background)
     bt.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
     return bt
   } ()
   
-  let searchButton: UIButton = {
-    let bt = UIButton()
-    bt.configLayout(width: 48, height: 48, bgColor: CustomColor.main, radius: 20)
+  let searchButton: QueensGameButton = {
+    let bt = QueensGameButton()
+    bt.configLayout(width: 48, height: 48, bgColor: CustomColor.text, radius: 20)
     bt.setImage(
       IconFactory.createSystemIcon(
         "magnifyingglass",
