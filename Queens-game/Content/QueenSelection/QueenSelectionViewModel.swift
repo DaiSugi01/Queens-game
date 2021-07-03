@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import RxSwift
 
 class QueenSelectionViewModel {
+  
+  let disposeBag = DisposeBag()
   
   public func selectQueen() {
     let queenIndex: Int = Int.random(in: 0 ..< GameManager.shared.users.count)
