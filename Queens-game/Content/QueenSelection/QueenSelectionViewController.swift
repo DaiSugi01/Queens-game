@@ -41,6 +41,14 @@ class QueenSelectionViewController:
     
     configureButtonActions()
     
+    // FIX ME. Temporary avoid selecting card selection
+    collectionView.rx
+      .itemSelected
+      .subscribe(onNext:{ [weak self] indexPath in
+        self?.navButtons.nextButton.isEnabled =  indexPath.item != 1
+        self?.navButtons.nextButton.alpha = indexPath.item != 1 ? 1 : 0.1
+      })
+      .disposed(by: vm.disposeBag)
   }
 }
 

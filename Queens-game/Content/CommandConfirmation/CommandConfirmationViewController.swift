@@ -69,10 +69,11 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     let uv = UIView()
     bt.configSuperView(under: uv)
     NSLayoutConstraint.activate([
-      bt.widthAnchor.constraint(equalTo: uv.widthAnchor, multiplier: 1, constant: 0),
-      uv.heightAnchor.constraint(equalTo: bt.heightAnchor)
+      bt.leadingAnchor.constraint(equalTo: uv.leadingAnchor, constant: 0),
+      bt.trailingAnchor.constraint(equalTo: uv.trailingAnchor, constant: -8),
+      uv.heightAnchor.constraint(equalTo: bt.heightAnchor),
+      bt.centerYAnchor.constraint(equalTo: uv.centerYAnchor)
     ])
-    bt.centerXYin(uv)
     return uv
   }()
   

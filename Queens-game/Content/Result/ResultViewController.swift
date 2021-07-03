@@ -71,7 +71,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
     let wrapper = UIView()
     stackView.configSuperView(under: wrapper)
     stackView.matchParent(
-      padding: .init(top: 0, left: 24, bottom: 0, right: 24)
+      padding: .init(top: 0, left: 4, bottom: 0, right: 8)
     )
     return wrapper
   }()
@@ -96,7 +96,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       padding: .init(top: 16, left: 16, bottom: 16, right: 16)
     )
     background.matchParent(
-      padding: .init(top: 0, left: 24, bottom: 0, right: 24)
+      padding: .init(top: 0, left: 0, bottom: 0, right: 8)
     )
     background.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
     background.configLayout(bgColor: CustomColor.backgroundUpper, radius: 16)
@@ -134,8 +134,10 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       spacing: 24
     )
     stackView.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: screenTitle)
+    stackView.setCustomSpacing(12, after: targetTitle)
+    stackView.setCustomSpacing(12, after: detailTitle)
     stackView.setCustomSpacing(32, after: targetBlock)
-    stackView.setCustomSpacing(56, after: detailBlock)
+    stackView.setCustomSpacing(60, after: detailBlock)
     return stackView
   }()
 

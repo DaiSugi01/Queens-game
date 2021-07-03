@@ -26,6 +26,7 @@ class CustomSegmentedView: UIStackView {
     imgv.configSuperView(under: wrapper)
     imgv.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 0).isActive = true
     imgv.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0).isActive = true
+    wrapper.isHidden = true
     return wrapper
   }()
   lazy var titleStackView = HorizontalStackView(
@@ -35,10 +36,6 @@ class CustomSegmentedView: UIStackView {
   
   let segmentedControl: UISegmentedControl = {
     let sc = UISegmentedControl()
-//    let bg = UIImage(color: CustomColor.concave, size: CGSize(width: 1, height: 32))
-//    sc.setBackgroundImage(bg, for: .highlighted, barMetrics: .default)
-//    let bg2 = UIImage(color: CustomColor.backgroundPlus, size: CGSize(width: 1, height: 32))
-//    sc.setBackgroundImage(bg2, for: .selected, barMetrics: .default)
     sc.backgroundColor = CustomColor.backgroundLower
     sc.selectedSegmentTintColor = CustomColor.backgroundUpper
     return sc
@@ -67,7 +64,6 @@ class CustomSegmentedView: UIStackView {
         animated: false
       )
     }
-    
     segmentedControl.selectedSegmentIndex = 1
   }
   required init(coder: NSCoder) {
@@ -76,15 +72,3 @@ class CustomSegmentedView: UIStackView {
   
 }
 
-extension UIImage {
-    convenience init(color: UIColor, size: CGSize) {
-        UIGraphicsBeginImageContextWithOptions(size, false, 1)
-        color.set()
-        let ctx = UIGraphicsGetCurrentContext()!
-        ctx.fill(CGRect(origin: .zero, size: size))
-        let image = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        self.init(data: image.pngData()!)!
-    }
-}
