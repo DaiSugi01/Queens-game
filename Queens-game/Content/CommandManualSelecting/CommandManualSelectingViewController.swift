@@ -41,6 +41,8 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     let nx = CommandConfirmationViewController(viewModel: viewModel)
     nx.modalPresentationStyle = .automatic
     
+//    nx.rx.deallocated.bind(to: collectionView.item)
+    
     present(nx, animated: true, completion: { [unowned self] in
       // If you don't set this, buttons on presented view won't respond
       self.searchBar.resignFirstResponder()

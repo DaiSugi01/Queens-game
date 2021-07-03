@@ -96,3 +96,11 @@ class CommandCollectionViewCell: UICollectionViewCell {
   }
   
 }
+
+extension CommandCollectionViewCell {
+  override var isSelected: Bool {
+    didSet {
+      self.alpha = isSelected ? 0.4 : 1.0
+    }
+  }
+}

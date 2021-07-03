@@ -98,3 +98,9 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   }
   
 }
+
+extension CommonCommandViewController {
+  override func viewDidAppear(_ animated: Bool) {
+    print("did")
+  }
+}

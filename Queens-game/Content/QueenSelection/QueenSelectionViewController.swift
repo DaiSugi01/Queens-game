@@ -72,14 +72,6 @@ extension QueenSelectionViewController {
           for: indexPath
         ) as! SelectionCollectionViewCell
         cell.configContent(by: selection)
-        
-        
-        // Fix me. Temporally prohibit selecting for card select
-        if indexPath.item == 1 {
-          cell.isUserInteractionEnabled = false
-          cell.titleLabel.textColor = CustomColor.subText.withAlphaComponent(0.5)
-          cell.bodyLabel.textColor = CustomColor.subText.withAlphaComponent(0.5)
-        }
 
         return cell
       }

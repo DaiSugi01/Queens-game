@@ -12,8 +12,8 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
   
-  var viewModel = CommandViewModel()
-  var selectedCommand: Command!
+  private var viewModel: CommandViewModel!
+  private var selectedCommand: Command!
   
   lazy var scrollView = DynamicHeightScrollView(
     contentView: stackView,
