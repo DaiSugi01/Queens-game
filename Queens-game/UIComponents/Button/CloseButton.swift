@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class CloseButton: UIButton {
+class CloseButton: QueensGameButton {
   
   override init(frame: CGRect) {
     super.init(frame: frame)

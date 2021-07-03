@@ -9,8 +9,8 @@ import UIKit
 
 class CommandSettingViewController: CommonCommandViewController {
   
-  let addButton: UIButton = {
-    let bt = UIButton()
+  let addButton: QueensGameButton = {
+    let bt = QueensGameButton()
     bt.configLayout(width: 48, height: 48, bgColor: CustomColor.main, radius: 20)
     bt.setImage(
       IconFactory.createSystemIcon(

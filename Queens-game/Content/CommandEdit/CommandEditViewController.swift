@@ -19,8 +19,8 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   
   // MARK: - Save and delete button
   
-  let saveButton: UIButton = {
-    let bt = UIButton()
+  let saveButton: QueensGameButton = {
+    let bt = QueensGameButton()
     // Set image
     let image = IconFactory.createSystemIcon(
       "tray.and.arrow.down.fill",
@@ -28,7 +28,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
     bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
@@ -44,7 +43,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
     bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt

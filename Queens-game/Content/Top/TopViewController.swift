@@ -109,13 +109,14 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
       to: .left
     )
     editCommandButton.contentEdgeInsets.left -= 10.5
+    editCommandButton.backgroundColor = .clear
     
     menuButtonAtTopPage.insertIcon(
       IconFactory.createSystemIcon("list.bullet", pointSize: 15 ),
       to: .left
     )
     menuButtonAtTopPage.contentEdgeInsets.left -= 9
-    
+    menuButtonAtTopPage.backgroundColor = .clear
   }
   
   private func configureActions() {

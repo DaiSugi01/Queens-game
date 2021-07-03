@@ -56,7 +56,12 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     bt.backButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
     
     bt.nextButton.setTitle("Yes", for: .normal)
-    bt.nextButton.insertIcon(IconFactory.createSystemIcon("checkmark", color: CustomColor.background), to: .right)
+    let btTintColor = CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light))
+    bt.nextButton.setTitleColor(btTintColor, for: .normal)
+    bt.nextButton.insertIcon(
+      IconFactory.createSystemIcon("checkmark", color: btTintColor),
+      to: .right
+    )
     bt.nextButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
     bt.nextButton.configBgColor(bgColor: CustomColor.accent)
     
@@ -64,7 +69,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     let uv = UIView()
     bt.configSuperView(under: uv)
     NSLayoutConstraint.activate([
-      bt.widthAnchor.constraint(equalTo: uv.widthAnchor, multiplier: 1, constant: -32),
+      bt.widthAnchor.constraint(equalTo: uv.widthAnchor, multiplier: 1, constant: 0),
       uv.heightAnchor.constraint(equalTo: bt.heightAnchor)
     ])
     bt.centerXYin(uv)

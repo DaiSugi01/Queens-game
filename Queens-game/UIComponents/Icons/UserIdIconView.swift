@@ -19,9 +19,10 @@ class UserIdIconView: UIImageView {
     label.textAlignment = .center
     label.configSuperView(under: self)
     label.centerXYin(self)
+    label.textColor = CustomColor.background
     
     self.configRadius(radius: 24)
-    self.configBgColor(bgColor: CustomColor.convex)
+    self.configBgColor(bgColor: CustomColor.subMain)
     self.configSize(width: size, height: size)
   }
   

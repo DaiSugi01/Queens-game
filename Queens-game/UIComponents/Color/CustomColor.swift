@@ -18,7 +18,7 @@ struct CustomColor {
   static var main: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#1A1717")! : UIColor(hex: "#1A1717")!
+        UIColor(hex: "#251F1F")! : UIColor(hex: "#E1DFDF")!
     }
   }
   
@@ -28,7 +28,7 @@ struct CustomColor {
   static var subMain: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#8C8989")! : UIColor(hex: "#8C8989")!
+        UIColor(hex: "#968D8D")! : UIColor(hex: "#A09898")!
     }
   }
   
@@ -48,7 +48,7 @@ struct CustomColor {
   static var background: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#F2EEE8")! : UIColor(hex: "#F2EEE8")!
+        UIColor(hex: "#F3F2F2")! : UIColor(hex: "#0D0A0A")!
     }
   }
 
@@ -58,7 +58,7 @@ struct CustomColor {
   static var concave: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#EBE5DA")! : UIColor(hex: "#EBE5DA")!
+        UIColor(hex: "#E7E5E4")! : UIColor(hex: "#191515")!
     }
   }
   
@@ -68,7 +68,7 @@ struct CustomColor {
   static var convex: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#FFFEFC")! : UIColor(hex: "#FFFEFC")!
+        UIColor(hex: "#FFFFFF")! : UIColor(hex: "#242020")! //1C1919
     }
   }
 }
