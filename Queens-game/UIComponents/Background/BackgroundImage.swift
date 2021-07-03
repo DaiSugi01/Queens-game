@@ -22,7 +22,7 @@ struct BackgroundImage {
       CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .dark))
     )
     
-    let bgImage = UIImage(color: .clear, size: .init(width: 1, height: 1))
+    let bgImage = UIImage.fromColor(.clear)
     // Register your light and dark mode image to image's asset.
     bgImage.imageAsset?.register(lightImage, with: .init(userInterfaceStyle: .light))
     bgImage.imageAsset?.register(darkImage, with: .init(userInterfaceStyle: .dark))

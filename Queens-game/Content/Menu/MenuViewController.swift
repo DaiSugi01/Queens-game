@@ -23,7 +23,14 @@ class MenuViewController: UIViewController {
     bt.configRadius(radius: 28)
     bt.setTitle("How to Play", for: .normal)
     bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
-    bt.insertIcon(IconFactory.createSystemIcon("questionmark.circle", color: CustomColor.background, pointSize: 17), to: .left)
+    bt.insertIcon(
+      IconFactory.createSystemIcon(
+        "questionmark.circle",
+        color: CustomColor.background,
+        pointSize: 17
+      ),
+      to: .left
+    )
     return bt
   }()
   
@@ -55,6 +62,7 @@ class MenuViewController: UIViewController {
     let bt = SubButton()
     bt.setTitle("Privacy policy", for: .normal)
     bt.setTitleColor(CustomColor.subText, for: .normal)
+    bt.backgroundColor = .clear
     bt.titleLabel?.font = CustomFont.p
     bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     bt.insertIcon(nil, to: .left)
@@ -76,7 +84,7 @@ class MenuViewController: UIViewController {
     sv.setCustomSpacing(16, after: goToTopButton)
     sv.translatesAutoresizingMaskIntoConstraints = false
     sv.isLayoutMarginsRelativeArrangement = true
-    sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 24, trailing: 40)
+    sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 40, trailing: 40)
     
     sv.backgroundColor = UIColor(patternImage: BackgroundImage.image)
     
@@ -132,7 +140,6 @@ class MenuViewController: UIViewController {
   )
   
   
-  
   let cancelAction = UIAlertAction(
     title: "No",
     style: UIAlertAction.Style.cancel,
@@ -148,7 +155,6 @@ class MenuViewController: UIViewController {
     self.alert.addAction(self.cancelAction)
     self.alert.addAction(self.confirmAction)
 
-    
   }
   
   deinit {
@@ -169,9 +175,10 @@ extension MenuViewController {
   
   private func configureLayout() {
     view.configBgColor(bgColor: .clear)
-    if !viewModel.needQuitButton {
-      goToTopButton.isHidden = true
-    }
+
+    goToTopButton.isHidden = viewModel.isTopMenu
+    privacyPolicyButton.isHidden = !viewModel.isTopMenu
+    
     stackView.configSuperView(under: view)
     stackView.configSize(width: 296)
     stackView.centerXYin(view)

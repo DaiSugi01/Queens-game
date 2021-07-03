@@ -41,6 +41,14 @@ class QueenSelectionViewController:
     
     configureButtonActions()
     
+    // FIX ME. Temporary avoid selecting card selection
+    collectionView.rx
+      .itemSelected
+      .subscribe(onNext:{ [weak self] indexPath in
+        self?.navButtons.nextButton.isEnabled =  indexPath.item != 1
+        self?.navButtons.nextButton.alpha = indexPath.item != 1 ? 1 : 0.1
+      })
+      .disposed(by: vm.disposeBag)
   }
 }
 
@@ -72,14 +80,6 @@ extension QueenSelectionViewController {
           for: indexPath
         ) as! SelectionCollectionViewCell
         cell.configContent(by: selection)
-        
-        
-        // Fix me. Temporally prohibit selecting for card select
-        if indexPath.item == 1 {
-          cell.isUserInteractionEnabled = false
-          cell.titleLabel.textColor = CustomColor.subText.withAlphaComponent(0.5)
-          cell.bodyLabel.textColor = CustomColor.subText.withAlphaComponent(0.5)
-        }
 
         return cell
       }
