@@ -21,7 +21,7 @@ class CustomSegmentedView: UIStackView {
     let wrapper = UIView()
     let image = UIImage(systemName: "info.circle")?.withRenderingMode(.alwaysTemplate)
     let imgv = UIImageView(image: image)
-    imgv.tintColor = CustomColor.subMain
+    imgv.tintColor = CustomColor.subText
     imgv.configSize(width: 16, height: 16)
     imgv.configSuperView(under: wrapper)
     imgv.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 0).isActive = true
@@ -37,10 +37,10 @@ class CustomSegmentedView: UIStackView {
     let sc = UISegmentedControl()
 //    let bg = UIImage(color: CustomColor.concave, size: CGSize(width: 1, height: 32))
 //    sc.setBackgroundImage(bg, for: .highlighted, barMetrics: .default)
-//    let bg2 = UIImage(color: CustomColor.convex, size: CGSize(width: 1, height: 32))
+//    let bg2 = UIImage(color: CustomColor.backgroundPlus, size: CGSize(width: 1, height: 32))
 //    sc.setBackgroundImage(bg2, for: .selected, barMetrics: .default)
-    sc.backgroundColor = CustomColor.concave
-    sc.selectedSegmentTintColor = CustomColor.convex
+    sc.backgroundColor = CustomColor.backgroundLower
+    sc.selectedSegmentTintColor = CustomColor.backgroundUpper
     return sc
   }()
   

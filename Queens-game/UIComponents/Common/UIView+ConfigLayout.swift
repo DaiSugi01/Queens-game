@@ -81,7 +81,7 @@ extension UIView {
 //    }
 //    self.layer.shouldRasterize = true
 //    self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-//    self.layer.shadowColor = CustomColor.main.cgColor
+//    self.layer.shadowColor = CustomColor.text.cgColor
 //    self.layer.shadowOpacity = 1
 //    self.layer.shadowOffset = .zero
 //    self.layer.shadowRadius = 10

@@ -27,10 +27,22 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   
   
   // minus
-  let minusButton: UIButton = {
-    let bt = UIButton()
-    let btImage = IconFactory.createSystemIcon("minus.square", pointSize: 40, weight: .regular)
+  let minusButton: QueensGameButton = {
+    let bt = QueensGameButton()
+    let btImage = IconFactory.createSystemIcon(
+      "person.crop.circle.badge.minus",
+      color: CustomColor.subText,
+      pointSize: 40,
+      weight: .regular
+    )
+    let btImageDisabled = IconFactory.createSystemIcon(
+      "person.crop.circle.badge.minus",
+      color: CustomColor.accent.withAlphaComponent(0.1),
+      pointSize: 40,
+      weight: .regular
+    )
     bt.setImage(btImage, for: .normal)
+    bt.setImage(btImageDisabled, for: .disabled)
     bt.setContentHuggingPriority(.required, for: .horizontal)
     return bt
   }()
@@ -43,10 +55,22 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
   }()
   
   // plus
-  let plusButton: UIButton = {
-    let bt = UIButton()
-    let btImage = IconFactory.createSystemIcon("plus.square.fill", pointSize: 40, weight: .regular)
+  let plusButton: QueensGameButton = {
+    let bt = QueensGameButton()
+    let btImage = IconFactory.createSystemIcon(
+      "person.crop.circle.fill.badge.plus",
+      color: CustomColor.subText,
+      pointSize: 40,
+      weight: .regular
+    )
+    let btImageDisabled = IconFactory.createSystemIcon(
+      "person.crop.circle.fill.badge.plus",
+      color: CustomColor.accent.withAlphaComponent(0.1),
+      pointSize: 40,
+      weight: .regular
+    )
     bt.setImage(btImage, for: .normal)
+    bt.setImage(btImageDisabled, for: .disabled)
     bt.setContentHuggingPriority(.required, for: .horizontal)
     return bt
   }()

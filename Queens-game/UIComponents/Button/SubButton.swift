@@ -8,14 +8,7 @@
 import UIKit
 
 /// This is a sub button. It is mainly used for negative or weak meaning such as "Back", "No", "Cancel", and "Close".
-class SubButton: UIButton {
-  
-  enum Direction {
-    case left, right
-  }
-  
-  var contentInset: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
-  var paddingBetweenImageAndText: CGFloat = 8
+class SubButton: QueensGameButton {
   
   /// Custom initializer to create Button
   /// - Parameters:
@@ -33,13 +26,13 @@ class SubButton: UIButton {
     self.titleLabel?.font = CustomFont.h4
     self.setTitle(title, for: .normal)
     self.titleLabel?.textAlignment = .center
-    // Config color
-    self.setTitleColor(CustomColor.main, for: .normal)
-    self.setTitleColor(self.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
     
-    // Config position of label.
+    // Config color
+    self.setTitleColor(CustomColor.text, for: .normal)
+    
     self.contentEdgeInsets = contentInset
     
+    // button icon
     self.insertIcon(
       IconFactory.createSystemIcon("chevron.left")!,
       to: .left
@@ -49,42 +42,5 @@ class SubButton: UIButton {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  func insertIcon(_ image: UIImage?, to: Direction) {
-  
-    self.setImage(image, for: .normal)
-    self.setImage(image, for: .disabled) // This won't let change color at disable
-    
-    self.contentEdgeInsets.right += paddingBetweenImageAndText
-    self.titleEdgeInsets = UIEdgeInsets(
-        top: 0,
-        left: paddingBetweenImageAndText,
-        bottom: 0,
-        right: -paddingBetweenImageAndText
-    )
-    
-    switch to {
-      case .left:
-        self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.titleLabel?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.imageView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-      case .right:
-        self.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        self.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        self.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-    }
-    
-  }
-  
-  func moveIcon(to direction: Direction, withReverse: Bool) {
-    guard let imageView = self.imageView, let image = imageView.image else { return }
-    self.insertIcon(
-      image,
-      to: direction
-    )
-    if withReverse {
-      imageView.transform = CGAffineTransform(scaleX: -imageView.transform.a, y: 1.0)
-    }
-  }
-  
+
 }

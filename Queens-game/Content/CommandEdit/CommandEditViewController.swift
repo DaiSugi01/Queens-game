@@ -19,8 +19,8 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   
   // MARK: - Save and delete button
   
-  let saveButton: UIButton = {
-    let bt = UIButton()
+  let saveButton: QueensGameButton = {
+    let bt = QueensGameButton()
     // Set image
     let image = IconFactory.createSystemIcon(
       "tray.and.arrow.down.fill",
@@ -28,7 +28,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
     bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
@@ -44,7 +43,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    bt.translatesAutoresizingMaskIntoConstraints = false
     // Set target
     bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt
@@ -67,10 +65,10 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let contentLabel = H3Label(text: "Content")
   lazy var textView: UITextView = {
     let tv = UITextView()
-    tv.configLayout( bgColor: CustomColor.concave, radius: 18)
+    tv.configLayout( bgColor: CustomColor.backgroundLower, radius: 18)
     tv.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
     tv.font = CustomFont.p
-    tv.textColor = CustomColor.subMain
+    tv.textColor = CustomColor.subText
     tv.tintColor = CustomColor.accent
     return tv
   } ()

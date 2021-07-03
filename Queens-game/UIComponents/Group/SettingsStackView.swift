@@ -22,7 +22,7 @@ class SettingsSwitcherStackView: UIStackView {
 
   var switcher: UISwitch = {
     let sw = UISwitch()
-    sw.onTintColor = CustomColor.main
+    sw.onTintColor = CustomColor.text
     sw.setContentHuggingPriority(.required, for: .horizontal)
     return sw
   }()

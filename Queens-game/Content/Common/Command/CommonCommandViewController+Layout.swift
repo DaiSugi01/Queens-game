@@ -35,7 +35,7 @@ extension CommonCommandViewController {
     searchBar.isHidden = true
     
     // Mask
-    searchBarMask.configBgColor(bgColor: CustomColor.main)
+    searchBarMask.configBgColor(bgColor: CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .dark)))
     searchBarMask.alpha = 0
     searchBarMask.matchParent()
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(maskTapped))

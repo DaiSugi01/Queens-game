@@ -13,7 +13,7 @@ class H3Label: UILabel {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.font = CustomFont.h3
-    self.textColor = CustomColor.main
+    self.textColor = CustomColor.text
     self.textAlignment = .left
     self.numberOfLines = 0
     self.lineBreakMode = .byWordWrapping

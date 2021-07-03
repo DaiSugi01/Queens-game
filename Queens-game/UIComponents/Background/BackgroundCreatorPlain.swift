@@ -28,7 +28,7 @@ class BackgroundCreatorPlain: BackgroundCreator {
   let backgroundView: UIImageView = {
     let imgv = UIImageView()
     imgv.translatesAutoresizingMaskIntoConstraints = false
-    imgv.image = BackgroundCreatorPlain.bgImage
+    imgv.image = BackgroundImage.image
     imgv.layer.masksToBounds = true
     imgv.contentMode = .scaleAspectFill
     return imgv
@@ -91,12 +91,8 @@ class BackgroundCreatorPlain: BackgroundCreator {
   
   private static func lineGenerator() -> UIView {
     let uv = UIView()
-    uv.configLayout(height: 1, bgColor: CustomColor.subMain.withAlphaComponent(0.4))
+    uv.configLayout(height: 1, bgColor: CustomColor.subText.withAlphaComponent(0.4))
     return uv
   }
-  private  static let bgImage: UIImage = {
-    let img = UIImage(named: "background-texture2")
-    return UIImage.blend(CustomColor.background, img!)
-  } ()
 
 }

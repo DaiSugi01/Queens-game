@@ -39,16 +39,22 @@ class MenuViewController: UIViewController {
   let goToTopButton: MainButton = {
     let bt = MainButton()
     bt.configRadius(radius: 28)
+    let btTintColor = CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light))
     bt.setTitle("Back to Top", for: .normal)
+    bt.setTitleColor(btTintColor, for: .normal)
     bt.backgroundColor = CustomColor.accent
     bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
-    bt.insertIcon(IconFactory.createSystemIcon("suit.heart.fill", color: CustomColor.background, pointSize: 16), to: .left)
+    bt.insertIcon(
+      IconFactory.createSystemIcon("suit.heart.fill", color: btTintColor, pointSize: 16),
+      to: .left
+    )
     return bt
   }()
   
   let privacyPolicyButton: SubButton = {
     let bt = SubButton()
     bt.setTitle("Privacy policy", for: .normal)
+    bt.setTitleColor(CustomColor.subText, for: .normal)
     bt.titleLabel?.font = CustomFont.p
     bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     bt.insertIcon(nil, to: .left)
@@ -71,9 +77,12 @@ class MenuViewController: UIViewController {
     sv.translatesAutoresizingMaskIntoConstraints = false
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 32, leading: 40, bottom: 24, trailing: 40)
+    
+    sv.backgroundColor = UIColor(patternImage: BackgroundImage.image)
+    
     sv.layer.cornerRadius = 16
-    sv.layer.borderWidth = 4
-    sv.layer.backgroundColor = CustomColor.main.cgColor
+    sv.layer.borderWidth = 3
+    sv.layer.borderColor = traitCollection.userInterfaceStyle == .light ? CustomColor.text.withAlphaComponent(0.8).cgColor : CustomColor.subText.cgColor
     return sv
   }()
   
@@ -163,7 +172,6 @@ extension MenuViewController {
     if !viewModel.needQuitButton {
       goToTopButton.isHidden = true
     }
-    stackView.configBgColor(bgColor: CustomColor.background)
     stackView.configSuperView(under: view)
     stackView.configSize(width: 296)
     stackView.centerXYin(view)
