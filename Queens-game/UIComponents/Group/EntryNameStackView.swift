@@ -15,12 +15,12 @@ class EntryNameStackView: UIStackView {
     let tf = UITextField()
     tf.configLayout(
       height: 56,
-      bgColor: CustomColor.concave,
+      bgColor: CustomColor.backgroundLower,
       radius: 22
     )
     tf.textAlignment = .center
     tf.font = CustomFont.p
-    tf.textColor = CustomColor.subMain
+    tf.textColor = CustomColor.subText
     tf.tintColor = CustomColor.accent
     return tf
   }()

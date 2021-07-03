@@ -65,10 +65,10 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let contentLabel = H3Label(text: "Content")
   lazy var textView: UITextView = {
     let tv = UITextView()
-    tv.configLayout( bgColor: CustomColor.concave, radius: 18)
+    tv.configLayout( bgColor: CustomColor.backgroundLower, radius: 18)
     tv.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
     tv.font = CustomFont.p
-    tv.textColor = CustomColor.subMain
+    tv.textColor = CustomColor.subText
     tv.tintColor = CustomColor.accent
     return tv
   } ()

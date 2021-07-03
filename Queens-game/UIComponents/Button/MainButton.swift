@@ -19,7 +19,7 @@ class MainButton: QueensGameButton {
     super.init(frame: .zero)
     
     self.configLayout(
-      bgColor: CustomColor.main,
+      bgColor: CustomColor.text,
       radius: 24
     )
     

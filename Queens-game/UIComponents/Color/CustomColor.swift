@@ -15,17 +15,17 @@ struct CustomColor {
   /// Used for main text color.
   /// - Light mode -> similar to  black color
   /// - Dark mode -> similar to white color
-  static var main: UIColor {
+  static var text: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
         UIColor(hex: "#251F1F")! : UIColor(hex: "#E1DFDF")!
     }
   }
   
-  /// Used for sub-main text color. More subtle, gray-like color. We use this color when we slightly display some supplement info.
+  /// Used for sub-text color. More subtle, gray-like color. We use this color when we slightly display some supplement info.
   /// - Light mode -> similar to  black color
   /// - Dark mode -> similar to white color
-  static var subMain: UIColor {
+  static var subText: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
         UIColor(hex: "#968D8D")! : UIColor(hex: "#A09898")!
@@ -54,8 +54,8 @@ struct CustomColor {
 
   /// Used for background, but one level deeper (darker) than background. We use it when the object is concave, such as text field.  Imagine like this shape. -> ⌴
   /// - Light mode -> similar to white, but slightly darker.
-  /// - Dark mode -> similar to black, but slightly darker
-  static var concave: UIColor {
+  /// - Dark mode -> similar to black, but slightly lighter
+  static var backgroundLower: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
         UIColor(hex: "#E7E5E4")! : UIColor(hex: "#191515")!
@@ -65,7 +65,7 @@ struct CustomColor {
   /// Used for background, but one level shallow (lighter) than background. We use it when the object is convex, such as card and cell.  Imagine like this shape. -> ⎍
   /// - Light mode -> similar to white, but slightly lighter.
   /// - Dark mode -> similar to black, but slightly lighter.
-  static var convex: UIColor {
+  static var backgroundUpper: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
         UIColor(hex: "#FFFFFF")! : UIColor(hex: "#242020")! //1C1919

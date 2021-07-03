@@ -15,7 +15,7 @@ class MenuButton: QueensGameButton {
     // Set image
     let image = IconFactory.createSystemIcon(
       "list.bullet",
-      color: CustomColor.subMain,
+      color: CustomColor.subText,
       pointSize: 24
     )
 

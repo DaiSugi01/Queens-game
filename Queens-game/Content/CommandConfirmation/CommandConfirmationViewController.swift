@@ -41,7 +41,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   lazy var descriptionView: UIStackView = {
     let wrapper = UIStackView()
-    wrapper.configLayout(bgColor: CustomColor.convex, radius: 32)
+    wrapper.configLayout(bgColor: CustomColor.backgroundUpper, radius: 32)
     let content: UILabel = H4Label(text: selectedCommand.detail)
     wrapper.addArrangedSubview(content)
     wrapper.isLayoutMarginsRelativeArrangement = true
@@ -88,13 +88,13 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   lazy var difficultyStackView = CommandAttributeStackView(
     command: selectedCommand,
     attributeType: .difficulty,
-    color: CustomColor.subMain
+    color: CustomColor.subText
   )
   
   lazy var typeStackView = CommandAttributeStackView(
     command: selectedCommand,
     attributeType: .targetType,
-    color: CustomColor.subMain
+    color: CustomColor.subText
   )
   
   

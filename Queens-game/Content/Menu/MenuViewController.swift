@@ -54,7 +54,7 @@ class MenuViewController: UIViewController {
   let privacyPolicyButton: SubButton = {
     let bt = SubButton()
     bt.setTitle("Privacy policy", for: .normal)
-    bt.setTitleColor(CustomColor.subMain, for: .normal)
+    bt.setTitleColor(CustomColor.subText, for: .normal)
     bt.titleLabel?.font = CustomFont.p
     bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     bt.insertIcon(nil, to: .left)
@@ -82,7 +82,7 @@ class MenuViewController: UIViewController {
     
     sv.layer.cornerRadius = 16
     sv.layer.borderWidth = 3
-    sv.layer.borderColor = traitCollection.userInterfaceStyle == .light ? CustomColor.main.withAlphaComponent(0.8).cgColor : CustomColor.subMain.cgColor
+    sv.layer.borderColor = traitCollection.userInterfaceStyle == .light ? CustomColor.text.withAlphaComponent(0.8).cgColor : CustomColor.subText.cgColor
     return sv
   }()
   

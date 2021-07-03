@@ -11,7 +11,7 @@ class CommandSettingViewController: CommonCommandViewController {
   
   let addButton: QueensGameButton = {
     let bt = QueensGameButton()
-    bt.configLayout(width: 48, height: 48, bgColor: CustomColor.main, radius: 20)
+    bt.configLayout(width: 48, height: 48, bgColor: CustomColor.text, radius: 20)
     bt.setImage(
       IconFactory.createSystemIcon(
         "plus",

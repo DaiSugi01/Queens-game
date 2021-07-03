@@ -39,11 +39,11 @@ class DemoColorViewController: UIViewController {
         
          - You can use by `CustomColor.color`
         */
-        createUIView(200, 100, CustomColor.main, "main \n Used for text color"),
-        createUIView(200, 100, CustomColor.subMain, "sub-main \n Used for supplement text color"),
+        createUIView(200, 100, CustomColor.text, "main \n Used for text color"),
+        createUIView(200, 100, CustomColor.subText, "sub-main \n Used for supplement text color"),
         createUIView(200, 100, CustomColor.background, "background \n Used for main background"),
-        createUIView(200, 100, CustomColor.convex, "convex \n Used for background which is upper, like card"),
-        createUIView(200, 100, CustomColor.concave, "concave \n Used for background which is lower, like text field"),
+        createUIView(200, 100, CustomColor.backgroundUpper, "convex \n Used for background which is upper, like card"),
+        createUIView(200, 100, CustomColor.backgroundLower, "concave \n Used for background which is lower, like text field"),
         createUIView(200, 100, CustomColor.accent, "accent \n Accent color used for emphasize something"),
       ],
       spacing: 48

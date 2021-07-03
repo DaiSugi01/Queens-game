@@ -148,34 +148,34 @@ extension IconFactory {
     switch type {
       case .citizen:
         iconSet = [.citizen]
-        colorSet = [CustomColor.subMain]
+        colorSet = [CustomColor.subText]
       case .allCitizen:
         iconSet = [.allCitizen]
-        colorSet = [CustomColor.subMain]
+        colorSet = [CustomColor.subText]
       case .queen:
         iconSet = [.queen]
         colorSet = [CustomColor.accent]
       case .levelOne:
         iconSet = [.levelOne]
-        colorSet = [CustomColor.subMain]
+        colorSet = [CustomColor.subText]
       case .arrow:
         iconSet = [.arrow]
-        colorSet = [CustomColor.subMain]
+        colorSet = [CustomColor.subText]
       case .cToC:
         iconSet = [.citizen, .arrow, .citizen]
-        colorSet = [CustomColor.subMain, CustomColor.subMain, CustomColor.subMain]
+        colorSet = [CustomColor.subText, CustomColor.subText, CustomColor.subText]
       case .cToA:
         iconSet = [.citizen, .arrow, .allCitizen]
-        colorSet = [CustomColor.subMain, CustomColor.subMain, CustomColor.subMain]
+        colorSet = [CustomColor.subText, CustomColor.subText, CustomColor.subText]
       case .cToQ:
         iconSet = [.citizen, .arrow, .queen]
-        colorSet = [CustomColor.subMain, CustomColor.subMain, CustomColor.accent]
+        colorSet = [CustomColor.subText, CustomColor.subText, CustomColor.accent]
       case .levelTwo:
         iconSet = [.levelOne, .levelOne]
-        colorSet = [CustomColor.subMain, CustomColor.accent]
+        colorSet = [CustomColor.subText, CustomColor.accent]
       case .levelThree:
         iconSet = [.levelOne, .levelOne, .levelOne]
-        colorSet = [CustomColor.subMain, CustomColor.accent, CustomColor.accent]
+        colorSet = [CustomColor.subText, CustomColor.accent, CustomColor.accent]
       case .userId( _):
         return image
     }
@@ -228,7 +228,7 @@ extension IconFactory {
   
   static func createSystemIcon(
     _ name: String,
-    color: UIColor = CustomColor.main,
+    color: UIColor = CustomColor.text,
     pointSize: CGFloat = 20,
     weight: UIImage.SymbolWeight = .black,
     scale: UIImage.SymbolScale = .large

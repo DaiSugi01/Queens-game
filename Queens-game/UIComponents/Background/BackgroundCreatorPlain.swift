@@ -91,7 +91,7 @@ class BackgroundCreatorPlain: BackgroundCreator {
   
   private static func lineGenerator() -> UIView {
     let uv = UIView()
-    uv.configLayout(height: 1, bgColor: CustomColor.subMain.withAlphaComponent(0.4))
+    uv.configLayout(height: 1, bgColor: CustomColor.subText.withAlphaComponent(0.4))
     return uv
   }
 

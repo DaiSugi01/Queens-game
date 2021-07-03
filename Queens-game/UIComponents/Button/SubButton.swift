@@ -28,7 +28,7 @@ class SubButton: QueensGameButton {
     self.titleLabel?.textAlignment = .center
     
     // Config color
-    self.setTitleColor(CustomColor.main, for: .normal)
+    self.setTitleColor(CustomColor.text, for: .normal)
     
     self.contentEdgeInsets = contentInset
     

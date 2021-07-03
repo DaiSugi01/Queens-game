@@ -22,7 +22,7 @@ class UserIdIconView: UIImageView {
     label.textColor = CustomColor.background
     
     self.configRadius(radius: 24)
-    self.configBgColor(bgColor: CustomColor.subMain)
+    self.configBgColor(bgColor: CustomColor.subText)
     self.configSize(width: size, height: size)
   }
   

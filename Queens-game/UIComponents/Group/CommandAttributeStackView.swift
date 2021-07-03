@@ -24,7 +24,7 @@ class CommandAttributeStackView: UIStackView {
   init(
     command: Command,
     attributeType: Attribute,
-    color: UIColor = CustomColor.main
+    color: UIColor = CustomColor.text
   ) {
     
     // Title

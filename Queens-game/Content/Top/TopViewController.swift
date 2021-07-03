@@ -105,7 +105,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     
     let image = IconFactory.createImage(type: .levelOne, width: 28)
     editCommandButton.insertIcon(
-      image.withTintColor(CustomColor.main, renderingMode: .alwaysOriginal),
+      image.withTintColor(CustomColor.text, renderingMode: .alwaysOriginal),
       to: .left
     )
     editCommandButton.contentEdgeInsets.left -= 10.5

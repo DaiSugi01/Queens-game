@@ -31,7 +31,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     let bt = QueensGameButton()
     let btImage = IconFactory.createSystemIcon(
       "person.crop.circle.badge.minus",
-      color: CustomColor.subMain,
+      color: CustomColor.subText,
       pointSize: 40,
       weight: .regular
     )
@@ -59,7 +59,7 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
     let bt = QueensGameButton()
     let btImage = IconFactory.createSystemIcon(
       "person.crop.circle.fill.badge.plus",
-      color: CustomColor.subMain,
+      color: CustomColor.subText,
       pointSize: 40,
       weight: .regular
     )
