@@ -12,8 +12,8 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
   
-  var viewModel = CommandViewModel()
-  var selectedCommand: Command!
+  private var viewModel: CommandViewModel!
+  private var selectedCommand: Command!
   
   lazy var scrollView = DynamicHeightScrollView(
     contentView: stackView,
@@ -183,5 +183,10 @@ extension CommandConfirmationViewController {
     
     self.viewModel.confirmedTriggerSubject.onCompleted()
     dismiss(animated: true, completion:nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    self.viewModel.dismissSubject.onCompleted()
   }
 }

@@ -94,7 +94,6 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
         self.dataSource.apply(snapshot, animatingDifferences: willAnimate)
       })
       .disposed(by: viewModel.disposeBag)
-    
   }
-  
 }
+

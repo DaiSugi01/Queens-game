@@ -44,7 +44,7 @@ class CommandSettingViewController: CommonCommandViewController {
     super.configBinding()
     
     // If #item reach max, disable add button.
-    viewModel.didReachMaxItemSubject
+    viewModel.didReachMaxItemRelay
       .map(!)
       .bind(to: addButton.rx.isValid)
       .disposed(by: viewModel.disposeBag)
@@ -57,6 +57,13 @@ extension CommandSettingViewController {
   // If cell is tapped
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let nextVC = CommandEditViewController(viewModel: viewModel)
+    
+    viewModel.dismissSubject.subscribe { [weak self] _ in
+      self?.collectionView.deselectItem(at: indexPath, animated: true)
+      print(indexPath)
+    }
+    .disposed(by: viewModel.disposeBag)
+    
     // Pass selected command's position(index) to view model.
     viewModel.updateEditMode(index: indexPath.row)
     present(nextVC, animated: true, completion: { [unowned self] in
