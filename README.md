@@ -44,12 +44,7 @@ Besides, we can let users to edit these commands what ever they want, like a "To
 
 Lastly, we can included a lot of fun animation because it's a app and this makes users much fun!
 
-<div style="
-  display: inline-flex;
-  gap: 16px;
-  align-items: center;
-  justify-content: center;
-">
+<div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-queen.webp" alt="Queen" width=240 />
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-todo.webp" alt="todo" width=240 height="240" />
 </div>
@@ -78,7 +73,9 @@ The basic flow of the game is as follows.
 5. Targets written in the command will be chosen randomly
 6. Execute(Obey) the command
 
-[each sene animation]
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-whole-game.webp" alt="game flow" width=240 />
+</div>
 
 ### Settings
 
@@ -89,42 +86,41 @@ At the game setting we can do is shown below.
 - See play guide
 - See policy
 
-[each sene animation]
-
-<div align="center" style="
-  display: inline-flex;
-  gap: 16px;
-">
-  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-todo.webp" alt="todo"  width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
-
-  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-planner.webp" alt="planner" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
-
-  <img class="app-screen-capture"  src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-location-manager.webp"  alt="location-manager" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;" />
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-settings.webp" alt="settings" width=240 />
 </div>
+
 
 
 ## Project management
 
 We used github project (Kanban) for scheduling and used the agile style. This makes the project complete efficently and remote work.
 
-![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-schedule.webp)
-![Docs](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-docs.webp)
-![Tasks](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-requirements.webp)
+![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/management-kanban.webp)
+
+![Discussion](https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/management-discussion.webp)
 
 
 ## UI Designing
 
+### UI mock up
 We created a whole UI mock using Figma including Dark Mode. In addition to creating a style guide, We created design components that are well suitable for implementing swift codes.
 
-![UI mock 1](https://github.com/cookie777/images/blob/main/works/2021-01-Hang-Out-Planner/ui-mock1.webp?raw=true)
-![UI mock 2](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/ui-mock2.webp)
+### Dark and like mode
 
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animatino-lightmode.webp" alt="dark and light mode" width=240 />
+</div>
 
 ## Front-end animation
 
 To harmonize and unify the UI, this app has a lot of custom animation and functions, such as transition, search bar, loading screen.
 
 ### Custom search bar
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-search-bar.webp" alt="search bar" width=240 />
+</div>
 
 Although existing search controller embedded in Navigation Controller is useful and well-prepared, it is hard to customize on you own way. So this time, we created our own custom search controller.
 To do this, we implement on only UI but 
@@ -152,6 +148,10 @@ extension CommonCommandViewController: UISearchBarDelegate {
 [animation of search bar]
 
 ### pop up transition
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-pop-menu.webp" alt="pop up menu" width=240 />
+</div>
 
 The default transition animation is nice but limited. To make it more game like, we created a natural pop up revealing game menu. We used `UIViewControllerAnimatedTransitioning` and `UIViewControllerTransitioningDelegate` to customize present animation.
 
@@ -183,6 +183,10 @@ To realize theses features, we adopted View model (MVVM) pattern, and reactive f
 
 ### Disabling button depends on user action
 
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-num-of-players.webp" alt="#plyaers" width=240 />
+</div>
+
 ```swift
 // View model
   let numOfPlayers: BehaviorRelay = BehaviorRelay(value: 5)
@@ -212,9 +216,12 @@ vm.numOfPlayers
 
 ```
 
-[photo of]
 
 ### Countdown animation
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-countdown.webp" alt="countdown" width=240 />
+</div>
 
 For another example, we created a countdown screen, which each second the label changes, and after reaching to 0 seconds, the while view is replaced.
 
@@ -269,9 +276,11 @@ Each seconds, we do `onNext` and bind to UILabel. After finish countdown, we emi
 
 ```
 
-[photo of ]
-
 ### Todo feature
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-todo.webp" alt="todo list" width=240 />
+</div>
 
 This game contains initial template items (commands) so that users only have to select them. Of course, later user can add new command or edit them. This is a sort of Todo feature. We realize it by using collection view with difffable datasource, which elegantly displays the differences of items. In addition, RxSwift, MVVM pattern, and Real to keep as persistance data are used.
 
@@ -311,10 +320,6 @@ This is a one example code. The ViewModel reads stored items considering search 
       })
       .disposed(by: viewModel.disposeBag)
 ```
-
-[photo]
-
-
 
 ## Future work
 
