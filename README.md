@@ -1,13 +1,12 @@
 # iOS Game app: Queens game
 
-keyword: Swift, Realm, RxSwift, MVVM, CoreAnimation, collection view, diffable data sources
+keyword: `Swift`, `Realm`, `RxSwift`, `MVVM`, `CoreAnimation`, `UICollectionView`, `diffable data sources`
 
 ## Summary
 
-We created an iOS game application with Swift. This app provides a multi payer game to play between your friends and neighbors. Because this games includes great random factors and customization, each time it will provides you a variable joys.
+We created an iOS game application with Swift. This app provides a multi-payer game to play between your friends and neighbors. Since this game includes great random factors and customization, each time a player will be provided with variable joys.
 
-This is has a lot of UI factors and models with reactive relationship.
-Thus, we adopted RxSwift and MVVM design pattern to completely separate views, models and logics.
+This app is has a lot of UI factors and data models with a reactive relationship. Thus, we adopted RxSwift and MVVM design patterns to completely separate views, models, and logic.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-whole-game.webp" alt="Kings game" width=240 />
@@ -18,31 +17,28 @@ Thus, we adopted RxSwift and MVVM design pattern to completely separate views, m
 
 ### Backgorund
 
-There are a lot of unique and awesome games in every countries and cultures.
-Three is a game called "Kings game(王様ゲーム)" in Japan, which is kind a "truth or dare", but might be more flexible and thralling. We thought it would be great to introduce the game in mobile application so that all over the people in the world can know, play and share its wonderful experience!
+There are enormous unique and awesome games in every country and culture. "King's game" which is called "王様ゲーム" in Japan is also one of them.  This party game is a sort of combination of, "Simon Says" and "truth or dare", but might be more flexible and thralling. We thought it would be great to introduce this game into a mobile application so that all over the people in world can know, play and share its wonderful experience!
 
 <div align="center" >
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-king.webp" alt="Kings game" width=240 />
 </div>
 
-### What is Kings game?
+### What is "King's game"?
 
-The kings game is a simple game consists of command and obey.
-We decide one "King" and others(citizens) providing secret index.
-Then, the King makes a command, such as "No. 2 have to make No.3 laugh!".
-Finally each person reveals their own index (number), and those who becomes the targets have to follow the command!
-
+The king's game simply consists of two factors, command and obey.
+Participants decide on one "King" and others(citizens). Every citizen is provided a secret index that only him/herself knows.
+Then, the King makes a command involving indexes, such as "No. 2 have to make No.3 laugh! 🤣".
+Finally, each person reveals their index (number), and those who are targeted have to follow the command!
 
 ### Introducing into App
 
-To realize this, we created a game app which we replace "King" to "Queen" instead. This is because to make it unique, and there is already a game called "Kings cup" which might be a bit.
+To realize this, we created a game app, which we replace "King" with "Queen" instead. This is because to make this game unique, and there is already a game called "King's cup" in western culture which might cause misunderstanding.
 
-In the app, we randomly select the queen and others(citizens).
-What is more, by using the advantage of app, we can also prepare template collections of commands, and then only targets can be randomly selected.
+In the app, we randomly select the queen and others(citizens), the same as King's game. What is more, by using the advantage of the application platform, we can also prepare template collections of commands. When a queen chooses the command, targets are randomly selected.
 
-Besides, we can let users to edit these commands what ever they want, like a "To do" app feature. And of course, those commands are saved permanently in the app so that even after closing the app, users can keep on using their customized commands!
+Besides, we can let users edit these commands whatever they want, like a "To-do list" app feature. And of course, those commands are saved permanently in the app so that even after closing the app, users can keep on using their customized commands when restart!
 
-Lastly, we can included a lot of fun animation because it's a app and this makes users much fun!
+Lastly, we can introduce a lot of fun animation because it's an app and this makes users much more fun!
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-queen.webp" alt="Queen" width=240 />
@@ -50,7 +46,7 @@ Lastly, we can included a lot of fun animation because it's a app and this makes
 </div>
 
 
-## Spec
+## Main spec
 
 - Swift: version 5.4
 - iOS: 14.3
@@ -60,7 +56,7 @@ Lastly, we can included a lot of fun animation because it's a app and this makes
 
 ## Usage
 
-Once you launch the app, users can select weather starting a new game or modifying game settings. 
+Once you launch the app, users can select whether to start a new game or modifying game settings. 
 
 ### New Game
 
@@ -69,8 +65,8 @@ The basic flow of the game is as follows.
 1. Select the number of players
 2. Enter user names
 3. Choose the queen randomly
-4. The queen choose the command
-5. Targets written in the command will be chosen randomly
+4. The queen chooses the command
+5. Targets described in the command will be chosen randomly
 6. Execute(Obey) the command
 
 <div align="center">
@@ -79,12 +75,12 @@ The basic flow of the game is as follows.
 
 ### Settings
 
-At the game setting we can do is shown below.
+In the game settings, what we can control is shown below.
 
 - Edit template commands like a ToDO app
 - Edit some game configuration
-- See play guide
-- See policy
+- See play guide (How to play)
+- See privacy & policy
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-settings.webp" alt="settings" width=240 />
@@ -94,7 +90,7 @@ At the game setting we can do is shown below.
 
 ## Project management
 
-We used github project (Kanban) for scheduling and used the agile style. This makes the project complete efficently and remote work.
+We used the GitHub project (Kanban feature) for scheduling and followed the agile style. This makes the project complete efficiently with even remote work.
 
 ![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/management-kanban.webp)
 
@@ -103,31 +99,55 @@ We used github project (Kanban) for scheduling and used the agile style. This ma
 
 ## UI Designing
 
-### UI mock up
-We created a whole UI mock using Figma including Dark Mode. In addition to creating a style guide, We created design components that are well suitable for implementing swift codes.
+### UI mockup
+We created a whole UI mockup with Figma. In addition to creating a style guide, We created UI components that are well suitable for implementing with MVVM design pattern. 
 
-### Dark and like mode
+### Dynamic Light and Dark mode.
+
+We also prepared and introduce both light and dark modes to suffice users' demands these days. These light and dark modes correspond to the iOS system's appearance. Thus, as soon as a user switches its app appearance, the app will be reflected without restarting.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animatino-lightmode.webp" alt="dark and light mode" width=240 />
 </div>
 
+This feature was realized by using `traitCollection` and `userInterfaceStyle`. We implemented a static custom color wrapped by `struct`.
+
+```swift
+/// Custom color set used for this project.
+/// - Compatible with dark mode.
+struct CustomColor {
+  
+ /// Used for main text color.
+ /// - Light mode -> similar to black color
+ /// - Dark mode -> similar to white color
+ static var text: UIColor {
+  return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+   return traitCollection.userInterfaceStyle == .light ?
+    UIColor(hex: "#251F1F")! : UIColor(hex: "#E1DFDF")!
+  }
+ }
+```
+
 ## Front-end animation
 
-To harmonize and unify the UI, this app has a lot of custom animation and functions, such as transition, search bar, loading screen.
+For harmony and consistency of UI, this app has a lot of custom animation and UI functions, such as transition, search bar, and loading screen.
 
 ### Custom search bar
+
+Although the existing `UISearchController` embedded in Navigation Controller is useful and well-prepared, it is hard to customize in your way. So this time, we decided not to use any `UISearchController` but only our custom `UISearchBar`.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-search-bar.webp" alt="search bar" width=240 />
 </div>
 
-Although existing search controller embedded in Navigation Controller is useful and well-prepared, it is hard to customize on you own way. So this time, we created our own custom search controller.
-To do this, we implement on only UI but 
-
-- Search bar will be displayed and hidden by user's scrolling.
-- When tap search bar, it will focus, make other places dark
+To create a custom `UISearchBar`, some of the basic features have to be implemented by yourself. For example,
+- Search bar will be displayed and hidden by the user's scrolling.
+- When tapping the search bar, it will focus on it by making other places(views) darker.
+- When tapping the search bar, a keyboard is displayed
 - If you tap outside the keyboard, the keyboard will be dismissed
+- Cancel, enter, and close behavior
+
+It was a bit painstaking to do define, but thankfully, we were able to create our own flexible customized search bar!
 
 ```swift
 extension CommonCommandViewController: UISearchBarDelegate {
@@ -145,15 +165,15 @@ extension CommonCommandViewController: UISearchBarDelegate {
     }
   }
 ```
-[animation of search bar]
 
 ### pop up transition
+
+
+The default transition animation is nice but limited. To make the transition more game-like, we created a natural pop-up menu. We used `UIViewControllerAnimatedTransitioning` and `UIViewControllerTransitioningDelegate` for customizing mordal animation.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-pop-menu.webp" alt="pop up menu" width=240 />
 </div>
-
-The default transition animation is nice but limited. To make it more game like, we created a natural pop up revealing game menu. We used `UIViewControllerAnimatedTransitioning` and `UIViewControllerTransitioningDelegate` to customize present animation.
 
 ```swift
 // The delegatee who will do the transition. We will send this to the delegator.
@@ -167,7 +187,7 @@ extension PopUpTransitioningDelegatee {
     return PopUpTransitioning.shared
   }
 
-  // Tells delegate What kind if animation transitioning do you want to use when dismissing ?
+  // Tells delegate What kind of animation transitioning do you want to use when dismissing?
   func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     PopUpTransitioning.shared.presenting = false
     return PopUpTransitioning.shared
@@ -177,15 +197,30 @@ extension PopUpTransitioningDelegatee {
 
 ## Back-end
 
-This app includes many reactive scenes. For instance, when user decides the max number players, it will auto disable the positive button. For another example after countdown, the app will show different view on it.
+This app includes many reactive scenes. For instance, when the number of players reaches the maximum, it will auto-disable the plus button. For another example, after a countdown, the app will show a different view on the screen.
 
-To realize theses features, we adopted View model (MVVM) pattern, and reactive frame work which is RxSwift.
+Therefore, we adopted a view model (MVVM) pattern and reactive framework which is RxSwift.
 
 ### Disabling button depends on user action
+
+
+We added a feature that a user can choose how many players join the game.  Following the original King's game spec, we wanted to set the maximum and the minimum number of players.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-num-of-players.webp" alt="#plyaers" width=240 />
 </div>
+
+So we needed features like as follows,
+- When a user tap plus or minus button, it'll also reflect the label soon
+- When the number of players (#player) reaches max or min, don't let the user tap anymore
+
+This was the exact opportunity to adopt RXswift.
+We made each button, label, and variable for #player reactive as reactive relation.
+- When a plus or minus button is tapped, we bind it to #player
+- When #player changes, it emits its value and the label subscribes to it.
+- When #player reaches max or min, we bind it as boolean to button's enable 
+
+
 
 ```swift
 // View model
@@ -219,14 +254,15 @@ vm.numOfPlayers
 
 ### Countdown animation
 
+
+For another example, we created a countdown screen, in which each second the label changes, and after reaching 0 seconds, the whole view is replaced.
+
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-countdown.webp" alt="countdown" width=240 />
 </div>
 
-For another example, we created a countdown screen, which each second the label changes, and after reaching to 0 seconds, the while view is replaced.
-
-For this feature, we use `onNext` and `oncomplete`.
-Each seconds, we do `onNext` and bind to UILabel. After finish countdown, we emit `onComplete`, which trigger a next view replacing.
+For this feature, we use `onNext` and `onComplete`.
+Each second, we send `onNext` and bind to UILabel. After finishing the countdown, we emit `onComplete`, which triggers a next view replacing.
 
 
 ```swift
@@ -278,15 +314,16 @@ Each seconds, we do `onNext` and bind to UILabel. After finish countdown, we emi
 
 ### Todo feature
 
+
+This game contains initial template command so that users only have to select them. Of course,  a user can add new commands or edit them later. This is a sort of Todo list feature. We realize it by using a `UICollectionView` with difffable datasource, which elegantly displays the differences of items. In addition, Realm was used to keep items as persistence data.
+
+Furthermore, we added a searching(filtering) feature, which leads the user to comfortably find their item.
+
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-todo.webp" alt="todo list" width=240 />
 </div>
 
-This game contains initial template items (commands) so that users only have to select them. Of course, later user can add new command or edit them. This is a sort of Todo feature. We realize it by using collection view with difffable datasource, which elegantly displays the differences of items. In addition, RxSwift, MVVM pattern, and Real to keep as persistance data are used.
-
-Furthermore, we added a custom searching feature, which leads user to comfortably find their item.
-
-This is a one example code. The ViewModel reads stored items considering search text. The viewController subscribes snapshot and reflect to the UI.
+This is an example code. The ViewModel reads stored items considering search text. The viewController subscribes snapshot and it reflects the UI.
 
 ```swift
   // View model
@@ -325,7 +362,7 @@ This is a one example code. The ViewModel reads stored items considering search 
 
 What we're planning to do next is as follows.
 
-- Publish in the app store (coming soon! we've preparing documents now.)
+- Publish in the app store (Coming soon! We are preparing documents now.)
 - Implement authentication by using firebase so that user can store their commands and history to cloud store
 - Add play card graphic to select the Queen
 
@@ -335,7 +372,7 @@ What we're planning to do next is as follows.
 ### Tak ([cookie777](https://github.com/cookie777))
 
 - UI Designer
-  - UI mock up
+  - UI mockup
   - Basic All UI Components
 - Developer
   - Command Todo feature
