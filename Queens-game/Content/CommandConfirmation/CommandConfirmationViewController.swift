@@ -184,4 +184,9 @@ extension CommandConfirmationViewController {
     self.viewModel.confirmedTriggerSubject.onCompleted()
     dismiss(animated: true, completion:nil)
   }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    self.viewModel.dismissSubject.onCompleted()
+  }
 }

@@ -94,13 +94,6 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
         self.dataSource.apply(snapshot, animatingDifferences: willAnimate)
       })
       .disposed(by: viewModel.disposeBag)
-    
   }
-  
 }
 
-extension CommonCommandViewController {
-  override func viewDidAppear(_ animated: Bool) {
-    print("did")
-  }
-}

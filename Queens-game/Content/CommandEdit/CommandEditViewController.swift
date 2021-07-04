@@ -122,7 +122,7 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
 extension CommandEditViewController {
   func configureTextView() {
     // If #item reach min, disable delete button.
-    viewModel.didReachMinItemSubject
+    viewModel.didReachMinItemRelay
       .map(!)
       .bind(to: deleteButton.rx.isEnabled)
       .disposed(by: viewModel.disposeBag)
@@ -157,6 +157,10 @@ extension CommandEditViewController {
   }
   private func dismiss() {
     dismiss(animated: true, completion: nil)
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    viewModel.dismissSubject.onCompleted()
   }
 }
 

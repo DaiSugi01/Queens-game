@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxRelay
 import RealmSwift
 
 class CommandViewModel {
@@ -28,7 +29,8 @@ class CommandViewModel {
 
   // RxSwift
   let disposeBag = DisposeBag()
-  let confirmedTriggerSubject = PublishSubject<Void>()
+  
+  // command selecting VC
   var snapshot =  Snapshot()
   var snapshotSubject = PublishSubject<Snapshot>()
   var didReachMinItem: Bool {
@@ -37,8 +39,14 @@ class CommandViewModel {
   var didReachMaxItem: Bool {
     realm.objects(Command.self).count >= 6
   }
-  lazy var didReachMinItemSubject = BehaviorSubject<Bool>(value: didReachMinItem)
-  lazy var didReachMaxItemSubject = BehaviorSubject<Bool>(value: didReachMaxItem)
+  lazy var didReachMinItemRelay = BehaviorRelay<Bool>(value: didReachMinItem)
+  lazy var didReachMaxItemRelay = BehaviorRelay<Bool>(value: didReachMaxItem)
+  
+  // command confirmation VC
+  /// confirmed tap ?
+  let confirmedTriggerSubject = PublishSubject<Void>()
+  /// dismissed ?
+  let dismissSubject = PublishSubject<Void>()
   
   // Realm
   let realm = try! Realm()
@@ -163,8 +171,8 @@ extension CommandViewModel {
   /// Ex, if items >= 256 -> disable add button
   func sendItemCount() {
 //    itemCountSubject.onNext(realm.objects(Command.self).count)
-    didReachMinItemSubject.onNext(didReachMinItem)
-    didReachMaxItemSubject.onNext(didReachMaxItem)
+    didReachMinItemRelay.accept(didReachMinItem)
+    didReachMaxItemRelay.accept(didReachMaxItem)
   }
   
 }
