@@ -9,7 +9,10 @@ We created an iOS game application with Swift. This app provides a multi payer g
 This is has a lot of UI factors and models with reactive relationship.
 Thus, we adopted RxSwift and MVVM design pattern to completely separate views, models and logics.
 
-[over all animation]
+<div align="center">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-whole-game.webp" alt="Kings game" width=240 />
+</div>
+
 
 ## Motivation
 
@@ -17,7 +20,10 @@ Thus, we adopted RxSwift and MVVM design pattern to completely separate views, m
 
 There are a lot of unique and awesome games in every countries and cultures.
 Three is a game called "Kings game(王様ゲーム)" in Japan, which is kind a "truth or dare", but might be more flexible and thralling. We thought it would be great to introduce the game in mobile application so that all over the people in the world can know, play and share its wonderful experience!
-[king's game photo]
+
+<div align="center" >
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-king.webp" alt="Kings game" width=240 />
+</div>
 
 ### What is Kings game?
 
@@ -38,10 +44,14 @@ Besides, we can let users to edit these commands what ever they want, like a "To
 
 Lastly, we can included a lot of fun animation because it's a app and this makes users much fun!
 
-photo
-[quenn] [king] [todo] 
-<div align="center" >
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-summary.webp" alt="select categories" width=240 />
+<div style="
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+">
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-queen.webp" alt="Queen" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-todo.webp" alt="todo" width=240 height="240" />
 </div>
 
 
