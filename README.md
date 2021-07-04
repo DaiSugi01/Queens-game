@@ -1,4 +1,4 @@
-# iOS Game app: Queens game
+# iOS Game app: Queen's game
 
 keyword: `Swift`, `Realm`, `RxSwift`, `MVVM`, `CoreAnimation`, `UICollectionView`, `diffable data sources`
 
@@ -9,7 +9,7 @@ We created an iOS game application with Swift. This app provides a multi-payer g
 This app is has a lot of UI factors and data models with a reactive relationship. Thus, we adopted RxSwift and MVVM design patterns to completely separate views, models, and logic.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-whole-game.webp" alt="Kings game" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-whole-game.webp" alt="Kings game" width=240 />
 </div>
 
 
@@ -20,7 +20,7 @@ This app is has a lot of UI factors and data models with a reactive relationship
 There are enormous unique and awesome games in every country and culture. "King's game" which is called "王様ゲーム" in Japan is also one of them.  This party game is a sort of combination of, "Simon Says" and "truth or dare", but might be more flexible and thralling. We thought it would be great to introduce this game into a mobile application so that all over the people in world can know, play and share its wonderful experience!
 
 <div align="center" >
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-king.webp" alt="Kings game" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/concept-king.webp" alt="Kings game" width=240 />
 </div>
 
 ### What is "King's game"?
@@ -41,8 +41,8 @@ Besides, we can let users edit these commands whatever they want, like a "To-do 
 Lastly, we can introduce a lot of fun animation because it's an app and this makes users much more fun!
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-queen.webp" alt="Queen" width=240 />
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/concept-todo.webp" alt="todo" width=240 height="240" />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/concept-queen.webp" alt="Queen" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/concept-todo.webp" alt="todo" width=240 height="240" />
 </div>
 
 
@@ -70,7 +70,7 @@ The basic flow of the game is as follows.
 6. Execute(Obey) the command
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-whole-game.webp" alt="game flow" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-whole-game.webp" alt="game flow" width=240 />
 </div>
 
 ### Settings
@@ -83,7 +83,7 @@ In the game settings, what we can control is shown below.
 - See privacy & policy
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-settings.webp" alt="settings" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-settings.webp" alt="settings" width=240 />
 </div>
 
 
@@ -92,9 +92,9 @@ In the game settings, what we can control is shown below.
 
 We used the GitHub project (Kanban feature) for scheduling and followed the agile style. This makes the project complete efficiently with even remote work.
 
-![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/management-kanban.webp)
+![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/management-kanban.webp)
 
-![Discussion](https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/management-discussion.webp)
+![Discussion](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/management-discussion.webp)
 
 
 ## UI Designing
@@ -107,7 +107,7 @@ We created a whole UI mockup with Figma. In addition to creating a style guide, 
 We also prepared and introduce both light and dark modes to suffice users' demands these days. These light and dark modes correspond to the iOS system's appearance. Thus, as soon as a user switches its app appearance, the app will be reflected without restarting.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animatino-lightmode.webp" alt="dark and light mode" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animatino-lightmode.webp" alt="dark and light mode" width=240 />
 </div>
 
 This feature was realized by using `traitCollection` and `userInterfaceStyle`. We implemented a static custom color wrapped by `struct`.
@@ -137,7 +137,7 @@ For harmony and consistency of UI, this app has a lot of custom animation and UI
 Although the existing `UISearchController` embedded in Navigation Controller is useful and well-prepared, it is hard to customize in your way. So this time, we decided not to use any `UISearchController` but only our custom `UISearchBar`.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-search-bar.webp" alt="search bar" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-search-bar.webp" alt="search bar" width=240 />
 </div>
 
 To create a custom `UISearchBar`, some of the basic features have to be implemented by yourself. For example,
@@ -172,7 +172,7 @@ extension CommonCommandViewController: UISearchBarDelegate {
 The default transition animation is nice but limited. To make the transition more game-like, we created a natural pop-up menu. We used `UIViewControllerAnimatedTransitioning` and `UIViewControllerTransitioningDelegate` for customizing mordal animation.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-pop-menu.webp" alt="pop up menu" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-pop-menu.webp" alt="pop up menu" width=240 />
 </div>
 
 ```swift
@@ -207,7 +207,7 @@ Therefore, we adopted a view model (MVVM) pattern and reactive framework which i
 We added a feature that a user can choose how many players join the game.  Following the original King's game spec, we wanted to set the maximum and the minimum number of players.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-num-of-players.webp" alt="#plyaers" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-num-of-players.webp" alt="#plyaers" width=240 />
 </div>
 
 So we needed features like as follows,
@@ -258,7 +258,7 @@ vm.numOfPlayers
 For another example, we created a countdown screen, in which each second the label changes, and after reaching 0 seconds, the whole view is replaced.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-countdown.webp" alt="countdown" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-countdown.webp" alt="countdown" width=240 />
 </div>
 
 For this feature, we use `onNext` and `onComplete`.
@@ -320,7 +320,7 @@ This game contains initial template command so that users only have to select th
 Furthermore, we added a searching(filtering) feature, which leads the user to comfortably find their item.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-05-Queens-Game/animation-todo.webp" alt="todo list" width=240 />
+<img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-todo.webp" alt="todo list" width=240 />
 </div>
 
 This is an example code. The ViewModel reads stored items considering search text. The viewController subscribes snapshot and it reflects the UI.

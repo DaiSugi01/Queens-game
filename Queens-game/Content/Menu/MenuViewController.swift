@@ -200,12 +200,12 @@ extension MenuViewController {
   }
   
   @objc func howToPlayTapped(_ sender: UIButton) {
-    let nx = RuleBookViewController()
+    let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/play-guide")
     present(nx, animated: true, completion: nil)
   }
   
   @objc func privacyPolicyTapped(_ sender: UIButton) {
-    let nx = PrivacyPolicyViewController()
+    let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/privacy-policy")
     present(nx, animated: true, completion: nil)
   }
 }
