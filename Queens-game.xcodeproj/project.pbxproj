@@ -27,7 +27,6 @@
 		0A3A62D92638CF960082ACAE /* CommonCommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */; };
 		0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62DC2638D19B0082ACAE /* CommandEditViewController.swift */; };
 		0A3A62E32638D3320082ACAE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E22638D3320082ACAE /* MenuViewController.swift */; };
-		0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */; };
 		0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */; };
 		0A3A62F12638D7B60082ACAE /* ExitAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */; };
 		0A85DFDA265B1AFA00F662B5 /* QueenSelectedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A85DFD9265B1AFA00F662B5 /* QueenSelectedViewModel.swift */; };
@@ -48,7 +47,7 @@
 		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
 		481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA3FF2689811800ADF48A /* MenuViewModel.swift */; };
 		481CA4022689928B00ADF48A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA4012689928B00ADF48A /* LoadingView.swift */; };
-		481CA405268AEDE300ADF48A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */; };
+		481CA405268AEDE300ADF48A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA404268AEDE300ADF48A /* WebViewViewController.swift */; };
 		482681822645EBA80010543A /* UISearchBar+configLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */; };
 		482681832645EBA80010543A /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815D2645EBA70010543A /* CustomSearchBar.swift */; };
 		482681842645EBA80010543A /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826815F2645EBA70010543A /* CustomColor.swift */; };
@@ -143,7 +142,6 @@
 		0A3A62D82638CF960082ACAE /* CommonCommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCommandViewController.swift; sourceTree = "<group>"; };
 		0A3A62DC2638D19B0082ACAE /* CommandEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandEditViewController.swift; sourceTree = "<group>"; };
 		0A3A62E22638D3320082ACAE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBookViewController.swift; sourceTree = "<group>"; };
 		0A3A62EC2638D47A0082ACAE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0A3A62F02638D7B60082ACAE /* ExitAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertViewController.swift; sourceTree = "<group>"; };
 		0A85DFD9265B1AFA00F662B5 /* QueenSelectedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenSelectedViewModel.swift; sourceTree = "<group>"; };
@@ -164,7 +162,7 @@
 		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		481CA3FF2689811800ADF48A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		481CA4012689928B00ADF48A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		481CA404268AEDE300ADF48A /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		4826815C2645EBA70010543A /* UISearchBar+configLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+configLayout.swift"; sourceTree = "<group>"; };
 		4826815D2645EBA70010543A /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		4826815F2645EBA70010543A /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -514,8 +512,7 @@
 		481CA403268AED9D00ADF48A /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				0A3A62E72638D39C0082ACAE /* RuleBookViewController.swift */,
-				481CA404268AEDE300ADF48A /* PrivacyPolicyViewController.swift */,
+				481CA404268AEDE300ADF48A /* WebViewViewController.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -951,7 +948,6 @@
 				48AE80432640B26F00CBDB5E /* DemoButtonViewController.swift in Sources */,
 				48EECAE6265F6E5600B74066 /* UIButton+RxIsValid.swift in Sources */,
 				0AD08ACF264A6F1900654A05 /* QueensGameSelectionProtocol.swift in Sources */,
-				0A3A62E82638D39C0082ACAE /* RuleBookViewController.swift in Sources */,
 				485635E626436FA40043AF21 /* GameManager.swift in Sources */,
 				482681872645EBA80010543A /* PLabel.swift in Sources */,
 				482681842645EBA80010543A /* CustomColor.swift in Sources */,
@@ -967,7 +963,7 @@
 				4814766226901CF700271645 /* QueensGameButton.swift in Sources */,
 				485635EE26438A140043AF21 /* Section.swift in Sources */,
 				48E54180267D5EAD00D891E1 /* QueenGameCollectionViewProtocal.swift in Sources */,
-				481CA405268AEDE300ADF48A /* PrivacyPolicyViewController.swift in Sources */,
+				481CA405268AEDE300ADF48A /* WebViewViewController.swift in Sources */,
 				482681982645EBA80010543A /* UIImage+append.swift in Sources */,
 				482681932645EBA80010543A /* SubButton.swift in Sources */,
 				0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */,
