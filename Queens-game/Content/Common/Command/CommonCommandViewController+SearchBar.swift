@@ -66,20 +66,23 @@ extension CommonCommandViewController: UISearchBarDelegate {
     // Quit focus
     searchBar.resignFirstResponder()
   }
-  
-  // Display search bar if search bottom icon is tapped.
-  @objc func searchButtonTapped() {
-    UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
-    { [unowned self] in
-      self.searchBar.isHidden = false
-      self.searchBar.alpha = 1
-      self.searchBarMask.alpha = 0.6
-      searchBar.becomeFirstResponder()
-    }
-  }
-  
-  @objc func maskTapped() {
-    searchBar.endEditing(true)
-  }
 }
 
+extension CommonCommandViewController {
+  
+  /// Display search bar if search bottom icon is tapped.
+  func configureSearchButtonBinding() {
+    searchButton.rx.tap
+      .bind{ [weak self] in
+        guard let self = self else { return }
+        UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
+        { [unowned self] in
+          self.searchBar.isHidden = false
+          self.searchBar.alpha = 1
+          self.searchBarMask.alpha = 0.6
+          self.searchBar.becomeFirstResponder()
+        }
+      }
+      .disposed(by: viewModel.disposeBag)
+  }
+}

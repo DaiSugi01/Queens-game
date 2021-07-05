@@ -24,7 +24,7 @@ class CommandHeaderCollectionReusableView: UICollectionReusableView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    stackView.configSuperView(under: self)
+    stackView.configureSuperView(under: self)
     stackView.matchParent()
   }
   required init?(coder: NSCoder) {

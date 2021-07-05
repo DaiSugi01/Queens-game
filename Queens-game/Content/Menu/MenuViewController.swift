@@ -20,9 +20,8 @@ class MenuViewController: UIViewController {
   
   let howToPlayButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     bt.setTitle("How to Play", for: .normal)
-    bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
     bt.insertIcon(
       IconFactory.createSystemIcon(
         "questionmark.circle",
@@ -36,21 +35,19 @@ class MenuViewController: UIViewController {
   
   let settingButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     bt.setTitle("Settings", for: .normal)
-    bt.addTarget(self, action: #selector(settingTapped(_:)), for: .touchUpInside)
     bt.insertIcon(IconFactory.createSystemIcon("gear", color: CustomColor.background, pointSize: 16), to: .left)
     return bt
   }()
   
   let goToTopButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     let btTintColor = CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light))
     bt.setTitle("Back to Top", for: .normal)
     bt.setTitleColor(btTintColor, for: .normal)
     bt.backgroundColor = CustomColor.accent
-    bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
     bt.insertIcon(
       IconFactory.createSystemIcon("suit.heart.fill", color: btTintColor, pointSize: 16),
       to: .left
@@ -64,7 +61,6 @@ class MenuViewController: UIViewController {
     bt.setTitleColor(CustomColor.subText, for: .normal)
     bt.backgroundColor = .clear
     bt.titleLabel?.font = CustomFont.p
-    bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     bt.insertIcon(nil, to: .left)
     return bt
   }()
@@ -152,9 +148,10 @@ class MenuViewController: UIViewController {
     super.viewDidLoad()
     
     configureLayout()
-    self.alert.addAction(self.cancelAction)
-    self.alert.addAction(self.confirmAction)
+    alert.addAction(self.cancelAction)
+    alert.addAction(self.confirmAction)
 
+    configureBindings()
   }
   
   deinit {
@@ -174,39 +171,50 @@ class MenuViewController: UIViewController {
 extension MenuViewController {
   
   private func configureLayout() {
-    view.configBgColor(bgColor: .clear)
+    view.configureBgColor(bgColor: .clear)
 
     goToTopButton.isHidden = viewModel.isTopMenu
     privacyPolicyButton.isHidden = !viewModel.isTopMenu
     
-    stackView.configSuperView(under: view)
-    stackView.configSize(width: 296)
+    stackView.configureSuperView(under: view)
+    stackView.configureSize(width: 296)
     stackView.centerXYin(view)
   }
   
-  @objc func goToTop(_ sender: UIButton) {
-    present(self.alert, animated: true, completion: nil)
-  }
-  
-  @objc func settingTapped(_ sender: UIButton) {
-    let nx = SettingsViewController()
-    let navigationController = UINavigationController(rootViewController:nx)
-    navigationController.navigationBar.isHidden = true
-    present(navigationController, animated: true, completion: nil)
-  }
-  
-  @objc func closeTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  @objc func howToPlayTapped(_ sender: UIButton) {
-    let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/play-guide")
-    present(nx, animated: true, completion: nil)
-  }
-  
-  @objc func privacyPolicyTapped(_ sender: UIButton) {
-    let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/privacy-policy")
-    present(nx, animated: true, completion: nil)
+  private func configureBindings() {
+    goToTopButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        self.present(self.alert, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    settingButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = SettingsViewController()
+        let navigationController = UINavigationController(rootViewController: nx)
+        navigationController.navigationBar.isHidden = true
+        self?.present(navigationController, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    howToPlayButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/play-guide")
+        self?.present(nx, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    privacyPolicyButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/privacy-policy")
+        self?.present(nx, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
 }
 

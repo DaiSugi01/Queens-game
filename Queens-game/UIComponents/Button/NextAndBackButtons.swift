@@ -24,7 +24,7 @@ class NextAndBackButtons: HorizontalStackView {
       arrangedSubviews: [backButton, nextButton],
       distribution: .equalSpacing
     )
-    self.configLayout(superView: superView)
+    self.configureLayout(superView: superView)
 
   }
   

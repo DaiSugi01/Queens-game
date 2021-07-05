@@ -6,23 +6,31 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class TopViewController: UIViewController, QueensGameViewControllerProtocol {
+  
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
-  let popUpTransitioning = PopUpTransitioningDelegatee()
+  private let popUpTransitioning = PopUpTransitioningDelegatee()
   
-  let screenTitle: H1Label = {
+  private let disposeBag = DisposeBag()
+  
+  private let screenTitle: H1Label = {
     let lb = H1Label()
     let title = NSMutableAttributedString(string: "Queen's Game")
-    title.addAttribute(.foregroundColor, value: CustomColor.accent, range: NSMakeRange(0, 1))
+    title.addAttribute(
+      .foregroundColor,
+      value: CustomColor.accent,
+      range: NSMakeRange(0, 1)
+    )
     lb.attributedText = title
     lb.numberOfLines = 2
-    lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
   
-  lazy var buttonWrapper: VerticalStackView = {
+  private lazy var buttonWrapper: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         startButton,
@@ -35,36 +43,13 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     return sv
   }()
   
-  let startButton = MainButton(title: "Start game")
-  @objc func startTapped(_ sender: UIButton) {
-    let nx = PlayerSelectionViewController()
-    GameManager.shared.pushGameProgress(navVC: navigationController,
-                                        currentScreen: self,
-                                        nextScreen: nx)
-  }
+  private let startButton = MainButton(title: "Start game")
   
-  let editCommandButton = SubButton(title: "Edit commands")
-  @objc func editCommandTapped(_ sender: UIButton) {
-    let nx = CommandSettingViewController()
-    navigationController?.pushViewController(nx, animated: true)
-  }
+  private let editCommandButton = SubButton(title: "Edit commands")
   
-  let menuButtonAtTopPage: SubButton = SubButton(title: "Menu")
-  @objc func goToMenu(_ sender: UIButton) {
-    let nx = MenuViewController()
-    nx.viewModel.isTopMenu = true
-    nx.modalPresentationStyle = .overCurrentContext
-    nx.transitioningDelegate = popUpTransitioning
-    
-    // If already something is presented, present the view over it
-    if let presentedVC = self.presentedViewController {
-        presentedVC.present(nx, animated: true, completion: nil)
-    }else{
-      self.present(nx, animated: true, completion: nil)
-    }
-  }
+  private let menuButtonAtTopPage: SubButton = SubButton(title: "Menu")
   
-  lazy var verticalSV: VerticalStackView = {
+  private lazy var verticalSV: VerticalStackView = {
     let sv = VerticalStackView(arrangedSubviews: [screenTitle, buttonWrapper])
     sv.alignment = .fill
     sv.distribution = .equalSpacing
@@ -73,16 +58,26 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     GameManager.shared.resetGameManeger()
-    backgroundCreator.configureLayout()
+    
     configureLayout()
-    configureActions()
+    backgroundCreator.configureLayout()
+    
+    configureBindings()
+    
     configureDemoButton() // debug button
   }
+}
+
+
+// MARK: - Layout
+
+extension TopViewController {
   
   private func configureLayout() {
     
-    verticalSV.configSuperView(under: view)
+    verticalSV.configureSuperView(under: view)
     
     // Set constraints
     verticalSV.matchParent(
@@ -103,6 +98,10 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
       to: .left
     )
     
+    configureButtonLayout()
+  }
+  
+  private func configureButtonLayout() {
     let image = IconFactory.createImage(type: .levelOne, width: 28)
     editCommandButton.insertIcon(
       image.withTintColor(CustomColor.text, renderingMode: .alwaysOriginal),
@@ -119,15 +118,59 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     menuButtonAtTopPage.backgroundColor = .clear
   }
   
-  private func configureActions() {
-    startButton.addTarget(self, action: #selector(startTapped(_:)), for: .touchUpInside)
-    editCommandButton.addTarget(self, action: #selector(editCommandTapped(_:)), for: .touchUpInside)
-    menuButtonAtTopPage.addTarget(self, action: #selector(goToMenu(_:)), for: .touchUpInside)
+}
+
+// MARK: - Bindings
+
+extension TopViewController {
+
+  private func configureBindings() {
+    startButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        let nx = PlayerSelectionViewController()
+        GameManager.shared.pushGameProgress(
+          navVC: self.navigationController,
+          currentScreen: self,
+          nextScreen: nx
+        )
+      }
+      .disposed(by: disposeBag)
+    
+    editCommandButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        let nx = CommandSettingViewController()
+        self.navigationController?.pushViewController(nx, animated: true)
+      }
+      .disposed(by: disposeBag)
+    
+    menuButtonAtTopPage.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        let nx = MenuViewController()
+        nx.viewModel.isTopMenu = true
+        nx.modalPresentationStyle = .overCurrentContext
+        nx.transitioningDelegate = self.popUpTransitioning
+        
+        // If already something is presented, present the view over it
+        if let presentedVC = self.presentedViewController {
+            presentedVC.present(nx, animated: true, completion: nil)
+        }else{
+          self.present(nx, animated: true, completion: nil)
+        }
+      }
+      .disposed(by: disposeBag)
+
   }
+  
 }
 
 
-// MARK: - Debug button
+// MARK: - Debug button.
 
 extension TopViewController {
   
@@ -135,21 +178,31 @@ extension TopViewController {
     let demoButton = UIButton()
     
     // Set image
-    let btImage = IconFactory.createSystemIcon("heart.fill", color: CustomColor.accent, pointSize: 40)
-
+    let btImage = IconFactory.createSystemIcon(
+      "heart.fill",
+      color: CustomColor.accent,
+      pointSize: 40
+    )
     demoButton.setImage(btImage, for: .normal)
-    // rotate image
     demoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-    // target
-    demoButton.addTarget(self, action: #selector(demoButtonTapped(_:)), for: .touchUpInside)
+    
     // constraint
-    demoButton.configSuperView(under: view)
-    demoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80).isActive = true
-    demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
-  }
-  
-  @objc func demoButtonTapped(_ sender: UIButton) {
-    navigationController?.pushViewController(DemoViewController(), animated: true)
+    demoButton.configureSuperView(under: view)
+    NSLayoutConstraint.activate([
+      demoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
+      demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48)
+    ])
+    
+    demoButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        self.navigationController?.pushViewController(
+          DemoViewController(),
+          animated: true
+        )
+      }
+      .disposed(by: disposeBag)
   }
   
 }

@@ -24,8 +24,8 @@ class CommandSelectionViewController:
   // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
 
-  let viewModel = CommandSelectionViewModel()
-  let navButtons = NextAndBackButtons()
+  private let viewModel = CommandSelectionViewModel()
+  private let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,12 +38,16 @@ class CommandSelectionViewController:
     // QueensGameViewControllerProtocol
     backgroundCreator.configureLayout()
     
-    configureButtonActions()
+    // navBar
+    navButtons.configureSuperView(under: view)
+    navButtons.configureLayoutToBottom()
+    configureNavButtonBinding()
   }
 }
 
 
-// QueensGameSelectionProtocol
+// MARK: - QueensGameSelectionProtocol
+
 extension CommandSelectionViewController {
   func configureDiffableDataSource() {
     configureDiffableDataSourceHelper(
@@ -87,47 +91,49 @@ extension CommandSelectionViewController {
   }
 }
 
-// Configuration for this own class
+
+// MARK: - Bindings
+
 extension CommandSelectionViewController {
   
-  /// Set Button Actions
-  private func configureButtonActions() {
-    navButtons.configSuperView(under: view)
-    navButtons.configureLayoutToBottom()
+  private func configureNavButtonBinding() {
     
-    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
+    navButtons.nextButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        
+        guard let index = self.collectionView.indexPathsForSelectedItems?.first?.item else { return }
+        
+        switch Constant.CommandSelection.Index(rawValue: index) {
+        case .manual:
+          let nx = CommandManualSelectingViewController()
+          GameManager.shared.pushGameProgress(
+            navVC: self.navigationController,
+            currentScreen: self,
+            nextScreen: nx
+          )
+        case .random:
+          let nx = CitizenSelectedViewController()
+          GameManager.shared.command = self.viewModel.rundomCommandSelector()
+          GameManager.shared.pushGameProgress(
+            navVC: self.navigationController,
+            currentScreen: self,
+            nextScreen: nx
+          )
+        default:
+          print("None of them are selected")
+        }
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    // Go back to previous screen
+    navButtons.backButton.rx
+      .tap
+      .bind { [weak self] _ in
+        GameManager.shared.popGameProgress(navVC: self?.navigationController)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
   
-  /// Go to next screen depends on user selection
-  /// - Parameter sender: UIButton
-  @objc private func goToNext(_ sender: UIButton) {
-    guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
-    
-    switch Constant.CommandSelection.Index(rawValue: index) {
-    case .manual:
-      let nx = CommandManualSelectingViewController()
-      GameManager.shared.pushGameProgress(
-        navVC: navigationController,
-        currentScreen: self,
-        nextScreen: nx
-      )
-    case .random:
-      let nx = CitizenSelectedViewController()
-      GameManager.shared.command = viewModel.rundomCommandSelector()
-      GameManager.shared.pushGameProgress(
-        navVC: navigationController,
-        currentScreen: self,
-        nextScreen: nx
-      )
-    default:
-      print("None of them are selected")
-    }
-  }
-  
-  /// Go back to previous screen
-  /// - Parameter sender: UIButton
-  @objc private func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController)
-  }
 }

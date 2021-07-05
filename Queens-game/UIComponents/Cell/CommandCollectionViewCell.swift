@@ -33,7 +33,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
       alignment: .center,
       distribution: .fill
     )
-    sv.configSize(width: 16*3)
+    sv.configureSize(width: 16*3)
     return sv
   }()
   
@@ -45,7 +45,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
       alignment: .center,
       distribution: .fill
     )
-    sv.configLayout(bgColor: CustomColor.backgroundUpper, radius: 12, shadow: true)
+    sv.configureLayout(bgColor: CustomColor.backgroundUpper, radius: 12)
     
     // Config margin
     sv.isLayoutMarginsRelativeArrangement = true
@@ -55,7 +55,7 @@ class CommandCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    stackView.configSuperView(under: contentView)
+    stackView.configureSuperView(under: contentView)
     stackView.matchParent()
   }
   

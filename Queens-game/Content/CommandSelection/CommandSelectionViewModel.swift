@@ -7,8 +7,11 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
 
 class CommandSelectionViewModel {
+  let disposeBag = DisposeBag()
+  
   func rundomCommandSelector() -> Command {
     let realm = try! Realm()
     let items = realm.objects(Command.self)

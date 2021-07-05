@@ -28,15 +28,11 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   var headerTitle: String = ""
   
   // Bottom navigation bar
-  let backButton: SubButton = {
-    let bt = SubButton()
-    bt.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-    return bt
-  } ()
+  let backButton = SubButton()
   
   let searchButton: QueensGameButton = {
     let bt = QueensGameButton()
-    bt.configLayout(width: 48, height: 48, bgColor: CustomColor.text, radius: 20)
+    bt.configureLayout(width: 48, height: 48, bgColor: CustomColor.text, radius: 20)
     bt.setImage(
       IconFactory.createSystemIcon(
         "magnifyingglass",
@@ -45,7 +41,6 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
       ),
       for: .normal
     )
-    bt.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     return bt
   } ()
   
@@ -64,20 +59,18 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
     createCollectionViewLayout()
     createDiffableDataSource()
     
-    configBinding()
+    configSnapshotBinding()
+    configureNavButtonBinding()
+    configureSearchButtonBinding()
     
     // Config Other ui views
     configureSearchBar()
     configureBottomNavigationBar()
   }
   
-  @objc func backTapped() {
-    navigationController?.popViewController(animated: true)
-  }
   
-  // Rx swift
   /// Subscriber of snapshot. This is called after snapshot in view model is modified.
-  func configBinding() {
+  func configSnapshotBinding() {
     
     viewModel.snapshotSubject
       .subscribe (onNext: { [unowned self] snapshot in
@@ -93,6 +86,15 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
         
         self.dataSource.apply(snapshot, animatingDifferences: willAnimate)
       })
+      .disposed(by: viewModel.disposeBag)
+  }
+  
+  func configureNavButtonBinding() {
+    backButton.rx
+      .tap
+      .bind { [weak self] _  in
+        self?.navigationController?.popViewController(animated: true)
+      }
       .disposed(by: viewModel.disposeBag)
   }
 }

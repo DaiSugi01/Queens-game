@@ -64,9 +64,9 @@ class SettingsViewController: UIViewController, QueensGameViewControllerProtocol
 extension SettingsViewController {
   
   private func configureLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
+    view.configureBgColor(bgColor: CustomColor.background)
     
-    scrollView.configSuperView(under: view)
+    scrollView.configureSuperView(under: view)
     scrollView.matchParent(
       padding: .init(
         top: Constant.Common.topLineHeight,

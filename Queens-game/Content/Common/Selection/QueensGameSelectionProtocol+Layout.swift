@@ -12,7 +12,7 @@ import UIKit
 extension QueensGameSelectionProtocol {
   /// Setup whole layout except background.
   func configureViewControllerLayout() {
-    collectionView.configSuperView(under: view)
+    collectionView.configureSuperView(under: view)
     
     // collection view
     collectionView.matchParent(
@@ -46,7 +46,7 @@ extension QueensGameSelectionProtocol {
   ///     - with section header
   
   func configureCollectionViewLayout() {
-    collectionView.configBgColor(bgColor: .clear)
+    collectionView.configureBgColor(bgColor: .clear)
     // Config compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }

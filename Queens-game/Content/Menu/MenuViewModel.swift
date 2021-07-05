@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class  MenuViewModel {
+  
+  let disposeBag = DisposeBag()
+  
   /// Determine if we need quit button (go to top button) or not.
   /// Basically, it's true but from top VC, we make it false.
   var isTopMenu: Bool = false

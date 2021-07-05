@@ -119,3 +119,36 @@ extension GameManager {
     }
   }
 }
+
+
+// MARK: - Mock data
+
+struct MockGameManager: GameManagerProtocol {
+
+  var users: [User] = {
+    let user1 = User(id: UUID(), playerId: 1, name: "Paul")
+    let user2 = User(id: UUID(), playerId: 2, name: "Freeman")
+    let user3 = User(id: UUID(), playerId: 3, name: "Drake")
+    let user4 = User(id: UUID(), playerId: 4, name: "Baldwin")
+    let user5 = User(id: UUID(), playerId: 5, name: "Palmer")
+    let user6 = User(id: UUID(), playerId: 6, name: "Lee")
+    let user7 = User(id: UUID(), playerId: 7, name: "Fletcher")
+    return [user1,user2,user3,user4,user5,user6,user7]
+  }()
+
+  var queen: User?
+
+  var command = Command(
+    detail: """
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    """,
+    difficulty: .easy,
+    commandType: .cToC
+  )
+
+  init() {
+    self.queen = self.users[0]
+  }
+
+
+}

@@ -26,7 +26,7 @@ class GeneticLabelCollectionReusableView: UICollectionReusableView {
   func configLabel(lb: UILabel) {
     // Reset and add label
     lb.removeFromSuperview()
-    lb.configSuperView(under: self)
+    lb.configureSuperView(under: self)
     lb.matchParent()
   }
 }

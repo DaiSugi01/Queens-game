@@ -15,7 +15,7 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
 
   let textField: UITextField = {
     let tf = UITextField()
-    tf.configLayout(
+    tf.configureLayout(
       height: 56,
       bgColor: CustomColor.backgroundLower,
       radius: 22
@@ -35,13 +35,13 @@ class UsernameInputCollectionViewCell: UICollectionViewCell {
       alignment: .center,
       distribution: .fill
     )
-    sv.configRadius(radius: 32)
+    sv.configureRadius(radius: 32)
     return sv
   }()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    stackView.configSuperView(under: self)
+    stackView.configureSuperView(under: self)
     stackView.matchParent()
   }
   required init?(coder: NSCoder) {

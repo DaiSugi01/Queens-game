@@ -12,19 +12,19 @@ import RxCocoa
 class CitizenSelectedViewController:  UIViewController, QueensGameViewControllerProtocol {
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
+
+  private let disposeBag = DisposeBag()
+
+  private let viewModel = CitizenSelectedViewModel()
+
   
-
-  let disposeBag = DisposeBag()
-
-  let viewModel = CitizenSelectedViewModel()
-
   // MARK: - Before count down stack view
   
-  lazy var countdownStackView = CountdownStackView(
-    countdown: self.viewModel.countdownTime
+  private lazy var countdownStackView = CountdownStackView(
+    countdown: viewModel.countdownTime
   )
 
-  let beforeCountdownTitle: H2Label = {
+  private let beforeCountdownTitle: H2Label = {
     let lb = H2Label(text: "Choosing citizens...")
     lb.lineBreakMode = .byWordWrapping
     lb.setContentHuggingPriority(.required, for: .vertical)
@@ -32,15 +32,14 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     return lb
   }()
 
-  let skipButton: SubButton = {
+  private let skipButton: SubButton = {
     let button = SubButton()
     button.setTitle("Skip", for: .normal)
-    button.addTarget(self, action: #selector(skipButtonTapped(_:)), for: .touchUpInside)
     button.insertIcon(IconFactory.createSystemIcon("chevron.right.2", weight: .bold), to: .right)
     return button
   }()
 
-  lazy var beforeCountdownStackView: VerticalStackView = {
+  private lazy var beforeCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         beforeCountdownTitle,
@@ -53,26 +52,27 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     return sv
   }()
 
+  
   // MARK: After Countdown views
 
-  let afterCountdownTitle: H2Label = {
+  private let afterCountdownTitle: H2Label = {
     let lb = H2Label(text: "You are chosen...")
     lb.lineBreakMode = .byWordWrapping
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
 
-  lazy var targetUserIcon: UIImageView = createLargeUserIcon(id: viewModel.target.playerId)
+  private lazy var targetUserIcon: UIImageView = createLargeUserIcon(id: viewModel.target.playerId)
 
-  lazy var targetUserName: H3Label = {
-    let label = H3Label(text: self.viewModel.target.name)
+  private lazy var targetUserName: H3Label = {
+    let label = H3Label(text: viewModel.target.name)
     label.textAlignment = .center
     return label
   }()
   
-  lazy var targetWrapper: VerticalStackView = {
+  private lazy var targetWrapper: VerticalStackView = {
     let stackView = VerticalStackView(
-      arrangedSubviews: [self.targetUserIcon, self.targetUserName]
+      arrangedSubviews: [targetUserIcon, targetUserName]
     )
     stackView.spacing = 8
     stackView.isLayoutMarginsRelativeArrangement = true
@@ -82,33 +82,28 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
 
 
   // We will insert stakeHolder views into here, if c to c which needs one more icon
-  lazy var commandWrapper: VerticalStackView = {
+  private lazy var commandWrapper: VerticalStackView = {
     let stackView = VerticalStackView(
-      arrangedSubviews: [self.targetWrapper],
+      arrangedSubviews: [targetWrapper],
       alignment: .center
     )
     stackView.spacing = 40
     return stackView
   }()
   
-  let nextButton: MainButton = {
+  private let nextButton: MainButton = {
     let button = MainButton()
     button.setTitle("Next", for: .normal)
-    button.addTarget(
-      self,
-      action: #selector(nextButtonTapped(_:)),
-      for: .touchUpInside
-    )
     button.isEnabled = false
     return button
   }()
 
-  lazy var afterCountdownStackView: VerticalStackView = {
+  private lazy var afterCountdownStackView: VerticalStackView = {
     let stackView = VerticalStackView(
       arrangedSubviews: [
-        self.afterCountdownTitle,
-        self.commandWrapper,
-        self.nextButton
+        afterCountdownTitle,
+        commandWrapper,
+        nextButton
       ],
       alignment: .center,
       distribution: .equalSpacing
@@ -117,20 +112,19 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
   }()
   
   
-  // MARK: - Stakeholder views (this is used for c to c)
-  
+  // MARK: - Stakeholder views (this is used for "c to c" command)
 
-  lazy var stakeholderIcon: UIImageView = createLargeUserIcon(id: viewModel.stakeholder.playerId)
+  private lazy var stakeholderIcon: UIImageView = createLargeUserIcon(id: viewModel.stakeholder.playerId)
 
-  lazy var stakeholderName: H3Label = {
-    let label = H3Label(text: self.viewModel.stakeholder.name)
+  private lazy var stakeholderName: H3Label = {
+    let label = H3Label(text: viewModel.stakeholder.name)
     label.textAlignment = .center
     return label
   }()
 
-  lazy var stakeholderStackView: VerticalStackView = {
+  private lazy var stakeholderStackView: VerticalStackView = {
     let stackView = VerticalStackView(
-      arrangedSubviews: [self.stakeholderIcon, self.stakeholderName]
+      arrangedSubviews: [stakeholderIcon, stakeholderName]
     )
     stackView.spacing = 8
     return stackView
@@ -141,34 +135,26 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
     super.viewDidLoad()
     backgroundCreator.configureLayout()
     configureLayoutBeforeCountdown()
-    if self.viewModel.settings.canSkipCommand {
-      self.replaceView()
+    configureNavButtonBinding()
+    
+    if viewModel.settings.canSkipCommand {
+      replaceView()
       return
     }
-    self.viewModel.countdown()
-    self.viewModel.rxCountdownTime
-      .subscribe(onNext: { [weak self] time in
-        guard let time = time else { return }
-        DispatchQueue.main.async {
-          self?.countdownStackView.countdownLabel.text = String(time)
-          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
-        }
-      },
-      onCompleted: {
-        self.replaceView()
-      })
-      .disposed(by: disposeBag)
-  }
-  
+    viewModel.countdown()
+    configureCountdownBinding()
 
-  
+  }
 }
+
+
+// MARK: - Layut
 
 extension CitizenSelectedViewController {
 
   private func configureLayoutBeforeCountdown() {
     
-    beforeCountdownStackView.configSuperView(under: super.view)
+    beforeCountdownStackView.configureSuperView(under: super.view)
     beforeCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
@@ -178,44 +164,6 @@ extension CitizenSelectedViewController {
       )
     )
     
-  }
-
-  private func configureLayoutAfterCountdown() {
-    
-    afterCountdownStackView.configSuperView(under: super.view)
-    afterCountdownStackView.matchParent(
-      padding: .init(
-        top: Constant.Common.topSpacing,
-        left: Constant.Common.leadingSpacing,
-        bottom: Constant.Common.bottomSpacing,
-        right: Constant.Common.trailingSpacing
-      )
-    )
-
-    if self.viewModel.getGameManager().command.commandType == .cToC {
-      self.commandWrapper.addArrangedSubview(self.stakeholderStackView)
-    }
-
-  }
-
-  @objc func skipButtonTapped(_ sender: UIButton) {
-    self.viewModel.rxCountdownTime.onCompleted()
-  }
-
-  @objc func nextButtonTapped(_ sender: UIButton) {
-    self.toResult()
-  }
-
-  private func toResult() {
-    let nx = ResultViewController(
-      target:self.viewModel.target,
-      stakeholders:self.viewModel.stakeholders
-    )
-    GameManager.shared.pushGameProgress(
-      navVC: navigationController,
-      currentScreen: self,
-      nextScreen: nx
-    )
   }
 
   private func replaceView() {
@@ -239,6 +187,24 @@ extension CitizenSelectedViewController {
     )
   }
   
+  private func configureLayoutAfterCountdown() {
+    
+    afterCountdownStackView.configureSuperView(under: super.view)
+    afterCountdownStackView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing,
+        left: Constant.Common.leadingSpacing,
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing
+      )
+    )
+
+    if viewModel.getGameManager().command.commandType == .cToC {
+      commandWrapper.addArrangedSubview(stakeholderStackView)
+    }
+
+  }
+  
   private func createLargeUserIcon(id: Int) -> UIImageView {
     let isTwoIcon = viewModel.getGameManager().command.commandType == .cToC
     
@@ -247,41 +213,54 @@ extension CitizenSelectedViewController {
       width: isTwoIcon ? 112 : 152
     ) as! UserIdIconView
     idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 64)
-    idIcon.configRadius(radius: (isTwoIcon ? 112 : 152)/4)
+    idIcon.configureRadius(radius: (isTwoIcon ? 112 : 152)/4)
     return idIcon
   }
 
 }
 
 
-// MARK: - Mock data
+// MARK: - Binding
 
-struct MockGameManager: GameManagerProtocol {
-
-  var users: [User] = {
-    let user1 = User(id: UUID(), playerId: 1, name: "Paul")
-    let user2 = User(id: UUID(), playerId: 2, name: "Freeman")
-    let user3 = User(id: UUID(), playerId: 3, name: "Drake")
-    let user4 = User(id: UUID(), playerId: 4, name: "Baldwin")
-    let user5 = User(id: UUID(), playerId: 5, name: "Palmer")
-    let user6 = User(id: UUID(), playerId: 6, name: "Lee")
-    let user7 = User(id: UUID(), playerId: 7, name: "Fletcher")
-    return [user1,user2,user3,user4,user5,user6,user7]
-  }()
-
-  var queen: User?
-
-  var command = Command(
-    detail: """
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    """,
-    difficulty: .easy,
-    commandType: .cToC
-  )
-
-  init() {
-    self.queen = self.users[0]
+extension CitizenSelectedViewController {
+  
+  private func configureNavButtonBinding() {
+    skipButton.rx
+      .tap
+      .bind { [weak self] _ in
+        self?.viewModel.rxCountdownTime.onCompleted()
+      }
+      .disposed(by: disposeBag)
+    
+    nextButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        let nx = ResultViewController(
+          target:self.viewModel.target,
+          stakeholders:self.viewModel.stakeholders
+        )
+        GameManager.shared.pushGameProgress(
+          navVC: self.navigationController,
+          currentScreen: self,
+          nextScreen: nx
+        )
+      }
+      .disposed(by: disposeBag)
   }
-
-
+  
+  private func configureCountdownBinding() {
+    viewModel.rxCountdownTime
+      .subscribe(onNext: { [weak self] time in
+        guard let time = time else { return }
+        DispatchQueue.main.async {
+          self?.countdownStackView.countdownLabel.text = String(time)
+          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
+        }
+      },
+      onCompleted: {
+        self.replaceView()
+      })
+      .disposed(by: disposeBag)
+  }
 }

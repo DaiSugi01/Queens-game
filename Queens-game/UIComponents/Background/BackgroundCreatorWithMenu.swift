@@ -6,11 +6,12 @@
 //
 
 import UIKit
-
+import RxSwift
 
 /// BackgroundView which also have menu bottom on top right in addition to `backgroundPlain`
 class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
-
+  let disposeBag = DisposeBag()
+  
   let menuButton = MenuButton()
   private let popUpTransition = PopUpTransitioningDelegatee()
   /// This is used for `present` and getting `view`
@@ -25,9 +26,10 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
   
   override func configureLayout() {
-    menuButton.configSuperView(under: parentView)
+    menuButton.configureSuperView(under: parentView)
     super.configureLayout()
     configureMenuButton()
+    configureMenuButtonBinding()
   }
   
   func configureMenuButton() {
@@ -41,29 +43,11 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
         constant: -Constant.Common.trailingSpacing*0.8
       )
     ])
-    menuButton.addTarget(
-      self,
-      action: #selector(menuTapped),
-      for: .touchUpInside
-    )
-  }
-  @objc func menuTapped() {
-    let nx = MenuViewController()
-    nx.viewModel.navigationController = viewController.navigationController
-    nx.modalPresentationStyle = .overCurrentContext
-    nx.transitioningDelegate = popUpTransition
-    
-    // If already something is presented, present the view over it
-    if let presentedVC = viewController.presentedViewController {
-        presentedVC.present(nx, animated: true, completion: nil)
-    }else{
-      viewController.present(nx, animated: true, completion: nil)
-    }
   }
   
   override func configureBorder() {
     // Top (Consider menu button)
-    topLine.configSuperView(under: parentView)
+    topLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       topLine.leadingAnchor.constraint(
         equalTo: parentView.leadingAnchor,
@@ -80,7 +64,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
     ])
     
     // Bottom (same)
-    bottomLine.configSuperView(under: parentView)
+    bottomLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       bottomLine.widthAnchor.constraint(
         equalTo: parentView.widthAnchor,
@@ -95,5 +79,25 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
 }
 
+extension BackgroundCreatorWithMenu {
+  private func configureMenuButtonBinding() {
+    menuButton.rx.tap
+      .bind{ [weak self] in
+        guard let self = self else { return }
+        let nx = MenuViewController()
+        nx.viewModel.navigationController = self.viewController.navigationController
+        nx.modalPresentationStyle = .overCurrentContext
+        nx.transitioningDelegate = self.popUpTransition
+        
+        // If already something is presented, present the view over it
+        if let presentedVC = self.viewController.presentedViewController {
+          presentedVC.present(nx, animated: true, completion: nil)
+        }else{
+          self.viewController.present(nx, animated: true, completion: nil)
+        }
+      }
+      .disposed(by: disposeBag)
+  }
+}
 
 

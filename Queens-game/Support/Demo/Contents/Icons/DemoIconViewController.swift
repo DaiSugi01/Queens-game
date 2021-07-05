@@ -18,10 +18,10 @@ class DemoIconViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.configBgColor(bgColor: CustomColor.background)
+    view.configureBgColor(bgColor: CustomColor.background)
     
     let scroll = UIScrollView()
-    scroll.configSuperView(under: view)
+    scroll.configureSuperView(under: view)
     scroll.matchParent()
     scroll.contentSize = .init(width: 0, height: 1000)
     
@@ -46,7 +46,7 @@ class DemoIconViewController: UIViewController {
     }
     stack.addArrangedSubview(IconFactory.createImageView(type: .userId(7), width: 64))
     
-    stack.configSuperView(under: scroll)
+    stack.configureSuperView(under: scroll)
     stack.centerXYin(scroll)
 
   }

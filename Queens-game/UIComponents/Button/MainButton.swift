@@ -18,7 +18,7 @@ class MainButton: QueensGameButton {
   init(superView: UIView? = nil, title: String = "Next") {
     super.init(frame: .zero)
     
-    self.configLayout(
+    self.configureLayout(
       bgColor: CustomColor.text,
       radius: 24
     )

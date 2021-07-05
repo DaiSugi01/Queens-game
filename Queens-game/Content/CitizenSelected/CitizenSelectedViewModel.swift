@@ -65,6 +65,7 @@ class CitizenSelectedViewModel {
 
 }
 
+// Suits anmation
 // Completely redundant... just for fun.
 extension CitizenSelectedViewModel {
   func rotateSuite(time: Int, view: UIView?) {

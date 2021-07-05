@@ -16,7 +16,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
     let img = UIImage(systemName: "circle")?.withRenderingMode(.alwaysTemplate)
     imv.tintColor = CustomColor.subText
     imv.image = img
-    imv.configSize(width: 22, height: 22)
+    imv.configureSize(width: 22, height: 22)
     return imv
   }()
   let titleLabel = H3Label(text: "title")
@@ -30,7 +30,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
   lazy var stackView: UIStackView = {
     let sv = VerticalStackView(arrangedSubviews: [titleSet, bodyLabel], alignment: .leading)
     sv.alignment = .fill
-    sv.configLayout(height: 144, radius: 16, shadow: true)
+    sv.configureLayout(height: 144, radius: 16)
     // Configure margin
     sv.isLayoutMarginsRelativeArrangement = true
     sv.directionalLayoutMargins = .init(top: 24, leading: 16, bottom: 16, trailing: 16)
@@ -41,7 +41,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    stackView.configSuperView(under: self)
+    stackView.configureSuperView(under: self)
     stackView.matchParent()
   }
   required init?(coder: NSCoder) {
@@ -65,7 +65,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         // Display background and check mark
         UIView.animate(withDuration: duration/2 , delay: 0, options: .curveEaseInOut)
         { [unowned self] in
-          stackView.configBgColor(bgColor: CustomColor.backgroundUpper)
+          stackView.configureBgColor(bgColor: CustomColor.backgroundUpper)
           stackView.layer.borderColor = UIColor.clear.cgColor
         }
         // `UIView.transition` is required for animation of UIImage, not `UIView.animate`
@@ -78,7 +78,7 @@ class SelectionCollectionViewCell: UICollectionViewCell {
         // Hide background and check mark
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut)
         { [unowned self] in
-          stackView.configBgColor(bgColor: .clear)
+          stackView.configureBgColor(bgColor: .clear)
           stackView.layer.borderColor = CustomColor.backgroundLower.cgColor
         }
         UIView.transition(with: checkIcon, duration: duration, options: .transitionCrossDissolve) {

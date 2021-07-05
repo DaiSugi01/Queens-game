@@ -100,12 +100,12 @@ class CountdownStackView: UIView, CountdownGroup {
     super.init(frame: .zero)
     self.translatesAutoresizingMaskIntoConstraints = false
     
-    countDownWrapper.configSuperView(under: self)
+    countDownWrapper.configureSuperView(under: self)
     countDownWrapper.centerXYin(self)
     
-    suitsWrapper.configSuperView(under: self)
+    suitsWrapper.configureSuperView(under: self)
     suitsWrapper.centerXYin(self)
-    suitsWrapper.configSize(width: 200, height: 200)
+    suitsWrapper.configureSize(width: 200, height: 200)
     
     self.countdownLabel.text = String(countdown)
 
