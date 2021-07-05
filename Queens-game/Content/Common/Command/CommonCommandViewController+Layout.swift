@@ -12,8 +12,8 @@ extension CommonCommandViewController {
   func configureSearchBar() {
     searchBar.delegate = self
     // Position
-    searchBarMask.configSuperView(under: view)
-    searchBar.configSuperView(under: view)
+    searchBarMask.configureSuperView(under: view)
+    searchBar.configureSuperView(under: view)
     searchBar.anchors(
       topAnchor: nil,
       leadingAnchor: view.leadingAnchor,
@@ -35,7 +35,7 @@ extension CommonCommandViewController {
     searchBar.isHidden = true
     
     // Mask
-    searchBarMask.configBgColor(bgColor: CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .dark)))
+    searchBarMask.configureBgColor(bgColor: CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .dark)))
     searchBarMask.alpha = 0
     searchBarMask.matchParent()
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(maskTapped))
@@ -44,7 +44,7 @@ extension CommonCommandViewController {
   
   
   func configureBottomNavigationBar() {
-    bottomNavigationBar.configSuperView(under: view)
+    bottomNavigationBar.configureSuperView(under: view)
     bottomNavigationBar.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
       constant: -Constant.Common.bottomSpacing
@@ -63,7 +63,7 @@ extension CommonCommandViewController {
   ///    - section
   ///     - with section header
   func createCollectionViewLayout() {
-    collectionView.configLayout(superView: view, bgColor: .clear)
+    collectionView.configureLayout(superView: view, bgColor: .clear)
     collectionView.anchors(
       topAnchor: view.topAnchor,
       leadingAnchor: view.leadingAnchor,

@@ -17,11 +17,11 @@ class DemoButtonViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.configBgColor(bgColor: .white)
+    view.configureBgColor(bgColor: .white)
     
     // Configure scroll view
     let scroll = UIScrollView()
-    scroll.configSuperView(under: view)
+    scroll.configureSuperView(under: view)
     scroll.matchParent()
     scroll.contentSize = .init(width: 0, height: 1000)
     
@@ -35,7 +35,7 @@ class DemoButtonViewController: UIViewController {
     let backButton  = SubButton()
     
     let nextRedButton = MainButton()
-    nextRedButton.configBgColor(bgColor: CustomColor.accent)
+    nextRedButton.configureBgColor(bgColor: CustomColor.accent)
  
     let backNextButtons = NextAndBackButtons()
 
@@ -44,7 +44,7 @@ class DemoButtonViewController: UIViewController {
       spacing: 64
     )
     
-    stack.configSuperView(under: scroll)
+    stack.configureSuperView(under: scroll)
     stack.centerXYin(scroll)
 
     

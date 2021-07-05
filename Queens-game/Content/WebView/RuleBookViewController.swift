@@ -42,7 +42,7 @@ class RuleBookViewController: UIViewController, QueensGameViewControllerProtocol
 extension RuleBookViewController {
 
   private func setupLayout() {
-    view.configBgColor(bgColor: CustomColor.background)
+    view.configureBgColor(bgColor: CustomColor.background)
 
     view.addSubview(stackView)
     stackView.topAnchor.constraint(

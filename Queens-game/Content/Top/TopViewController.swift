@@ -82,7 +82,7 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
   
   private func configureLayout() {
     
-    verticalSV.configSuperView(under: view)
+    verticalSV.configureSuperView(under: view)
     
     // Set constraints
     verticalSV.matchParent(
@@ -143,7 +143,7 @@ extension TopViewController {
     // target
     demoButton.addTarget(self, action: #selector(demoButtonTapped(_:)), for: .touchUpInside)
     // constraint
-    demoButton.configSuperView(under: view)
+    demoButton.configureSuperView(under: view)
     demoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80).isActive = true
     demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48).isActive = true
   }

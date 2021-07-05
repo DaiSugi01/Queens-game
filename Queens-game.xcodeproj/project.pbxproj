@@ -65,7 +65,7 @@
 		4826818F2645EBA80010543A /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */; };
 		482681902645EBA80010543A /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826816E2645EBA70010543A /* VerticalStackView.swift */; };
 		482681912645EBA80010543A /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */; };
-		482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482681702645EBA70010543A /* UIView+ConfigLayout.swift */; };
+		482681922645EBA80010543A /* UIView+ConfigureLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482681702645EBA70010543A /* UIView+ConfigureLayout.swift */; };
 		482681932645EBA80010543A /* SubButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482681722645EBA70010543A /* SubButton.swift */; };
 		482681942645EBA80010543A /* NextAndBackButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482681732645EBA70010543A /* NextAndBackButtons.swift */; };
 		482681952645EBA80010543A /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482681742645EBA70010543A /* MainButton.swift */; };
@@ -181,7 +181,7 @@
 		4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
 		4826816E2645EBA70010543A /* VerticalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
-		482681702645EBA70010543A /* UIView+ConfigLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConfigLayout.swift"; sourceTree = "<group>"; };
+		482681702645EBA70010543A /* UIView+ConfigureLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConfigureLayout.swift"; sourceTree = "<group>"; };
 		482681722645EBA70010543A /* SubButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubButton.swift; sourceTree = "<group>"; };
 		482681732645EBA70010543A /* NextAndBackButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextAndBackButtons.swift; sourceTree = "<group>"; };
 		482681742645EBA70010543A /* MainButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
@@ -589,7 +589,7 @@
 				4826816E2645EBA70010543A /* VerticalStackView.swift */,
 				4826816D2645EBA70010543A /* UINavigationController+hideBarBackground.swift */,
 				4826816F2645EBA70010543A /* UIView+ConstraintLayout.swift */,
-				482681702645EBA70010543A /* UIView+ConfigLayout.swift */,
+				482681702645EBA70010543A /* UIView+ConfigureLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -934,7 +934,7 @@
 				0A3A62952638B1830082ACAE /* TopViewController.swift in Sources */,
 				481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */,
 				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
-				482681922645EBA80010543A /* UIView+ConfigLayout.swift in Sources */,
+				482681922645EBA80010543A /* UIView+ConfigureLayout.swift in Sources */,
 				48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
 				4826818A2645EBA80010543A /* H4Label.swift in Sources */,

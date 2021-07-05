@@ -20,7 +20,7 @@ class MenuViewController: UIViewController {
   
   let howToPlayButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     bt.setTitle("How to Play", for: .normal)
     bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
     bt.insertIcon(
@@ -36,7 +36,7 @@ class MenuViewController: UIViewController {
   
   let settingButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     bt.setTitle("Settings", for: .normal)
     bt.addTarget(self, action: #selector(settingTapped(_:)), for: .touchUpInside)
     bt.insertIcon(IconFactory.createSystemIcon("gear", color: CustomColor.background, pointSize: 16), to: .left)
@@ -45,7 +45,7 @@ class MenuViewController: UIViewController {
   
   let goToTopButton: MainButton = {
     let bt = MainButton()
-    bt.configRadius(radius: 28)
+    bt.configureRadius(radius: 28)
     let btTintColor = CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light))
     bt.setTitle("Back to Top", for: .normal)
     bt.setTitleColor(btTintColor, for: .normal)
@@ -174,13 +174,13 @@ class MenuViewController: UIViewController {
 extension MenuViewController {
   
   private func configureLayout() {
-    view.configBgColor(bgColor: .clear)
+    view.configureBgColor(bgColor: .clear)
 
     goToTopButton.isHidden = viewModel.isTopMenu
     privacyPolicyButton.isHidden = !viewModel.isTopMenu
     
-    stackView.configSuperView(under: view)
-    stackView.configSize(width: 296)
+    stackView.configureSuperView(under: view)
+    stackView.configureSize(width: 296)
     stackView.centerXYin(view)
   }
   

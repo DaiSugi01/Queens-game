@@ -168,9 +168,9 @@ extension PlayerSelectionViewController {
   /// Setup whole layout
   private func configureLayout() {
     
-    screenTitle.configSuperView(under: view)
-    plusMinusWrapper.configSuperView(under: view)
-    navButtons.configSuperView(under: view)
+    screenTitle.configureSuperView(under: view)
+    plusMinusWrapper.configureSuperView(under: view)
+    navButtons.configureSuperView(under: view)
     
     screenTitle.anchors(
       topAnchor: view.topAnchor,

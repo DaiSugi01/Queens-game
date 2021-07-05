@@ -49,8 +49,8 @@ class BackgroundCreatorPlain: BackgroundCreator {
   
   func configureSuperView() {
     parentView.insertSubview(backgroundView, at: 0)
-    topLine.configSuperView(under: parentView)
-    bottomLine.configSuperView(under: parentView)
+    topLine.configureSuperView(under: parentView)
+    bottomLine.configureSuperView(under: parentView)
   }
   
   func configureBorder() {
@@ -91,7 +91,7 @@ class BackgroundCreatorPlain: BackgroundCreator {
   
   private static func lineGenerator() -> UIView {
     let uv = UIView()
-    uv.configLayout(height: 1, bgColor: CustomColor.subText.withAlphaComponent(0.4))
+    uv.configureLayout(height: 1, bgColor: CustomColor.subText.withAlphaComponent(0.4))
     return uv
   }
 

@@ -41,7 +41,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   
   lazy var descriptionView: UIStackView = {
     let wrapper = UIStackView()
-    wrapper.configLayout(bgColor: CustomColor.backgroundUpper, radius: 32)
+    wrapper.configureLayout(bgColor: CustomColor.backgroundUpper, radius: 32)
     let content: UILabel = H4Label(text: selectedCommand.detail)
     wrapper.addArrangedSubview(content)
     wrapper.isLayoutMarginsRelativeArrangement = true
@@ -63,11 +63,11 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
       to: .right
     )
     bt.nextButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
-    bt.nextButton.configBgColor(bgColor: CustomColor.accent)
+    bt.nextButton.configureBgColor(bgColor: CustomColor.accent)
     
     // Create a wrapper to set a local margin buttons.
     let uv = UIView()
-    bt.configSuperView(under: uv)
+    bt.configureSuperView(under: uv)
     NSLayoutConstraint.activate([
       bt.leadingAnchor.constraint(equalTo: uv.leadingAnchor, constant: 0),
       bt.trailingAnchor.constraint(equalTo: uv.trailingAnchor, constant: -8),
@@ -155,7 +155,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
 
 extension CommandConfirmationViewController {
   private func configureScrollView() {
-    scrollView.configSuperView(under: view)
+    scrollView.configureSuperView(under: view)
     
     // Scroll View
     scrollView.matchParent(

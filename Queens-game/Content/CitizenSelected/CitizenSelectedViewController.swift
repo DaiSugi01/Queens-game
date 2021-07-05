@@ -168,7 +168,7 @@ extension CitizenSelectedViewController {
 
   private func configureLayoutBeforeCountdown() {
     
-    beforeCountdownStackView.configSuperView(under: super.view)
+    beforeCountdownStackView.configureSuperView(under: super.view)
     beforeCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
@@ -182,7 +182,7 @@ extension CitizenSelectedViewController {
 
   private func configureLayoutAfterCountdown() {
     
-    afterCountdownStackView.configSuperView(under: super.view)
+    afterCountdownStackView.configureSuperView(under: super.view)
     afterCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
@@ -247,7 +247,7 @@ extension CitizenSelectedViewController {
       width: isTwoIcon ? 112 : 152
     ) as! UserIdIconView
     idIcon.label.font = CustomFont.h2.withSize(isTwoIcon ? 48 : 64)
-    idIcon.configRadius(radius: (isTwoIcon ? 112 : 152)/4)
+    idIcon.configureRadius(radius: (isTwoIcon ? 112 : 152)/4)
     return idIcon
   }
 

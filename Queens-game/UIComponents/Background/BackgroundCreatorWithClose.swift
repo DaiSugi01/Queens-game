@@ -24,7 +24,7 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
   }
   
   override func configureLayout() {
-    closeButton.configSuperView(under: parentView)
+    closeButton.configureSuperView(under: parentView)
     super.configureLayout()
     configureCloseButton()
   }
@@ -52,7 +52,7 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
   
   override func configureBorder() {
     // Top (Consider menu button)
-    topLine.configSuperView(under: parentView)
+    topLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       topLine.leadingAnchor.constraint(
         equalTo: parentView.leadingAnchor,
@@ -69,7 +69,7 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
     ])
     
     // Bottom (same)
-    bottomLine.configSuperView(under: parentView)
+    bottomLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       bottomLine.widthAnchor.constraint(
         equalTo: parentView.widthAnchor,

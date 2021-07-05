@@ -25,10 +25,10 @@ class DemoColorViewController: UIViewController {
      - You can configure background color, size... etc (see the extension files)
      - You can configure those at once by calling `configureLayout`
     */
-    view.configBgColor(bgColor: .cyan)
+    view.configureBgColor(bgColor: .cyan)
     
     let scroll = UIScrollView()
-    scroll.configSuperView(under: view)
+    scroll.configureSuperView(under: view)
     scroll.matchParent()
     scroll.contentSize = .init(width: 0, height: 1500)
     
@@ -49,7 +49,7 @@ class DemoColorViewController: UIViewController {
       spacing: 48
     )
     
-    stack.configSuperView(under: scroll)
+    stack.configureSuperView(under: scroll)
     stack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
     
@@ -62,12 +62,11 @@ class DemoColorViewController: UIViewController {
      How to use: UIView custom configuration
      - You can configure at once by calling `configureLayout`
     */
-    uv.configLayout(
+    uv.configureLayout(
       width: w,
       height: h,
       bgColor: color,
-      radius: 32,
-      shadow: true
+      radius: 32
     )
     
     let lb = H4Label()

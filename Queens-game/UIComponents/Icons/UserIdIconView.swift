@@ -17,13 +17,13 @@ class UserIdIconView: UIImageView {
     super.init(frame: .zero)
     label.text = String(id)
     label.textAlignment = .center
-    label.configSuperView(under: self)
+    label.configureSuperView(under: self)
     label.centerXYin(self)
     label.textColor = CustomColor.background
     
-    self.configRadius(radius: 24)
-    self.configBgColor(bgColor: CustomColor.subText)
-    self.configSize(width: size, height: size)
+    self.configureRadius(radius: 24)
+    self.configureBgColor(bgColor: CustomColor.subText)
+    self.configureSize(width: size, height: size)
   }
   
   required init(coder: NSCoder) {

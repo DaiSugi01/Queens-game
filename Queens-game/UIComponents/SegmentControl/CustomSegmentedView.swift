@@ -22,8 +22,8 @@ class CustomSegmentedView: UIStackView {
     let image = UIImage(systemName: "info.circle")?.withRenderingMode(.alwaysTemplate)
     let imgv = UIImageView(image: image)
     imgv.tintColor = CustomColor.subText
-    imgv.configSize(width: 16, height: 16)
-    imgv.configSuperView(under: wrapper)
+    imgv.configureSize(width: 16, height: 16)
+    imgv.configureSuperView(under: wrapper)
     imgv.centerYAnchor.constraint(equalTo: wrapper.centerYAnchor, constant: 0).isActive = true
     imgv.trailingAnchor.constraint(equalTo: wrapper.trailingAnchor, constant: 0).isActive = true
     wrapper.isHidden = true

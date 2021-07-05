@@ -22,7 +22,7 @@ class LoadingView: UIView {
     super.init(frame: .zero)
     self.backgroundColor = CustomColor.background
     label.textAlignment = .center
-    stackView.configSuperView(under: self)
+    stackView.configureSuperView(under: self)
     stackView.centerXYin(self)
     stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -Constant.Common.leadingSpacing*2).isActive = true
   }

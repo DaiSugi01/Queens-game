@@ -34,7 +34,7 @@ class DemoSearchViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.configBgColor(bgColor:  CustomColor.background)
+    view.configureBgColor(bgColor:  CustomColor.background)
     configSearchBar()
 
     
@@ -46,7 +46,7 @@ class DemoSearchViewController: UIViewController {
       ],
       spacing: 32
     )
-    stackView.configLayout(superView: view, width: 360)
+    stackView.configureLayout(superView: view, width: 360)
     stackView.centerXYin(view)
   }
   

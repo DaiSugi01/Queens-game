@@ -25,7 +25,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   }
   
   override func configureLayout() {
-    menuButton.configSuperView(under: parentView)
+    menuButton.configureSuperView(under: parentView)
     super.configureLayout()
     configureMenuButton()
   }
@@ -63,7 +63,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
   
   override func configureBorder() {
     // Top (Consider menu button)
-    topLine.configSuperView(under: parentView)
+    topLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       topLine.leadingAnchor.constraint(
         equalTo: parentView.leadingAnchor,
@@ -80,7 +80,7 @@ class BackgroundCreatorWithMenu: BackgroundCreatorPlain {
     ])
     
     // Bottom (same)
-    bottomLine.configSuperView(under: parentView)
+    bottomLine.configureSuperView(under: parentView)
     NSLayoutConstraint.activate([
       bottomLine.widthAnchor.constraint(
         equalTo: parentView.widthAnchor,

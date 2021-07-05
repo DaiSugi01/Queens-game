@@ -65,7 +65,7 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
   let contentLabel = H3Label(text: "Content")
   lazy var textView: UITextView = {
     let tv = UITextView()
-    tv.configLayout( bgColor: CustomColor.backgroundLower, radius: 18)
+    tv.configureLayout( bgColor: CustomColor.backgroundLower, radius: 18)
     tv.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
     tv.font = CustomFont.p
     tv.textColor = CustomColor.subText
@@ -188,9 +188,9 @@ extension CommandEditViewController {
 extension CommandEditViewController {
   
   private func configureScrollView() {
-    view.configBgColor(bgColor: CustomColor.background)
+    view.configureBgColor(bgColor: CustomColor.background)
     
-    scrollView.configSuperView(under: view)
+    scrollView.configureSuperView(under: view)
     scrollView.matchParent(
       padding: .init(
         top: Constant.Common.topLineHeight,
@@ -216,7 +216,7 @@ extension CommandEditViewController {
   }
   
   private func configureButtons() {
-    saveDeleteWrapper.configSuperView(under: view)
+    saveDeleteWrapper.configureSuperView(under: view)
     saveDeleteWrapper.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
       constant: -Constant.Common.bottomSpacing

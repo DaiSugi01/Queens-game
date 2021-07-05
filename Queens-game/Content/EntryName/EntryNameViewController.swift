@@ -82,9 +82,9 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   }
   
   private func configureSuperView() {
-    scrollView.configSuperView(under: view)
-    contentWrapper.configSuperView(under: scrollView)
-    navButtons.configSuperView(under: view)
+    scrollView.configureSuperView(under: view)
+    contentWrapper.configureSuperView(under: scrollView)
+    navButtons.configureSuperView(under: view)
   }
   
   private func configureNavButtons() {

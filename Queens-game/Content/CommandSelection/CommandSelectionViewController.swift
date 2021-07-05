@@ -92,7 +92,7 @@ extension CommandSelectionViewController {
   
   /// Set Button Actions
   private func configureButtonActions() {
-    navButtons.configSuperView(under: view)
+    navButtons.configureSuperView(under: view)
     navButtons.configureLayoutToBottom()
     
     navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)

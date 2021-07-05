@@ -17,7 +17,7 @@ class SubButton: QueensGameButton {
   init(superView: UIView? = nil, title: String = "Back") {
     super.init(frame: .zero)
 
-    self.configLayout(
+    self.configureLayout(
       bgColor: CustomColor.background,
       radius: 24
     )

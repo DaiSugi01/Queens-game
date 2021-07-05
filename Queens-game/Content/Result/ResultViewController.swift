@@ -69,7 +69,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
     
     // Wrapper to make side margin
     let wrapper = UIView()
-    stackView.configSuperView(under: wrapper)
+    stackView.configureSuperView(under: wrapper)
     stackView.matchParent(
       padding: .init(top: 0, left: 4, bottom: 0, right: 8)
     )
@@ -89,8 +89,8 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var detailBlock: UIView = {
     let background = UIView()
     let wrapper = UIView() // This is needed for make padding
-    detailText.configSuperView(under: background)
-    background.configSuperView(under: wrapper)
+    detailText.configureSuperView(under: background)
+    background.configureSuperView(under: wrapper)
     
     detailText.matchParent(
       padding: .init(top: 16, left: 16, bottom: 16, right: 16)
@@ -99,7 +99,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
       padding: .init(top: 0, left: 0, bottom: 0, right: 8)
     )
     background.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
-    background.configLayout(bgColor: CustomColor.backgroundUpper, radius: 16)
+    background.configureLayout(bgColor: CustomColor.backgroundUpper, radius: 16)
     return wrapper
   }()
   
@@ -177,7 +177,7 @@ class ResultViewController: UIViewController, QueensGameViewControllerProtocol {
 extension ResultViewController {
 
   private func setupLayout() {
-    scrollView.configSuperView(under: view)
+    scrollView.configureSuperView(under: view)
     scrollView.matchParent(
       padding: .init(
         top: Constant.Common.topLineHeight,
@@ -200,7 +200,7 @@ extension ResultViewController {
       action: #selector(nextTapped),
       for: .touchUpInside
     )
-    navButtons.configSuperView(under: view)
+    navButtons.configureSuperView(under: view)
     navButtons.centerXin(view)
     navButtons.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,

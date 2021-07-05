@@ -162,7 +162,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   private func configureLayoutBeforeCountdown() {
     
-    beforeCountdownStackView.configSuperView(under: view)
+    beforeCountdownStackView.configureSuperView(under: view)
     beforeCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
@@ -175,7 +175,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   private func configureLayoutAfterCountdown() {
     
-    afterCountdownStackView.configSuperView(under: super.view)
+    afterCountdownStackView.configureSuperView(under: super.view)
     afterCountdownStackView.matchParent(
       padding: .init(
         top: Constant.Common.topSpacing,
