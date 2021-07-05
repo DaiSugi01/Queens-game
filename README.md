@@ -99,8 +99,23 @@ We used the GitHub project (Kanban feature) for scheduling and followed the agil
 
 ## UI Designing
 
+We created a whole UI mockup both considering light and dark mode with Figma. In addition to creating a style guide, We created UI components that are well suitable for implementing with MVVM design pattern. 
+
+### Style Guide
+
+![style-guide](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-design-guide.webp)
+
 ### UI mockup
-We created a whole UI mockup with Figma. In addition to creating a style guide, We created UI components that are well suitable for implementing with MVVM design pattern. 
+
+![UI-mockup](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-mockup.webp)
+
+### UI components
+
+![UI components](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-mockup-components.webp)
+
+
+
+
 
 ### Dynamic Light and Dark mode.
 
