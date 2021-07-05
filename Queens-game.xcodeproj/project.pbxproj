@@ -44,6 +44,8 @@
 		3B9E940C2650610A003207F7 /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9E940B2650610A003207F7 /* Executor.swift */; };
 		480952A32675DACA00A39166 /* BackgroundCreatorPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */; };
 		4814766226901CF700271645 /* QueensGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814766126901CF700271645 /* QueensGameButton.swift */; };
+		481476642692D5C600271645 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481476632692D5C600271645 /* ResultViewModel.swift */; };
+		481476662692D7EA00271645 /* ScreenSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481476652692D7EA00271645 /* ScreenSelectionViewModel.swift */; };
 		481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */; };
 		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
 		481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA3FF2689811800ADF48A /* MenuViewModel.swift */; };
@@ -160,6 +162,8 @@
 		3B9E940B2650610A003207F7 /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		480952A22675DACA00A39166 /* BackgroundCreatorPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorPlain.swift; sourceTree = "<group>"; };
 		4814766126901CF700271645 /* QueensGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueensGameButton.swift; sourceTree = "<group>"; };
+		481476632692D5C600271645 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
+		481476652692D7EA00271645 /* ScreenSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelectionViewModel.swift; sourceTree = "<group>"; };
 		481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithClose.swift; sourceTree = "<group>"; };
 		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		481CA3FF2689811800ADF48A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -434,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3A62D32638C3AA0082ACAE /* ResultViewController.swift */,
+				481476632692D5C600271645 /* ResultViewModel.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 			isa = PBXGroup;
 			children = (
 				48E5417C267D315700D891E1 /* ScreenSelectionViewController.swift */,
+				481476652692D7EA00271645 /* ScreenSelectionViewModel.swift */,
 			);
 			path = ScreenSelection;
 			sourceTree = "<group>";
@@ -962,6 +968,7 @@
 				48AE80422640B26F00CBDB5E /* DemoCellCollectionViewController.swift in Sources */,
 				48C82A5C268406D4003F7851 /* CommandSelectionViewModel.swift in Sources */,
 				0AD08A9F26486F5900654A05 /* QueenSelectionViewController.swift in Sources */,
+				481476642692D5C600271645 /* ResultViewModel.swift in Sources */,
 				0A3A62B82638BFC30082ACAE /* QueenSelectedViewController.swift in Sources */,
 				0A3A62CE2638C3310082ACAE /* CitizenSelectedViewController.swift in Sources */,
 				4814766226901CF700271645 /* QueensGameButton.swift in Sources */,
@@ -972,6 +979,7 @@
 				482681932645EBA80010543A /* SubButton.swift in Sources */,
 				0A3A62842637A70C0082ACAE /* tempExtension.swift in Sources */,
 				0A3A62982638B3780082ACAE /* PlayerSelectionViewController.swift in Sources */,
+				481476662692D7EA00271645 /* ScreenSelectionViewModel.swift in Sources */,
 				482681912645EBA80010543A /* UIView+ConstraintLayout.swift in Sources */,
 				0A3A62AF2638BC5A0082ACAE /* EntryNameViewController.swift in Sources */,
 				0A3A62D92638CF960082ACAE /* CommonCommandViewController.swift in Sources */,

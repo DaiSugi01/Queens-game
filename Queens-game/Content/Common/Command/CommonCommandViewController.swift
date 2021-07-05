@@ -28,11 +28,7 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
   var headerTitle: String = ""
   
   // Bottom navigation bar
-  let backButton: SubButton = {
-    let bt = SubButton()
-    bt.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-    return bt
-  } ()
+  let backButton = SubButton()
   
   let searchButton: QueensGameButton = {
     let bt = QueensGameButton()
@@ -64,20 +60,17 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
     createCollectionViewLayout()
     createDiffableDataSource()
     
-    configBinding()
+    configSnapshotBinding()
+    configureNavButtonBinding()
     
     // Config Other ui views
     configureSearchBar()
     configureBottomNavigationBar()
   }
   
-  @objc func backTapped() {
-    navigationController?.popViewController(animated: true)
-  }
   
-  // Rx swift
   /// Subscriber of snapshot. This is called after snapshot in view model is modified.
-  func configBinding() {
+  func configSnapshotBinding() {
     
     viewModel.snapshotSubject
       .subscribe (onNext: { [unowned self] snapshot in
@@ -93,6 +86,15 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
         
         self.dataSource.apply(snapshot, animatingDifferences: willAnimate)
       })
+      .disposed(by: viewModel.disposeBag)
+  }
+  
+  func configureNavButtonBinding() {
+    backButton.rx
+      .tap
+      .bind { [weak self] _  in
+        self?.navigationController?.popViewController(animated: true)
+      }
       .disposed(by: viewModel.disposeBag)
   }
 }

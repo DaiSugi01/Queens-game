@@ -14,7 +14,6 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
   let vm: EntryNameViewModel = EntryNameViewModel()
-
   
   lazy var scrollView = DynamicHeightScrollView(
     contentView: contentWrapper,
@@ -43,55 +42,63 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     return lb
   }()
   
-  let navButtons: NextAndBackButtons = {
-    let bts = NextAndBackButtons()
-    bts.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    bts.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
-    
-    return bts
-  }()
-  
-  @objc private func goToNext(_ sender: UIButton) {
-    // Save user to UserDefaults
-    vm.saveUsers()
-    
-    let nx = QueenSelectionViewController()
-    GameManager.shared.pushGameProgress(
-      navVC: navigationController!,
-      currentScreen: self,
-      nextScreen: nx
-    )
-  }
-  
-  @objc private func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController!)
-  }
+  let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     vm.getUsersFromUserDefaults()
-    createContent()
+    configureTextFields()
     
-    configureSuperView()
-    configureNavButtons()
-    configureScrollView()
-    configureKeyboard()
-    // Do this lastly to add menu button in top layer.
+    configureLayout()
+    configureNavButtonBindings()
+    configureKeyboardBinding()
+    
     backgroundCreator.configureLayout()
     
   }
   
-  private func configureSuperView() {
+}
+
+
+// MARK: - Text Fields
+
+extension EntryNameViewController {
+  
+  /// Create each EntryName fields
+  private func configureTextFields() {
+    // Make each EntryName field
+    for user in GameManager.shared.users {
+      
+      let userInputStackView = EntryNameStackView()
+      userInputStackView.configContent(by: user.playerId, and: user.name)
+      
+      // Observe text field
+      userInputStackView.textField.rx
+        .text
+        .subscribe(onNext: { [weak self] value in
+          guard let self = self, let value = value else { return }
+          self.vm.updateUserName(playerId: user.playerId - 1, newName: value)
+        })
+        .disposed(by: vm.disposeBag)
+      
+      contentWrapper.addArrangedSubview(userInputStackView)
+    }
+  }
+  
+}
+
+
+// MARK: - Layout
+
+extension EntryNameViewController {
+  
+  private func configureLayout() {
     scrollView.configureSuperView(under: view)
     contentWrapper.configureSuperView(under: scrollView)
     navButtons.configureSuperView(under: view)
-  }
-  
-  private func configureNavButtons() {
+    
     navButtons.configureLayoutToBottom()
-  }
-  
-  private func configureScrollView() {
+    
     // Scroll View
     scrollView.matchParent(
       padding: .init(
@@ -103,29 +110,38 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     )
   }
   
-  /// Create each EntryName fields
-  private func createContent() {
-    // Make each EntryName field
-    for user in GameManager.shared.users {
-      
-      let userInputStackView = EntryNameStackView()
-      userInputStackView.configContent(by: user.playerId, and: user.name)
-      
-      // Observe text field
-      userInputStackView.textField.rx.text.asObservable()
-        .subscribe(onNext: { [weak self] value in
-          self?.vm.updateUserName(playerId: user.playerId-1, newName: value!)
-        })
-        .disposed(by: vm.disposeBag)
-      
-      contentWrapper.addArrangedSubview(userInputStackView)
-    }
-  }
-  
 }
 
+
+// MARK: - Bindings
+
 extension EntryNameViewController {
-  private func configureKeyboard() {
+  
+  private func configureNavButtonBindings() {
+    navButtons.nextButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        // Save user to UserDefaults
+        self.vm.saveUsers()
+        let nx = QueenSelectionViewController()
+        GameManager.shared.pushGameProgress(
+          navVC: self.navigationController!,
+          currentScreen: self,
+          nextScreen: nx
+        )
+      }
+      .disposed(by: vm.disposeBag)
+    
+    navButtons.backButton.rx
+      .tap
+      .bind { [weak self] _ in
+        GameManager.shared.popGameProgress(navVC: self?.navigationController!)
+      }
+      .disposed(by: vm.disposeBag)
+  }
+  
+  private func configureKeyboardBinding() {
     
     let willShownObservable = NotificationCenter.default
       .rx.notification(UIResponder.keyboardWillShowNotification)
@@ -159,4 +175,6 @@ extension EntryNameViewController {
       }
       .disposed(by: vm.disposeBag)
   }
+  
 }
+

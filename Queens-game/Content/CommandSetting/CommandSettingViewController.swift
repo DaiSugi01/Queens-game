@@ -40,8 +40,8 @@ class CommandSettingViewController: CommonCommandViewController {
     })
   }
   
-  override func configBinding() {
-    super.configBinding()
+  override func configSnapshotBinding() {
+    super.configSnapshotBinding()
     
     // If #item reach max, disable add button.
     viewModel.didReachMaxItemRelay

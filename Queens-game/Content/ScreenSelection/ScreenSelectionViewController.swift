@@ -12,6 +12,7 @@ class ScreenSelectionViewController:
   QueensGameSelectionProtocol,
   QueensGameViewControllerProtocol
 {
+  
   // QueensGameSelectionProtocol
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
@@ -23,8 +24,9 @@ class ScreenSelectionViewController:
   // QueensGameViewControllerProtocol
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
+  private let viewModel = ScreenSelectionViewModel()
   
-  let navButtons = NextAndBackButtons()
+  private let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,8 +39,8 @@ class ScreenSelectionViewController:
     // QueensGameViewControllerProtocol
     backgroundCreator.configureLayout()
     
-    configureButtonActions()
-    
+    configureLayout()
+    configureNavButtonBinding()
   }
   
   deinit {
@@ -47,7 +49,8 @@ class ScreenSelectionViewController:
 }
 
 
-// QueensGameSelectionProtocol
+// MARK: - QueensGameSelectionProtocol
+
 extension ScreenSelectionViewController {
   func configureRegistration() {
     collectionView.register(
@@ -93,16 +96,14 @@ extension ScreenSelectionViewController {
 
 
 
-// Configuration for this own class
+// MARK: - Layout
+
 extension ScreenSelectionViewController {
   
   /// Set Button Actions
-  private func configureButtonActions() {
+  private func configureLayout() {
     navButtons.configureSuperView(under: view)
     navButtons.configureLayoutToBottom()
-    
-    navButtons.nextButton.addTarget(self, action: #selector(goToNext(_:)), for: .touchUpInside)
-    navButtons.backButton.addTarget(self, action: #selector(goBackToPrevious(_:)), for: .touchUpInside)
     
     navButtons.nextButton.titleLabel?.text = "Go !"
     navButtons.nextButton.insertIcon(
@@ -110,52 +111,36 @@ extension ScreenSelectionViewController {
       to: .right
     )
   }
+}
+
+
+// MARK: - Bindings
+
+extension ScreenSelectionViewController {
   
-  /// Go to next screen depends on user selection
-  /// - Parameter sender: UIButton
-  @objc private func goToNext(_ sender: UIButton) {
-    guard let index = collectionView.indexPathsForSelectedItems?.first?.item else { return }
+  private func configureNavButtonBinding() {
     
-    if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
-      
-      let loadingView = LoadingView()
-      loadingView.alpha = 0
-      loadingView.frame = window.frame
-      window.addSubview(loadingView)
-      
-      UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseInOut) {
-        loadingView.alpha = 1
-      } completion: { [unowned self] _ in
+    navButtons.nextButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
         
-        switch Constant.ScreenSelection.Index(rawValue: index) {
-          case .home:
-            GameManager.shared.loadGameProgress(to: .home, with: navigationController)
-          case .queen:
-            GameManager.shared.loadGameProgress(to: .queenSelection, with: navigationController)
-          case .command:
-            GameManager.shared.loadGameProgress(to: .commandSelection, with: navigationController)
-          case .none:
-            print("no page")
-            GameManager.shared.loadGameProgress(to: .home, with: navigationController)
-        }
+        guard let index = self.collectionView.indexPathsForSelectedItems?.first?.item else { return }
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+        guard let navigationController = self.navigationController else { return }
         
-        UIView.animate(withDuration: 0.6, delay: 0, options: .beginFromCurrentState) {
-          loadingView.icon.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-        } completion: { _ in
-          UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) {
-            loadingView.alpha = 0
-          } completion: { _ in
-            loadingView.removeFromSuperview()
-          }
-        }
+        self.viewModel.loadScreen(window, navigationController, index)
+        
       }
-      
-    }
+      .disposed(by: viewModel.disposeBag)
+    
+    // Go back to previous screen
+    navButtons.backButton.rx
+      .tap
+      .bind { [weak self] _ in
+        GameManager.shared.popGameProgress(navVC: self?.navigationController)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
   
-  /// Go back to previous screen
-  /// - Parameter sender: UIButton
-  @objc private func goBackToPrevious(_ sender: UIButton) {
-    GameManager.shared.popGameProgress(navVC: navigationController)
-  }
 }

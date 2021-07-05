@@ -22,7 +22,6 @@ class MenuViewController: UIViewController {
     let bt = MainButton()
     bt.configureRadius(radius: 28)
     bt.setTitle("How to Play", for: .normal)
-    bt.addTarget(self, action: #selector(howToPlayTapped(_:)), for: .touchUpInside)
     bt.insertIcon(
       IconFactory.createSystemIcon(
         "questionmark.circle",
@@ -38,7 +37,6 @@ class MenuViewController: UIViewController {
     let bt = MainButton()
     bt.configureRadius(radius: 28)
     bt.setTitle("Settings", for: .normal)
-    bt.addTarget(self, action: #selector(settingTapped(_:)), for: .touchUpInside)
     bt.insertIcon(IconFactory.createSystemIcon("gear", color: CustomColor.background, pointSize: 16), to: .left)
     return bt
   }()
@@ -50,7 +48,6 @@ class MenuViewController: UIViewController {
     bt.setTitle("Back to Top", for: .normal)
     bt.setTitleColor(btTintColor, for: .normal)
     bt.backgroundColor = CustomColor.accent
-    bt.addTarget(self, action: #selector(goToTop(_:)), for: .touchUpInside)
     bt.insertIcon(
       IconFactory.createSystemIcon("suit.heart.fill", color: btTintColor, pointSize: 16),
       to: .left
@@ -64,7 +61,6 @@ class MenuViewController: UIViewController {
     bt.setTitleColor(CustomColor.subText, for: .normal)
     bt.backgroundColor = .clear
     bt.titleLabel?.font = CustomFont.p
-    bt.addTarget(self, action: #selector(privacyPolicyTapped(_:)), for: .touchUpInside)
     bt.insertIcon(nil, to: .left)
     return bt
   }()
@@ -152,9 +148,10 @@ class MenuViewController: UIViewController {
     super.viewDidLoad()
     
     configureLayout()
-    self.alert.addAction(self.cancelAction)
-    self.alert.addAction(self.confirmAction)
+    alert.addAction(self.cancelAction)
+    alert.addAction(self.confirmAction)
 
+    configureBindings()
   }
   
   deinit {
@@ -184,29 +181,41 @@ extension MenuViewController {
     stackView.centerXYin(view)
   }
   
-  @objc func goToTop(_ sender: UIButton) {
-    present(self.alert, animated: true, completion: nil)
-  }
-  
-  @objc func settingTapped(_ sender: UIButton) {
-    let nx = SettingsViewController()
-    let navigationController = UINavigationController(rootViewController:nx)
-    navigationController.navigationBar.isHidden = true
-    present(navigationController, animated: true, completion: nil)
-  }
-  
-  @objc func closeTapped(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  @objc func howToPlayTapped(_ sender: UIButton) {
-    let nx = RuleBookViewController()
-    present(nx, animated: true, completion: nil)
-  }
-  
-  @objc func privacyPolicyTapped(_ sender: UIButton) {
-    let nx = PrivacyPolicyViewController()
-    present(nx, animated: true, completion: nil)
+  private func configureBindings() {
+    goToTopButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        self.present(self.alert, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    settingButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = SettingsViewController()
+        let navigationController = UINavigationController(rootViewController: nx)
+        navigationController.navigationBar.isHidden = true
+        self?.present(navigationController, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    howToPlayButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = RuleBookViewController()
+        self?.present(nx, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    howToPlayButton.rx
+      .tap
+      .bind { [weak self] _ in
+        let nx = PrivacyPolicyViewController()
+        self?.present(nx, animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
   }
 }
 

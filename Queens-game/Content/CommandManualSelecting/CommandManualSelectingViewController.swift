@@ -17,8 +17,8 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     super.viewDidLoad()
   }
   
-  override func configBinding() {
-    super.configBinding()
+  override func configSnapshotBinding() {
+    super.configSnapshotBinding()
     
     // Trigger of confirm button
     viewModel.confirmedTriggerSubject.subscribe(onCompleted:{
@@ -30,19 +30,28 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     }).disposed(by: viewModel.disposeBag)
   }
   
-  // If back is tapped
-  override func backTapped() {
-    guard let navVC = navigationController else { return }
-    GameManager.shared.popGameProgress(navVC: navVC)
+  
+  override func configureNavButtonBinding() {
+    backButton.rx
+      .tap
+      .bind { [weak self] _  in
+        guard let navVC = self?.navigationController else { return }
+        GameManager.shared.popGameProgress(navVC: navVC)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
+  
   
   // If cell is tapped
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    // pass selected item's index to view model
+    
+    // Send index of selected item to view model
     viewModel.updateEditMode(index: indexPath.row)
+    
     let nx = CommandConfirmationViewController(viewModel: viewModel)
     nx.modalPresentationStyle = .automatic
     
+    // After dismiss, deselect item
     viewModel.dismissSubject.subscribe { [weak self] _ in
       self?.collectionView.deselectItem(at: indexPath, animated: true)
     }

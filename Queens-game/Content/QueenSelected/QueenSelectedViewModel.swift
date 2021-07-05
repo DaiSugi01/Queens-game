@@ -34,6 +34,7 @@ class QueenSelectedViewModel {
 }
 
 
+// Suits Animation 
 // Completely redundant... just for fun.
 extension QueenSelectedViewModel {
   func rotateSuite(time: Int, view: UIView?) {

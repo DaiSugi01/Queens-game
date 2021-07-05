@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Instance variables
+
 class CommandConfirmationViewController:  UIViewController, QueensGameViewControllerProtocol {
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
@@ -15,31 +15,14 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   private var viewModel: CommandViewModel!
   private var selectedCommand: Command!
   
-  lazy var scrollView = DynamicHeightScrollView(
-    contentView: stackView,
-    padding: .init(
-      top: Constant.Common.topSpacingFromTopLine,
-      left: Constant.Common.leadingSpacing,
-      bottom: Constant.Common.bottomSpacingFromBottomLine,
-      right: Constant.Common.trailingSpacing
-    )
-  )
-  
-  // Details
-  let titleLabel: H2Label = {
-    let lb = H2Label(text: "Ready to give this order?")
-    return lb
-  } ()
-  
-  
-  // MARK: - Command description
+  // MARK: - Command description views
 
-  let descriptionTitleLabel: H3Label = {
+  private let descriptionTitleLabel: H3Label = {
     let lb = H3Label(text: "Command")
     return lb
   } ()
   
-  lazy var descriptionView: UIStackView = {
+  private lazy var descriptionView: UIStackView = {
     let wrapper = UIStackView()
     wrapper.configureLayout(bgColor: CustomColor.backgroundUpper, radius: 32)
     let content: UILabel = H4Label(text: selectedCommand.detail)
@@ -49,22 +32,26 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     return wrapper
   } ()
   
-  let confirmationButtons: UIView = {
+  private let confirmationButtons: NextAndBackButtons = {
     let bt = NextAndBackButtons()
     bt.backButton.setTitle("No", for: .normal)
     bt.backButton.insertIcon(IconFactory.createSystemIcon("multiply"), to: .left)
-    bt.backButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
     
     bt.nextButton.setTitle("Yes", for: .normal)
-    let btTintColor = CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light))
+    let btTintColor = CustomColor.background.resolvedColor(
+      with: .init(userInterfaceStyle: .light)
+    )
     bt.nextButton.setTitleColor(btTintColor, for: .normal)
     bt.nextButton.insertIcon(
       IconFactory.createSystemIcon("checkmark", color: btTintColor),
       to: .right
     )
-    bt.nextButton.addTarget(self, action: #selector(yesTapped), for: .touchUpInside)
     bt.nextButton.configureBgColor(bgColor: CustomColor.accent)
-    
+    return bt
+  }()
+  
+  private lazy var confirmationButtonsWrapper: UIView = {
+    let bt = confirmationButtons
     // Create a wrapper to set a local margin buttons.
     let uv = UIView()
     bt.configureSuperView(under: uv)
@@ -78,28 +65,26 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   }()
   
   
+  // MARK: - Attributes views
   
-  // MARK: - Attributes
-  
-  let subSectionAttributeLabel: H3Label = {
+  private let subSectionAttributeLabel: H3Label = {
     let lb = H3Label(text: "This command is")
     return lb
   } ()
 
-  lazy var difficultyStackView = CommandAttributeStackView(
+  private lazy var difficultyStackView = CommandAttributeStackView(
     command: selectedCommand,
     attributeType: .difficulty,
     color: CustomColor.subText
   )
   
-  lazy var typeStackView = CommandAttributeStackView(
+  private lazy var typeStackView = CommandAttributeStackView(
     command: selectedCommand,
     attributeType: .targetType,
     color: CustomColor.subText
   )
   
-  
-  lazy var attributesStackView: VerticalStackView = {
+  private lazy var attributesStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         subSectionAttributeLabel,
@@ -114,22 +99,37 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
   } ()
   
   
-  // MARK: - All in one
+  // MARK: - Integrate All views
   
-  lazy var stackView: VerticalStackView = {
+  private lazy var scrollView = DynamicHeightScrollView(
+    contentView: stackView,
+    padding: .init(
+      top: Constant.Common.topSpacingFromTopLine,
+      left: Constant.Common.leadingSpacing,
+      bottom: Constant.Common.bottomSpacingFromBottomLine,
+      right: Constant.Common.trailingSpacing
+    )
+  )
+  
+  private let titleLabel: H2Label = {
+    let lb = H2Label(text: "Ready to give this order?")
+    return lb
+  } ()
+  
+  private lazy var stackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         titleLabel,
         descriptionTitleLabel,
         descriptionView,
-        confirmationButtons,
+        confirmationButtonsWrapper,
         attributesStackView
       ]
     )
     sv.setCustomSpacing(Constant.Common.topSpacingFromTitle, after: titleLabel)
     sv.setCustomSpacing(16, after: descriptionTitleLabel)
     sv.setCustomSpacing(40, after: descriptionView)
-    sv.setCustomSpacing(48, after: confirmationButtons)
+    sv.setCustomSpacing(48, after: confirmationButtonsWrapper)
     return sv
   } ()
   
@@ -146,6 +146,7 @@ class CommandConfirmationViewController:  UIViewController, QueensGameViewContro
     super.viewDidLoad()
     configureScrollView()
     backgroundCreator.configureLayout()
+    configureNavButtonBinding()
   }
   
 }
@@ -171,18 +172,27 @@ extension CommandConfirmationViewController {
 }
 
 
-// MARK: - Transition
+// MARK: - bindings
 
 extension CommandConfirmationViewController {
-  @objc func cancelTapped() {
-    dismiss(animated: true, completion: nil)
-  }
   
-  @objc func yesTapped() {
-    GameManager.shared.command = selectedCommand
+  private func configureNavButtonBinding() {
+    confirmationButtons.backButton.rx
+      .tap
+      .bind { [weak self] in
+        self?.dismiss(animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
     
-    self.viewModel.confirmedTriggerSubject.onCompleted()
-    dismiss(animated: true, completion:nil)
+    confirmationButtons.nextButton.rx
+      .tap
+      .bind { [weak self] in
+        guard let self = self else { return }
+        GameManager.shared.command = self.selectedCommand
+        self.viewModel.confirmedTriggerSubject.onCompleted()
+        self.dismiss(animated: true, completion:nil)
+      }
+      .disposed(by: viewModel.disposeBag)
   }
   
   override func viewDidDisappear(_ animated: Bool) {

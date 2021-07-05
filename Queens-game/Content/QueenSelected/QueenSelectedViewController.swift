@@ -13,32 +13,30 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorPlain(parentView: view)
   
-  let disposeBag = DisposeBag()
-  let viewModel = QueenSelectedViewModel()
-  
+  private let disposeBag = DisposeBag()
+  private let viewModel = QueenSelectedViewModel()
   
   // MARK: - Before countdown views
   
-  lazy var countdownStackView = CountdownStackView(
-    countdown: self.viewModel.countdownTime
+  private lazy var countdownStackView = CountdownStackView(
+    countdown: viewModel.countdownTime
   )
   
-  let beforeCountdownTitle: H2Label = {
+  private let beforeCountdownTitle: H2Label = {
     let lb = H2Label(text: "Choosing a Queen...")
     lb.textAlignment = .center
     return lb
   }()
   
-  let skipButton: SubButton = {
+  private let skipButton: SubButton = {
     let button = SubButton()
     button.setTitle("Skip", for: .normal)
-    button.addTarget(self, action: #selector(skipButtonTapped(_:)), for: .touchUpInside)
     button.insertIcon(IconFactory.createSystemIcon("chevron.right.2", weight: .bold), to: .right)
     return button
   }()
   
   
-  lazy var beforeCountdownStackView: VerticalStackView = {
+  private lazy var beforeCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         beforeCountdownTitle,
@@ -54,14 +52,9 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
   
   // MARK: After Countdown views
   
-  let afterCountdownTitle: H2Label = {
-    let lb = H2Label(text: "The Queen is")
-    lb.translatesAutoresizingMaskIntoConstraints = false
-    lb.lineBreakMode = .byWordWrapping
-    return lb
-  }()
+  private let afterCountdownTitle = H2Label(text: "The Queen is")
   
-  lazy var queenIcon: UIImageView = {
+  private lazy var queenIcon: UIImageView = {
     let icon = IconFactory.createImageView(
       type: .queen,
       height: 152
@@ -69,14 +62,14 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return icon
   }()
   
-  lazy var userNumberLabel: H2Label = {
+  private lazy var userNumberLabel: H2Label = {
     let label = H2Label(text: "No.")
     label.textColor = CustomColor.accent
     label.textAlignment = .right
     return label
   }()
   
-  lazy var targetUserIcon: UIImageView = {
+  private lazy var targetUserIcon: UIImageView = {
     let icon = IconFactory.createImageView(
       type: .userId(GameManager.shared.queen!.playerId),
       width: 64
@@ -84,14 +77,14 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return icon
   }()
   
-  lazy var targetUserName: H2Label = {
+  private lazy var targetUserName: H2Label = {
     let label = H2Label(text: GameManager.shared.queen!.name)
     label.textAlignment = .center
     label.textColor = CustomColor.accent
     return label
   }()
   
-  lazy var targetIconLabel: HorizontalStackView = {
+  private lazy var targetIconLabel: HorizontalStackView = {
     let sv = HorizontalStackView(
       arrangedSubviews: [self.userNumberLabel, targetUserIcon]
     )
@@ -102,7 +95,7 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return sv
   }()
   
-  lazy var queenIconLabel: VerticalStackView = {
+  private lazy var queenIconLabel: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [queenIcon, targetIconLabel, targetUserName]
     )
@@ -114,16 +107,14 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     return sv
   }()
   
-  let nextButton: MainButton = {
+  private let nextButton: MainButton = {
     let button = MainButton()
     button.setTitle("Next", for: .normal)
-    button.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
     button.isEnabled = false
     return button
   }()
   
-  
-  lazy var afterCountdownStackView: VerticalStackView = {
+  private lazy var afterCountdownStackView: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [
         self.afterCountdownTitle,
@@ -140,25 +131,21 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     super.viewDidLoad()
     backgroundCreator.configureLayout()
     configureLayoutBeforeCountdown()
-    if self.viewModel.settings.canSkipQueen {
-      self.replaceView()
+    configureNavButtonBinding()
+    
+    if viewModel.settings.canSkipQueen {
+      replaceView()
       return
     }
-    self.viewModel.countdown()
-    self.viewModel.rxCountdownTime
-      .subscribe(onNext: { [weak self] time in
-        guard let time = time else { return }
-        DispatchQueue.main.async {
-          self?.countdownStackView.countdownLabel.text = String(time)
-          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
-        }
-      },
-      onCompleted: {
-        self.replaceView()
-      })
-      .disposed(by: disposeBag)
+    viewModel.countdown()
+    configureCountdownBinding()
   }
+}
 
+
+// MARK: - Layout
+
+extension QueenSelectedViewController {
   
   private func configureLayoutBeforeCountdown() {
     
@@ -173,25 +160,12 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     )
   }
   
-  private func configureLayoutAfterCountdown() {
-    
-    afterCountdownStackView.configureSuperView(under: super.view)
-    afterCountdownStackView.matchParent(
-      padding: .init(
-        top: Constant.Common.topSpacing,
-        left: Constant.Common.leadingSpacing,
-        bottom: Constant.Common.bottomSpacing,
-        right: Constant.Common.trailingSpacing
-      )
-    )
-  }
-  
   private func replaceView() {
     self.beforeCountdownStackView.removeFromSuperview()
     
     // Set up, but make last half views invisible
     afterCountdownStackView.alpha = 0
-    self.configureLayoutAfterCountdown()
+    configureLayoutAfterCountdown()
     
     // Fade in the last half views
     UIView.animate(
@@ -208,20 +182,61 @@ class QueenSelectedViewController: UIViewController, QueensGameViewControllerPro
     
   }
   
-  @objc func skipButtonTapped(_ sender: UIButton) {
-    self.viewModel.rxCountdownTime.onCompleted()
-  }
-  
-  @objc func nextButtonTapped(_ sender: UIButton) {
-    self.goToNext()
-  }
-  
-  private func goToNext() {
-    let nx = CommandSelectionViewController()
-    GameManager.shared.pushGameProgress(
-      navVC: navigationController,
-      currentScreen: self,
-      nextScreen: nx
+  private func configureLayoutAfterCountdown() {
+    
+    afterCountdownStackView.configureSuperView(under: super.view)
+    afterCountdownStackView.matchParent(
+      padding: .init(
+        top: Constant.Common.topSpacing,
+        left: Constant.Common.leadingSpacing,
+        bottom: Constant.Common.bottomSpacing,
+        right: Constant.Common.trailingSpacing
+      )
     )
   }
+  
+}
+
+
+// MARK: - Binding
+
+extension QueenSelectedViewController {
+  
+  private func configureNavButtonBinding() {
+    skipButton.rx
+      .tap
+      .bind { [weak self] _ in
+        self?.viewModel.rxCountdownTime.onCompleted()
+      }
+      .disposed(by: disposeBag)
+    
+    nextButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        let nx = CommandSelectionViewController()
+        GameManager.shared.pushGameProgress(
+          navVC: self.navigationController,
+          currentScreen: self,
+          nextScreen: nx
+        )
+      }
+      .disposed(by: disposeBag)
+  }
+  
+  private func configureCountdownBinding() {
+    viewModel.rxCountdownTime
+      .subscribe(onNext: { [weak self] time in
+        guard let time = time else { return }
+        DispatchQueue.main.async {
+          self?.countdownStackView.countdownLabel.text = String(time)
+          self?.viewModel.rotateSuite(time: time, view: self?.countdownStackView)
+        }
+      },
+      onCompleted: {
+        self.replaceView()
+      })
+      .disposed(by: disposeBag)
+  }
+  
 }
