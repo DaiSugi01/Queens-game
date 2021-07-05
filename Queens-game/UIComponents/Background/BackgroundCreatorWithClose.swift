@@ -6,10 +6,12 @@
 //
 
 import UIKit
-
+import RxSwift
 
 /// BackgroundView which also have close bottom on top right in addition to `backgroundPlain`
 class BackgroundCreatorWithClose: BackgroundCreatorPlain {
+  
+  let disposeBag = DisposeBag()
 
   let closeButton = CloseButton()
   /// This is used for `present` and getting `view`
@@ -27,6 +29,7 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
     closeButton.configureSuperView(under: parentView)
     super.configureLayout()
     configureCloseButton()
+    configureNavButtonBinding()
   }
   
   func configureCloseButton() {
@@ -40,14 +43,6 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
         constant: -Constant.Common.trailingSpacing*0.8
       )
     ])
-    closeButton.addTarget(
-      self,
-      action: #selector(closeTapped),
-      for: .touchUpInside
-    )
-  }
-  @objc func closeTapped() {
-    viewController.dismiss(animated: true, completion: nil)
   }
   
   override func configureBorder() {
@@ -81,5 +76,15 @@ class BackgroundCreatorWithClose: BackgroundCreatorPlain {
       ),
       bottomLine.centerXAnchor.constraint(equalTo: parentView.centerXAnchor)
     ])
+  }
+}
+
+extension BackgroundCreatorWithClose {
+  private func configureNavButtonBinding() {
+   closeButton.rx.tap
+      .bind{ [weak self] in
+        self?.viewController.dismiss(animated: true, completion: nil)
+      }
+      .disposed(by: disposeBag)
   }
 }

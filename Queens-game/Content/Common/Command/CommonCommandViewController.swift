@@ -41,7 +41,6 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
       ),
       for: .normal
     )
-    bt.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     return bt
   } ()
   
@@ -62,6 +61,7 @@ class CommonCommandViewController: UIViewController, QueensGameViewControllerPro
     
     configSnapshotBinding()
     configureNavButtonBinding()
+    configureSearchButtonBinding()
     
     // Config Other ui views
     configureSearchBar()

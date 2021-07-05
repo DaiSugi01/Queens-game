@@ -38,10 +38,15 @@ extension CommonCommandViewController {
     searchBarMask.configureBgColor(bgColor: CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .dark)))
     searchBarMask.alpha = 0
     searchBarMask.matchParent()
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(maskTapped))
+    
+    let tapGesture = UITapGestureRecognizer()
     searchBarMask.addGestureRecognizer(tapGesture)
+    tapGesture.rx.event.bind { [weak self] _ in
+      self?.searchBar.endEditing(true)
+    }
+    .disposed(by: viewModel.disposeBag)
+
   }
-  
   
   func configureBottomNavigationBar() {
     bottomNavigationBar.configureSuperView(under: view)

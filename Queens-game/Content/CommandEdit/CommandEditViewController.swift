@@ -28,8 +28,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    // Set target
-    bt.addTarget(self, action: #selector(saveTapped(_:)), for: .touchUpInside)
     return bt
   }()
 
@@ -43,8 +41,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
       weight: .bold
     )
     bt.setBackgroundImage(image, for: .normal)
-    // Set target
-    bt.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     return bt
   }()
   
@@ -112,15 +108,17 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
     super.viewDidLoad()
     configureScrollView()
     configureButtons()
-    configureTextView()
     configureKeyboard()
     backgroundCreator.configureLayout()
+    
+    configureTextViewBinding()
+    configureNavButtonBinding()
   }
 }
 
-// MARK: - Target Action
+// MARK: - binding
 extension CommandEditViewController {
-  func configureTextView() {
+  func configureTextViewBinding() {
     // If #item reach min, disable delete button.
     viewModel.didReachMinItemRelay
       .map(!)
@@ -139,24 +137,28 @@ extension CommandEditViewController {
       .bind(to: saveButton.rx.isValid)
       .disposed(by: viewModel.disposeBag)
   }
-}
 
-
-// MARK: - Target Action
-
-extension CommandEditViewController {
-  @objc func saveTapped(_ sender: UIButton) {
-    guard let (detail, difficulty, commandType) = validateInput() else { return }
-    viewModel.createOrUpdateItem(detail, difficulty, commandType)
-    dismiss()
-  }
   
-  @objc func deleteTapped(_ sender: UIButton) {
-    viewModel.deleteSelectedItem()
-    dismiss()
-  }
-  private func dismiss() {
-    dismiss(animated: true, completion: nil)
+  private func configureNavButtonBinding() {
+    saveButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        guard let (detail, difficulty, commandType) = self.validateInput() else { return }
+        self.viewModel.createOrUpdateItem(detail, difficulty, commandType)
+        self.dismiss(animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    deleteButton.rx
+      .tap
+      .bind { [weak self] _ in
+        guard let self = self else { return }
+        self.viewModel.deleteSelectedItem()
+        self.dismiss(animated: true, completion: nil)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
   }
   
   override func viewDidDisappear(_ animated: Bool) {

@@ -203,19 +203,18 @@ extension MenuViewController {
     howToPlayButton.rx
       .tap
       .bind { [weak self] _ in
-        let nx = RuleBookViewController()
+        let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/play-guide")
         self?.present(nx, animated: true, completion: nil)
       }
       .disposed(by: viewModel.disposeBag)
     
-    howToPlayButton.rx
+    privacyPolicyButton.rx
       .tap
       .bind { [weak self] _ in
-        let nx = PrivacyPolicyViewController()
+        let nx = WebViewViewController(url: "https://daisugi01.github.io/Queens-game/privacy-policy")
         self?.present(nx, animated: true, completion: nil)
       }
       .disposed(by: viewModel.disposeBag)
-    
   }
 }
 
