@@ -103,11 +103,11 @@ We created a whole UI mockup both considering light and dark mode with Figma. In
 
 ### Style Guide
 
-![style-guide](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-design-guide.webp)
+![style-guide](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-style-guide.webp)
 
 ### UI mockup
 
-![UI-mockup](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-mockup.webp)
+![UI-mockup](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-mockup-design.webp)
 
 ### UI components
 
