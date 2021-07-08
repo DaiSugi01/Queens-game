@@ -283,7 +283,6 @@
 			children = (
 				0A3A627A2637A2F30082ACAE /* Content */,
 				0A3A62792637A2C50082ACAE /* Extention */,
-				0A306FDA25F7078C0059CDEE /* Info.plist */,
 				0A3A627426379D2B0082ACAE /* Model */,
 				0A3A627C2637A5450082ACAE /* Support */,
 				4826815A2645EBA70010543A /* UIComponents */,
@@ -344,6 +343,7 @@
 		0A3A627C2637A5450082ACAE /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0A306FDA25F7078C0059CDEE /* Info.plist */,
 				0A306FC925F7078B0059CDEE /* AppDelegate.swift */,
 				0A306FD525F7078C0059CDEE /* Assets.xcassets */,
 				48AE80292640B26F00CBDB5E /* Demo */,
@@ -1161,7 +1161,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PTMH7A8WP;
-				INFOPLIST_FILE = "Queens-game/Info.plist";
+				INFOPLIST_FILE = "Queens-game/Support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1183,7 +1183,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PTMH7A8WP;
-				INFOPLIST_FILE = "Queens-game/Info.plist";
+				INFOPLIST_FILE = "Queens-game/Support/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
