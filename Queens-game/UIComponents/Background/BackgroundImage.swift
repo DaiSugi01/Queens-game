@@ -12,7 +12,7 @@ struct BackgroundImage {
     //Because image is static, we implicitly set color by resolvedColor
     
     // Light image has texture
-    let img = UIImage(named: "background-texture2")
+    let img = UIImage(named: "background-texture")
     let lightImage = UIImage.blend(
       CustomColor.background.resolvedColor(with: .init(userInterfaceStyle: .light)),
       img!
