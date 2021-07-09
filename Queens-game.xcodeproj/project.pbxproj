@@ -116,6 +116,7 @@
 		48E5417B267C741A00D891E1 /* CommandAttributeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */; };
 		48E5417D267D315700D891E1 /* ScreenSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417C267D315700D891E1 /* ScreenSelectionViewController.swift */; };
 		48E54180267D5EAD00D891E1 /* QueenGameCollectionViewProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5417F267D5EAD00D891E1 /* QueenGameCollectionViewProtocal.swift */; };
+		48E826D62697AFBF00AA3BFB /* Command+default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E826D52697AFBF00AA3BFB /* Command+default.swift */; };
 		48EBE7E02672974E00DAC164 /* UIImage+blend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EBE7DF2672974E00DAC164 /* UIImage+blend.swift */; };
 		48EECAE6265F6E5600B74066 /* UIButton+RxIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */; };
 		99655A9E23AAC208A3A831A5 /* Pods_Queens_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7741296D6E1B0570961E4D89 /* Pods_Queens_game.framework */; };
@@ -233,6 +234,7 @@
 		48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAttributeStackView.swift; sourceTree = "<group>"; };
 		48E5417C267D315700D891E1 /* ScreenSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelectionViewController.swift; sourceTree = "<group>"; };
 		48E5417F267D5EAD00D891E1 /* QueenGameCollectionViewProtocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenGameCollectionViewProtocal.swift; sourceTree = "<group>"; };
+		48E826D52697AFBF00AA3BFB /* Command+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command+default.swift"; sourceTree = "<group>"; };
 		48EBE7DF2672974E00DAC164 /* UIImage+blend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+blend.swift"; sourceTree = "<group>"; };
 		48EECAE5265F6E5500B74066 /* UIButton+RxIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+RxIsValid.swift"; sourceTree = "<group>"; };
 		70A0E9A6E9035114D263CFA8 /* Pods-Queens-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Queens-game.release.xcconfig"; path = "Target Support Files/Pods-Queens-game/Pods-Queens-game.release.xcconfig"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				485635EB26437CED0043AF21 /* Command.swift */,
+				48E826D52697AFBF00AA3BFB /* Command+default.swift */,
 				485635E926437C7A0043AF21 /* CommandType.swift */,
 				485635E726437C3F0043AF21 /* Difficulty.swift */,
 				3B9E940B2650610A003207F7 /* Executor.swift */,
@@ -487,8 +490,8 @@
 			isa = PBXGroup;
 			children = (
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
-				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
+				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */,
 			);
 			path = Group;
@@ -998,6 +1001,7 @@
 				4892E022264A170300C3EFB4 /* CommonCommandViewController+Layout.swift in Sources */,
 				48E5417B267C741A00D891E1 /* CommandAttributeStackView.swift in Sources */,
 				482681972645EBA80010543A /* CustomFont.swift in Sources */,
+				48E826D62697AFBF00AA3BFB /* Command+default.swift in Sources */,
 				487AF1E5264B977100663047 /* CommonCommandViewController+ScrollView.swift in Sources */,
 				4892E020264A02D900C3EFB4 /* CommonCommandViewController+DataSource.swift in Sources */,
 				485635E426436A420043AF21 /* Settings.swift in Sources */,

@@ -56,6 +56,8 @@ class TopViewController: UIViewController, QueensGameViewControllerProtocol {
     return sv
   }()
   
+  private let heartDemoButton = UIButton()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -175,7 +177,6 @@ extension TopViewController {
 extension TopViewController {
   
   private func configureDemoButton() {
-    let demoButton = UIButton()
     
     // Set image
     let btImage = IconFactory.createSystemIcon(
@@ -183,17 +184,22 @@ extension TopViewController {
       color: CustomColor.accent,
       pointSize: 40
     )
-    demoButton.setImage(btImage, for: .normal)
-    demoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+    heartDemoButton.setImage(btImage, for: .normal)
+    heartDemoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
     
     // constraint
-    demoButton.configureSuperView(under: view)
+    heartDemoButton.configureSuperView(under: view)
     NSLayoutConstraint.activate([
-      demoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
-      demoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48)
+      heartDemoButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
+      heartDemoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48)
     ])
     
-    demoButton.rx
+    if !Constant.isDebugMode {
+      heartDemoButton.isUserInteractionEnabled = false
+      return
+    }
+    
+    heartDemoButton.rx
       .tap
       .bind { [weak self] _ in
         guard let self = self else { return }

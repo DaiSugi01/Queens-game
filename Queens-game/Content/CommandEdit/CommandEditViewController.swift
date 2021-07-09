@@ -125,14 +125,14 @@ extension CommandEditViewController {
       .bind(to: deleteButton.rx.isEnabled)
       .disposed(by: viewModel.disposeBag)
     
-    // If #character in text field is less than 0 or more than 512, disable save botton.
+    // If #character in text field is less than 0 or more than 256, disable save button.
     textView
       .rx
       .text
       .map { text in
         guard let text = text else { return false }
-        return text.trimmingCharacters(in: .whitespacesAndNewlines).count > 0
-          && text.count <= 128
+        return text.trimmingCharacters(in: .whitespacesAndNewlines).count > Constant.Command.minCharacters
+          && text.count <= Constant.Command.maxCharacters
       }
       .bind(to: saveButton.rx.isValid)
       .disposed(by: viewModel.disposeBag)

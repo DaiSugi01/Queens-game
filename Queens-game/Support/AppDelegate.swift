@@ -45,7 +45,7 @@ extension AppDelegate {
     // If there is no item, fill sample data.
     if restoredItems.count == 0 {
       // Because of reference type, we create copy objects (other wise sample date is also deleted when you delete from the list.)
-      let initialCopy = CommandViewModel.samples.map {Command(value: $0)}
+      let initialCopy = Command.defaultValue.map {Command(value: $0)}
       // Save them.
       try! realm.write {
         realm.add(initialCopy)
