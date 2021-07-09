@@ -13,7 +13,7 @@ fileprivate let disposeBag = DisposeBag()
 
 class SettingsSwitcherStackView: UIStackView {
   
-  let identifier: String!
+  let type: canSkip!
 
   var descriptionLabel: PLabel = {
     let lb = PLabel()
@@ -27,8 +27,8 @@ class SettingsSwitcherStackView: UIStackView {
     return sw
   }()
 
-  init(_ identifier: String) {
-    self.identifier = identifier
+  init(_ type: canSkip) {
+    self.type = type
     super.init(frame: .zero)
 
     self.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class SettingsSwitcherStackView: UIStackView {
 
 
 class SettingsWaitingTimeStackView: UIStackView {
-  let identifier: String!
+  let type: WaitingSeconds!
   
   var didTap = { (sec: Double) -> Void in print(sec) }
 
@@ -84,8 +84,8 @@ class SettingsWaitingTimeStackView: UIStackView {
     return sv
   } ()
 
-  init(_ identifier: String) {
-    self.identifier = identifier
+  init(_ type: WaitingSeconds) {
+    self.type = type
     super.init(frame: .zero)
     
     self.translatesAutoresizingMaskIntoConstraints = false

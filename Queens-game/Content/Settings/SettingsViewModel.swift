@@ -27,30 +27,24 @@ class SettingViewModel {
   /// Get `PublishRelay` related to `canSkip` type item in setting
   /// - Parameter identifier: item id
   /// - Returns: `PublishRelay` related to `canSkip` type item in setting
-  func getCanSkipRelay(_ identifier: String) ->  PublishRelay<Bool> {
-    switch identifier {
-      case Settings.canSkipQueenIdentifier:
+  func getCanSkipRelay(_ type: canSkip) ->  PublishRelay<Bool> {
+    switch type {
+      case .queen:
         return self.canSkipQueenSelectionRelay
-      case Settings.canSkipCommandIdentifier:
+      case .command:
         return self.canSkipCommandSelectionRelay
-      default:
-        print("no match")
-        return self.canSkipQueenSelectionRelay
     }
   }
   
   /// Get `PublishRelay` related to `waitingSeconds` type item in setting
   /// - Parameter identifier: item id
   /// - Returns: `PublishRelay` related to `waitingSeconds` type item in setting
-  func getWaitingSecondsRelay(_ identifier: String) ->  PublishRelay<Double> {
-    switch identifier {
-      case Settings.citizenWaitingSecondsIdentifier:
+  func getWaitingSecondsRelay(_ type: WaitingSeconds) ->  PublishRelay<Double> {
+    switch type {
+      case .queen:
         return self.citizenWaitingSecondsRelay
-      case Settings.queenWaitingSecondsIdentifier:
+      case .citizen:
         return self.queenWaitingSecondsRelay
-      default:
-        print("no match")
-        return  self.citizenWaitingSecondsRelay
     }
   }
 

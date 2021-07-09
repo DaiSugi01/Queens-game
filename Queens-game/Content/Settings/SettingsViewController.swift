@@ -17,10 +17,10 @@ class SettingsViewController: UIViewController, QueensGameViewControllerProtocol
   let viewModel: SettingViewModel = SettingViewModel(settings: Settings.shared)
   
   let titleLabel = H2Label(text: "Settings")
-  let canSkipQueenView = SettingsSwitcherStackView(Settings.canSkipQueenIdentifier)
-  let canSkipCommandView = SettingsSwitcherStackView(Settings.canSkipCommandIdentifier)
-  let queenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.queenWaitingSecondsIdentifier)
-  let citizenWaitingSecondsView = SettingsWaitingTimeStackView(Settings.citizenWaitingSecondsIdentifier)
+  let canSkipQueenView = SettingsSwitcherStackView(.queen)
+  let canSkipCommandView = SettingsSwitcherStackView(.command)
+  let queenWaitingSecondsView = SettingsWaitingTimeStackView(.queen)
+  let citizenWaitingSecondsView = SettingsWaitingTimeStackView(.citizen)
   
   lazy var items = [
     canSkipQueenView,
@@ -82,14 +82,31 @@ extension SettingsViewController {
     items.enumerated().forEach { (index, item) in
       // Switch
       if let switchItem = item as? SettingsSwitcherStackView {
-        let data = self.viewModel.settings.getCanSkipSource(switchItem.identifier)
+        
+        let switchType = switchItem.type ?? .queen
+        
+        // fill data
+        let data = self.viewModel.settings.getCanSkipSource(switchType)
         switchItem.descriptionLabel.text = data.description
         switchItem.switcher.setOn(data.canSkip, animated: false)
         
-        let relay = self.viewModel.getCanSkipRelay(switchItem.identifier)
+        // bind
         switchItem.switcher.rx.isOn.asObservable()
-          .subscribe(onNext: {
-            relay.accept($0)
+          .subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            
+            // to setting
+            self.viewModel.getCanSkipRelay(switchType).accept($0)
+            // to waiting seconds view
+            let isOff = !$0
+            switch switchType {
+              case .queen:
+                self.queenWaitingSecondsView.isUserInteractionEnabled = isOff
+                self.queenWaitingSecondsView.alpha = isOff ?  1.0 : 0.2
+              case .command:
+                self.citizenWaitingSecondsView.isUserInteractionEnabled = isOff
+                self.citizenWaitingSecondsView.alpha = isOff ?  1.0 : 0.2
+            }
             
           })
           .disposed(by: disposeBag)
@@ -97,13 +114,13 @@ extension SettingsViewController {
       
       // Sec
       if let waitingTimeItem = item as? SettingsWaitingTimeStackView {
-        let data = self.viewModel.settings.getWaitingSecondsSource(waitingTimeItem.identifier)
+        let data = self.viewModel.settings.getWaitingSecondsSource(waitingTimeItem.type)
         waitingTimeItem.descriptionLabel.text = data.description
         let sec = data.sec
         waitingTimeItem.stepper.value = sec
         waitingTimeItem.sec.text = "\(Int(sec)) sec"
 
-        let relay = self.viewModel.getWaitingSecondsRelay(waitingTimeItem.identifier)
+        let relay = self.viewModel.getWaitingSecondsRelay(waitingTimeItem.type)
 
         waitingTimeItem.stepper.rx.value.asObservable()
           .subscribe(onNext: {

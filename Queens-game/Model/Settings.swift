@@ -47,30 +47,24 @@ extension SettingsProtocol {
   /// Get source of setting item which is `canSkip` type.
   /// - Parameter identifier: specific identifier related to each item
   /// - Returns: description: item description,  canSkip: weather you can skip its step or not
-  func getCanSkipSource(_ identifier: String) -> (description: String, canSkip: Bool) {
-    switch identifier {
-      case Settings.canSkipQueenIdentifier:
+  func getCanSkipSource(_ type: canSkip) -> (description: String, canSkip: Bool) {
+    switch type {
+      case .queen:
         return (canSkipQueenDescription, canSkipQueen)
-      case Settings.canSkipCommandIdentifier:
+      case .command:
         return (canSkipCommandDescription, canSkipCommand)
-      default:
-        print("no match")
-        return (canSkipQueenDescription, canSkipQueen)
     }
   }
   
   /// Get source of setting item which is `WaitingSeconds` type.
   /// - Parameter identifier: specific identifier related to each item
   /// - Returns: description: item description,  sec: how long you have to wait til its end.
-  func getWaitingSecondsSource(_ identifier: String) -> (description: String, sec: Double) {
-    switch identifier {
-      case Settings.queenWaitingSecondsIdentifier:
+  func getWaitingSecondsSource(_ type: WaitingSeconds) -> (description: String, sec: Double) {
+    switch type {
+      case .queen:
         return (queenWaitingSecondsDescription, queenWaitingSeconds)
-      case Settings.citizenWaitingSecondsIdentifier:
+      case .citizen:
         return (citizenWaitingSecondsDescription, citizenWaitingSeconds)
-      default:
-        print("no match")
-        return (queenWaitingSecondsDescription, queenWaitingSeconds)
     }
   }
   
@@ -91,6 +85,17 @@ extension SettingsProtocol {
     self.citizenWaitingSeconds = sec
   }
   
+}
+
+protocol SettingType { }
+
+enum canSkip: SettingType {
+  case queen
+  case command
+}
+enum WaitingSeconds: SettingType {
+  case queen
+  case citizen
 }
 
 class Settings: SettingsProtocol, Codable {

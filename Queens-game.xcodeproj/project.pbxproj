@@ -490,8 +490,8 @@
 			isa = PBXGroup;
 			children = (
 				0A0425A126539E3A0019AEC1 /* EntryNameStackView.swift */,
-				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				48E5417A267C741A00D891E1 /* CommandAttributeStackView.swift */,
+				3B7981C4264F8C66002D2F71 /* CountdownStackView.swift */,
 				3B93A6F62648AD8E009FB008 /* SettingsStackView.swift */,
 			);
 			path = Group;
