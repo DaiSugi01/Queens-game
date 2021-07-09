@@ -13,7 +13,7 @@ import RxCocoa
 class CommandManualSelectingViewController: CommonCommandViewController {
   
   override func viewDidLoad() {
-    headerTitle = "What is your command?"
+    headerTitle = "What is the queen's command?"
     super.viewDidLoad()
   }
   

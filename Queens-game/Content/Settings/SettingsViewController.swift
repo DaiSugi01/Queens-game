@@ -78,21 +78,24 @@ extension SettingsViewController {
   }
   
   private func configureBinding() {
+    
     items.enumerated().forEach { (index, item) in
+      // Switch
       if let switchItem = item as? SettingsSwitcherStackView {
         let data = self.viewModel.settings.getCanSkipSource(switchItem.identifier)
         switchItem.descriptionLabel.text = data.description
         switchItem.switcher.setOn(data.canSkip, animated: false)
         
-        // RxSwift
         let relay = self.viewModel.getCanSkipRelay(switchItem.identifier)
         switchItem.switcher.rx.isOn.asObservable()
           .subscribe(onNext: {
             relay.accept($0)
+            
           })
           .disposed(by: disposeBag)
       }
       
+      // Sec
       if let waitingTimeItem = item as? SettingsWaitingTimeStackView {
         let data = self.viewModel.settings.getWaitingSecondsSource(waitingTimeItem.identifier)
         waitingTimeItem.descriptionLabel.text = data.description
@@ -100,7 +103,6 @@ extension SettingsViewController {
         waitingTimeItem.stepper.value = sec
         waitingTimeItem.sec.text = "\(Int(sec)) sec"
 
-        // RxSwift
         let relay = self.viewModel.getWaitingSecondsRelay(waitingTimeItem.identifier)
 
         waitingTimeItem.stepper.rx.value.asObservable()

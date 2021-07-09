@@ -97,10 +97,10 @@ class Settings: SettingsProtocol, Codable {
   
   static let shared = Settings()
   
-  var canSkipQueen: Bool = true
+  var canSkipQueen: Bool = false
   var canSkipCommand: Bool = false
   var queenWaitingSeconds: Double = 5
-  var citizenWaitingSeconds: Double = 6
+  var citizenWaitingSeconds: Double = 5
   
   private init() {
     let jsonDecoder = JSONDecoder()

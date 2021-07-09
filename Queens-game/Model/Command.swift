@@ -114,13 +114,13 @@ extension Command {
     get {
       switch CommandType(rawValue: intType) {
         case .cToA:
-          return Constant.CommandDescription.cToA
+          return Constant.Command.Description.cToA
         case .cToC:
-          return Constant.CommandDescription.cToC
+          return Constant.Command.Description.cToC
         case .cToQ:
-          return Constant.CommandDescription.cToQ
+          return Constant.Command.Description.cToQ
         default:
-          return Constant.CommandDescription.cToC
+          return Constant.Command.Description.cToC
       }
     }
   }
@@ -130,13 +130,13 @@ extension Command {
     get {
       switch Difficulty(rawValue: intDifficulty) {
         case .easy:
-          return Constant.CommandDescription.easy
+          return Constant.Command.Description.easy
         case .normal:
-          return Constant.CommandDescription.normal
+          return Constant.Command.Description.normal
         case .hard:
-          return Constant.CommandDescription.hard
+          return Constant.Command.Description.hard
         default:
-          return Constant.CommandDescription.easy
+          return Constant.Command.Description.easy
       }
     }
   }

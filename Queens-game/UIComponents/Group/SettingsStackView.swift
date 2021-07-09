@@ -15,8 +15,8 @@ class SettingsSwitcherStackView: UIStackView {
   
   let identifier: String!
 
-  var descriptionLabel: H4Label = {
-    let lb = H4Label()
+  var descriptionLabel: PLabel = {
+    let lb = PLabel()
     return lb
   }()
 
@@ -54,14 +54,14 @@ class SettingsWaitingTimeStackView: UIStackView {
   
   var didTap = { (sec: Double) -> Void in print(sec) }
 
-  var descriptionLabel: H4Label = {
-    let lb = H4Label()
+  var descriptionLabel: PLabel = {
+    let lb = PLabel()
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
 
-  var sec: H4Label = {
-    let lb = H4Label()
+  var sec: PLabel = {
+    let lb = PLabel()
     lb.textAlignment = .center
     return lb
   }()

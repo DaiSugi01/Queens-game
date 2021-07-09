@@ -34,10 +34,10 @@ class CommandViewModel {
   var snapshot =  Snapshot()
   var snapshotSubject = PublishSubject<Snapshot>()
   var didReachMinItem: Bool {
-    realm.objects(Command.self).count <= 3
+    realm.objects(Command.self).count <= Constant.Command.minItems
   }
   var didReachMaxItem: Bool {
-    realm.objects(Command.self).count >= 6
+    realm.objects(Command.self).count >= Constant.Command.maxItems
   }
   lazy var didReachMinItemRelay = BehaviorRelay<Bool>(value: didReachMinItem)
   lazy var didReachMaxItemRelay = BehaviorRelay<Bool>(value: didReachMaxItem)
@@ -71,17 +71,22 @@ extension CommandViewModel {
   /// Read items from realm and update snapshot (and update UI)
   func readItems() {
     let items: [Command]
+    let sortDescriptors: [SortDescriptor] = [
+      SortDescriptor(keyPath: "intDifficulty", ascending: true),
+      SortDescriptor(keyPath: "intType", ascending: true),
+      SortDescriptor(keyPath: "detail", ascending: true),
+    ]
     
     if searchText == "" {
       items = Array(
-        realm.objects(Command.self)
-          .sorted(byKeyPath: "detail", ascending: true)
+        realm.objects(Command.self).sorted(by: sortDescriptors)
       )
+      
     } else {
       items = Array(
         realm.objects(Command.self)
           .filter("detail CONTAINS[c] %@", searchText)
-          .sorted(byKeyPath: "detail", ascending: true)
+          .sorted(by: sortDescriptors)
       )
     }
     
@@ -178,22 +183,22 @@ extension CommandViewModel {
 }
 
 
-extension CommandViewModel {
-  static var samples = [
-    Command(
-      detail: "Sing a song in front of others",
-      difficulty: .hard,
-      commandType: .cToA
-    ),
-    Command(
-      detail: "Buy something worth maximum 5$ to Queen",
-      difficulty: .normal,
-      commandType: .cToQ
-    ),
-    Command(
-      detail: "Look each other deeply 30secs",
-      difficulty: .easy,
-      commandType: .cToA
-    )
-  ]
-}
+//extension CommandViewModel {
+//  static var samples = [
+//    Command(
+//      detail: "Sing a song in front of others",
+//      difficulty: .hard,
+//      commandType: .cToA
+//    ),
+//    Command(
+//      detail: "Buy something worth maximum 5$ to Queen",
+//      difficulty: .normal,
+//      commandType: .cToQ
+//    ),
+//    Command(
+//      detail: "Look each other deeply 30secs",
+//      difficulty: .easy,
+//      commandType: .cToA
+//    )
+//  ]
+//}
