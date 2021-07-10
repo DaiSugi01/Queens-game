@@ -44,11 +44,18 @@ extension QueensGameSelectionProtocol {
       ) as? GeneticLabelCollectionReusableView {
         
         let screenTitle: H2Label = {
-          let lb = H2Label(text: title)
+          
+          let lb = H2Label()
+          // Too many chars? then shrink!
+          if title.count > 20, let font = lb.font {
+            lb.font  = font.withSize(font.pointSize*0.82)
+          }
+          lb.text = title
+          
           lb.lineBreakMode = .byWordWrapping
           return lb
         }()
-        
+
         headerView.configLabel(lb: screenTitle)
         return headerView
       }

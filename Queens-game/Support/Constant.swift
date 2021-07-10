@@ -101,7 +101,7 @@ struct Constant {
   }
   
   struct CommandSelection {
-    static let title = "Select how to command"
+    static let title = "The queen can decide how to command"
     static let options = [
       Selection(
         title: "Manual select",
