@@ -185,7 +185,7 @@ extension TopViewController {
       pointSize: 40
     )
     heartDemoButton.setImage(btImage, for: .normal)
-    heartDemoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+    heartDemoButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4.8))
     
     // constraint
     heartDemoButton.configureSuperView(under: view)
