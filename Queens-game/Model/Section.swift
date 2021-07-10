@@ -14,6 +14,6 @@ enum Section: Hashable {
   case userName
   /// This section is used for collection view when accessing command such as  `CommandSettingViewController` and `CommandManualSelectingViewController`
   case command
-  /// This section is used for collection view when selecting choices such as `QueenSelectionViewController` and `CommandSelectionViewController`
+  /// This section is used for collection view when selecting choices such as `QueenBeforeSelectionViewController` and `CommandSelectionViewController`
   case selection
 }

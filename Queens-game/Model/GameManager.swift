@@ -81,7 +81,7 @@ extension GameManager {
       case .queenSelection:
         queen = nil
         command = Command()
-        goBackTo(navVC, classType: QueenSelectionViewController.self)
+        goBackTo(navVC, classType: QueenBeforeSelectionViewController.self)
       case .commandSelection:
         command = Command()
         goBackTo(navVC, classType: CommandSelectionViewController.self)
@@ -108,7 +108,7 @@ extension GameManager {
     }
 
     // Go back to target vc and remove all progress until that.
-    // eg. [vc, vc, vc, target vc, vc, vc] -> [vc, vc, vc]
+    // eg. [vc1, vc2, vc3, target vc4, vc5, vc6] -> [vc1, vc2, vc3]
     if let index = gameProgress.lastIndex(where: { type(of: $0) == T.self }) {
       let vc = gameProgress[index]
       gameProgress.removeSubrange( index..<gameProgress.count )

@@ -13,9 +13,9 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
   
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithMenu(viewController: self)
   
-  let vm: EntryNameViewModel = EntryNameViewModel()
+  private let vm: EntryNameViewModel = EntryNameViewModel()
   
-  lazy var scrollView = DynamicHeightScrollView(
+  private lazy var scrollView = DynamicHeightScrollView(
     contentView: contentWrapper,
     padding: .init(
       top: Constant.Common.topSpacingFromTopLine,
@@ -25,7 +25,7 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     )
   )
   
-  lazy var contentWrapper: VerticalStackView = {
+  private lazy var contentWrapper: VerticalStackView = {
     let sv = VerticalStackView(
       arrangedSubviews: [screenTitle],
       spacing: 16
@@ -35,14 +35,13 @@ class EntryNameViewController: UIViewController, QueensGameViewControllerProtoco
     return sv
   }()
   
-  let screenTitle: H2Label = {
+  private let screenTitle: H2Label = {
     let lb = H2Label(text: "Enter player's name")
-    lb.lineBreakMode = .byWordWrapping
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
   }()
   
-  let navButtons = NextAndBackButtons()
+  private let navButtons = NextAndBackButtons()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -124,7 +123,7 @@ extension EntryNameViewController {
         guard let self = self else { return }
         // Save user to UserDefaults
         self.vm.saveUsers()
-        let nx = QueenSelectionViewController()
+        let nx = QueenBeforeSelectionViewController()
         GameManager.shared.pushGameProgress(
           navVC: self.navigationController!,
           currentScreen: self,

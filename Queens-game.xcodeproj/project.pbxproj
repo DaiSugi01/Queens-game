@@ -45,6 +45,8 @@
 		4814766226901CF700271645 /* QueensGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4814766126901CF700271645 /* QueensGameButton.swift */; };
 		481476642692D5C600271645 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481476632692D5C600271645 /* ResultViewModel.swift */; };
 		481476662692D7EA00271645 /* ScreenSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481476652692D7EA00271645 /* ScreenSelectionViewModel.swift */; };
+		481BA6A0269988C600F5D5F2 /* QueenBeforeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481BA69F269988C600F5D5F2 /* QueenBeforeSelectionViewController.swift */; };
+		481BA6A22699893500F5D5F2 /* QueenBeforeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481BA6A12699893500F5D5F2 /* QueenBeforeSelectionViewModel.swift */; };
 		481C2CB3267AF390003975FF /* BackgroundCreatorWithClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */; };
 		481C2CB5267AF5A1003975FF /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481C2CB4267AF5A1003975FF /* CloseButton.swift */; };
 		481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CA3FF2689811800ADF48A /* MenuViewModel.swift */; };
@@ -163,6 +165,8 @@
 		4814766126901CF700271645 /* QueensGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueensGameButton.swift; sourceTree = "<group>"; };
 		481476632692D5C600271645 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		481476652692D7EA00271645 /* ScreenSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSelectionViewModel.swift; sourceTree = "<group>"; };
+		481BA69F269988C600F5D5F2 /* QueenBeforeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenBeforeSelectionViewController.swift; sourceTree = "<group>"; };
+		481BA6A12699893500F5D5F2 /* QueenBeforeSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenBeforeSelectionViewModel.swift; sourceTree = "<group>"; };
 		481C2CB2267AF390003975FF /* BackgroundCreatorWithClose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCreatorWithClose.swift; sourceTree = "<group>"; };
 		481C2CB4267AF5A1003975FF /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		481CA3FF2689811800ADF48A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				0A3A62932638B1610082ACAE /* Top */,
 				0A3A629A2638B3880082ACAE /* PlayerSelection */,
 				0A3A629D2638B8A50082ACAE /* EntryName */,
+				481BA69E2699888400F5D5F2 /* QueenBeforeSelection */,
 				0A3A62A32638BB8A0082ACAE /* QueenSelection */,
 				0A3A62AD2638BC2B0082ACAE /* QueenSelected */,
 				0A3A62BA2638C01A0082ACAE /* CommandSelection */,
@@ -506,6 +511,15 @@
 				487F4BDE268F9C4F0064B7FA /* BackgroundImage.swift */,
 			);
 			path = Background;
+			sourceTree = "<group>";
+		};
+		481BA69E2699888400F5D5F2 /* QueenBeforeSelection */ = {
+			isa = PBXGroup;
+			children = (
+				481BA69F269988C600F5D5F2 /* QueenBeforeSelectionViewController.swift */,
+				481BA6A12699893500F5D5F2 /* QueenBeforeSelectionViewModel.swift */,
+			);
+			path = QueenBeforeSelection;
 			sourceTree = "<group>";
 		};
 		481CA3FC2689449900ADF48A /* Transitioning */ = {
@@ -924,6 +938,7 @@
 				482681862645EBA80010543A /* H2Label.swift in Sources */,
 				487F4BDF268F9C4F0064B7FA /* BackgroundImage.swift in Sources */,
 				4826818D2645EBA80010543A /* SelectionCollectionViewCell.swift in Sources */,
+				481BA6A0269988C600F5D5F2 /* QueenBeforeSelectionViewController.swift in Sources */,
 				0A3A62DD2638D19B0082ACAE /* CommandEditViewController.swift in Sources */,
 				0AD08AD1264A6FD100654A05 /* QueensGameSelectionProtocol+Layout.swift in Sources */,
 				48E5417D267D315700D891E1 /* ScreenSelectionViewController.swift in Sources */,
@@ -941,6 +956,7 @@
 				481CA4002689811800ADF48A /* MenuViewModel.swift in Sources */,
 				487AF1F0264CE75400663047 /* CommandSettingViewController.swift in Sources */,
 				482681922645EBA80010543A /* UIView+ConfigureLayout.swift in Sources */,
+				481BA6A22699893500F5D5F2 /* QueenBeforeSelectionViewModel.swift in Sources */,
 				48DD334B2681218A00A2FC1B /* PopUpTransitioning.swift in Sources */,
 				0A3A62ED2638D47A0082ACAE /* SettingsViewController.swift in Sources */,
 				4826818A2645EBA80010543A /* H4Label.swift in Sources */,
