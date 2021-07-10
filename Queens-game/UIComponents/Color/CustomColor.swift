@@ -38,7 +38,7 @@ struct CustomColor {
   static var accent: UIColor {
     return UIColor { (traitCollection: UITraitCollection) -> UIColor in
       return traitCollection.userInterfaceStyle == .light ?
-        UIColor(hex: "#CC3033")! : UIColor(hex: "#CC3033")!
+        UIColor(hex: "#B83234")! : UIColor(hex: "#B83234")!
     }
   }
   

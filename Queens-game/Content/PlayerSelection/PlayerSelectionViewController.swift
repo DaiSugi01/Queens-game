@@ -81,7 +81,8 @@ class PlayerSelectionViewController: UIViewController, QueensGameViewControllerP
       arrangedSubviews: [minusButton, playerCountLabel, plusButton],
       distribution: .equalSpacing
     )
-    sv.directionalLayoutMargins = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+    sv.isLayoutMarginsRelativeArrangement = true
+    sv.directionalLayoutMargins = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
     
     return sv
   }()
