@@ -50,6 +50,10 @@ extension CommonCommandViewController {
       ) as? CommandHeaderCollectionReusableView {
         // Config view
         headerView.title.text = headerTitle
+        // Too many chars? then shrink!
+        if headerTitle.count > 20, let font = headerView.title.font{
+          headerView.title.font  = font.withSize(font.pointSize*0.82)
+        }
         return headerView
       }
       return nil

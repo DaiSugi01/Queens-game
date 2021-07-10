@@ -56,7 +56,7 @@ class CitizenSelectedViewController:  UIViewController, QueensGameViewController
   // MARK: After Countdown views
 
   private let afterCountdownTitle: H2Label = {
-    let lb = H2Label(text: "You are chosen...")
+    let lb = H2Label(text: "Target")
     lb.lineBreakMode = .byWordWrapping
     lb.setContentHuggingPriority(.required, for: .vertical)
     return lb
@@ -201,6 +201,7 @@ extension CitizenSelectedViewController {
 
     if viewModel.getGameManager().command.commandType == .cToC {
       commandWrapper.addArrangedSubview(stakeholderStackView)
+      afterCountdownTitle.text = "Targets"
     }
 
   }
