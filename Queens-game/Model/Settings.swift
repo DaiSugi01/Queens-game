@@ -73,7 +73,7 @@ extension SettingsProtocol {
     self.canSkipQueen = bool
   }
   
-  mutating func updateSkipOrderSelection(_ bool: Bool) {
+  mutating func updateSkipCommandSelection(_ bool: Bool) {
     self.canSkipCommand = bool
   }
   

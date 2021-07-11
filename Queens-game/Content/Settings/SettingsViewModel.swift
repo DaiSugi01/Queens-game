@@ -42,9 +42,9 @@ class SettingViewModel {
   func getWaitingSecondsRelay(_ type: WaitingSeconds) ->  PublishRelay<Double> {
     switch type {
       case .queen:
-        return self.citizenWaitingSecondsRelay
-      case .citizen:
         return self.queenWaitingSecondsRelay
+      case .citizen:
+        return self.citizenWaitingSecondsRelay
     }
   }
 
@@ -57,7 +57,7 @@ class SettingViewModel {
     }.disposed(by: disposeBag)
 
     self.canSkipCommandSelectionRelay.subscribe { [weak self]  in
-      self?.settings.updateSkipOrderSelection($0)
+      self?.settings.updateSkipCommandSelection($0)
     }.disposed(by: disposeBag)
 
     self.queenWaitingSecondsRelay.subscribe { [weak self] sec in
