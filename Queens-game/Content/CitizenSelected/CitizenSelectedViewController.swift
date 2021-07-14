@@ -178,11 +178,11 @@ extension CitizenSelectedViewController {
       withDuration: 1.8,
       delay: 0,
       options: .curveEaseIn,
-      animations: { [weak self] in
-        self?.afterCountdownStackView.alpha = 1
+      animations: {
+        self.afterCountdownStackView.alpha = 1
       },
-      completion: { [weak self] _ in
-        self?.nextButton.isEnabled = true
+      completion: { _ in
+        self.nextButton.isEnabled = true
       }
     )
   }
@@ -241,6 +241,7 @@ extension CitizenSelectedViewController {
           target:self.viewModel.target,
           stakeholders:self.viewModel.stakeholders
         )
+        
         GameManager.shared.pushGameProgress(
           navVC: self.navigationController,
           currentScreen: self,

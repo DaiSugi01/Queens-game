@@ -40,7 +40,7 @@ class ScreenSelectionViewController:
     backgroundCreator.configureLayout()
     
     configureLayout()
-    configureNavButtonBinding()
+    configureBinding()
   }
   
   deinit {
@@ -118,7 +118,7 @@ extension ScreenSelectionViewController {
 
 extension ScreenSelectionViewController {
   
-  private func configureNavButtonBinding() {
+  private func configureBinding() {
     
     navButtons.nextButton.rx
       .tap
@@ -128,7 +128,7 @@ extension ScreenSelectionViewController {
         guard let index = self.collectionView.indexPathsForSelectedItems?.first?.item else { return }
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
         guard let navigationController = self.navigationController else { return }
-        
+        Vibration.impact()
         self.viewModel.loadScreen(window, navigationController, index)
         
       }
@@ -139,6 +139,13 @@ extension ScreenSelectionViewController {
       .tap
       .bind { [weak self] _ in
         GameManager.shared.popGameProgress(navVC: self?.navigationController)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    collectionView.rx
+      .itemSelected
+      .bind { _ in
+        Vibration.select()
       }
       .disposed(by: viewModel.disposeBag)
   }

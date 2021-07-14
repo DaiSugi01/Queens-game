@@ -153,18 +153,18 @@ extension QueenBeforeSelectionViewController {
   private func transitToNextView() {
       // prevent multi tapping
       self.tapButton.isUserInteractionEnabled = false
+      
+    Vibration.impact()
     
       UIView.animate(
         withDuration: 0.4,
         delay: 0,
         options: [.curveEaseOut],
-        animations: { [weak self] in
-        self?.tapButtonShadow.transform = CGAffineTransform(scaleX: 1.24, y: 1.24)
-        self?.tapButtonShadow.alpha = 0
+        animations: {
+          self.tapButtonShadow.transform = CGAffineTransform(scaleX: 1.24, y: 1.24)
+          self.tapButtonShadow.alpha = 0
         },
-        completion: {  [weak self] _ in
-          guard let self = self else { return }
-
+        completion: { _ in
           // Transition
           self.viewModel.selectQueen()
           let nx = QueenSelectedViewController()

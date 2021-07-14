@@ -60,30 +60,29 @@ class SelectionCollectionViewCell: UICollectionViewCell {
   // Configure behaviour when cell is selected
   override var isSelected: Bool {
     didSet{
-      let duration = 0.32
+      let duration = 0.24
       if isSelected{
         // Display background and check mark
-        UIView.animate(withDuration: duration/2 , delay: 0, options: .curveEaseInOut)
-        { [unowned self] in
-          stackView.configureBgColor(bgColor: CustomColor.backgroundUpper)
-          stackView.layer.borderColor = UIColor.clear.cgColor
+        UIView.animate(withDuration: duration , delay: 0, options: .curveEaseOut)
+        {
+          self.stackView.configureBgColor(bgColor: CustomColor.backgroundUpper)
+          self.stackView.layer.borderColor = UIColor.clear.cgColor
         }
+        
         // `UIView.transition` is required for animation of UIImage, not `UIView.animate`
-        UIView.transition(with: checkIcon, duration: duration/2, options: .transitionCrossDissolve) {
-          [unowned self] in
-          checkIcon.image = UIImage(systemName: "checkmark.circle")
+        UIView.transition(with: checkIcon, duration: duration, options: .transitionCrossDissolve) {
+          self.checkIcon.image = UIImage(systemName: "checkmark.circle")
         }
 
       }else{
         // Hide background and check mark
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut)
-        { [unowned self] in
-          stackView.configureBgColor(bgColor: .clear)
-          stackView.layer.borderColor = CustomColor.backgroundLower.cgColor
+        UIView.animate(withDuration: duration/2, delay: 0, options: .curveEaseInOut)
+        {
+          self.stackView.configureBgColor(bgColor: .clear)
+          self.stackView.layer.borderColor = CustomColor.backgroundLower.cgColor
         }
         UIView.transition(with: checkIcon, duration: duration, options: .transitionCrossDissolve) {
-          [unowned self] in
-          checkIcon.image = UIImage(systemName: "circle")
+          self.checkIcon.image = UIImage(systemName: "circle")
         }
       }
     }

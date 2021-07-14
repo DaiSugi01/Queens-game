@@ -148,7 +148,6 @@ extension PlayerSelectionViewController {
     navButtons.nextButton.rx.tap
       .bind{ [weak self] in
         guard let self = self else { return }
-        
         self.vm.initUserData(playerCount: self.vm.numOfPlayers.value)
         let nx = EntryNameViewController()
         GameManager.shared.pushGameProgress(
@@ -171,12 +170,14 @@ extension PlayerSelectionViewController {
     // button tapped -> #player
     plusButton.rx.tap
       .subscribe { [weak self] _ in
+        Vibration.select()
         self?.vm.numOfPlayers.accept((self?.vm.numOfPlayers.value)! + 1)
       }
       .disposed(by: vm.disposeBag)
     
     minusButton.rx.tap
       .subscribe { [weak self] _ in
+        Vibration.select()
         self?.vm.numOfPlayers.accept((self?.vm.numOfPlayers.value)! - 1)
       }
       .disposed(by: vm.disposeBag)

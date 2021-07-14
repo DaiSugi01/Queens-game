@@ -41,7 +41,7 @@ class CommandSelectionViewController:
     // navBar
     navButtons.configureSuperView(under: view)
     navButtons.configureLayoutToBottom()
-    configureNavButtonBinding()
+    configureBinding()
   }
 }
 
@@ -96,7 +96,7 @@ extension CommandSelectionViewController {
 
 extension CommandSelectionViewController {
   
-  private func configureNavButtonBinding() {
+  private func configureBinding() {
     
     navButtons.nextButton.rx
       .tap
@@ -116,6 +116,7 @@ extension CommandSelectionViewController {
         case .random:
           let nx = CitizenSelectedViewController()
           GameManager.shared.command = self.viewModel.rundomCommandSelector()
+          Vibration.impact()
           GameManager.shared.pushGameProgress(
             navVC: self.navigationController,
             currentScreen: self,
@@ -132,6 +133,13 @@ extension CommandSelectionViewController {
       .tap
       .bind { [weak self] _ in
         GameManager.shared.popGameProgress(navVC: self?.navigationController)
+      }
+      .disposed(by: viewModel.disposeBag)
+    
+    collectionView.rx
+      .itemSelected
+      .bind { _ in
+        Vibration.select()
       }
       .disposed(by: viewModel.disposeBag)
   }

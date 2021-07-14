@@ -33,7 +33,7 @@ extension CommonCommandViewController: UISearchBarDelegate {
     
     // reveal mask
     UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
-    { [unowned self] in
+    {
       self.searchBarMask.alpha = 0.6
     }
     // show cancel button
@@ -49,7 +49,7 @@ extension CommonCommandViewController: UISearchBarDelegate {
     
     // hide and disable mask
     UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
-    { [unowned self] in
+    {
       self.searchBarMask.alpha = 0
     }
     return true
@@ -76,7 +76,7 @@ extension CommonCommandViewController {
       .bind{ [weak self] in
         guard let self = self else { return }
         UIView.animate( withDuration: 0.24, delay: 0, options: .curveEaseIn)
-        { [unowned self] in
+        { 
           self.searchBar.isHidden = false
           self.searchBar.alpha = 1
           self.searchBarMask.alpha = 0.6
