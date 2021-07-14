@@ -14,7 +14,7 @@ import RxSwift
 class CommandEditViewController: UIViewController, QueensGameViewControllerProtocol {
   lazy var backgroundCreator: BackgroundCreator = BackgroundCreatorWithClose(viewController: self)
   
-  let viewModel: CommandViewModel!
+  let viewModel: CommandViewModel
   
   
   // MARK: - Save and delete button
@@ -50,7 +50,6 @@ class CommandEditViewController: UIViewController, QueensGameViewControllerProto
     alignment: .center,
     distribution: .equalCentering
   )
-  
   
   
   // MARK: - Content
@@ -219,13 +218,15 @@ extension CommandEditViewController {
   
   private func configureButtons() {
     saveDeleteWrapper.configureSuperView(under: view)
+    
     saveDeleteWrapper.bottomAnchor.constraint(
       equalTo: view.bottomAnchor,
       constant: -Constant.Common.bottomSpacing
     ).isActive = true
+    
     saveDeleteWrapper.centerXin(view)
     
-    // If edit mode, add delete button
+    // If edit mode, add `delete button`
     if let _ = viewModel.selectedCommand {
       saveDeleteWrapper.insertArrangedSubview(deleteButton, at: 0)
     }
@@ -233,7 +234,7 @@ extension CommandEditViewController {
 }
 
 
-// MARK: - Text view
+// MARK: - Text view, key board
 
 extension CommandEditViewController {
   private func configureKeyboard() {
@@ -256,8 +257,25 @@ extension CommandEditViewController {
     
     Observable.of(willShownObservable, willHideObservable)
       .merge()
-      .subscribe { [weak self] height in
+      .bind { [weak self] height in
         self?.scrollView.contentInset = .init(top: 0, left: 0, bottom: height, right: 0)
+        UIView.animate(
+          withDuration: 1,
+          delay: 0,
+          options: .curveEaseInOut,
+          animations: {
+            // scroll
+            self?.scrollView.setContentOffset(
+              CGPoint(x: 0, y: height*0.8),
+              animated: false // This is ok, because it's already in the animation.
+            )
+            // button
+            self?.saveDeleteWrapper.transform = CGAffineTransform.init(
+              translationX: 0,
+              y: -height*0.8
+            )
+          }
+        )
       }
       .disposed(by: viewModel.disposeBag)
 
