@@ -89,6 +89,8 @@ extension BackgroundCreatorWithMenu {
         nx.modalPresentationStyle = .overCurrentContext
         nx.transitioningDelegate = self.popUpTransition
         
+        Vibration.confirm()
+        
         // If already something is presented, present the view over it
         if let presentedVC = self.viewController.presentedViewController {
           presentedVC.present(nx, animated: true, completion: nil)

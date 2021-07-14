@@ -22,6 +22,7 @@ class CommandManualSelectingViewController: CommonCommandViewController {
     
     // Trigger of confirm button
     viewModel.confirmedTriggerSubject.subscribe(onCompleted:{
+      Vibration.impact()
       GameManager.shared.pushGameProgress(
         navVC: self.navigationController,
         currentScreen: self,

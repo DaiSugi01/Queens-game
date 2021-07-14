@@ -153,11 +153,7 @@ class MenuViewController: UIViewController {
 
     configureBindings()
   }
-  
-  deinit {
-    print("\(Self.self) is being deinitialized")
-  }
-  
+
   // This can detect if you touch outside of the content.
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     // Let user to dismiss when tapping out side
@@ -186,6 +182,7 @@ extension MenuViewController {
       .tap
       .bind { [weak self] _ in
         guard let self = self else { return }
+        Vibration.warning()
         self.present(self.alert, animated: true, completion: nil)
       }
       .disposed(by: viewModel.disposeBag)

@@ -218,11 +218,12 @@ extension ResultViewController {
       usingSpringWithDamping: 0.56,
       initialSpringVelocity: 0,
       options: .curveEaseInOut
-    ) { [weak self] in
-      self?.navButtons.alpha = 1
-      self?.navButtons.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-    } completion: { [weak self] _ in
-      self?.navButtons.isUserInteractionEnabled = true
+    ) {
+      
+      self.navButtons.alpha = 1
+      self.navButtons.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    } completion: {  _ in
+      self.navButtons.isUserInteractionEnabled = true
     }
   }
 }

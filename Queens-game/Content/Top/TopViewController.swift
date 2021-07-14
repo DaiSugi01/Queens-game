@@ -132,6 +132,7 @@ extension TopViewController {
       .bind { [weak self] _ in
         guard let self = self else { return }
         let nx = PlayerSelectionViewController()
+        Vibration.impact()
         GameManager.shared.pushGameProgress(
           navVC: self.navigationController,
           currentScreen: self,
@@ -145,6 +146,7 @@ extension TopViewController {
       .bind { [weak self] _ in
         guard let self = self else { return }
         let nx = CommandSettingViewController()
+        Vibration.confirm()
         self.navigationController?.pushViewController(nx, animated: true)
       }
       .disposed(by: disposeBag)
@@ -157,6 +159,7 @@ extension TopViewController {
         nx.viewModel.isTopMenu = true
         nx.modalPresentationStyle = .overCurrentContext
         nx.transitioningDelegate = self.popUpTransitioning
+        Vibration.confirm()
         
         // If already something is presented, present the view over it
         if let presentedVC = self.presentedViewController {

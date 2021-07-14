@@ -144,6 +144,7 @@ extension CommandEditViewController {
       .bind { [weak self] _ in
         guard let self = self else { return }
         guard let (detail, difficulty, commandType) = self.validateInput() else { return }
+        Vibration.impact()
         self.viewModel.createOrUpdateItem(detail, difficulty, commandType)
         self.dismiss(animated: true, completion: nil)
       }
@@ -154,6 +155,7 @@ extension CommandEditViewController {
       .bind { [weak self] _ in
         guard let self = self else { return }
         self.viewModel.deleteSelectedItem()
+        Vibration.warning()
         self.dismiss(animated: true, completion: nil)
       }
       .disposed(by: viewModel.disposeBag)
@@ -258,24 +260,23 @@ extension CommandEditViewController {
     Observable.of(willShownObservable, willHideObservable)
       .merge()
       .bind { [weak self] height in
-        self?.scrollView.contentInset = .init(top: 0, left: 0, bottom: height, right: 0)
-        UIView.animate(
-          withDuration: 1,
-          delay: 0,
-          options: .curveEaseInOut,
-          animations: {
-            // scroll
-            self?.scrollView.setContentOffset(
-              CGPoint(x: 0, y: height*0.8),
-              animated: false // This is ok, because it's already in the animation.
-            )
-            // button
-            self?.saveDeleteWrapper.transform = CGAffineTransform.init(
-              translationX: 0,
-              y: -height*0.8
-            )
-          }
+        
+        self?.scrollView.contentInset = .init(
+          top: 0, left: 0, bottom: height, right: 0
         )
+        
+        // scroll
+        self?.scrollView.setContentOffset(
+          CGPoint(x: 0, y: height*0.8),
+          animated: false // This is ok, because it's already in the animation.
+        )
+        
+        // button
+        self?.saveDeleteWrapper.transform = CGAffineTransform.init(
+          translationX: 0,
+          y: -height*0.8
+        )
+
       }
       .disposed(by: viewModel.disposeBag)
 

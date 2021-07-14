@@ -125,7 +125,7 @@ extension EntryNameViewController {
         self.vm.saveUsers()
         let nx = QueenBeforeSelectionViewController()
         GameManager.shared.pushGameProgress(
-          navVC: self.navigationController!,
+          navVC: self.navigationController,
           currentScreen: self,
           nextScreen: nx
         )
@@ -135,7 +135,7 @@ extension EntryNameViewController {
     navButtons.backButton.rx
       .tap
       .bind { [weak self] _ in
-        GameManager.shared.popGameProgress(navVC: self?.navigationController!)
+        GameManager.shared.popGameProgress(navVC: self?.navigationController)
       }
       .disposed(by: vm.disposeBag)
   }
@@ -159,8 +159,10 @@ extension EntryNameViewController {
     
     Observable.of(willShownObservable, willHideObservable)
       .merge()
-      .subscribe { [weak self] height in
-        self?.scrollView.contentInset = .init(top: 0, left: 0, bottom: height, right: 0)
+      .bind { [weak self] height in
+          self?.scrollView.contentInset = .init(
+            top: 0, left: 0, bottom: height, right: 0
+          )
       }
       .disposed(by: vm.disposeBag)
     
