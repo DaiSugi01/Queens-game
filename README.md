@@ -12,12 +12,11 @@ This app is has a lot of UI factors and data models with a reactive relationship
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-whole-game.webp" alt="Kings game" width=240 />
 </div>
 
-
 ## Motivation
 
 ### Backgorund
 
-There are enormous unique and awesome games in every country and culture. "King's game" which is called "王様ゲーム" in Japan is also one of them.  This party game is a sort of combination of, "Simon Says" and "truth or dare", but might be more flexible and thralling. We thought it would be great to introduce this game into a mobile application so that all over the people in world can know, play and share its wonderful experience!
+There are enormous unique and awesome games in every country and culture. "King's game" which is called "王様ゲーム" in Japan is also one of them. This party game is a sort of combination of, "Simon Says" and "truth or dare", but might be more flexible and thrilling. We thought it would be great to introduce this game into a mobile application so that all over the people in world can know, play and share its wonderful experience!
 
 <div align="center" >
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/concept-king.webp" alt="Kings game" width=240 />
@@ -45,7 +44,6 @@ Lastly, we can introduce a lot of fun animation because it's an app and this mak
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/concept-todo.webp" alt="todo" width=240 height="240" />
 </div>
 
-
 ## Main spec
 
 - Swift: version 5.4
@@ -56,7 +54,7 @@ Lastly, we can introduce a lot of fun animation because it's an app and this mak
 
 ## Usage
 
-Once you launch the app, users can select whether to start a new game or modifying game settings. 
+Once you launch the app, users can select whether to start a new game or modifying game settings.
 
 ### New Game
 
@@ -86,8 +84,6 @@ In the game settings, what we can control is shown below.
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-settings.webp" alt="settings" width=240 />
 </div>
 
-
-
 ## Project management
 
 We used the GitHub project (Kanban feature) for scheduling and followed the agile style. This makes the project complete efficiently with even remote work.
@@ -96,10 +92,9 @@ We used the GitHub project (Kanban feature) for scheduling and followed the agil
 
 ![Discussion](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/management-discussion.webp)
 
-
 ## UI Designing
 
-We created a whole UI mockup both considering light and dark mode with Figma. In addition to creating a style guide, We created UI components that are well suitable for implementing with MVVM design pattern. 
+We created a whole UI mockup both considering light and dark mode with Figma. In addition to creating a style guide, We created UI components that are well suitable for implementing with MVVM design pattern.
 
 ### Style Guide
 
@@ -112,10 +107,6 @@ We created a whole UI mockup both considering light and dark mode with Figma. In
 ### UI components
 
 ![UI components](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/ui-mockup-components.webp)
-
-
-
-
 
 ### Dynamic Light and Dark mode.
 
@@ -131,7 +122,7 @@ This feature was implemented by using `traitCollection` and `userInterfaceStyle`
 /// Custom color set used for this project.
 /// - Compatible with dark mode.
 struct CustomColor {
-  
+
  /// Used for main text color.
  /// - Light mode -> similar to black color
  /// - Dark mode -> similar to white color
@@ -156,6 +147,7 @@ Although the existing `UISearchController` embedded in Navigation Controller is 
 </div>
 
 To create a custom `UISearchBar`, some of the basic features have to be implemented by yourself. For example,
+
 - Search bar will be displayed and hidden by the user's scrolling.
 - When tapping the search bar, it will focus on it by making other places(views) darker.
 - When tapping the search bar, a keyboard is displayed
@@ -166,12 +158,12 @@ It was a bit painstaking to do define, but thankfully, we were able to create ou
 
 ```swift
 extension CommonCommandViewController: UISearchBarDelegate {
-  
+
   // Whenever Text is changed
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.searchText = searchText
     viewModel.readItems()
-    
+
     // If text is empty -> This is executed when "x" button is click. We want to stop focus.
     if searchText.isEmpty {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -182,7 +174,6 @@ extension CommonCommandViewController: UISearchBarDelegate {
 ```
 
 ### pop up transition
-
 
 The default transition animation is nice but limited. To make the transition more game-like, we created a natural pop-up menu. We used `UIViewControllerAnimatedTransitioning` and `UIViewControllerTransitioningDelegate` for customizing mordal animation.
 
@@ -218,24 +209,23 @@ Therefore, we adopted a view model (MVVM) pattern and reactive framework which i
 
 ### Disabling button depends on user action
 
-
-We added a feature that a user can choose how many players join the game.  Following the original King's game spec, we wanted to set the maximum and the minimum number of players.
+We added a feature that a user can choose how many players join the game. Following the original King's game spec, we wanted to set the maximum and the minimum number of players.
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/animation-num-of-players.webp" alt="#plyaers" width=240 />
 </div>
 
 So we needed features like as follows,
+
 - When a user tap plus or minus button, it'll also reflect the label soon
 - When the number of players (#player) reaches max or min, don't let the user tap anymore
 
 This was the exact opportunity to adopt RXswift.
 We made each button, label, and variable for #player reactive as reactive relation.
+
 - When a plus or minus button is tapped, we bind it to #player
 - When #player changes, it emits its value and the label subscribes to it.
-- When #player reaches max or min, we bind it as boolean to button's enable 
-
-
+- When #player reaches max or min, we bind it as boolean to button's enable
 
 ```swift
 // View model
@@ -266,9 +256,7 @@ vm.numOfPlayers
 
 ```
 
-
 ### Countdown animation
-
 
 For another example, we created a countdown screen, in which each second the label changes, and after reaching 0 seconds, the whole view is replaced.
 
@@ -279,17 +267,16 @@ For another example, we created a countdown screen, in which each second the lab
 For this feature, we use `onNext` and `onComplete`.
 Each second, we send `onNext` and bind to UILabel. After finishing the countdown, we emit `onComplete`, which triggers a next view replacing.
 
-
 ```swift
 
   // View model
-  
+
   var timer = Timer()
   var countdownTime = Int(Settings.shared.queenWaitingSeconds) // Singleton
 
   // Subject
   let rxCountdownTime = PublishSubject<Int?>()
-  
+
   func countdown() {
     self.timer = Timer.scheduledTimer(
       withTimeInterval: 1,
@@ -329,8 +316,7 @@ Each second, we send `onNext` and bind to UILabel. After finishing the countdown
 
 ### Todo feature
 
-
-This game contains initial template command so that users only have to select them. Of course,  a user can add new commands or edit them later. This is a sort of Todo list feature. We utilized it by using a `UICollectionView` with difffable datasource, which elegantly displays the differences of items. In addition, Realm was used to keep items as persistence data.
+This game contains initial template command so that users only have to select them. Of course, a user can add new commands or edit them later. This is a sort of Todo list feature. We utilized it by using a `UICollectionView` with difffable datasource, which elegantly displays the differences of items. In addition, Realm was used to keep items as persistence data.
 
 Furthermore, we added a searching(filtering) feature, which leads the user to comfortably find their item.
 
@@ -346,7 +332,7 @@ This is an example code. The ViewModel reads stored items considering search tex
   /// Read items from realm and update snapshot (and update UI)
   func readItems() {
     let items: [Command]
-    
+
     if searchText == "" {
       items = Array(
         realm.objects(Command.self)
@@ -359,7 +345,7 @@ This is an example code. The ViewModel reads stored items considering search tex
           .sorted(byKeyPath: "detail", ascending: true)
       )
     }
-    
+
     updateSnapshot(newItems: items)
   }
 ```
@@ -381,7 +367,6 @@ What we're planning to do next is as follows.
 - Implement authentication by using firebase so that user can store their commands and history to cloud store
 - Add play card graphic to select the Queen
 
-
 ## Team member and contribution
 
 ### Tak ([cookie777](https://github.com/cookie777))
@@ -394,16 +379,9 @@ What we're planning to do next is as follows.
   - transition animation
   - Custom Search bar
 
-
 ### Daiki ([DaiSugi01](https://github.com/DaiSugi01))
 
-
-
 ### Takayasu ([TakayasuNasu](https://github.com/TakayasuNasu))
-
-
-
-
 
 <!-- 1. Start game with more than three people.
 1. allocate index(number) to other randmamly by using lottery.
@@ -414,4 +392,3 @@ What we're planning to do next is as follows.
 3. The king gives a order(command) involing others user
    1. ex,King says "No. 2 have to make lought No.3!"
 4. Fun time, -->
-
