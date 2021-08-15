@@ -1,6 +1,15 @@
 # iOS Game app: Queen's game
 
-keyword: `Swift`, `Realm`, `RxSwift`, `MVVM`, `CoreAnimation`, `UICollectionView`, `diffable data sources`
+`Swift`, `Realm`, `RxSwift`, `MVVM`, `CoreAnimation`, `UICollectionView`, `diffable data sources`
+
+## Release
+
+We published our app to the App Store!🎉
+[App Store Links](https://apps.apple.com/us/app/queens-game/id1575671780)
+
+![App Store screenshots](https://raw.githubusercontent.com/cookie777/images/main/works/2021-06-Queens-Game/app-store.webp)
+
+
 
 ## Summary
 
